@@ -18,14 +18,12 @@ import re
 from datetime import datetime
 from typing import Any, Optional
 from urllib.parse import quote_plus
-from zoneinfo import ZoneInfo
 
+from app.engine.deterministic import clean_model
 from app.scrapers.base import BaseScraper, ScrapedAuction, ScrapedItem, ScrapedSession
-from app.timeutil import BRT  # noqa: F401
+from app.timeutil import BRT
 
 logger = logging.getLogger("zleilao.scraper.leilo")
-
-BRT = ZoneInfo("America/Sao_Paulo")
 
 RETOMADA_MAP = {
     "frota": "frota", "financeira": "financeira", "banco": "financeira", "seguradora": "seguradora",
@@ -147,8 +145,8 @@ class LeiloScraper(BaseScraper):
         Isso atrapalha busca e deduplicacao, e nao descreve o bem."""
         if not raw:
             return None
-        cleaned = re.sub(r"\s*\(\s*\d\s*P(\s*/\s*\d\s*P)*\s*\)\s*", " ", raw, flags=re.I)
-        return re.sub(r"\s{2,}", " ", cleaned).strip().title() or None
+        cleaned = clean_model(raw)
+        return cleaned.title() if cleaned else None
 
     # ── mapeamento ───────────────────────────────────────────────────
 

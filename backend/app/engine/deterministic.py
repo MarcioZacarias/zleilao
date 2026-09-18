@@ -177,6 +177,20 @@ def detect_model(text: str, brand: str | None) -> str | None:
     return model.title() if model else None
 
 
+#: Sufixo de portas das bases de referencia de veiculos (Infocar/Molicar):
+#: "GOL TRENDLINE (2P/4P)". Nao descreve o bem e atrapalha busca e dedup.
+DOORS_SUFFIX_RE = re.compile(r"\s*\(\s*\d\s*P(\s*/\s*\d\s*P)*\s*\)\s*", re.I)
+
+
+def clean_model(raw: str | None) -> str | None:
+    """Normaliza o modelo vindo da fonte. Roda tambem na reextracao, entao
+    alcanca o que ja' esta' gravado em `attributes._raw`."""
+    if not raw:
+        return None
+    cleaned = DOORS_SUFFIX_RE.sub(" ", str(raw))
+    return re.sub(r"\s{2,}", " ", cleaned).strip(" .-/") or None
+
+
 def detect_years(text: str) -> tuple[int | None, int | None]:
     """Retorna (ano_fabricacao, ano_modelo)."""
     t = text
@@ -261,7 +275,7 @@ def extract_vehicle_fields(title: str, short_text: str | None, raw: dict[str, An
     raw = raw or {}
     text = f"{title}\n{short_text or ''}"
     brand = raw.get("marca") or detect_brand(title) or detect_brand(text)
-    model = raw.get("modelo") or detect_model(title, brand)
+    model = clean_model(raw.get("modelo")) or detect_model(title, brand)
     fab, mod = detect_years(title)
     if fab is None and mod is None:
         fab, mod = detect_years(text)
