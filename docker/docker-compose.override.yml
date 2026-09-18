@@ -1,0 +1,24 @@
+# =========================================================
+# ZConnect Leilão — override de DESENVOLVIMENTO (maquina local).
+# ---------------------------------------------------------
+# Publica portas em 0.0.0.0 e monta o codigo-fonte. NUNCA usar em producao.
+# Portas locais escolhidas para nao colidir com o dev do Promo (8002/5174/5433).
+# =========================================================
+
+services:
+  postgres:
+    ports:
+      - "${DB_PORT:-5434}:5432"
+
+  backend:
+    ports:
+      - "${BACKEND_PORT:-8005}:8000"
+    environment:
+      DEBUG: "1"
+    volumes:
+      - ../backend/app:/app/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  dashboard:
+    ports:
+      - "${DASHBOARD_PORT:-5177}:80"

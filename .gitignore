@@ -1,0 +1,39 @@
+# Environment
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.pytest_cache/
+
+# Node
+node_modules/
+dashboard/dist/
+dashboard/package-lock.json
+
+# Docker
+docker/pgdata/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude
+.claude/
+
+# Playwright (instalado sem --save para screenshots de verificação)
+dashboard/test-results/

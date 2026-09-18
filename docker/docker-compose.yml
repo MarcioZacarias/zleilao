@@ -1,0 +1,82 @@
+# =========================================================
+# ZConnect Leilão — stack base.
+# ---------------------------------------------------------
+# Este arquivo NAO publica nenhuma porta no host. Quem publica e' o override:
+#
+#   dev  : docker compose --env-file .env -p zconnect_leilao \
+#            -f docker/docker-compose.yml -f docker/docker-compose.override.yml up -d --build
+#
+#   prod : docker compose --env-file .env -p zconnect_leilao \
+#            -f docker/docker-compose.yml -f docker/docker-compose.prod.yml up -d --build
+#
+# IMPORTANTE: o servidor de producao hospeda zconnect_crm, zconnect_personalfinance
+# (Contas), zconnect_suporte e zconnect_promo. TODO comando de compose precisa de
+# `-p zconnect_leilao`. Sem isso o Compose adota o nome do diretorio como projeto
+# e pode derrubar containers de outro sistema. Principio aditivo: nada aqui
+# altera container existente.
+# =========================================================
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: zleilao-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-zleilao}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-zleilaopass}
+      POSTGRES_DB: ${POSTGRES_DB:-zleilao}
+    # Servidor compartilhado com 1 vCPU / 3,8 GB: limites conservadores.
+    command: >
+      postgres -c shared_buffers=128MB -c work_mem=8MB -c maintenance_work_mem=64MB
+               -c max_connections=40 -c effective_cache_size=384MB
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - leilao-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-zleilao}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: zleilao-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - ../.env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-zleilao}:${POSTGRES_PASSWORD:-zleilaopass}@postgres:5432/${POSTGRES_DB:-zleilao}
+      DATABASE_URL_SYNC: postgresql://${POSTGRES_USER:-zleilao}:${POSTGRES_PASSWORD:-zleilaopass}@postgres:5432/${POSTGRES_DB:-zleilao}
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@zconnect.ia.br}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - leilao-net
+
+  dashboard:
+    build:
+      context: ../dashboard
+      dockerfile: Dockerfile
+    container_name: zleilao-dashboard
+    restart: unless-stopped
+    depends_on:
+      - backend
+    networks:
+      - leilao-net
+
+networks:
+  leilao-net:
+    name: zconnect_leilao_net
+    driver: bridge
+
+volumes:
+  pgdata:
+    name: zconnect_leilao_pgdata

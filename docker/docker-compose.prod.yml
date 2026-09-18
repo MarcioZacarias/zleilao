@@ -1,0 +1,34 @@
+# =========================================================
+# ZConnect Leilão — override de PRODUCAO (servidor compartilhado).
+# ---------------------------------------------------------
+#   cd /opt/zconnect_leilao
+#   docker compose --env-file .env -p zconnect_leilao \
+#     -f docker/docker-compose.yml -f docker/docker-compose.prod.yml \
+#     up -d --build
+#
+#   - Backend e dashboard escutam SO' em 127.0.0.1 (8005 e 5177). Quem publica
+#     na internet e' o nginx DO HOST (docker/nginx/leilao.zconnect.ia.br.conf).
+#   - NAO existe container nginx (roubaria 80/443 dos outros sistemas).
+#   - O Postgres nao ganha porta no host.
+#
+# Mapa de portas do host:
+#   Contas  8001, 5173, 5433, 6380, 3000
+#   CRM     8002, 5174
+#   Suporte 8003, 5175
+#   Promo   8004, 5176
+#   Leilão  8005, 5177   <- este stack
+# =========================================================
+
+services:
+  postgres:
+    restart: always
+
+  backend:
+    restart: always
+    ports:
+      - "127.0.0.1:8005:8000"
+
+  dashboard:
+    restart: always
+    ports:
+      - "127.0.0.1:5177:80"
