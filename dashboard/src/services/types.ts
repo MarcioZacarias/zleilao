@@ -45,7 +45,16 @@ export type JobRunType =
   | "match"
   | "dispatch";
 export type JobStatus = "running" | "success" | "failed" | "skipped";
-export type SortOption = "relevance" | "price_asc" | "price_desc" | "session_asc" | "newest";
+export type SortOption =
+  | "relevance"
+  | "price_asc"
+  | "price_desc"
+  | "session_asc"
+  | "newest"
+  /** maior desconto sobre a referência de mercado (RN-010) */
+  | "opportunity"
+  /** exige os três parâmetros de raio */
+  | "distance";
 export type AdminSortOption = "updated_desc" | "first_seen_desc" | "session_asc" | "price_desc";
 
 export interface ItemCard {
@@ -77,6 +86,11 @@ export interface ItemCard {
   auction_type: string | null;
   card_fields: Record<string, unknown>;
   possible_duplicate: boolean;
+  /** RN-010. Nulo quando não há referência confiável — nunca tratar como zero. */
+  opportunity_score: number | null;
+  opportunity_discount: number | null;
+  /** Só vem preenchido na busca por raio. Distância entre municípios. */
+  distance_km?: number | null;
 }
 
 export interface CategoryField {
@@ -154,6 +168,51 @@ export interface ItemDetail extends ItemCard {
   disclaimer: string | null;
   extraction_status: string | null;
   extraction_version: string | null;
+  opportunity: Opportunity | null;
+}
+
+/**
+ * Score de oportunidade (RN-010). Só existe quando dá para comparar com
+ * honestidade. As `reasons` não são detalhe técnico: são o que torna o número
+ * legível, e a interface é obrigada a mostrá-las junto.
+ */
+export interface Opportunity {
+  score: number;
+  discount_pct: number;
+  reference_value: string;
+  total_cost: string;
+  reference_label: string | null;
+  computed_at: string;
+  reasons: {
+    lance?: number;
+    comissao_pct?: number;
+    comissao?: number;
+    despesas?: number;
+    custo_total?: number;
+    referencia?: number;
+    referencia_ajustada?: number;
+    desconto_pct?: number;
+    condicao?: string;
+    condicao_presumida?: boolean;
+    fator_condicao?: number;
+    base_calculo?: string;
+    /** Ressalva de que o lance inicial é o piso do pregão. */
+    nota_preco?: string;
+    /** Aviso de que o estado do bem foi presumido. */
+    nota_condicao?: string;
+    /** Explicação do ajuste da referência para sinistro/sucata. */
+    nota?: string;
+    /** Custo acima da referência de mercado. */
+    alerta?: string;
+  };
+}
+
+/** Município para a busca por raio (`GET /portal/cities`). */
+export interface CityOption {
+  city: string;
+  state: string;
+  lat: number;
+  lng: number;
 }
 
 export interface FacetValue {
@@ -448,6 +507,10 @@ export interface PortalSearchParams {
   session_from?: string;
   session_to?: string;
   status?: string;
+  /** Busca por raio: os três andam juntos ou nenhum vale. */
+  near_city?: string;
+  near_state?: string;
+  radius_km?: number | string;
   sort?: SortOption;
   page?: number;
   page_size?: number;
@@ -492,7 +555,10 @@ export type CriteriaKey =
   | "city"
   | "source"
   | "condition"
-  | "auction_type";
+  | "auction_type"
+  | "near_city"
+  | "near_state"
+  | "radius_km";
 
 /** `GET /me` — a conta do assinante logado. */
 export interface AccountMe {

@@ -7,12 +7,14 @@ import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import {
   AUCTION_TYPE_LABELS,
   CONDITION_LABELS,
+  SORT_DISTANCE,
   SORT_LABELS,
   STATUS_LABELS,
 } from "../../lib/labels";
 import { dateInputToIso, formatBRL, isoToDateInput } from "../../lib/format";
 import { ItemCard } from "../../components/portal/ItemCard";
 import { Facet } from "../../components/portal/Facet";
+import { RadiusFilter } from "../../components/portal/RadiusFilter";
 import { Pagination } from "../../components/ui/Pagination";
 import { ItemCardSkeleton } from "../../components/ui/Skeleton";
 import { EmptyState } from "../../components/ui/EmptyState";
@@ -38,6 +40,10 @@ const FILTER_KEYS = [
   "session_from",
   "session_to",
   "status",
+  // busca por raio — os três andam juntos
+  "near_city",
+  "near_state",
+  "radius_km",
 ] as const;
 type FilterKey = (typeof FILTER_KEYS)[number];
 
@@ -71,6 +77,9 @@ function toApiParams(f: Filters): PortalSearchParams {
     session_from: f.session_from,
     session_to: f.session_to,
     status: f.status,
+    near_city: f.near_city,
+    near_state: f.near_state,
+    radius_km: num(f.radius_km),
     sort: f.sort,
     page: f.page,
     page_size: PAGE_SIZE,
@@ -275,6 +284,19 @@ function FilterPanel({ filters, facets, categories, models, update, clearAll, ac
 
       <Facet title="UF" options={facets.states ?? []} value={filters.state} onChange={(v) => update({ state: v })} max={10} />
 
+      <Facet
+        title="Distância"
+        active={!!filters.near_city}
+        onClear={() => update({ near_city: null, near_state: null, radius_km: null })}
+      >
+        <RadiusFilter
+          city={filters.near_city}
+          state={filters.near_state}
+          radius={filters.radius_km}
+          onChange={update}
+        />
+      </Facet>
+
       <Facet title="Fonte" options={facets.sources ?? []} value={filters.source} onChange={(v) => update({ source: v })} />
 
       <Facet
@@ -415,8 +437,13 @@ export default function Search() {
     setSearchParams(next);
   };
 
-  const activeFilters = FILTER_KEYS.filter((k) => k !== "q" && filters[k]);
+  // near_state e radius_km viajam junto com near_city; um chip so para os tres.
+  const activeFilters = FILTER_KEYS.filter(
+    (k) => k !== "q" && k !== "near_state" && k !== "radius_km" && filters[k]
+  );
   const facets = page?.facets ?? {};
+  const hasRadius = !!(filters.near_city && filters.near_state && filters.radius_km);
+  const sortOptions = hasRadius ? { ...SORT_LABELS, ...SORT_DISTANCE } : SORT_LABELS;
 
   const chipLabel = (k: FilterKey): string => {
     const v = filters[k]!;
@@ -453,6 +480,8 @@ export default function Search() {
         return `Pregão até ${isoToDateInput(v).split("-").reverse().join("/")}`;
       case "status":
         return STATUS_LABELS[v] ?? v;
+      case "near_city":
+        return `${filters.radius_km ?? 100} km de ${v}${filters.near_state ? `/${filters.near_state}` : ""}`;
       default:
         return `${k}: ${v}`;
     }
@@ -463,7 +492,12 @@ export default function Search() {
     facets,
     categories,
     models,
-    update: (patch) => update(patch),
+    update: (patch) =>
+      update(
+        patch.near_city === null && filters.sort === "distance"
+          ? { ...patch, sort: "relevance" }
+          : patch
+      ),
     clearAll,
     activeCount: activeFilters.length,
   };
@@ -505,7 +539,7 @@ export default function Search() {
               className="portal-select w-auto py-1.5 text-xs"
               aria-label="Ordenar por"
             >
-              {Object.entries(SORT_LABELS).map(([v, l]) => (
+              {Object.entries(sortOptions).map(([v, l]) => (
                 <option key={v} value={v}>
                   {l}
                 </option>
@@ -531,7 +565,15 @@ export default function Search() {
             <button
               key={k}
               type="button"
-              onClick={() => update({ [k]: null, ...(k === "brand" ? { model: null } : {}) })}
+              onClick={() =>
+                update({
+                  [k]: null,
+                  ...(k === "brand" ? { model: null } : {}),
+                  ...(k === "near_city"
+                    ? { near_state: null, radius_km: null, ...(filters.sort === "distance" ? { sort: "relevance" } : {}) }
+                    : {}),
+                })
+              }
               className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-3 py-1 text-xs text-accent-300 ring-1 ring-inset ring-accent/30 hover:ring-accent/60"
             >
               {chipLabel(k)} <X size={12} />

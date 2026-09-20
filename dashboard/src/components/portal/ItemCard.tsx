@@ -8,6 +8,7 @@ import { PriceTag } from "./PriceTag";
 import { StatusBadge } from "./StatusBadge";
 import { ConditionBadge } from "./ConditionBadge";
 import { Countdown } from "./Countdown";
+import { OpportunityBadge } from "./OpportunityPanel";
 
 interface ItemCardProps {
   item: ItemCardType;
@@ -100,6 +101,13 @@ export function ItemCard({ item, compact = false }: ItemCardProps) {
             <span className="inline-flex items-center gap-1">
               <MapPin size={12} />
               {[item.city, item.state].filter(Boolean).join(" / ")}
+              {/* Distância só aparece na busca por raio — é o que explica a ordem. */}
+              {item.distance_km !== null && item.distance_km !== undefined && (
+                <span className="text-accent-300" title="Distância entre a sua cidade e a cidade do lote">
+                  {/* Abaixo de 1 km é o mesmo município: "0 km" só confundiria. */}
+                  · {item.distance_km < 1 ? "sua cidade" : `${Math.round(item.distance_km)} km`}
+                </span>
+              )}
             </span>
           )}
           {item.km !== null && item.km !== undefined && (
@@ -118,6 +126,14 @@ export function ItemCard({ item, compact = false }: ItemCardProps) {
         <div className="mt-3 flex items-end justify-between gap-2">
           <PriceTag price={item.price} priceKind={item.price_kind} priceSecond={item.price_second} size="sm" closed={closed} />
         </div>
+
+        {/* RN-010: selo só quando há referência confiável. Ausência de score
+            não é desconto zero — é "não sabemos". */}
+        {item.opportunity_discount !== null && item.opportunity_discount !== undefined && (
+          <div className="mt-2">
+            <OpportunityBadge discount={item.opportunity_discount} />
+          </div>
+        )}
 
         {item.next_session_at && !closed && (
           <div

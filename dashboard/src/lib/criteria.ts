@@ -20,10 +20,14 @@ export const CRITERIA_KEYS: CriteriaKey[] = [
   "source",
   "condition",
   "auction_type",
+  // busca por raio: as três chaves só valem juntas
+  "near_city",
+  "near_state",
+  "radius_km",
 ];
 
 const INT_KEYS = new Set<CriteriaKey>(["year_min", "year_max"]);
-const FLOAT_KEYS = new Set<CriteriaKey>(["price_min", "price_max"]);
+const FLOAT_KEYS = new Set<CriteriaKey>(["price_min", "price_max", "radius_km"]);
 
 /** Só as chaves que viram critério — `sort`, `page` e `status` ficam de fora. */
 export function criteriaFromParams(sp: URLSearchParams): Criteria {
@@ -54,10 +58,7 @@ export function criteriaToSearch(criteria: Criteria): string {
 }
 
 export function criteriaCount(criteria: Criteria): number {
-  return CRITERIA_KEYS.filter((k) => {
-    const v = criteria[k];
-    return v !== undefined && v !== null && v !== "";
-  }).length;
+  return criteriaPairs(criteria).length;
 }
 
 /** Valor formatado para exibição (preço em BRL, enums com rótulo pt-BR). */
@@ -71,20 +72,32 @@ export function criteriaValueLabel(key: CriteriaKey, value: unknown): string {
       return CONDITION_LABELS[s] ?? s;
     case "auction_type":
       return AUCTION_TYPE_LABELS[s] ?? s;
+    case "radius_km":
+      return `${s} km`;
     default:
       return s;
   }
 }
 
-/** Lista "Marca: Fiat", "Preço até: R$ 50.000,00"… para chips e resumos. */
+/**
+ * Lista "Marca: Fiat", "Preço até: R$ 50.000,00"… para chips e resumos.
+ *
+ * A busca por raio ocupa três chaves, mas é um conceito só: vira um chip
+ * único ("Perto de: 100 km de Campinas/SP"), senão o resumo do filtro fica
+ * com três linhas dizendo a mesma coisa.
+ */
 export function criteriaPairs(criteria: Criteria): { key: CriteriaKey; label: string; value: string }[] {
   return CRITERIA_KEYS.filter((k) => {
+    if (k === "near_state" || k === "radius_km") return false;
     const v = criteria[k];
     return v !== undefined && v !== null && v !== "";
   }).map((k) => ({
     key: k,
     label: CRITERIA_LABELS[k] ?? k,
-    value: criteriaValueLabel(k, criteria[k]),
+    value:
+      k === "near_city"
+        ? `${criteria.radius_km ?? 100} km de ${criteria.near_city}${criteria.near_state ? `/${criteria.near_state}` : ""}`
+        : criteriaValueLabel(k, criteria[k]),
   }));
 }
 
@@ -115,7 +128,8 @@ export function suggestFilterName(criteria: Criteria): string {
   if (criteria.price_max) extras.push(`até ${formatBRL(criteria.price_max)}`);
   else if (criteria.price_min) extras.push(`acima de ${formatBRL(criteria.price_min)}`);
 
-  if (criteria.state) extras.push(String(criteria.state));
+  if (criteria.near_city) extras.push(`${criteria.radius_km ?? 100} km de ${criteria.near_city}`);
+  else if (criteria.state) extras.push(String(criteria.state));
   if (criteria.city) extras.push(String(criteria.city));
   if (criteria.condition) extras.push(CONDITION_LABELS[String(criteria.condition)] ?? String(criteria.condition));
 

@@ -260,8 +260,13 @@ comissão + despesas, a condição do bem ajusta a referência, e o lance inicia
 declarado como piso do pregão, não preço de arremate.
 
 **Busca por raio sem PostGIS**: base dos 5.571 municípios versionada em
-`app/data/municipios.json`, retângulo mais Haversine em SQL puro. Item sem
-coordenada reconhecida não entra na busca, em vez de entrar no lugar errado.
+`app/data/municipios.json` (coordenada, população IBGE 2021 e nome de exibição),
+retângulo mais Haversine em SQL puro. Item sem coordenada reconhecida não entra
+na busca, em vez de entrar no lugar errado — e **cidade de referência não
+reconhecida devolve 400**, porque ignorar o raio entregaria o país inteiro a
+quem pediu 60 km. A população não entra em nenhum cálculo: serve só para o
+autocomplete oferecer Campinas antes de Campanha. Com o raio ativo, cada item
+traz `distance_km`, que é o que justifica a ordem "mais perto" na tela.
 
 ## 9. Qualidade do dado — o que a coleta descarta
 
@@ -287,13 +292,14 @@ uma correção de regra nunca limparia um dado errado já gravado.
 | Onda | Escopo | Situação |
 |---|---|---|
 | 1 | Coleta, normalização, vitrine, painel | pronta |
-| 2 | Contas, filtros salvos, alertas (RN-006/RN-007) | backend pronto e validado; telas construídas |
-| 3 | Comparador com referência FIPE (RN-010) | pronta |
-| 4 | Busca por raio, máquinas e equipamentos | pronta |
+| 2 | Contas, filtros salvos, alertas (RN-006/RN-007) | pronta |
+| 3 | Comparador com referência FIPE (RN-010) | pronta, na vitrine e na ficha |
+| 4 | Busca por raio, máquinas e equipamentos | pronta, com filtro e ordem na busca |
 | 5 | Parcerias (painel de leiloeiro, destaque pago) | depende de decisão comercial |
 
-- 60 testes unitários. Validação de ponta a ponta em Docker local contra as três
-  fontes reais e contra a API FIPE.
+- 67 testes unitários. Validação de ponta a ponta em Docker local contra as três
+  fontes reais, contra a API FIPE e com as telas renderizadas no Playwright
+  (sem erro de console, sem overflow em 1440 e em 390 px).
 - 454 itens coletados, 298 publicados na vitrine, 3 fontes saudáveis, 8 jobs
   agendados.
 - **Não publicado** no servidor. Sem API key de LLM e sem SMTP configurados: o

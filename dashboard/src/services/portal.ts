@@ -6,6 +6,7 @@ import type {
   FacetValue,
   ItemCard,
   ItemDetail,
+  CityOption,
   ItemPage,
   PortalSearchParams,
   PortalStats,
@@ -31,6 +32,9 @@ export const portalApi = {
     api.get<FacetValue[]>("/portal/brands", { params: clean({ category }) }).then((r) => r.data),
   models: (brand: string) =>
     api.get<FacetValue[]>("/portal/models", { params: { brand } }).then((r) => r.data),
+  /** Autocomplete de município para a busca por raio (base local, sem chamada externa). */
+  cities: (q: string, limit = 8) =>
+    api.get<CityOption[]>("/portal/cities", { params: { q, limit } }).then((r) => r.data),
   upcomingAuctions: (days = 7, limit = 10) =>
     api.get<Auction[]>("/portal/auctions/upcoming", { params: { days, limit } }).then((r) => r.data),
   auction: (id: number | string) =>

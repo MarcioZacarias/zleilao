@@ -10,7 +10,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any, Optional
 
-from sqlalchemy import Select, func, or_, select
+from sqlalchemy import Select, false, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.engine.geo import bounding_box, coords_for
@@ -61,7 +61,16 @@ def describe_criteria(criteria: dict[str, Any]) -> str:
         "condition": "condicao", "auction_type": "tipo",
         "near_city": "perto de", "near_state": "UF de referencia", "radius_km": "raio (km)",
     }
-    parts = [f"{labels.get(k, k)}: {v}" for k, v in criteria.items() if v not in (None, "")]
+    skip = set()
+    if criteria.get("near_city"):
+        # As tres chaves do raio sao um conceito so: um item, nao tres.
+        skip = {"near_city", "near_state", "radius_km"}
+    parts = [f"{labels.get(k, k)}: {v}" for k, v in criteria.items()
+             if v not in (None, "") and k not in skip]
+    if skip:
+        uf = criteria.get("near_state")
+        raio = criteria.get("radius_km") or 100
+        parts.append(f"ate {raio:g} km de {criteria['near_city']}" + (f"/{uf}" if uf else ""))
     return ", ".join(parts) if parts else "todos os lotes"
 
 
@@ -134,6 +143,10 @@ def apply_filters(
     # (Haversine) filtra as pontas. Sem o retângulo, um raio de 100 km leria a
     # tabela inteira.
     center = radius_center(criteria)
+    if center is None and wants_radius(criteria):
+        # Pediu raio e a cidade nao foi reconhecida: nao casa nada. Ignorar o
+        # filtro devolveria o pais inteiro para quem pediu 60 km.
+        return stmt.where(false())
     if center:
         (lat, lng), radius = center
         lat_min, lat_max, lng_min, lng_max = bounding_box(lat, lng, radius)
@@ -143,6 +156,11 @@ def apply_filters(
             haversine_sql(lat, lng) <= radius,
         )
     return stmt
+
+
+def wants_radius(criteria: dict[str, Any]) -> bool:
+    """O criterio pede busca por raio (tendo a cidade sido reconhecida ou nao)."""
+    return bool(criteria.get("near_city")) and bool(criteria.get("radius_km"))
 
 
 def radius_center(criteria: dict[str, Any]) -> tuple[tuple[float, float], float] | None:

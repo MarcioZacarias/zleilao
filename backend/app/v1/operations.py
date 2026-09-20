@@ -144,7 +144,7 @@ async def dashboard(db: AsyncSession = Depends(get_db)):
     new_24h = await db.scalar(select(func.count(Item.id)).where(Item.first_seen_at >= now - timedelta(hours=24))) or 0
     upcoming = await db.scalar(select(func.count(Auction.id)).where(Auction.starts_at >= now, Auction.starts_at <= now + timedelta(days=7))) or 0
     last_jobs = {}
-    for jt in ("scrape", "normalize", "lifecycle", "dedup", "cleanup"):
+    for jt in ("scrape", "normalize", "lifecycle", "dedup", "match", "dispatch", "comparator", "cleanup"):
         j = await db.scalar(select(JobExecution).where(JobExecution.job_type == jt).order_by(JobExecution.started_at.desc()).limit(1))
         last_jobs[jt] = JobExecutionOut.model_validate(j).model_dump() if j else None
     # coleta por dia (14 dias) para grafico

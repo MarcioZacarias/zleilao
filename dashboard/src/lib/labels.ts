@@ -159,7 +159,11 @@ export const SORT_LABELS: Record<string, string> = {
   session_asc: "Pregão mais próximo",
   price_asc: "Menor preço",
   price_desc: "Maior preço",
+  opportunity: "Maior desconto",
 };
+
+/** "Mais perto" só faz sentido com a busca por raio ativa. */
+export const SORT_DISTANCE = { distance: "Mais perto" } as const;
 
 export const ADMIN_SORT_LABELS: Record<string, string> = {
   updated_desc: "Atualização recente",
@@ -247,4 +251,7 @@ export const CRITERIA_LABELS: Record<string, string> = {
   source: "Fonte",
   condition: "Condição",
   auction_type: "Tipo de leilão",
+  near_city: "Perto de",
+  near_state: "UF de referência",
+  radius_km: "Raio",
 };

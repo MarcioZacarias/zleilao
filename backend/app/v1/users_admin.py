@@ -19,6 +19,7 @@ from sqlalchemy.orm import selectinload
 
 from app.auth import get_current_admin
 from app.database import get_db
+from app.engine.search import describe_criteria, normalize_criteria
 from app.models import Alert, Item, PLAN_FREE, PLAN_PRO, SavedFilter, Subscription, User
 from app.timeutil import now_brt
 from app.v1.serializers import SerializerContext
@@ -149,9 +150,12 @@ async def set_plan(user_id: int, body: PlanUpdate, db: AsyncSession = Depends(ge
 @users_router.get("/{user_id}/filters")
 async def user_filters(user_id: int, db: AsyncSession = Depends(get_db), _: User = Depends(get_current_admin)):
     rows = (await db.execute(select(SavedFilter).where(SavedFilter.user_id == user_id))).scalars().all()
+    # `description` vem pronta, igual em /me/filters: o admin não deveria ter
+    # que remontar o resumo do critério no cliente.
     return [{"id": f.id, "name": f.name, "criteria": f.criteria, "channels": f.channels,
              "is_active": f.is_active, "matches_count": f.matches_count,
-             "last_matched_at": f.last_matched_at, "created_at": f.created_at} for f in rows]
+             "last_matched_at": f.last_matched_at, "created_at": f.created_at,
+             "description": describe_criteria(normalize_criteria(f.criteria))} for f in rows]
 
 
 # ── alertas (admin) ────────────────────────────────────────────────────
@@ -159,6 +163,7 @@ async def user_filters(user_id: int, db: AsyncSession = Depends(get_db), _: User
 @alerts_router.get("")
 async def list_alerts(
     status: Optional[str] = None,
+    reason: Optional[str] = None,
     user_id: Optional[int] = None,
     limit: int = Query(100, ge=1, le=500),
     db: AsyncSession = Depends(get_db),
@@ -167,6 +172,8 @@ async def list_alerts(
     stmt = select(Alert)
     if status:
         stmt = stmt.where(Alert.status.in_(status.split(",")))
+    if reason:
+        stmt = stmt.where(Alert.reason.in_(reason.split(",")))
     if user_id:
         stmt = stmt.where(Alert.user_id == user_id)
     rows = (await db.execute(stmt.order_by(Alert.created_at.desc()).limit(limit))).scalars().all()

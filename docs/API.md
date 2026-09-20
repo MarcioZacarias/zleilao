@@ -328,8 +328,28 @@ Três parâmetros em `GET /portal/items`, sempre juntos:
 |---|---|---|
 | GET | `/portal/cities?q=camp&limit=8` | `[{city, state, lat, lng}]` — autocomplete offline, base de 5.571 municípios |
 
+O autocomplete ordena por **população** (IBGE 2021) e devolve o nome com
+acento: quem digita `camp` recebe Campinas, Campo Grande e Campos dos
+Goytacazes, não Campanha. O `city` devolvido é o que deve voltar em
+`near_city`.
+
 Item sem coordenada reconhecida **não entra** na busca por raio, em vez de
 entrar no lugar errado. A precisão é a do centroide do município.
+
+Quando a cidade de referência **não é reconhecida**, `/portal/items` responde
+`400 Cidade de referência não reconhecida para a busca por raio`. Ignorar o
+filtro devolveria o país inteiro a quem pediu 60 km — silenciosamente, e na
+direção errada. No motor de alertas, onde não cabe um erro HTTP, o mesmo caso
+não casa nenhum lote.
+
+Com o raio ativo, cada item do resultado traz também a distância:
+
+```ts
+distance_km: number | null;   // km entre o município do lote e o de referência
+```
+
+Vem `null` fora da busca por raio. É o que explica a ordem `distance` na tela:
+sem mostrar a distância, a lista reordenada não tem justificativa visível.
 
 ## Ordenações novas em `sort`
 

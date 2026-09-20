@@ -33,6 +33,7 @@ import { PriceTag } from "../../components/portal/PriceTag";
 import { StatusBadge } from "../../components/portal/StatusBadge";
 import { ConditionBadge } from "../../components/portal/ConditionBadge";
 import { Countdown } from "../../components/portal/Countdown";
+import { OpportunityPanel } from "../../components/portal/OpportunityPanel";
 import { Skeleton, SkeletonText } from "../../components/ui/Skeleton";
 import { EmptyState } from "../../components/ui/EmptyState";
 import { Button } from "../../components/ui/Button";
@@ -164,8 +165,13 @@ export default function LotDetail() {
 
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Galeria */}
-        <div className="lg:col-span-7">
+        <div className="space-y-4 lg:col-span-7">
           <Gallery images={item.images?.length ? item.images : item.image_url ? [item.image_url] : []} alt={item.title} />
+          {/* RN-010: só aparece quando há referência confiável. Sem ela, nada —
+              melhor silêncio que um score de amostra fraca.
+              Fica sob a galeria, e não na coluna fixa: a memória de cálculo
+              precisa de largura, e a coluna da direita já é a mais alta. */}
+          {item.opportunity && <OpportunityPanel opportunity={item.opportunity} />}
         </div>
 
         {/* Painel principal */}
@@ -275,6 +281,7 @@ export default function LotDetail() {
               )}
             </div>
           </div>
+
         </div>
       </div>
 

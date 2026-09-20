@@ -183,8 +183,10 @@ async def resend_verification(body: ForgotRequest, db: AsyncSession = Depends(ge
         try:
             await send_email(db, user.email, subject, html)
         except EmailUnavailable as exc:
-            await db.commit()
-            raise HTTPException(503, f"Não foi possível enviar agora: {exc}")
+            # Responder 503 aqui e 200 nos demais casos revelaria, pelo próprio
+            # código de status, que a conta existe e está sem verificar. A falha
+            # de SMTP vai só para o log; a resposta continua igual para todos.
+            logger.warning("reenvio de verificacao sem SMTP para %s: %s", user.email, exc)
         await db.commit()
     # Resposta igual exista ou não a conta, para não vazar quem tem cadastro.
     return {"status": "ok", "detail": "Se houver uma conta com esse e-mail, enviamos o link."}

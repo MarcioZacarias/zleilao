@@ -4,8 +4,9 @@
 os dois adicionam dependência ao servidor compartilhado, e uma API de
 geocodificação adicionaria latência e limite de uso a cada coleta. Em vez
 disso, a base oficial de 5.571 municípios brasileiros (código IBGE, nome, UF,
-coordenadas) mora no repositório: 200 KB, resolução instantânea, offline e
-determinística.
+coordenadas, população IBGE 2021) mora no repositório: 230 KB, resolução
+instantânea, offline e determinística. A população não entra no cálculo de
+distância — serve só para ordenar o autocomplete de cidade.
 
 A precisão é a do centroide do município, que é o suficiente: o usuário quer
 "lotes até 150 km de mim", não a distância exata até o pátio.
@@ -79,9 +80,11 @@ def _table() -> dict[str, list[float]]:
     except (OSError, ValueError) as exc:
         logger.error("base de municipios indisponivel (%s): busca por raio desligada", exc)
         return {}
-    for key, coords in list(data.items()):
+    for key, row in list(data.items()):
         if "'" in key:
-            data.setdefault(key.replace("'", ""), coords)
+            # O 5o elemento marca "esta linha e apelido": o autocomplete pula,
+            # para nao listar "Santa Barbara d'Oeste" duas vezes.
+            data.setdefault(key.replace("'", ""), list(row) + [True])
     return data
 
 
@@ -143,20 +146,27 @@ def bounding_box(lat: float, lng: float, radius_km: float) -> tuple[float, float
 
 
 def search_cities(term: str, limit: int = 8) -> list[dict]:
-    """Autocomplete de cidade para a interface de busca por raio."""
+    """Autocomplete de cidade para a interface de busca por raio.
+
+    Ordena por populacao, nao por ordem alfabetica nem por tamanho do nome:
+    quem digita "camp" quer Campinas e Campo Grande, nao Campanha. A varredura
+    percorre a base inteira — parar nos primeiros achados ordenaria um recorte
+    arbitrario da tabela.
+    """
     t = normalize_city(term)
     if len(t) < 2:
         return []
     out = []
-    for key, (lat, lng) in _table().items():
+    for key, row in _table().items():
         uf, name = key.split("|", 1)
-        if name.startswith(t):
-            out.append({"city": name.title(), "state": uf, "lat": lat, "lng": lng, "exact": True})
-        elif t in name:
-            out.append({"city": name.title(), "state": uf, "lat": lat, "lng": lng, "exact": False})
-        if len(out) >= limit * 4:
-            break
-    out.sort(key=lambda x: (not x["exact"], len(x["city"])))
+        pos = name.find(t)
+        if pos < 0 or len(row) > 4:  # len > 4 = apelido sem apostrofo
+            continue
+        pop = row[2] if len(row) > 2 else 0
+        display = row[3] if len(row) > 3 else name.title()
+        out.append({"city": display, "state": uf, "lat": row[0], "lng": row[1],
+                    "_rank": (pos != 0, -pop, len(name))})
+    out.sort(key=lambda x: x["_rank"])
     for o in out:
-        o.pop("exact", None)
+        o.pop("_rank", None)
     return out[:limit]

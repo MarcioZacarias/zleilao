@@ -184,3 +184,31 @@ def test_normalize_city_nao_corta_nome_composto():
     assert normalize_city("Guaratinguetá (SP)") == "guaratingueta"
     assert coords_for("Campo Grande", "MS") is not None
     assert coords_for("Rio Verde", "GO") is not None
+
+
+def test_search_cities_ordena_por_populacao():
+    """Quem digita "camp" quer Campinas, não Campanha: o peso é a população."""
+    nomes = [c["city"] for c in search_cities("camp", 5)]
+    assert nomes[0] == "Campinas"
+    assert "Campo Grande" in nomes
+    # nome de exibição vem acentuado, não do índice normalizado
+    assert search_cities("sao p", 1)[0]["city"] == "São Paulo"
+    assert search_cities("ribeirao p", 1)[0]["city"] == "Ribeirão Preto"
+
+
+def test_search_cities_nao_repete_apelido_sem_apostrofo():
+    """A base indexa "santa barbara doeste" como apelido de "d'oeste";
+    o apelido serve para casar o que as fontes escrevem, não para virar
+    uma segunda opção na lista."""
+    r = search_cities("santa b", 8)
+    assert len([c for c in r if c["city"] == "Santa Bárbara d'Oeste"]) == 1
+    # o apelido continua resolvendo coordenada
+    assert coords_for("Sta Barbara Doeste", "SP") is not None
+
+
+def test_wants_radius():
+    from app.engine.search import wants_radius
+    assert wants_radius({"near_city": "Campinas", "radius_km": 100})
+    assert not wants_radius({"near_city": "Campinas"})
+    assert not wants_radius({"radius_km": 100})
+    assert not wants_radius({})

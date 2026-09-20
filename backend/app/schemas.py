@@ -200,6 +200,7 @@ class ItemCardOut(BaseModel):
     possible_duplicate: bool = False
     opportunity_score: Optional[int] = None      # RN-010; ausente = sem referência confiável
     opportunity_discount: Optional[float] = None
+    distance_km: Optional[float] = None          # só na busca por raio, a partir da cidade do lote
     model_config = ConfigDict(from_attributes=True)
 
 

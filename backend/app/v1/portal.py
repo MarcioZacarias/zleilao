@@ -15,7 +15,9 @@ from app.database import get_db
 from app.timeutil import now_brt
 from app.engine.geo import search_cities
 from app.engine.lifecycle import VISIBLE_STATUSES
-from app.engine.search import apply_filters, base_query, haversine_sql, normalize_criteria, radius_center
+from app.engine.search import (
+    apply_filters, base_query, haversine_sql, normalize_criteria, radius_center, wants_radius,
+)
 from app.models import Auction, BrandingAsset, Category, ClickEvent, Item, ItemOpportunity, Source
 from app.schemas import AuctionOut, CategoryTreeOut, FacetValue, ItemDetailOut, ItemPage, PageMeta
 from app.settings_service import get_setting, get_setting_int
@@ -141,6 +143,8 @@ async def search_items(
         "auction_type": auction_type, "near_city": near_city, "near_state": near_state,
         "radius_km": radius_km,
     })
+    if wants_radius(criteria) and radius_center(criteria) is None:
+        raise HTTPException(400, "Cidade de referência não reconhecida para a busca por raio")
     extras = dict(category_path=category_path, status=status,
                   session_from=session_from, session_to=session_to)
 
@@ -172,6 +176,8 @@ async def search_items(
     stmt = stmt.options(selectinload(Item.auction)).offset((page - 1) * page_size).limit(page_size)
     items = (await db.execute(stmt)).scalars().unique().all()
     ctx = await SerializerContext(db).load(items)
+    if radius := radius_center(criteria):
+        ctx.center = radius[0]
 
     facet_out: dict[str, list[FacetValue]] = {}
     if facets:

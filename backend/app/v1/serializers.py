@@ -9,6 +9,7 @@ from sqlalchemy import or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.engine.category_fields import effective_fields
+from app.engine.geo import haversine_km
 from app.models import Auction, Category, CategoryField, Item, ItemDuplicate, ItemOpportunity, PriceReference, Source
 from app.schemas import (
     AuctionOut, AuctionSessionOut, CategoryFieldOut, DuplicateRefOut, ItemAdminOut, ItemCardOut,
@@ -27,6 +28,8 @@ class SerializerContext:
         self.field_defs: dict[int, list[tuple[CategoryField, Category]]] = {}
         self.dup_ids: set[int] = set()
         self.opportunities: dict[int, ItemOpportunity] = {}
+        #: centro da busca por raio, quando houver — preenchido pela rota.
+        self.center: tuple[float, float] | None = None
 
     async def load(self, items: list[Item]) -> "SerializerContext":
         if not self.sources:
@@ -76,7 +79,15 @@ class SerializerContext:
             possible_duplicate=item.id in self.dup_ids,
             opportunity_score=opp.score if (opp := self.opportunities.get(item.id)) else None,
             opportunity_discount=opp.discount_pct if opp else None,
+            distance_km=self._distance(item),
         )
+
+    def _distance(self, item: Item) -> float | None:
+        """Distância até o centro da busca. É a distância entre os municípios,
+        não até o pátio: o lote não tem endereço, tem cidade."""
+        if not self.center or item.lat is None or item.lng is None:
+            return None
+        return round(haversine_km(self.center[0], self.center[1], float(item.lat), float(item.lng)), 1)
 
     def field_defs_out(self, category_id: int | None) -> list[CategoryFieldOut]:
         if not category_id:

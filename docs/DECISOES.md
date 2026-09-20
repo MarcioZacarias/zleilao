@@ -210,3 +210,38 @@ serve de modelo para cadastrar outras fontes.
 Candidatos já sondados e com robots.txt permissivo, prontos para cadastro:
 Parque dos Leilões e Palácio dos Leilões. Rogério Menezes respondeu bem mas não
 foi calibrado.
+
+
+---
+
+# Onda 4 — a busca por raio na tela, e três coisas que o teste visual pegou
+
+A implantação das ondas 3 e 4 na interface expôs problemas que os testes
+unitários não pegariam, porque nenhum deles é uma função errada: são decisões
+de produto erradas.
+
+**1. Cidade não reconhecida alargava a busca.** Pedir "60 km de São Paulo" com
+a cidade grafada de um jeito que a base não reconhece fazia `radius_center`
+devolver `None`, e o filtro era simplesmente pulado — o usuário pedia um raio e
+recebia o país inteiro, sem aviso. Agora `apply_filters` não casa nada nesse
+caso e a vitrine responde 400 com o motivo. **O erro seguro é para menos.**
+
+**2. O autocomplete ordenava por tamanho do nome.** Digitar "camp" oferecia
+Campanha, Campestre e Campinaçu; Campinas nem aparecia, porque a varredura
+parava nos primeiros 32 achados e ordenava um recorte arbitrário da tabela. A
+base ganhou a população do IBGE (tabela 6579, 2021 — 5.548 dos 5.571 municípios
+casaram) e o nome de exibição com acento. A população não entra em nenhum
+cálculo de distância: existe só para ordenar a lista. O arquivo foi de 200 KB
+para 315 KB, o que continua barato para uma base offline e determinística.
+
+**3. A ordem "mais perto" não se explicava.** A lista vinha reordenada e nada na
+tela dizia por quê. O card agora traz `distance_km` ("· 39 km"), e o mesmo
+município aparece como "sua cidade" em vez de "0 km". O número é a distância
+entre centroides de município, não até o pátio — a ficha diz isso.
+
+Além disso, o filtro salvo passou a carregar as três chaves do raio: sem elas,
+"criar alerta desta busca" com raio ativo salvava um critério nacional, e o
+usuário receberia por e-mail o oposto do que via na tela ao salvar.
+
+O painel de comparação saiu da coluna fixa para baixo da galeria: a memória de
+cálculo precisa de largura, e a coluna da direita já era a mais alta das duas.
