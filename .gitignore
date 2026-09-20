@@ -37,3 +37,8 @@ Thumbs.db
 
 # Playwright (instalado sem --save para screenshots de verificação)
 dashboard/test-results/
+
+# Scripts temporários de depuração/validação (não fazem parte do projeto)
+dashboard/__*.mjs
+dashboard/_*.mjs
+dashboard/shots/

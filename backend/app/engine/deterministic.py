@@ -270,6 +270,74 @@ def detect_restricoes(text: str) -> str | None:
     return ", ".join(found) if found else None
 
 
+#: Tipos de maquina reconhecidos no titulo, do mais especifico para o generico.
+MACHINE_TYPES = [
+    ("retroescavadeira", "Retroescavadeira"), ("escavadeira", "Escavadeira"),
+    ("pa carregadeira", "Pá carregadeira"), ("motoniveladora", "Motoniveladora"),
+    ("rolo compactador", "Rolo compactador"), ("colheitadeira", "Colheitadeira"),
+    ("empilhadeira", "Empilhadeira"), ("plantadeira", "Plantadeira"),
+    ("semeadeira", "Semeadeira"), ("pulverizador", "Pulverizador"),
+    ("plaina agricola", "Plaina agrícola"), ("grade aradora", "Grade aradora"),
+    ("betoneira", "Betoneira"), ("guindaste", "Guindaste"), ("gerador", "Gerador"),
+    ("compressor", "Compressor"), ("transformador", "Transformador"),
+    ("munck", "Munck"), ("trator", "Trator"),
+]
+
+MACHINE_CONDITION_PATTERNS = [
+    (r"\bsucata\b|inserviv|imprest", "sucata"),
+    (r"nao funciona|nao liga|necessita (de )?reparo|para reparo|com defeito|danificad|quebrad|faltando pec", "necessita_reparo"),
+]
+
+
+def detect_horimeter(text: str | None) -> int | None:
+    """Horimetro faz, para maquina, o papel da quilometragem no veiculo."""
+    if not text:
+        return None
+    t = _n(text)
+    m = re.search(r"(\d{1,3}(?:\.\d{3})+|\d{2,7})\s*(?:horas|hrs|hs|h)\b", t)
+    if not m:
+        m = re.search(r"horimetro[:\s]*(\d{1,3}(?:\.\d{3})+|\d{2,7})", t)
+    if not m:
+        return None
+    try:
+        value = int(m.group(1).replace(".", ""))
+    except ValueError:
+        return None
+    # Horimetro plausivel: acima de 200.000 h e' quase certo erro de leitura.
+    return value if 0 < value <= 200_000 else None
+
+
+def detect_machine_type(text: str | None) -> str | None:
+    t = _n(text)
+    for needle, label in MACHINE_TYPES:
+        if needle in t:
+            return label
+    return None
+
+
+def extract_machine_fields(title: str, short_text: str | None, raw: dict[str, Any] | None) -> dict[str, Any]:
+    """Campos de maquina/equipamento. Mesma regra do veiculo: nunca inventa."""
+    raw = raw or {}
+    text = f"{title}\n{short_text or ''}"
+    out: dict[str, Any] = {
+        "marca": raw.get("marca") or detect_brand(title) or detect_brand(text),
+        "modelo": clean_model(raw.get("modelo")),
+        "ano_fabricacao": raw.get("ano_fabricacao") or detect_years(title)[0] or detect_years(title)[1],
+        "horimetro": raw.get("horimetro") or detect_horimeter(text),
+        "tipo_equipamento": raw.get("tipo_equipamento") or detect_machine_type(text),
+        "condicao": raw.get("condicao") or _first_match(text, MACHINE_CONDITION_PATTERNS),
+        "observacoes": raw.get("observacoes") or None,
+        "implementos": raw.get("implementos") or None,
+    }
+    if raw.get("potencia_cv"):
+        out["potencia_cv"] = raw["potencia_cv"]
+    else:
+        m = re.search(r"(\d{2,4})\s*(?:cv|hp)\b", _n(text))
+        if m:
+            out["potencia_cv"] = int(m.group(1))
+    return {k: v for k, v in out.items() if v is not None}
+
+
 def has_damage_words(text: str | None) -> bool:
     """O texto menciona dano, sinistro, sucata ou avaria?
 

@@ -19,7 +19,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.engine.category_fields import effective_fields, json_schema_for, validate_attributes
 from app.engine.classifier import classify
-from app.engine.deterministic import DET_VERSION, extract_vehicle_fields
+from app.engine.deterministic import DET_VERSION, extract_machine_fields, extract_vehicle_fields
 from app.engine.geo import coords_for
 from app.engine.masking import mask_text
 from app.models import Category, ExtractionCache, Item, Source
@@ -146,9 +146,14 @@ async def normalize_item(db: AsyncSession, item: Item, source: Source, categorie
 
     # 3. Campos da categoria + deterministico
     fields = [f for f, _ in await effective_fields(db, category)]
-    is_vehicle = category.path.split("/")[0] == "veiculos"
+    root = category.path.split("/")[0]
     short = (item.description or "")[:400]
-    det = extract_vehicle_fields(item.title, short, raw) if is_vehicle else dict(raw)
+    if root == "veiculos":
+        det = extract_vehicle_fields(item.title, short, raw)
+    elif root == "maquinas-equipamentos":
+        det = extract_machine_fields(item.title, short, raw)
+    else:
+        det = dict(raw)
 
     # 4. LLM (com cache)
     version = f"{PROMPT_VERSION}+{DET_VERSION}"

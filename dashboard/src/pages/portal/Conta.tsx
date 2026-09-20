@@ -91,13 +91,14 @@ export default function Conta() {
             type="button"
             onClick={() => goTo(t.key)}
             aria-current={tab === t.key ? "page" : undefined}
-            className={`-mb-px inline-flex shrink-0 items-center gap-1.5 border-b-2 px-3 py-2.5 text-sm transition-colors ${
+            className={`-mb-px inline-flex shrink-0 items-center gap-1.5 border-b-2 px-2 py-2.5 text-sm transition-colors sm:px-3 ${
               tab === t.key
                 ? "border-accent text-accent-300"
                 : "border-transparent text-radar-muted hover:text-radar-text"
             }`}
           >
-            <t.icon size={15} /> {t.label}
+            {/* No celular o ícone sai para as quatro abas caberem sem rolagem. */}
+            <t.icon size={15} className="hidden sm:inline" /> {t.label}
           </button>
         ))}
       </nav>

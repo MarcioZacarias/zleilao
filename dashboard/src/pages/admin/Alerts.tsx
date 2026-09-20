@@ -191,7 +191,7 @@ export default function Alerts() {
               }
             />
           ) : loading && !alerts ? (
-            <TableSkeleton rows={8} cols={6} />
+            <TableSkeleton rows={8} cols={7} />
           ) : visible.length === 0 ? (
             <EmptyState
               icon={BellRing}
@@ -203,15 +203,14 @@ export default function Alerts() {
               }
             />
           ) : (
-            <Table minWidth={1040}>
+            <Table minWidth={980}>
               <Thead>
                 <tr>
                   <Th>Criado</Th>
                   <Th>Usuário</Th>
                   <Th>Lote</Th>
                   <Th>Motivo</Th>
-                  <Th>Status</Th>
-                  <Th>Canal</Th>
+                  <Th>Status / canal</Th>
                   <Th>Detalhe / erro</Th>
                   <Th className="text-right">Ações</Th>
                 </tr>
@@ -268,14 +267,10 @@ export default function Alerts() {
                     </Td>
                     <Td>
                       <Badge variant={statusVariant(a.status)}>{ALERT_STATUS_LABELS[a.status] ?? a.status}</Badge>
-                      {a.sent_at && (
-                        <div className="mt-0.5 text-[11px] text-gray-400" title={formatDateTime(a.sent_at)}>
-                          {formatRelative(a.sent_at)}
-                        </div>
-                      )}
-                    </Td>
-                    <Td className="text-xs">
-                      {a.channel ? ALERT_CHANNEL_LABELS[a.channel] ?? a.channel : <span className="text-gray-400">—</span>}
+                      <div className="mt-0.5 text-[11px] text-gray-400">
+                        {a.channel ? ALERT_CHANNEL_LABELS[a.channel] ?? a.channel : "canal indefinido"}
+                        {a.sent_at && <span title={formatDateTime(a.sent_at)}> · {formatRelative(a.sent_at)}</span>}
+                      </div>
                     </Td>
                     <Td className="max-w-[240px]">
                       {a.error ? (

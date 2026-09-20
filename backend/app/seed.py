@@ -50,6 +50,22 @@ CAMINHAO_FIELDS = [
     ("tracao", "Tração", "string", None, False, None, False, False, "4x2, 6x2, 6x4..."),
 ]
 
+#: Máquinas e equipamentos: o que identifica o bem é o horímetro, não a
+#: quilometragem, e o estado operacional pesa mais que o ano.
+MAQUINA_FIELDS = [
+    ("marca", "Marca", "string", None, True, None, True, True, "Fabricante (ex.: John Deere, Caterpillar, Valtra)."),
+    ("modelo", "Modelo", "string", None, False, None, True, True, "Modelo do equipamento."),
+    ("ano_fabricacao", "Ano de fabricação", "int", None, False, None, True, True, "Ano, 4 digitos."),
+    ("horimetro", "Horímetro", "int", "h", False, None, True, True, "Horas trabalhadas, apenas numero."),
+    ("tipo_equipamento", "Tipo", "string", None, False, None, True, True, "Trator, colheitadeira, retroescavadeira, empilhadeira, gerador..."),
+    ("potencia_cv", "Potência", "int", "cv", False, None, False, False, None),
+    ("condicao", "Condição", "enum", None, True, ["normal", "necessita_reparo", "sucata", NI], True, True,
+     "'necessita_reparo' quando o texto aponta defeito ou falta de peca; 'sucata' quando inservivel."),
+    ("funcionando", "Funcionando", "bool", None, False, None, False, False, "O anuncio afirma que liga/opera?"),
+    ("implementos", "Implementos", "string", None, False, None, False, False, "Acessorios inclusos (concha, lamina, plataforma...)."),
+    ("observacoes", "Observações", "string", None, False, None, False, False, "Avarias e pontos relevantes, ate 300 caracteres."),
+]
+
 CATEGORIES = [
     {"name": "Veículos", "slug": "veiculos", "parent": None, "fields": VEHICLE_FIELDS, "keywords": [],
      "llm_hint": "Lote de veiculo automotor em leilao no Brasil."},
@@ -59,7 +75,17 @@ CATEGORIES = [
     {"name": "Utilitários e vans", "slug": "utilitarios", "parent": "veiculos", "fields": [], "keywords": ["van", "furgao", "furgão", "utilitario", "ducato", "sprinter", "master", "transit", "daily", "hr ", "kombi", "fiorino", "partner", "kangoo"]},
     {"name": "Ônibus", "slug": "onibus", "parent": "veiculos", "fields": [], "keywords": ["onibus", "ônibus", "micro-onibus", "microonibus", "micro onibus", "rodoviario"]},
     {"name": "Outros veículos", "slug": "outros-veiculos", "parent": "veiculos", "fields": [], "keywords": ["reboque", "trailer", "quadriciclo", "jet ski", "barco", "lancha", "aeronave", "sucata"]},
-    {"name": "Máquinas e equipamentos", "slug": "maquinas-equipamentos", "parent": None, "fields": [], "keywords": ["trator", "colheitadeira", "retroescavadeira", "escavadeira", "empilhadeira", "gerador", "compressor", "pa carregadeira", "motoniveladora"]},
+    {"name": "Máquinas e equipamentos", "slug": "maquinas-equipamentos", "parent": None, "fields": MAQUINA_FIELDS,
+     "keywords": ["trator", "colheitadeira", "retroescavadeira", "escavadeira", "empilhadeira", "gerador",
+                  "compressor", "pa carregadeira", "motoniveladora", "plaina agricola", "pulverizador",
+                  "semeadeira", "plantadeira", "rolo compactador", "guindaste", "munck", "betoneira"],
+     "llm_hint": "Maquina ou equipamento agricola/industrial em leilao. O horimetro faz o papel da quilometragem."},
+    {"name": "Máquinas agrícolas", "slug": "maquinas-agricolas", "parent": "maquinas-equipamentos", "fields": [],
+     "keywords": ["trator", "colheitadeira", "plantadeira", "semeadeira", "pulverizador", "plaina agricola", "grade aradora"]},
+    {"name": "Máquinas de construção", "slug": "maquinas-construcao", "parent": "maquinas-equipamentos", "fields": [],
+     "keywords": ["retroescavadeira", "escavadeira", "pa carregadeira", "motoniveladora", "rolo compactador", "betoneira", "guindaste", "munck"]},
+    {"name": "Equipamentos diversos", "slug": "equipamentos-diversos", "parent": "maquinas-equipamentos", "fields": [],
+     "keywords": ["empilhadeira", "gerador", "compressor", "transformador", "torno", "prensa"]},
     {"name": "Imóveis", "slug": "imoveis", "parent": None, "fields": [], "keywords": ["apartamento", "casa", "terreno", "imovel", "imóvel", "sala comercial", "galpao", "galpão", "sitio", "fazenda"]},
     {"name": "Diversos", "slug": "diversos", "parent": None, "fields": [], "keywords": []},
 ]

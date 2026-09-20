@@ -205,3 +205,41 @@ def test_scrape_stats_parcial():
     assert "parou em 2 paginas" in st.notes
     st.mark_partial("parou em 2 paginas")  # idempotente
     assert len(st.notes) == 1
+
+
+# ── máquinas e equipamentos (Onda 4) ───────────────────────────────
+
+from app.engine.deterministic import detect_horimeter, detect_machine_type, extract_machine_fields
+
+
+def test_detect_horimeter():
+    """Horímetro faz, para máquina, o papel da quilometragem no veículo."""
+    assert detect_horimeter("4.320 horas") == 4320
+    assert detect_horimeter("Horimetro: 8500") == 8500
+    assert detect_horimeter("12500 h de uso") == 12500
+    assert detect_horimeter("3.200 hs") == 3200
+    # leitura implausível não vira dado
+    assert detect_horimeter("999999 h") is None
+    assert detect_horimeter("sem informação") is None
+    assert detect_horimeter(None) is None
+
+
+def test_detect_machine_type():
+    assert detect_machine_type("RETROESCAVADEIRA CASE 580N") == "Retroescavadeira"
+    assert detect_machine_type("Gerador 100kva") == "Gerador"
+    assert detect_machine_type("PLAINA AGRICOLA BALDAN") == "Plaina agrícola"
+    assert detect_machine_type("Fiat Uno 1.0") is None
+
+
+def test_extract_machine_fields():
+    out = extract_machine_fields("TRATOR JOHN DEERE 6110J 2015", "Horimetro: 4.320 horas, 110 cv", {})
+    assert out["tipo_equipamento"] == "Trator"
+    assert out["horimetro"] == 4320
+    assert out["ano_fabricacao"] == 2015
+    assert out["potencia_cv"] == 110
+    # condição só quando o texto afirma
+    assert "condicao" not in out
+    ruim = extract_machine_fields("RETROESCAVADEIRA CASE 580N 2012", "nao liga, necessita reparo no motor", {})
+    assert ruim["condicao"] == "necessita_reparo"
+    sucata = extract_machine_fields("EMPILHADEIRA", "equipamento sucata, inservivel", {})
+    assert sucata["condicao"] == "sucata"

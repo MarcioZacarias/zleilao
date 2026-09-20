@@ -94,7 +94,9 @@ export function AlertasSection({ emailVerified, onGoToFilters }: { emailVerified
         </div>
       ) : (
         <>
-          <ul className="space-y-3">
+          {/* Em duas colunas no desktop: o card do lote é estreito e uma
+              coluna só deixaria metade da linha vazia. */}
+          <ul className="grid gap-3 lg:grid-cols-2">
             {alerts.map((a) => (
               <li key={a.id} className="portal-card p-4">
                 <div className="flex flex-col gap-4 sm:flex-row">
