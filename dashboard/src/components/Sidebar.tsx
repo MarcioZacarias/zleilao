@@ -10,6 +10,8 @@ import {
   Timer,
   Settings,
   LogOut,
+  Users,
+  BellRing,
   X,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
@@ -23,6 +25,8 @@ const links = [
   { to: "/admin/revisao", label: "Revisão", icon: ClipboardCheck },
   { to: "/admin/incidentes", label: "Incidentes", icon: AlertTriangle },
   { to: "/admin/duplicados", label: "Duplicados", icon: Copy },
+  { to: "/admin/usuarios", label: "Usuários", icon: Users },
+  { to: "/admin/alertas", label: "Alertas", icon: BellRing },
   { to: "/admin/jobs", label: "Jobs", icon: Timer },
   { to: "/admin/configuracoes", label: "Configurações", icon: Settings },
 ];

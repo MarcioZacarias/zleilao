@@ -117,3 +117,77 @@ difere do texto da EF e por quê. Data: 18/09/2026.
 - Nome definitivo do produto e subdomínio.
 - Chave da API do LLM (configurar em Configurações → Normalização) e teto de custo.
 - Lista final de fontes além das três da F1.
+
+---
+
+# Onda 3 — comparador (RN-010) e avaliação do módulo de usados
+
+## A mudança de rota, e por quê
+
+A EF previa calcular o preço de referência pela **mediana de anúncios de
+marketplaces**. Ao avaliar as fontes uma a uma, essa base se mostrou frágil
+e juridicamente arriscada:
+
+| Fonte | O que o robots.txt diz | Situação |
+|---|---|---|
+| Webmotors | `Disallow: /comprar/` (as páginas de anúncio), exceto 9 marcas premium; `Disallow: /api/detail/` | A listagem e `/api/search/car` não são proibidas e entregam dados ricos (inclusive km e percentual sobre a FIPE), mas o anúncio em si é restrito |
+| Mercado Livre | `Disallow: /` para agentes de IA (ClaudeBot, GPTBot, PerplexityBot e outros) | Intenção declarada contra coleta automatizada |
+| iCarros | `Disallow: /ache/listaanuncios.jsp` — justamente a listagem | Restrito |
+| OLX | já era Tier 2 na EF (anti-bot forte) | Mantido fora |
+
+**Decisão: a tabela FIPE passa a ser a referência primária do comparador.**
+Ela é pública, feita para consulta, atualizada mensalmente, e é a referência
+que o mercado brasileiro de fato usa — inclusive os leiloeiros, que publicam
+"X% da FIPE" nos próprios anúncios. Isso entrega o valor central da EF (saber
+se o lote é oportunidade) sem depender de scraping de terceiros.
+
+O módulo de usados **não é descartado**: `sources.kind = marketplace` e
+`items.item_type = listing` continuam no modelo, e `price_references` aceita
+`source_kind = "listings"`. Quando houver autorização de uma fonte — acordo
+comercial, API oficial ou programa de afiliados — os anúncios entram como
+complemento. O que muda é que o comparador não fica refém disso.
+
+## Como o score é calculado, e as três correções em relação à EF
+
+1. **Custo total, não o lance.** O arrematante paga lance + comissão do
+   leiloeiro + despesas de pátio. Medido num lote real: lance de R$ 21.600
+   vira R$ 26.560 de custo, e o desconto cai de 45% para 32%. Comparar o lance
+   cru com a FIPE infla o desconto em mais de dez pontos.
+
+2. **Condição do bem entra na conta.** Um sinistrado a 60% da FIPE não é
+   oportunidade, é o preço dele. A RN-010 exigia só amostra mínima; sem olhar
+   a condição, o comparador recomendaria justamente os piores lotes, que são
+   os de maior "desconto". Sinistro e sucata não são excluídos — entram com a
+   referência ajustada por um fator explícito, que aparece nas razões.
+
+3. **O lance inicial é o piso, não o preço final.** O lote vai a pregão e o
+   valor sobe. O score declara isso: é o desconto **máximo possível**, não o
+   provável.
+
+## Condição presumida — onde a RN-002 termina e o comparador começa
+
+Sem LLM configurado, a maioria dos lotes fica com `condition = nao_informado`,
+e a regra acima zerava o comparador inteiro (medido: 32 de 43 lotes sem score).
+
+A saída **não** foi inferir o campo, o que violaria a RN-002. O campo continua
+"não informado" na ficha. O que existe é uma **premissa do comparador**, com
+três travas:
+
+- só vale para retomada de **financeira, frota ou locadora** — leilões que
+  destacam sinistro quando há, e onde o silêncio é informativo. Não vale para
+  seguradora (onde sinistro é a regra) nem para judicial (onde a descrição
+  raramente fala do estado do bem);
+- qualquer menção a dano, avaria, sinistro ou sucata derruba a premissa;
+- o score é **penalizado em 15%** pela incerteza e a razão declara, com todas
+  as letras, que a condição foi presumida e deve ser conferida na fonte.
+
+Desligável em Configurações (`comparator_presume_condition`).
+
+## Validação
+
+Rodado contra a API FIPE real: 30 referências obtidas, com casamento de modelo
+entre 0,66 e 0,96 de confiança. O casamento é conservador — "Gol" nunca casa
+com "Golf", porque o que separa modelos é a primeira palavra. Dos 11 scores
+calculados, um (Honda XRE 2021) saiu com desconto negativo: o lance inicial já
+estava acima da FIPE. É exatamente o tipo de armadilha que o comparador existe
+para expor.

@@ -16,6 +16,7 @@ GROUP_LABELS = {
     "scraping": "Coleta", "portal": "Portal", "branding": "Marca",
     "alerts": "Alertas (RN-006/RN-007)", "email": "E-mail (SMTP)",
     "whatsapp": "WhatsApp", "accounts": "Contas de usuário",
+    "comparator": "Comparador (RN-010)",
 }
 
 

@@ -22,6 +22,16 @@ const Incidents = lazy(() => import("./pages/admin/Incidents"));
 const Duplicates = lazy(() => import("./pages/admin/Duplicates"));
 const Jobs = lazy(() => import("./pages/admin/Jobs"));
 const Settings = lazy(() => import("./pages/admin/Settings"));
+const Users = lazy(() => import("./pages/admin/Users"));
+const Alerts = lazy(() => import("./pages/admin/Alerts"));
+
+// Conta do assinante (Onda 2): telas que só quem cria conta abre.
+const Entrar = lazy(() => import("./pages/portal/Entrar"));
+const Cadastro = lazy(() => import("./pages/portal/Cadastro"));
+const VerificarEmail = lazy(() => import("./pages/portal/VerificarEmail"));
+const EsqueciSenha = lazy(() => import("./pages/portal/EsqueciSenha"));
+const RedefinirSenha = lazy(() => import("./pages/portal/RedefinirSenha"));
+const Conta = lazy(() => import("./pages/portal/Conta"));
 
 function Loading() {
   return <div className="flex min-h-screen items-center justify-center bg-gray-50 text-gray-400">Carregando...</div>;
@@ -53,9 +63,18 @@ export default function App() {
           <Route path="/busca" element={<Search />} />
           <Route path="/lote/:id" element={<LotDetail />} />
           <Route path="/pregao/:id" element={<AuctionPage />} />
+          <Route path="/conta" element={<Conta />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 
+        {/* Conta do assinante: pele escura, sem o cabeçalho da vitrine */}
+        <Route path="/entrar" element={<Entrar />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/verificar-email" element={<VerificarEmail />} />
+        <Route path="/esqueci-senha" element={<EsqueciSenha />} />
+        <Route path="/redefinir-senha" element={<RedefinirSenha />} />
+
+        {/* Login do administrador (pele própria) */}
         <Route path="/login" element={<Login />} />
 
         {/* Admin protegido */}
@@ -74,6 +93,8 @@ export default function App() {
           <Route path="revisao" element={<Review />} />
           <Route path="incidentes" element={<Incidents />} />
           <Route path="duplicados" element={<Duplicates />} />
+          <Route path="usuarios" element={<Users />} />
+          <Route path="alertas" element={<Alerts />} />
           <Route path="jobs" element={<Jobs />} />
           <Route path="configuracoes" element={<Settings />} />
           <Route path="*" element={<Navigate to="/admin" replace />} />

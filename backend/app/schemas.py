@@ -198,6 +198,8 @@ class ItemCardOut(BaseModel):
     auction_type: Optional[str] = None
     card_fields: dict[str, Any] = {}  # campos show_in_card da categoria
     possible_duplicate: bool = False
+    opportunity_score: Optional[int] = None      # RN-010; ausente = sem referência confiável
+    opportunity_discount: Optional[float] = None
     model_config = ConfigDict(from_attributes=True)
 
 
@@ -217,6 +219,18 @@ class DuplicateRefOut(BaseModel):
     status: str
 
 
+class OpportunityOut(BaseModel):
+    """RN-010 — só existe quando dá para comparar com honestidade."""
+    score: int
+    discount_pct: float
+    reference_value: Decimal
+    total_cost: Decimal
+    reasons: dict[str, Any] = {}
+    reference_label: Optional[str] = None   # ex.: "FIPE set/2026 — Uno Mille Way 1.0"
+    computed_at: datetime
+    model_config = ConfigDict(from_attributes=True)
+
+
 class ItemDetailOut(ItemCardOut):
     description: Optional[str] = None
     images: list[str] = []
@@ -231,6 +245,7 @@ class ItemDetailOut(ItemCardOut):
     disclaimer: Optional[str] = None
     extraction_status: Optional[str] = None
     extraction_version: Optional[str] = None
+    opportunity: Optional[OpportunityOut] = None
 
 
 class ItemAdminOut(ItemCardOut):

@@ -128,6 +128,8 @@ export const JOB_TYPE_LABELS: Record<string, string> = {
   lifecycle: "Ciclo de vida",
   dedup: "Deduplicação",
   cleanup: "Limpeza",
+  match: "Casamento de filtros",
+  dispatch: "Envio de alertas",
 };
 
 export const JOB_STATUS_LABELS: Record<string, string> = {
@@ -193,3 +195,56 @@ export const UF_LIST = [
   "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA",
   "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO",
 ];
+
+/* ───────── Onda 2: contas, filtros salvos e alertas ───────── */
+
+export const ALERT_REASON_LABELS: Record<string, string> = {
+  new: "Novo lote",
+  price_drop: "Queda de lance",
+  new_session: "Nova sessão",
+};
+
+export const ALERT_STATUS_LABELS: Record<string, string> = {
+  pending: "Na fila",
+  sent: "Enviado",
+  failed: "Falhou",
+  skipped: "Ignorado",
+};
+
+export const ALERT_CHANNEL_LABELS: Record<string, string> = {
+  email: "E-mail",
+  whatsapp: "WhatsApp",
+};
+
+export const PLAN_LABELS: Record<string, string> = {
+  free: "Gratuito",
+  pro: "Pago",
+};
+
+export const PLAN_STATUS_LABELS: Record<string, string> = {
+  active: "Ativo",
+  canceled: "Cancelado",
+  expired: "Vencido",
+};
+
+export const ROLE_LABELS: Record<string, string> = {
+  user: "Assinante",
+  admin: "Administrador",
+};
+
+/** Rótulo de cada chave do `criteria` do filtro salvo. */
+export const CRITERIA_LABELS: Record<string, string> = {
+  q: "Busca",
+  category: "Categoria",
+  brand: "Marca",
+  model: "Modelo",
+  year_min: "Ano a partir de",
+  year_max: "Ano até",
+  price_min: "Preço a partir de",
+  price_max: "Preço até",
+  state: "UF",
+  city: "Cidade",
+  source: "Fonte",
+  condition: "Condição",
+  auction_type: "Tipo de leilão",
+};

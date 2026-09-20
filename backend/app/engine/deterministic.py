@@ -270,6 +270,21 @@ def detect_restricoes(text: str) -> str | None:
     return ", ".join(found) if found else None
 
 
+def has_damage_words(text: str | None) -> bool:
+    """O texto menciona dano, sinistro, sucata ou avaria?
+
+    Usado pelo comparador para decidir se pode presumir um bem intacto. Vale
+    tanto para o vocabulario de sinistro quanto para avarias pontuais
+    ("embreagem danificada"), porque qualquer um deles derruba a premissa.
+    """
+    if not text:
+        return False
+    t = _n(text)
+    if any(re.search(pat, t) for pat, _ in CONDITION_PATTERNS):
+        return True
+    return bool(re.search(r"danificad|avaria|amassad|quebrad|faltando|ausencia de|nao funciona|sem motor|incendi|enchente|alagad", t))
+
+
 def extract_vehicle_fields(title: str, short_text: str | None, raw: dict[str, Any] | None) -> dict[str, Any]:
     """Campos que as regras conseguem extrair. Nunca inventa: ausente = None."""
     raw = raw or {}

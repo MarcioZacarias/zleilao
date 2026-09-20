@@ -18,6 +18,7 @@ import { ItemCardSkeleton } from "../../components/ui/Skeleton";
 import { EmptyState } from "../../components/ui/EmptyState";
 import { Drawer } from "../../components/ui/Drawer";
 import { Button } from "../../components/ui/Button";
+import { CreateAlertButton } from "../../components/portal/CreateAlertButton";
 import { errorMessage } from "../../services/api";
 
 const PAGE_SIZE = 24;
@@ -487,7 +488,9 @@ export default function Search() {
             {loading && !page ? "Carregando…" : page ? `${page.meta.total.toLocaleString("pt-BR")} ${page.meta.total === 1 ? "lote encontrado" : "lotes encontrados"}` : ""}
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          {/* O gancho do produto: a busca atual vira alerta (RN-006). */}
+          <CreateAlertButton className="order-first w-full sm:order-none sm:w-auto" />
           <Button variant="outline-dark" size="sm" className="lg:hidden" onClick={() => setDrawer(true)}>
             <SlidersHorizontal size={14} /> Filtros
             {activeFilters.length > 0 && (

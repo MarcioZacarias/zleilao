@@ -170,3 +170,104 @@ interface Duplicate { id; canonical: ItemCard; duplicate: ItemCard; similarity: 
 - Preço: `price_kind=lance_inicial` → rótulo "Lance inicial"; se `price_second` → mostrar "2ª praça: R$ …".
 - `condition` ≠ `normal`/`nao_informado` → selo de alerta (sinistro/sucata). O portal **não** calcula score de oportunidade na F1.
 - Disclaimer (`/portal/branding.disclaimer`) no rodapé de toda ficha.
+
+---
+
+# Onda 2 — contas, filtros salvos e alertas (RN-006/RN-007)
+
+Autenticação: o mesmo `POST /auth/login` serve para assinante e administrador; o campo
+`role` na resposta diz qual é (`user` ou `admin`). Rotas `/v1/me/*` exigem token de
+qualquer papel. Rotas de operação (`/v1/sources`, `/v1/items`, `/v1/users`, `/v1/alerts`,
+`/v1/settings`, `/v1/jobs`, `/v1/incidents`, `/v1/duplicates`, `/v1/categories`,
+`/v1/dashboard`) exigem **papel admin** e respondem **403** para assinante.
+
+## Enums
+
+| Campo | Valores |
+|---|---|
+| `Alert.reason` | `new` (lote novo), `price_drop` (queda de lance), `new_session` (nova sessão) |
+| `Alert.status` | `pending`, `sent`, `failed`, `skipped` |
+| `Alert.channel` | `email`, `whatsapp` |
+| `plan` | `free`, `pro` |
+| `plan_status` | `active`, `canceled`, `expired` |
+
+## Critério do filtro salvo
+
+`criteria` usa **exatamente** as chaves da busca pública, então a query string de
+`/busca` vira filtro salvo sem tradução:
+
+```
+q, category (slug), brand, model, year_min, year_max, price_min, price_max,
+state (UF), city, source (slug), condition, auction_type
+```
+
+Chaves desconhecidas são descartadas no servidor. Critério vazio significa "qualquer
+lote novo".
+
+## Público (sem token)
+
+| Método | Rota | Corpo / notas |
+|---|---|---|
+| POST | `/auth/register` | `{name, email, password (≥8), phone?}` → `{status, verification_required, verification_sent, detail}`. **409** se o e-mail já existe (mensagem neutra, não confirma cadastro). |
+| POST | `/auth/verify-email?token=` | → `{status, email}`. Token é de uso único: a segunda chamada dá **400**. |
+| POST | `/auth/resend-verification` | `{email}` → resposta igual exista ou não a conta. |
+| POST | `/auth/forgot-password` | `{email}` → resposta igual exista ou não a conta. |
+| POST | `/auth/reset-password` | `{token, new_password}` → devolve `access_token` já logado. |
+
+## Conta do assinante (token)
+
+| Método | Rota | Notas |
+|---|---|---|
+| GET | `/me` | `{id, email, name, role, phone, email_opt_in, whatsapp_opt_in, email_verified, quiet_start, quiet_end, plan, plan_status, plan_expires_at, filters_used, filters_limit, whatsapp_channel_available, realtime_alerts}` |
+| PATCH | `/me` | `{name?, phone?, email_opt_in?, whatsapp_opt_in?, quiet_start?, quiet_end?}`. Ativar WhatsApp sem telefone dá **400**. |
+| POST | `/me/change-password` | `{current_password, new_password}` |
+| GET | `/me/filters` | `{filters: SavedFilter[], limit, plan}` |
+| POST | `/me/filters` | `{name?, criteria, channels, is_active}` → **403** ao estourar o limite do plano, com a mensagem pronta para exibir. Sem `name`, o servidor gera a descrição. |
+| PUT/DELETE | `/me/filters/{id}` | |
+| GET | `/me/filters/{id}/preview?limit=6` | `{total, items: ItemCard[]}` — o que o filtro pegaria hoje |
+| GET | `/me/alerts?limit=50` | `[{id, reason, status, channel, detail, created_at, sent_at, saved_filter_id, item: ItemCard\|null}]` |
+
+```ts
+interface SavedFilter {
+  id: number; name: string; criteria: Record<string, unknown>; channels: ("email"|"whatsapp")[];
+  is_active: boolean; last_matched_at: string | null; matches_count: number;
+  created_at: string; description: string;   // resumo legível do critério
+}
+```
+
+## Admin
+
+| Método | Rota | Notas |
+|---|---|---|
+| GET | `/users?q=&plan=&page=&page_size=` | `{users: UserAdmin[], meta: PageMeta}` |
+| GET | `/users/summary` | `{users_total, users_verified, by_plan, active_filters, alerts_sent_today, alerts_pending, alerts_failed}` |
+| PATCH | `/users/{id}` | `{is_active?, role?, email_verified?}`. Bloqueia auto-rebaixamento e autodesativação. |
+| PUT | `/users/{id}/plan` | `{plan: "free"\|"pro", months: 0-36, note?}`. `months=0` no pago = sem vencimento (cortesia). Ativação **manual**: não há gateway. |
+| GET | `/users/{id}/filters` | filtros daquele usuário |
+| GET | `/alerts?status=&user_id=&limit=` | `[{id, reason, status, channel, detail, error, created_at, sent_at, user, item}]` |
+| POST | `/alerts/{id}/retry` | volta para `pending`. **400** se já foi enviado. |
+| POST | `/settings/test-email` | `{to}` → `{ok, detail}`. Envia mensagem real. |
+| POST | `/settings/test-whatsapp` | `{to: telefone}` → `{ok, detail}` |
+| POST | `/jobs/{match\|dispatch}/run` | dispara os jobs de alerta |
+
+```ts
+interface UserAdmin {
+  id: number; email: string; name: string | null; role: "user"|"admin"; is_active: boolean;
+  phone: string | null; email_opt_in: boolean; whatsapp_opt_in: boolean; email_verified: boolean;
+  created_at: string; last_login_at: string | null;
+  plan: "free"|"pro"; plan_status: string; plan_expires_at: string | null; plan_note: string | null;
+  filters: number; alerts_sent: number;
+}
+```
+
+## Regras que a interface precisa respeitar
+
+- **E-mail não verificado não recebe alerta.** `GET /me` traz `email_verified`; enquanto
+  for `false`, mostrar aviso com ação de reenviar. O login funciona mesmo sem verificar.
+- **Limite de filtros por plano** (`filters_used` / `filters_limit`): ao atingir, oferecer
+  remover um ou mudar de plano. O erro **403** já vem com o texto pronto.
+- **WhatsApp só aparece** quando `whatsapp_channel_available` é `true`; caso contrário o
+  canal não é oferecido, porque está desligado no servidor.
+- **Plano gratuito recebe resumo diário**, plano pago recebe quase em tempo real
+  (`realtime_alerts`). Deixar isso explícito na tela de planos.
+- **Janela de silêncio** é opcional e pessoal; vazia significa usar a global do sistema.

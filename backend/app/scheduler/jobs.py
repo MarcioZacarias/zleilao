@@ -27,6 +27,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import AsyncSessionLocal
 from app.timeutil import BRT, now_brt
+from app.engine.comparator import run_comparator
 from app.engine.dedup import run_dedup
 from app.engine.health import evaluate_run, open_incident
 from app.engine.lifecycle import run_cleanup, run_lifecycle
@@ -61,6 +62,7 @@ async def start_scheduler() -> None:
         dedup = await get_setting_int(db, "dedup_interval_minutes", 60)
         match_min = await get_setting_int(db, "match_interval_minutes", 10)
         disp_min = await get_setting_int(db, "dispatch_interval_minutes", 5)
+        comp_min = await get_setting_int(db, "comparator_interval_minutes", 180)
     # Datas de inicio timezone-aware: o container roda em UTC e o scheduler em
     # Brasilia; um `datetime.now()` naive seria interpretado no fuso errado.
     boot = datetime.now(BRT)
@@ -83,6 +85,8 @@ async def start_scheduler() -> None:
                        id="match", max_instances=1, coalesce=True)
     _scheduler.add_job(dispatch_job, IntervalTrigger(minutes=max(1, disp_min), start_date=boot + timedelta(minutes=3), timezone=BRT),
                        id="dispatch", max_instances=1, coalesce=True)
+    _scheduler.add_job(comparator_job, IntervalTrigger(minutes=max(10, comp_min), start_date=boot + timedelta(minutes=4), timezone=BRT),
+                       id="comparator", max_instances=1, coalesce=True)
     _scheduler.add_job(cleanup_job, CronTrigger(hour=3, minute=0, timezone=BRT), id="cleanup", max_instances=1, coalesce=True)
     _scheduler.start()
     logger.info("Scheduler: scrape_tick %dm, normalize %dm, lifecycle %dm, dedup %dm, match %dm, dispatch %dm, cleanup 03:00",
@@ -516,6 +520,26 @@ async def dispatch_job() -> dict[str, Any]:
                 raise
 
 
+async def comparator_job() -> dict[str, Any]:
+    """RN-010: referencia FIPE por bem + score de oportunidade dos lotes."""
+    if _lock("comparator").locked():
+        return {"skipped": True}
+    async with _lock("comparator"):
+        async with AsyncSessionLocal() as db:
+            if not await get_setting_bool(db, "comparator_enabled", True):
+                return {"disabled": True}
+            job = await _start_job(db, "comparator")
+            try:
+                stats = await run_comparator(db)
+                status = "failed" if stats.get("stopped") and not stats.get("scored") else "success"
+                await _finish_job(db, job, status, stats.get("scored", 0), stats.get("stopped"), stats)
+                return stats
+            except Exception as exc:
+                await db.rollback()
+                await _finish_job(db, job, "failed", 0, str(exc))
+                raise
+
+
 JOB_RUNNERS = {
     "scrape_tick": scrape_tick,
     "normalize": normalize_job,
@@ -523,5 +547,6 @@ JOB_RUNNERS = {
     "dedup": dedup_job,
     "match": match_job,
     "dispatch": dispatch_job,
+    "comparator": comparator_job,
     "cleanup": cleanup_job,
 }

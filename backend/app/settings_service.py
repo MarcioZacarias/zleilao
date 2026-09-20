@@ -78,6 +78,14 @@ DEFAULTS = [
     {"key": "free_digest_hour", "value": "9", "label": "RN-007: hora do resumo diario do plano gratuito (0-23)", "group": "alerts", "is_secret": False},
     {"key": "free_max_filters", "value": "3", "label": "RN-007: filtros salvos no plano gratuito", "group": "alerts", "is_secret": False},
     {"key": "pro_max_filters", "value": "30", "label": "RN-007: filtros salvos no plano pago", "group": "alerts", "is_secret": False},
+    # ── Comparador (RN-010) ────────────────────────────────────────────
+    {"key": "comparator_enabled", "value": "true", "label": "Comparador ligado (referencia FIPE + score)", "group": "comparator", "is_secret": False},
+    {"key": "comparator_interval_minutes", "value": "180", "label": "Intervalo do job do comparador (min)", "group": "comparator", "is_secret": False},
+    {"key": "fipe_api_url", "value": "https://parallelum.com.br/fipe/api/v1", "label": "API da tabela FIPE", "group": "comparator", "is_secret": False},
+    {"key": "fipe_max_lookups_per_cycle", "value": "40", "label": "Max consultas a FIPE por ciclo (a tabela muda 1x/mes)", "group": "comparator", "is_secret": False},
+    {"key": "price_reference_ttl_days", "value": "30", "label": "Validade da referencia de preco (dias)", "group": "comparator", "is_secret": False},
+    {"key": "comparator_presume_condition", "value": "true", "label": "Presumir bem integro quando a fonte nao informa (so em retomada de financeira/frota/locadora sem mencao a avaria; o score e penalizado)", "group": "comparator", "is_secret": False},
+    {"key": "default_commission_pct", "value": "5", "label": "RN-010: comissao padrao do leiloeiro (%) quando a fonte nao informa", "group": "comparator", "is_secret": False},
     # ── E-mail (SMTP) ──────────────────────────────────────────────────
     {"key": "email_enabled", "value": "true", "label": "Canal e-mail ligado", "group": "email", "is_secret": False},
     {"key": "smtp_host", "value": "", "label": "Servidor SMTP", "group": "email", "is_secret": False},

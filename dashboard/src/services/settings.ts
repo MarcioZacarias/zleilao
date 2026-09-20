@@ -1,5 +1,5 @@
 import api from "./api";
-import type { LlmTestResult, SettingsResponse } from "./types";
+import type { LlmTestResult, SettingsResponse, TestSendResult } from "./types";
 
 export type BrandingKey = "logo_dark" | "logo_light" | "favicon";
 
@@ -8,6 +8,12 @@ export const settingsApi = {
   save: (settings: Record<string, string>) =>
     api.put<{ status: string; updated: number }>("/settings", { settings }).then((r) => r.data),
   testLlm: () => api.post<LlmTestResult>("/settings/test-llm", null, { timeout: 60000 }).then((r) => r.data),
+  /** Envia uma mensagem real para o destinatário informado. */
+  testEmail: (to: string) =>
+    api.post<TestSendResult>("/settings/test-email", { to }, { timeout: 60000 }).then((r) => r.data),
+  /** `to` é o telefone com DDD. */
+  testWhatsapp: (to: string) =>
+    api.post<TestSendResult>("/settings/test-whatsapp", { to }, { timeout: 60000 }).then((r) => r.data),
 };
 
 export const brandingApi = {

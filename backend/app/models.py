@@ -532,6 +532,69 @@ class Alert(Base):
     )
 
 
+# ── Comparador: referência de preço e score (RN-010) ──────────────────────
+
+class PriceReference(Base):
+    """Preço de mercado de um bem (marca/modelo/ano), com a origem declarada.
+
+    `source_kind='fipe'` é a referência primária. `median_listings` fica
+    reservado para quando houver anúncios de marketplace autorizados.
+    """
+
+    __tablename__ = "price_references"
+
+    id = Column(Integer, primary_key=True, index=True)
+    vehicle_type = Column(String(20), nullable=False)   # carros | motos | caminhoes
+    brand = Column(String(60), nullable=False)
+    model = Column(String(120), nullable=False)
+    year = Column(Integer, nullable=False)
+    fuel = Column(String(30), nullable=True)
+
+    source_kind = Column(String(20), default="fipe", nullable=False)  # fipe | listings
+    value = Column(Numeric(14, 2), nullable=False)
+    sample_size = Column(Integer, default=1, nullable=False)   # 1 na FIPE; N em anúncios
+    min_value = Column(Numeric(14, 2), nullable=True)
+    max_value = Column(Numeric(14, 2), nullable=True)
+
+    fipe_code = Column(String(20), nullable=True)
+    fipe_model_label = Column(String(200), nullable=True)
+    reference_month = Column(String(40), nullable=True)
+    match_ratio = Column(Float, nullable=True)   # confiança do casamento de modelo
+
+    computed_at = Column(DateTime, default=utcnow, nullable=False)
+
+    __table_args__ = (
+        UniqueConstraint("vehicle_type", "brand", "model", "year", "fuel", "source_kind",
+                         name="uq_price_reference_key"),
+        Index("ix_price_reference_lookup", "brand", "model", "year"),
+    )
+
+
+class ItemOpportunity(Base):
+    """RN-010 — score de oportunidade de um lote contra a referência de mercado.
+
+    Só existe quando dá para comparar com honestidade: sem referência, ou com
+    condição do bem desconhecida, não há score (ver `engine/opportunity.py`).
+    """
+
+    __tablename__ = "item_opportunities"
+
+    id = Column(Integer, primary_key=True, index=True)
+    item_id = Column(Integer, ForeignKey("items.id", ondelete="CASCADE"), unique=True, nullable=False)
+    price_reference_id = Column(Integer, ForeignKey("price_references.id", ondelete="SET NULL"), nullable=True)
+
+    reference_value = Column(Numeric(14, 2), nullable=False)
+    #: lance + comissão do leiloeiro + despesas conhecidas — o que o
+    #: arrematante realmente desembolsa. Comparar só o lance infla o desconto.
+    total_cost = Column(Numeric(14, 2), nullable=False)
+    discount_pct = Column(Float, nullable=False)
+    score = Column(Integer, nullable=False)      # 0-100
+    reasons = Column(JSONB, nullable=True)
+    computed_at = Column(DateTime, default=utcnow, nullable=False)
+
+    __table_args__ = (Index("ix_item_opportunity_score", "score"),)
+
+
 class AuthToken(Base):
     """Token de uso unico para verificar e-mail ou redefinir senha.
     Guarda o hash, nunca o token em claro."""

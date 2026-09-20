@@ -33,8 +33,17 @@ export type IncidentKind =
 export type IncidentStatus = "open" | "acknowledged" | "resolved";
 export type DuplicateStatus = "suspected" | "confirmed" | "rejected";
 export type FieldType = "string" | "int" | "decimal" | "bool" | "enum" | "date";
+/** Jobs com histórico em `/dashboard.last_jobs`. Match e dispatch (Onda 2)
+ *  aparecem em `/jobs` e no agendador, mas não nesse resumo. */
 export type JobType = "scrape" | "normalize" | "lifecycle" | "dedup" | "cleanup";
-export type JobRunType = "scrape_tick" | "normalize" | "lifecycle" | "dedup" | "cleanup";
+export type JobRunType =
+  | "scrape_tick"
+  | "normalize"
+  | "lifecycle"
+  | "dedup"
+  | "cleanup"
+  | "match"
+  | "dispatch";
 export type JobStatus = "running" | "success" | "failed" | "skipped";
 export type SortOption = "relevance" | "price_asc" | "price_desc" | "session_asc" | "newest";
 export type AdminSortOption = "updated_desc" | "first_seen_desc" | "session_asc" | "price_desc";
@@ -454,4 +463,205 @@ export interface AdminItemsParams {
   page?: number;
   page_size?: number;
   sort?: AdminSortOption;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Onda 2 — contas, filtros salvos e alertas (RN-006/RN-007)
+   ───────────────────────────────────────────────────────────────────── */
+
+export type AlertReason = "new" | "price_drop" | "new_session";
+export type AlertStatus = "pending" | "sent" | "failed" | "skipped";
+export type AlertChannel = "email" | "whatsapp";
+export type Plan = "free" | "pro";
+export type PlanStatus = "active" | "canceled" | "expired";
+export type UserRole = "user" | "admin";
+
+/** Valores aceitos no `criteria` do filtro salvo (mesmas chaves da busca). */
+export type CriteriaValue = string | number;
+export type Criteria = Partial<Record<CriteriaKey, CriteriaValue>>;
+export type CriteriaKey =
+  | "q"
+  | "category"
+  | "brand"
+  | "model"
+  | "year_min"
+  | "year_max"
+  | "price_min"
+  | "price_max"
+  | "state"
+  | "city"
+  | "source"
+  | "condition"
+  | "auction_type";
+
+/** `GET /me` — a conta do assinante logado. */
+export interface AccountMe {
+  id: number;
+  email: string;
+  name: string | null;
+  role: string;
+  phone: string | null;
+  email_opt_in: boolean;
+  whatsapp_opt_in: boolean;
+  email_verified: boolean;
+  quiet_start: string | null;
+  quiet_end: string | null;
+  plan: Plan;
+  plan_status: string;
+  plan_expires_at: string | null;
+  filters_used: number;
+  filters_limit: number;
+  whatsapp_channel_available: boolean;
+  realtime_alerts: boolean;
+}
+
+export interface AccountUpdate {
+  name?: string;
+  phone?: string | null;
+  email_opt_in?: boolean;
+  whatsapp_opt_in?: boolean;
+  quiet_start?: string | null;
+  quiet_end?: string | null;
+}
+
+export interface SavedFilter {
+  id: number;
+  name: string;
+  criteria: Criteria;
+  channels: AlertChannel[];
+  is_active: boolean;
+  last_matched_at: string | null;
+  matches_count: number;
+  created_at: string;
+  description: string;
+}
+
+export interface SavedFilterInput {
+  name?: string | null;
+  criteria: Criteria;
+  channels: AlertChannel[];
+  is_active: boolean;
+}
+
+export interface SavedFilterList {
+  filters: SavedFilter[];
+  limit: number;
+  plan: Plan;
+}
+
+export interface FilterPreview {
+  total: number;
+  items: ItemCard[];
+}
+
+export interface MyAlert {
+  id: number;
+  reason: string;
+  status: string;
+  channel: string | null;
+  detail: string | null;
+  created_at: string;
+  sent_at: string | null;
+  saved_filter_id: number | null;
+  item: ItemCard | null;
+}
+
+export interface AdminAlert {
+  id: number;
+  reason: string;
+  status: string;
+  channel: string | null;
+  detail: string | null;
+  error: string | null;
+  created_at: string;
+  sent_at: string | null;
+  user: { id: number; email: string; name: string | null } | null;
+  item: ItemCard | null;
+}
+
+export interface UserAdmin {
+  id: number;
+  email: string;
+  name: string | null;
+  role: UserRole;
+  is_active: boolean;
+  phone: string | null;
+  email_opt_in: boolean;
+  whatsapp_opt_in: boolean;
+  email_verified: boolean;
+  created_at: string;
+  last_login_at: string | null;
+  plan: Plan;
+  plan_status: string;
+  plan_expires_at: string | null;
+  plan_note: string | null;
+  filters: number;
+  alerts_sent: number;
+}
+
+export interface UsersPage {
+  users: UserAdmin[];
+  meta: PageMeta;
+}
+
+export interface UsersSummary {
+  users_total: number;
+  users_verified: number;
+  by_plan: Record<string, number>;
+  active_filters: number;
+  alerts_sent_today: number;
+  alerts_pending: number;
+  alerts_failed: number;
+}
+
+export interface UserAdminUpdate {
+  is_active?: boolean;
+  role?: UserRole;
+  email_verified?: boolean;
+}
+
+export interface PlanUpdateInput {
+  plan: Plan;
+  /** 0 no plano pago = sem vencimento (cortesia). */
+  months: number;
+  note?: string | null;
+}
+
+/** `/users/{id}/filters` não devolve `description` (só a conta do dono devolve). */
+export interface AdminSavedFilter {
+  id: number;
+  name: string;
+  criteria: Criteria;
+  channels: AlertChannel[];
+  is_active: boolean;
+  matches_count: number;
+  last_matched_at: string | null;
+  created_at: string;
+}
+
+export interface RegisterResponse {
+  status: string;
+  verification_required: boolean;
+  verification_sent: boolean;
+  detail: string;
+}
+
+export interface SimpleStatus {
+  status: string;
+  detail?: string;
+}
+
+export interface VerifyEmailResponse {
+  status: string;
+  email: string;
+}
+
+/** `POST /auth/reset-password` já devolve a sessão aberta. */
+export interface ResetPasswordResponse extends LoginResponse {
+  status: string;
+}
+
+export interface TestSendResult {
+  ok: boolean;
+  detail: string;
 }

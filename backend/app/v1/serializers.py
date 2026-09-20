@@ -9,10 +9,10 @@ from sqlalchemy import or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.engine.category_fields import effective_fields
-from app.models import Auction, Category, CategoryField, Item, ItemDuplicate, Source
+from app.models import Auction, Category, CategoryField, Item, ItemDuplicate, ItemOpportunity, PriceReference, Source
 from app.schemas import (
     AuctionOut, AuctionSessionOut, CategoryFieldOut, DuplicateRefOut, ItemAdminOut, ItemCardOut,
-    ItemDetailOut, ItemPriceHistoryOut,
+    ItemDetailOut, ItemPriceHistoryOut, OpportunityOut,
 )
 
 
@@ -26,6 +26,7 @@ class SerializerContext:
         self.card_keys: dict[int, list[CategoryField]] = {}
         self.field_defs: dict[int, list[tuple[CategoryField, Category]]] = {}
         self.dup_ids: set[int] = set()
+        self.opportunities: dict[int, ItemOpportunity] = {}
 
     async def load(self, items: list[Item]) -> "SerializerContext":
         if not self.sources:
@@ -41,6 +42,11 @@ class SerializerContext:
             for a, b in rows:
                 self.dup_ids.add(a)
                 self.dup_ids.add(b)
+        if ids:
+            for opp in (await self.db.execute(
+                select(ItemOpportunity).where(ItemOpportunity.item_id.in_(ids))
+            )).scalars().all():
+                self.opportunities[opp.item_id] = opp
         for cid in {i.category_id for i in items if i.category_id}:
             await self.fields_for(cid)
         return self
@@ -68,6 +74,8 @@ class SerializerContext:
             category_id=item.category_id, category_slug=cat.slug if cat else None, category_name=cat.name if cat else None,
             auction_id=item.auction_id, auction_type=auction_type, card_fields=card_fields,
             possible_duplicate=item.id in self.dup_ids,
+            opportunity_score=opp.score if (opp := self.opportunities.get(item.id)) else None,
+            opportunity_discount=opp.discount_pct if opp else None,
         )
 
     def field_defs_out(self, category_id: int | None) -> list[CategoryFieldOut]:
@@ -106,7 +114,25 @@ class SerializerContext:
             price_history=[ItemPriceHistoryOut.model_validate(p) for p in (item.price_history or [])],
             duplicates=dups, first_seen_at=item.first_seen_at, disclaimer=disclaimer,
             extraction_status=item.extraction_status, extraction_version=item.extraction_version,
+            opportunity=await self.opportunity(item),
         )
+
+    async def opportunity(self, item: Item) -> OpportunityOut | None:
+        """RN-010: score com a referência nomeada. Sem referência confiável,
+        devolve None e o portal mostra "sem referência de mercado"."""
+        opp = self.opportunities.get(item.id)
+        if not opp:
+            opp = await self.db.scalar(select(ItemOpportunity).where(ItemOpportunity.item_id == item.id))
+        if not opp:
+            return None
+        dto = OpportunityOut.model_validate(opp)
+        ref = await self.db.get(PriceReference, opp.price_reference_id) if opp.price_reference_id else None
+        if ref:
+            month = (ref.reference_month or "").strip()
+            dto.reference_label = " — ".join(x for x in [
+                f"FIPE {month}" if month else "FIPE", ref.fipe_model_label or f"{ref.brand} {ref.model}"
+            ] if x)
+        return dto
 
     def admin(self, item: Item) -> ItemAdminOut:
         base = self.card(item).model_dump()

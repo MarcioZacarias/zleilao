@@ -207,3 +207,38 @@ export function slugify(text: string): string {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
+
+/* ───────── Telefone (Onda 2) ─────────
+ * O backend guarda só dígitos com DDI ("5511987654321"); a interface mostra
+ * e digita no formato brasileiro "(11) 98765-4321".
+ */
+
+/** Dígitos do telefone sem o DDI 55, para alimentar a máscara. */
+export function phoneDigits(value: string | null | undefined): string {
+  let d = (value ?? "").replace(/\D/g, "");
+  if (d.startsWith("55") && d.length > 11) d = d.slice(2);
+  return d.slice(0, 11);
+}
+
+/** Máscara progressiva: aceita digitação parcial sem travar o cursor. */
+export function maskPhone(value: string | null | undefined): string {
+  const d = phoneDigits(value);
+  if (!d) return "";
+  if (d.length <= 2) return `(${d}`;
+  const ddd = d.slice(0, 2);
+  const rest = d.slice(2);
+  if (rest.length <= 4) return `(${ddd}) ${rest}`;
+  const split = rest.length > 8 ? 5 : 4;
+  return `(${ddd}) ${rest.slice(0, split)}-${rest.slice(split)}`;
+}
+
+/** Telefone válido para o backend: DDD + 8 ou 9 dígitos. */
+export function isValidPhone(value: string | null | undefined): boolean {
+  const d = phoneDigits(value);
+  return d.length === 10 || d.length === 11;
+}
+
+/** Só HH:MM (janela de silêncio). Vazio é válido: usa a janela global. */
+export function isValidTimeWindow(value: string): boolean {
+  return value === "" || /^([01]\d|2[0-3]):([0-5]\d)$/.test(value.trim());
+}
