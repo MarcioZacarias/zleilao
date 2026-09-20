@@ -14,7 +14,9 @@ from app.timeutil import now_brt
 from app.database import get_db
 from app.engine.health import resolve_incident
 from app.engine.lifecycle import VISIBLE_STATUSES
-from app.models import Auction, ClickEvent, Item, ItemDuplicate, JobExecution, ScrapeIncident, Source, User
+from app.models import (
+    Auction, Item, ItemDuplicate, JobExecution, ScrapeIncident, Source, SourceDailyStat, User,
+)
 from app.schemas import DuplicateOut, DuplicateUpdate, IncidentOut, IncidentUpdate, JobExecutionOut
 from app.v1.serializers import SerializerContext
 
@@ -136,9 +138,16 @@ async def dashboard(db: AsyncSession = Depends(get_db)):
     sources = (await db.execute(select(Source).order_by(Source.name))).scalars().all()
     per_source_total = dict((await db.execute(select(Item.source_id, func.count()).group_by(Item.source_id))).all())
     per_source_pub = dict((await db.execute(select(Item.source_id, func.count()).where(Item.status.in_(VISIBLE_STATUSES)).group_by(Item.source_id))).all())
-    clicks_7d = dict((await db.execute(
-        select(ClickEvent.source_id, func.count()).where(ClickEvent.clicked_at >= now - timedelta(days=7)).group_by(ClickEvent.source_id)
-    )).all())
+    # CTR real: cliques sobre aberturas de ficha. Antes o denominador era o
+    # numero de lotes publicados, que nao e audiencia nenhuma.
+    desde = (now - timedelta(days=7)).date()
+    audiencia = {
+        sid: (v or 0, c or 0)
+        for sid, v, c in (await db.execute(
+            select(SourceDailyStat.source_id, func.sum(SourceDailyStat.views), func.sum(SourceDailyStat.clicks))
+            .where(SourceDailyStat.day >= desde).group_by(SourceDailyStat.source_id)
+        )).all()
+    }
     open_incidents = await db.scalar(select(func.count(ScrapeIncident.id)).where(ScrapeIncident.status == "open")) or 0
     suspected_dups = await db.scalar(select(func.count(ItemDuplicate.id)).where(ItemDuplicate.status == "suspected")) or 0
     new_24h = await db.scalar(select(func.count(Item.id)).where(Item.first_seen_at >= now - timedelta(hours=24))) or 0
@@ -168,11 +177,69 @@ async def dashboard(db: AsyncSession = Depends(get_db)):
                 "health_status": s.health_status, "last_run_at": s.last_run_at, "last_run_status": s.last_run_status,
                 "last_items_count": s.last_items_count, "avg_items_count": s.avg_items_count,
                 "items_total": per_source_total.get(s.id, 0), "items_published": per_source_pub.get(s.id, 0),
-                "clicks_7d": clicks_7d.get(s.id, 0),
-                "ctr_7d": round(clicks_7d.get(s.id, 0) / per_source_pub[s.id], 4) if per_source_pub.get(s.id) else None,
+                "views_7d": audiencia.get(s.id, (0, 0))[0],
+                "clicks_7d": audiencia.get(s.id, (0, 0))[1],
+                # Sem abertura no periodo nao existe taxa: None, nunca zero.
+                "ctr_7d": (round(audiencia[s.id][1] / audiencia[s.id][0], 4)
+                           if audiencia.get(s.id, (0, 0))[0] else None),
             }
             for s in sources
         ],
         "last_jobs": last_jobs,
         "daily_collected": [{"day": d.date().isoformat() if hasattr(d, "date") else str(d), "count": c} for d, c in daily],
+    }
+
+partners_router = APIRouter()
+
+
+@partners_router.get("/report")
+async def partners_report(
+    days: int = Query(30, ge=1, le=365),
+    db: AsyncSession = Depends(get_db),
+):
+    """Relatorio de audiencia e leads por fonte — criterio de aceite da F5.
+
+    `views` sao aberturas de ficha do lote, `clicks` sao saidas para o site do
+    leiloeiro. A taxa e a razao entre as duas: e o unico numero que um parceiro
+    pode conferir do lado dele, comparando com o proprio acesso.
+    """
+    now = now_brt()
+    desde = (now - timedelta(days=days)).date()
+
+    rows = (await db.execute(
+        select(SourceDailyStat.source_id, func.sum(SourceDailyStat.views), func.sum(SourceDailyStat.clicks))
+        .where(SourceDailyStat.day >= desde).group_by(SourceDailyStat.source_id)
+    )).all()
+    total = {sid: (v or 0, c or 0) for sid, v, c in rows}
+
+    serie = (await db.execute(
+        select(SourceDailyStat.day, func.sum(SourceDailyStat.views), func.sum(SourceDailyStat.clicks))
+        .where(SourceDailyStat.day >= desde).group_by(SourceDailyStat.day).order_by(SourceDailyStat.day)
+    )).all()
+
+    publicados = dict((await db.execute(
+        select(Item.source_id, func.count()).where(Item.status.in_(VISIBLE_STATUSES)).group_by(Item.source_id)
+    )).all())
+
+    sources = (await db.execute(select(Source).order_by(Source.name))).scalars().all()
+    fontes = []
+    for src in sources:
+        views, clicks = total.get(src.id, (0, 0))
+        fontes.append({
+            "source_id": src.id, "name": src.name, "slug": src.slug,
+            "items_published": publicados.get(src.id, 0),
+            "views": views, "clicks": clicks,
+            "ctr": round(clicks / views, 4) if views else None,
+            "views_per_item": round(views / publicados[src.id], 2) if publicados.get(src.id) else None,
+        })
+    fontes.sort(key=lambda f: f["clicks"], reverse=True)
+
+    soma_v = sum(f["views"] for f in fontes)
+    soma_c = sum(f["clicks"] for f in fontes)
+    return {
+        "days": days,
+        "from": desde.isoformat(),
+        "sources": fontes,
+        "totals": {"views": soma_v, "clicks": soma_c, "ctr": round(soma_c / soma_v, 4) if soma_v else None},
+        "daily": [{"day": d.isoformat(), "views": v or 0, "clicks": c or 0} for d, v, c in serie],
     }

@@ -313,6 +313,7 @@ export default function Dashboard() {
                   <Th>Última / média</Th>
                   <Th>Itens</Th>
                   <Th>Publicados</Th>
+                  <Th>Aberturas 7d</Th>
                   <Th>Cliques 7d</Th>
                   <Th>CTR 7d</Th>
                 </tr>
@@ -335,6 +336,7 @@ export default function Dashboard() {
                     <Td className="tabular-nums">{formatInt(s.last_items_count)} / {s.avg_items_count === null ? "—" : formatInt(Math.round(s.avg_items_count))}</Td>
                     <Td className="tabular-nums">{formatInt(s.items_total)}</Td>
                     <Td className="tabular-nums">{formatInt(s.items_published)}</Td>
+                    <Td className="tabular-nums">{formatInt(s.views_7d)}</Td>
                     <Td className="tabular-nums">{formatInt(s.clicks_7d)}</Td>
                     <Td className="tabular-nums">{s.ctr_7d === null ? "—" : formatPercent(s.ctr_7d * (s.ctr_7d <= 1 ? 100 : 1))}</Td>
                   </Tr>

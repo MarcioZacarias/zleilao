@@ -7,11 +7,16 @@ import type {
   IncidentStatus,
   JobExecution,
   JobRunType,
+  PartnersReport,
   SchedulerJob,
 } from "./types";
 
 export const dashboardApi = {
   get: () => api.get<DashboardData>("/dashboard").then((r) => r.data),
+};
+
+export const partnersApi = {
+  report: (days = 30) => api.get<PartnersReport>("/partners/report", { params: { days } }).then((r) => r.data),
 };
 
 export const incidentsApi = {

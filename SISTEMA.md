@@ -268,6 +268,28 @@ quem pediu 60 km. A população não entra em nenhum cálculo: serve só para o
 autocomplete oferecer Campinas antes de Campanha. Com o raio ativo, cada item
 traz `distance_km`, que é o que justifica a ordem "mais perto" na tela.
 
+## 8.6 Audiência e leads por fonte (onda 5)
+
+`source_daily_stats` guarda, por fonte e por dia, **aberturas de ficha** e
+**cliques de saída** para o site do leiloeiro. Agregado, e não um evento por
+visita: o relatório de parceria responde a uma taxa, e uma linha por dia por
+fonte responde isso sem crescer sem limite.
+
+Aberturas não são visitantes únicos — não há identificação do visitante, e a
+tela diz "aberturas" em vez de inventar uma métrica mais bonita para uma
+proposta comercial. Acesso de robô não conta (`engine/metrics.is_bot`), e a
+contagem nunca derruba a navegação: falha de gravação vira log, não erro para
+o visitante.
+
+Antes disso o painel exibia como "CTR" a divisão cliques ÷ lotes publicados,
+que não tem denominador de audiência. Agora a taxa é cliques ÷ aberturas, e é
+`—` quando não houve abertura no período: taxa sem denominador não existe.
+
+**Login de parceiro e destaque pago ficaram para quando houver contrato**
+(decisão de 20/09/2026). Destaque pago sem parceiro fechado seria viés de
+ranking que ninguém está pagando; o mecanismo é pequeno e entra quando o
+primeiro contrato existir — e, quando entrar, com selo visível de publicidade.
+
 ## 9. Qualidade do dado — o que a coleta descarta
 
 Regras aplicadas na coleta para não exibir lixo como se fosse informação do lote
@@ -295,9 +317,10 @@ uma correção de regra nunca limparia um dado errado já gravado.
 | 2 | Contas, filtros salvos, alertas (RN-006/RN-007) | pronta |
 | 3 | Comparador com referência FIPE (RN-010) | pronta, na vitrine e na ficha |
 | 4 | Busca por raio, máquinas e equipamentos | pronta, com filtro e ordem na busca |
-| 5 | Parcerias (painel de leiloeiro, destaque pago) | depende de decisão comercial |
+| 5 | Parcerias — relatório de CTR/leads por fonte | pronto (critério de aceite da EF) |
+| 5 | Parcerias — login de parceiro e destaque pago | adiado por decisão comercial (20/09/2026) |
 
-- 67 testes unitários. Validação de ponta a ponta em Docker local contra as três
+- 70 testes unitários. Validação de ponta a ponta em Docker local contra as três
   fontes reais, contra a API FIPE e com as telas renderizadas no Playwright
   (sem erro de console, sem overflow em 1440 e em 390 px).
 - 454 itens coletados, 298 publicados na vitrine, 3 fontes saudáveis, 8 jobs

@@ -357,3 +357,39 @@ sem mostrar a distância, a lista reordenada não tem justificativa visível.
 |---|---|
 | `distance` | do mais perto para o mais longe (exige os parâmetros de raio) |
 | `opportunity` | maior desconto primeiro; lote sem score vai para o fim |
+
+---
+
+# Onda 5 — audiência e leads por fonte
+
+O painel chamava de "CTR" a divisão `cliques / lotes publicados`. Não é taxa de
+nada: falta o denominador. A medição passou a contar **abertura de ficha**,
+agregada por fonte e por dia em `source_daily_stats`.
+
+| Contador | O que é |
+|---|---|
+| `views` | abertura da página de um lote (`GET /portal/items/{id}`) — **não** visitante único |
+| `clicks` | saída por `GET /portal/items/{id}/go`, o lead entregue ao leiloeiro |
+| taxa | `clicks / views`; `null` quando não houve abertura |
+
+Acessos de robô não contam (`app/engine/metrics.is_bot`), senão o relatório de
+parceria somaria o Googlebot como interesse de comprador. A contagem é
+subordinada à navegação: se o UPSERT falhar, o visitante ainda vê a ficha e
+ainda é redirecionado.
+
+| Método | Rota | Resposta |
+|---|---|---|
+| GET | `/partners/report?days=30` | totais, série diária e uma linha por fonte (admin) |
+
+```jsonc
+{
+  "days": 30, "from": "2026-08-21",
+  "sources": [{ "source_id": 3, "name": "Leilo", "slug": "leilo",
+                "items_published": 151, "views": 2278, "clicks": 357,
+                "ctr": 0.157, "views_per_item": 15.09 }],
+  "totals": { "views": 6577, "clicks": 1078, "ctr": 0.164 },
+  "daily": [{ "day": "2026-09-20", "views": 210, "clicks": 34 }]
+}
+```
+
+O `/dashboard` ganhou `views_7d` por fonte, e `ctr_7d` passou a ser a taxa real.

@@ -24,6 +24,7 @@ const Jobs = lazy(() => import("./pages/admin/Jobs"));
 const Settings = lazy(() => import("./pages/admin/Settings"));
 const Users = lazy(() => import("./pages/admin/Users"));
 const Alerts = lazy(() => import("./pages/admin/Alerts"));
+const Partners = lazy(() => import("./pages/admin/Partners"));
 
 // Conta do assinante (Onda 2): telas que só quem cria conta abre.
 const Entrar = lazy(() => import("./pages/portal/Entrar"));
@@ -95,6 +96,7 @@ export default function App() {
           <Route path="duplicados" element={<Duplicates />} />
           <Route path="usuarios" element={<Users />} />
           <Route path="alertas" element={<Alerts />} />
+          <Route path="parcerias" element={<Partners />} />
           <Route path="jobs" element={<Jobs />} />
           <Route path="configuracoes" element={<Settings />} />
           <Route path="*" element={<Navigate to="/admin" replace />} />

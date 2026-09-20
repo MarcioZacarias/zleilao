@@ -416,8 +416,32 @@ export interface DashboardSource {
   avg_items_count: number | null;
   items_total: number;
   items_published: number;
+  /** Aberturas de ficha (F5) — denominador honesto do CTR. */
+  views_7d: number;
   clicks_7d: number;
+  /** Cliques / aberturas. `null` quando não houve abertura: taxa sem denominador não existe. */
   ctr_7d: number | null;
+}
+
+/* ───────── Onda 5: audiência e leads por fonte ───────── */
+
+export interface PartnerSourceRow {
+  source_id: number;
+  name: string;
+  slug: string;
+  items_published: number;
+  views: number;
+  clicks: number;
+  ctr: number | null;
+  views_per_item: number | null;
+}
+
+export interface PartnersReport {
+  days: number;
+  from: string;
+  sources: PartnerSourceRow[];
+  totals: { views: number; clicks: number; ctr: number | null };
+  daily: { day: string; views: number; clicks: number }[];
 }
 
 export interface DashboardData {

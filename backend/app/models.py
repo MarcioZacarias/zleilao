@@ -19,6 +19,7 @@ from sqlalchemy import (
     JSON,
     Boolean,
     Column,
+    Date,
     DateTime,
     Float,
     ForeignKey,
@@ -402,6 +403,29 @@ class JobExecution(Base):
     __table_args__ = (Index("ix_job_executions_type_started", "job_type", "started_at"),)
 
 
+class SourceDailyStat(Base):
+    """Aberturas de ficha e cliques por fonte, agregados por dia (F5).
+
+    Agregado, e nao um evento por visita: o relatorio de parceria precisa de
+    taxa, nao de log, e uma linha por dia por fonte cabe em qualquer servidor.
+    `views` conta abertura de ficha — nao visitante unico, porque nao ha
+    identificacao. O rotulo na tela diz exatamente isso.
+    """
+
+    __tablename__ = "source_daily_stats"
+
+    id = Column(Integer, primary_key=True, index=True)
+    source_id = Column(Integer, ForeignKey("sources.id", ondelete="CASCADE"), nullable=False)
+    day = Column(Date, nullable=False)
+    views = Column(Integer, default=0, nullable=False)
+    clicks = Column(Integer, default=0, nullable=False)
+
+    __table_args__ = (
+        UniqueConstraint("source_id", "day", name="uq_source_daily_stats"),
+        Index("ix_source_daily_stats_day", "day"),
+    )
+
+
 class ClickEvent(Base):
     """Clique 'Ver no leilao oficial' — metrica de CTR por fonte (EF 8.4)."""
 
@@ -636,7 +660,7 @@ class BrandingAsset(Base):
 __all__ = [
     "JSON", "Source", "Category", "CategoryField", "Auction", "AuctionSession", "Item",
     "ItemPriceHistory", "RawItem", "ExtractionCache", "ItemDuplicate", "ScrapeIncident",
-    "JobExecution", "ClickEvent", "User", "SystemSetting", "BrandingAsset",
+    "JobExecution", "ClickEvent", "SourceDailyStat", "User", "SystemSetting", "BrandingAsset",
     "Subscription", "SavedFilter", "Alert", "AuthToken",
     "ITEM_STATUSES", "EXTRACTION_STATUSES", "ALERT_REASONS", "PLAN_FREE", "PLAN_PRO",
 ]

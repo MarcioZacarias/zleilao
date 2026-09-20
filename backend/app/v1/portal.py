@@ -15,6 +15,7 @@ from app.database import get_db
 from app.timeutil import now_brt
 from app.engine.geo import search_cities
 from app.engine.lifecycle import VISIBLE_STATUSES
+from app.engine.metrics import bump
 from app.engine.search import (
     apply_filters, base_query, haversine_sql, normalize_criteria, radius_center, wants_radius,
 )
@@ -232,13 +233,16 @@ async def models(brand: str, db: AsyncSession = Depends(get_db)):
 # ── detalhe / pregao / clique ──────────────────────────────────────
 
 @router.get("/portal/items/{item_id}", response_model=ItemDetailOut)
-async def item_detail(item_id: int, db: AsyncSession = Depends(get_db)):
+async def item_detail(item_id: int, request: Request, db: AsyncSession = Depends(get_db)):
     item = await db.scalar(
         select(Item).where(Item.id == item_id)
         .options(selectinload(Item.auction).selectinload(Auction.sessions), selectinload(Item.price_history))
     )
     if not item or item.status not in VISIBLE_STATUSES + ("closed",):
         raise HTTPException(404, "Lote não encontrado ou fora da vitrine")
+    # F5: denominador do CTR da fonte. Uma abertura de ficha, não um visitante.
+    await bump(db, item.source_id, "views", request.headers.get("user-agent"))
+    await db.commit()
     ctx = await SerializerContext(db).load([item])
     return await ctx.detail(item, await get_setting(db, "portal_disclaimer", ""))
 
@@ -249,6 +253,7 @@ async def go_to_source(item_id: int, request: Request, db: AsyncSession = Depend
     if not item:
         raise HTTPException(404, "Lote não encontrado")
     db.add(ClickEvent(item_id=item.id, source_id=item.source_id, referer=(request.headers.get("referer") or "")[:500]))
+    await bump(db, item.source_id, "clicks", request.headers.get("user-agent"))
     await db.commit()
     return RedirectResponse(item.official_url, status_code=302)
 

@@ -245,3 +245,36 @@ usuário receberia por e-mail o oposto do que via na tela ao salvar.
 
 O painel de comparação saiu da coluna fixa para baixo da galeria: a memória de
 cálculo precisa de largura, e a coluna da direita já era a mais alta das duas.
+
+
+---
+
+# Onda 5 — o que a EF chamava de CTR não era CTR
+
+O critério de aceite da F5 é "relatório de CTR/leads por fonte". O painel já
+mostrava uma coluna "CTR 7d", mas ela era `cliques ÷ lotes publicados` — um
+número sem denominador de audiência, que sobe quando a fonte publica menos.
+Levar isso para uma conversa comercial seria vender um número que não
+significa o que o nome promete.
+
+Passamos a contar **abertura de ficha** (`source_daily_stats`), e a taxa virou
+`cliques ÷ aberturas`. Três decisões dentro dessa:
+
+- **Agregado por dia, não evento por visita.** O relatório responde a uma taxa.
+  Uma linha por fonte por dia dá a mesma resposta e cabe num servidor de 1 vCPU
+  compartilhado; uma tabela de eventos cresceria sem limite pelo mesmo número.
+- **Aberturas, não visitantes únicos.** Não identificamos o visitante e não
+  vamos criar identificação só para engrossar um número de proposta. A tela
+  escreve "aberturas de ficha" e explica o que isso é.
+- **Robô não conta.** Sem o filtro de user-agent, o Googlebot entraria no
+  relatório como interesse de comprador no lote do parceiro.
+
+A contagem é subordinada à navegação: falha de gravação vira log, nunca erro
+para quem está vendo o lote.
+
+**Login de parceiro e destaque pago ficaram para depois** (decisão de
+20/09/2026). Sem contrato assinado, login de parceiro é superfície de ataque
+nova sem usuário, e destaque pago é viés de ranking que ninguém está pagando.
+Quando o primeiro contrato existir, o destaque entra com selo visível de
+publicidade — uma vitrine que empurra lote pago sem dizer que é pago perde a
+única coisa que ela tem para vender, que é ser confiável.

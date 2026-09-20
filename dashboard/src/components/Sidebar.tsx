@@ -12,6 +12,7 @@ import {
   LogOut,
   Users,
   BellRing,
+  Handshake,
   X,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
@@ -27,6 +28,7 @@ const links = [
   { to: "/admin/duplicados", label: "Duplicados", icon: Copy },
   { to: "/admin/usuarios", label: "Usuários", icon: Users },
   { to: "/admin/alertas", label: "Alertas", icon: BellRing },
+  { to: "/admin/parcerias", label: "Parcerias", icon: Handshake },
   { to: "/admin/jobs", label: "Jobs", icon: Timer },
   { to: "/admin/configuracoes", label: "Configurações", icon: Settings },
 ];

@@ -10,7 +10,9 @@ from app.database import init_db
 from app.v1 import account, categories, items, portal, settings_routes, sources
 from app.v1.auth_routes import router as auth_router
 from app.v1.branding import admin_router as branding_admin_router, public_router as branding_public_router
-from app.v1.operations import dashboard_router, duplicates_router, incidents_router, jobs_router
+from app.v1.operations import (
+    dashboard_router, duplicates_router, incidents_router, jobs_router, partners_router,
+)
 from app.v1.users_admin import alerts_router, users_router
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
@@ -68,6 +70,7 @@ app.include_router(items.router, prefix="/v1/items", tags=["Items"], dependencie
 app.include_router(incidents_router, prefix="/v1/incidents", tags=["Incidents"], dependencies=auth)
 app.include_router(jobs_router, prefix="/v1/jobs", tags=["Jobs"], dependencies=auth)
 app.include_router(duplicates_router, prefix="/v1/duplicates", tags=["Duplicates"], dependencies=auth)
+app.include_router(partners_router, prefix="/v1/partners", tags=["Partners"], dependencies=auth)
 app.include_router(users_router, prefix="/v1/users", tags=["Users"], dependencies=auth)
 app.include_router(alerts_router, prefix="/v1/alerts", tags=["Alerts"], dependencies=auth)
 app.include_router(settings_routes.router, prefix="/v1/settings", tags=["Settings"], dependencies=auth)
