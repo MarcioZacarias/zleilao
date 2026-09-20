@@ -1,6 +1,7 @@
 import logging
 
 from fastapi import APIRouter, Depends
+from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
@@ -13,6 +14,8 @@ router = APIRouter()
 GROUP_LABELS = {
     "llm": "Normalização (LLM)", "pipeline": "Pipeline", "health": "Saúde da coleta (RN-008)",
     "scraping": "Coleta", "portal": "Portal", "branding": "Marca",
+    "alerts": "Alertas (RN-006/RN-007)", "email": "E-mail (SMTP)",
+    "whatsapp": "WhatsApp", "accounts": "Contas de usuário",
 }
 
 
@@ -64,3 +67,45 @@ async def test_llm(db: AsyncSession = Depends(get_db)):
         "usage": {"input": getattr(usage, "input_tokens", None), "output": getattr(usage, "output_tokens", None)},
         "detail": f"Conexão ok com {resp.model}.",
     }
+
+
+class TestEmailRequest(BaseModel):
+    to: str
+
+
+@router.post("/test-email")
+async def test_email(body: TestEmailRequest, db: AsyncSession = Depends(get_db)):
+    """Envia uma mensagem real para o endereco informado. Vale mais que validar
+    a configuracao no papel: SMTP costuma falhar so' no envio."""
+    from app.notify.email import EmailUnavailable, is_valid_email, send_email
+
+    if not is_valid_email(body.to):
+        return {"ok": False, "detail": "Informe um e-mail valido para o teste."}
+    html = (
+        "<p>Este e um teste de configuracao do <b>ZConnect Leilao</b>.</p>"
+        "<p>Se voce recebeu esta mensagem, o SMTP esta funcionando e os alertas "
+        "por e-mail podem ser enviados.</p>"
+    )
+    try:
+        await send_email(db, body.to, "Teste de envio — ZConnect Leilão", html)
+    except EmailUnavailable as exc:
+        return {"ok": False, "detail": f"SMTP indisponivel: {exc}"}
+    except Exception as exc:
+        return {"ok": False, "detail": f"Falha no envio: {exc}"}
+    return {"ok": True, "detail": f"Mensagem enviada para {body.to}. Confira a caixa (e o spam)."}
+
+
+@router.post("/test-whatsapp")
+async def test_whatsapp(body: TestEmailRequest, db: AsyncSession = Depends(get_db)):
+    """`to` aqui e o telefone com DDD."""
+    from app.notify.whatsapp import WhatsAppUnavailable, normalize_phone, send_whatsapp
+
+    if not normalize_phone(body.to):
+        return {"ok": False, "detail": "Telefone invalido. Use DDD + numero."}
+    try:
+        await send_whatsapp(db, body.to, "Teste de configuracao do ZConnect Leilao. Se voce recebeu, o canal esta ok.")
+    except WhatsAppUnavailable as exc:
+        return {"ok": False, "detail": str(exc)}
+    except Exception as exc:
+        return {"ok": False, "detail": f"Falha no envio: {exc}"}
+    return {"ok": True, "detail": f"Mensagem enviada para {body.to}."}

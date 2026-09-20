@@ -43,6 +43,10 @@ async def login(body: LoginRequest, db: AsyncSession = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="E-mail ou senha incorretos")
     if not user.is_active:
         raise HTTPException(status_code=403, detail="Usuário desativado")
+    from app.timeutil import now_brt
+
+    user.last_login_at = now_brt()
+    await db.commit()
     token = create_access_token(data={"sub": user.email})
     return TokenResponse(access_token=token, user_name=user.name, user_email=user.email, role=user.role)
 

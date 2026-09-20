@@ -425,9 +425,128 @@ class User(Base):
     email = Column(String(200), unique=True, nullable=False)
     hashed_password = Column(String(200), nullable=False)
     name = Column(String(100), nullable=True)
-    role = Column(String(20), default="admin", nullable=False)  # admin (F1) | user (F3)
+    role = Column(String(20), default="user", nullable=False)  # admin | user
     is_active = Column(Boolean, default=True, nullable=False)
+
+    # Contato e consentimento (F2). O telefone so' e' usado se o usuario optar.
+    phone = Column(String(20), nullable=True)
+    whatsapp_opt_in = Column(Boolean, default=False, nullable=False)
+    email_opt_in = Column(Boolean, default=True, nullable=False)
+    email_verified_at = Column(DateTime, nullable=True)
+
+    # Janela de silencio pessoal (RN-006). Vazio = usa a global das settings.
+    quiet_start = Column(String(5), nullable=True)  # "22:00"
+    quiet_end = Column(String(5), nullable=True)    # "08:00"
+
     created_at = Column(DateTime, default=utcnow, nullable=False)
+    last_login_at = Column(DateTime, nullable=True)
+
+    subscription = relationship("Subscription", back_populates="user", uselist=False, cascade="all, delete-orphan")
+    saved_filters = relationship("SavedFilter", back_populates="user", cascade="all, delete-orphan")
+
+
+# ── Assinatura e planos (RN-007) ──────────────────────────────────────────
+
+PLAN_FREE = "free"
+PLAN_PRO = "pro"
+
+
+class Subscription(Base):
+    """Plano do usuario. Na F2 a ativacao e' manual pelo admin: a estrutura
+    esta' pronta para um gateway (provider/provider_ref), mas cobranca
+    automatica exige credenciais que ainda nao existem."""
+
+    __tablename__ = "subscriptions"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), unique=True, nullable=False)
+    plan = Column(String(20), default=PLAN_FREE, nullable=False)
+    status = Column(String(20), default="active", nullable=False)  # active | canceled | expired
+    started_at = Column(DateTime, default=utcnow, nullable=False)
+    current_period_end = Column(DateTime, nullable=True)  # nulo no free
+    provider = Column(String(30), nullable=True)          # manual | <gateway futuro>
+    provider_ref = Column(String(120), nullable=True)
+    activated_by = Column(String(200), nullable=True)     # e-mail do admin, quando manual
+    note = Column(Text, nullable=True)
+    updated_at = Column(DateTime, default=utcnow, onupdate=utcnow, nullable=False)
+
+    user = relationship("User", back_populates="subscription")
+
+
+# ── Filtros salvos e alertas (RN-006/RN-007) ──────────────────────────────
+
+ALERT_REASONS = ("new", "price_drop", "new_session")
+
+
+class SavedFilter(Base):
+    """Criterios persistidos do usuario. `criteria` usa exatamente as chaves da
+    busca publica (`GET /portal/items`), entao "criar alerta desta busca" e o
+    matching reaproveitam o mesmo codigo de filtro."""
+
+    __tablename__ = "saved_filters"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    name = Column(String(120), nullable=False)
+    criteria = Column(JSONB, nullable=False, default=dict)
+    channels = Column(JSONB, nullable=False, default=list)  # ["email", "whatsapp"]
+    is_active = Column(Boolean, default=True, nullable=False)
+    #: ultima vez que o matcher avaliou este filtro — evita reavaliar o acervo inteiro
+    last_checked_at = Column(DateTime, nullable=True)
+    last_matched_at = Column(DateTime, nullable=True)
+    matches_count = Column(Integer, default=0, nullable=False)
+    created_at = Column(DateTime, default=utcnow, nullable=False)
+    updated_at = Column(DateTime, default=utcnow, onupdate=utcnow, nullable=False)
+
+    user = relationship("User", back_populates="saved_filters")
+
+    __table_args__ = (Index("ix_saved_filters_user_active", "user_id", "is_active"),)
+
+
+class Alert(Base):
+    """Um casamento item x filtro. Nasce `pending` e o dispatcher envia.
+
+    RN-006: `(user_id, item_id, reason)` e' unico — o mesmo lote nunca e'
+    reenviado ao mesmo usuario pelo mesmo motivo, mesmo que case com varios
+    filtros. Uma queda de preco depois e' outro motivo, logo outro alerta.
+    """
+
+    __tablename__ = "alerts"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    item_id = Column(Integer, ForeignKey("items.id", ondelete="CASCADE"), nullable=False)
+    saved_filter_id = Column(Integer, ForeignKey("saved_filters.id", ondelete="SET NULL"), nullable=True)
+    reason = Column(String(20), default="new", nullable=False)  # ALERT_REASONS
+    channel = Column(String(20), nullable=True)                 # email | whatsapp (definido no envio)
+    status = Column(String(20), default="pending", nullable=False)  # pending | sent | failed | skipped
+    detail = Column(Text, nullable=True)   # ex.: "lance caiu de R$ 30.000 para R$ 24.000"
+    error = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=utcnow, nullable=False)
+    sent_at = Column(DateTime, nullable=True)
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "item_id", "reason", name="uq_alert_user_item_reason"),
+        Index("ix_alerts_status_created", "status", "created_at"),
+        Index("ix_alerts_user_created", "user_id", "created_at"),
+    )
+
+
+class AuthToken(Base):
+    """Token de uso unico para verificar e-mail ou redefinir senha.
+    Guarda o hash, nunca o token em claro."""
+
+    __tablename__ = "auth_tokens"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    kind = Column(String(20), nullable=False)  # verify_email | reset_password
+    token_hash = Column(String(64), unique=True, nullable=False)
+    expires_at = Column(DateTime, nullable=False)
+    used_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=utcnow, nullable=False)
+
+    __table_args__ = (Index("ix_auth_tokens_user_kind", "user_id", "kind"),)
 
 
 class SystemSetting(Base):
@@ -455,5 +574,6 @@ __all__ = [
     "JSON", "Source", "Category", "CategoryField", "Auction", "AuctionSession", "Item",
     "ItemPriceHistory", "RawItem", "ExtractionCache", "ItemDuplicate", "ScrapeIncident",
     "JobExecution", "ClickEvent", "User", "SystemSetting", "BrandingAsset",
-    "ITEM_STATUSES", "EXTRACTION_STATUSES",
+    "Subscription", "SavedFilter", "Alert", "AuthToken",
+    "ITEM_STATUSES", "EXTRACTION_STATUSES", "ALERT_REASONS", "PLAN_FREE", "PLAN_PRO",
 ]

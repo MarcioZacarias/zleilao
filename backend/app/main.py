@@ -4,13 +4,14 @@ from contextlib import asynccontextmanager
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.auth import get_current_user
+from app.auth import get_current_admin
 from app.config import get_settings
 from app.database import init_db
-from app.v1 import categories, items, portal, settings_routes, sources
+from app.v1 import account, categories, items, portal, settings_routes, sources
 from app.v1.auth_routes import router as auth_router
 from app.v1.branding import admin_router as branding_admin_router, public_router as branding_public_router
 from app.v1.operations import dashboard_router, duplicates_router, incidents_router, jobs_router
+from app.v1.users_admin import alerts_router, users_router
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -52,9 +53,14 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, 
 app.include_router(auth_router, prefix="/v1", tags=["Auth"])
 app.include_router(portal.router, prefix="/v1", tags=["Portal"])
 app.include_router(branding_public_router, prefix="/v1", tags=["Branding"])
+# Conta do usuario final: parte publica (cadastro, verificacao, senha) e parte
+# autenticada (/me...). O proprio router exige token onde precisa.
+app.include_router(account.router, prefix="/v1", tags=["Conta"])
 
-# ── Admin (JWT) ────────────────────────────────────────────────────
-auth = [Depends(get_current_user)]
+# ── Admin (JWT + papel admin) ──────────────────────────────────────
+# get_current_admin, nao get_current_user: desde a F2 existem contas de usuario
+# final, e um token valido de assinante NAO pode abrir o painel de operacao.
+auth = [Depends(get_current_admin)]
 app.include_router(dashboard_router, prefix="/v1", tags=["Dashboard"], dependencies=auth)
 app.include_router(sources.router, prefix="/v1/sources", tags=["Sources"], dependencies=auth)
 app.include_router(categories.router, prefix="/v1/categories", tags=["Categories"], dependencies=auth)
@@ -62,6 +68,8 @@ app.include_router(items.router, prefix="/v1/items", tags=["Items"], dependencie
 app.include_router(incidents_router, prefix="/v1/incidents", tags=["Incidents"], dependencies=auth)
 app.include_router(jobs_router, prefix="/v1/jobs", tags=["Jobs"], dependencies=auth)
 app.include_router(duplicates_router, prefix="/v1/duplicates", tags=["Duplicates"], dependencies=auth)
+app.include_router(users_router, prefix="/v1/users", tags=["Users"], dependencies=auth)
+app.include_router(alerts_router, prefix="/v1/alerts", tags=["Alerts"], dependencies=auth)
 app.include_router(settings_routes.router, prefix="/v1/settings", tags=["Settings"], dependencies=auth)
 app.include_router(branding_admin_router, prefix="/v1", tags=["Branding"], dependencies=auth)
 

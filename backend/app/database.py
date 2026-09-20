@@ -38,6 +38,20 @@ EXTRA_DDL = [
     "CREATE INDEX IF NOT EXISTS ix_items_attributes_gin ON items USING GIN (attributes jsonb_path_ops)",
     "CREATE INDEX IF NOT EXISTS ix_items_title_trgm ON items USING GIN (title gin_trgm_ops)",
     "CREATE INDEX IF NOT EXISTS ix_items_search_tsv ON items USING GIN (search_tsv)",
+    # ── F2: colunas novas em `users` ───────────────────────────────────
+    # `create_all` cria TABELA nova, mas nunca altera tabela existente. Toda
+    # coluna acrescentada depois do primeiro deploy precisa de um ALTER
+    # idempotente aqui, senão o boot quebra num banco que já rodou.
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS phone VARCHAR(20)",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS whatsapp_opt_in BOOLEAN NOT NULL DEFAULT FALSE",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS email_opt_in BOOLEAN NOT NULL DEFAULT TRUE",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS email_verified_at TIMESTAMP",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS quiet_start VARCHAR(5)",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS quiet_end VARCHAR(5)",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS last_login_at TIMESTAMP",
+    # O admin semeado na F1 nasceu com role='admin'; contas novas nascem
+    # 'user'. O default da coluna precisa acompanhar o modelo.
+    "ALTER TABLE users ALTER COLUMN role SET DEFAULT 'user'",
 ]
 
 

@@ -30,6 +30,8 @@ from app.timeutil import BRT, now_brt
 from app.engine.dedup import run_dedup
 from app.engine.health import evaluate_run, open_incident
 from app.engine.lifecycle import run_cleanup, run_lifecycle
+from app.engine.matcher import run_matcher
+from app.notify.dispatcher import run_dispatcher
 from app.engine.normalizer import LLMUnavailable, normalize_item
 from app.models import (
     Auction, AuctionSession, Category, Item, ItemPriceHistory, JobExecution, RawItem, Source,
@@ -57,6 +59,8 @@ async def start_scheduler() -> None:
         norm = await get_setting_int(db, "normalize_interval_minutes", 5)
         life = await get_setting_int(db, "lifecycle_interval_minutes", 30)
         dedup = await get_setting_int(db, "dedup_interval_minutes", 60)
+        match_min = await get_setting_int(db, "match_interval_minutes", 10)
+        disp_min = await get_setting_int(db, "dispatch_interval_minutes", 5)
     # Datas de inicio timezone-aware: o container roda em UTC e o scheduler em
     # Brasilia; um `datetime.now()` naive seria interpretado no fuso errado.
     boot = datetime.now(BRT)
@@ -75,9 +79,14 @@ async def start_scheduler() -> None:
                        id="lifecycle", max_instances=1, coalesce=True)
     _scheduler.add_job(dedup_job, IntervalTrigger(minutes=max(5, dedup), start_date=boot + timedelta(minutes=5), timezone=BRT),
                        id="dedup", max_instances=1, coalesce=True)
+    _scheduler.add_job(match_job, IntervalTrigger(minutes=max(1, match_min), start_date=boot + timedelta(minutes=2), timezone=BRT),
+                       id="match", max_instances=1, coalesce=True)
+    _scheduler.add_job(dispatch_job, IntervalTrigger(minutes=max(1, disp_min), start_date=boot + timedelta(minutes=3), timezone=BRT),
+                       id="dispatch", max_instances=1, coalesce=True)
     _scheduler.add_job(cleanup_job, CronTrigger(hour=3, minute=0, timezone=BRT), id="cleanup", max_instances=1, coalesce=True)
     _scheduler.start()
-    logger.info("Scheduler: scrape_tick %dm, normalize %dm, lifecycle %dm, dedup %dm, cleanup 03:00", tick, norm, life, dedup)
+    logger.info("Scheduler: scrape_tick %dm, normalize %dm, lifecycle %dm, dedup %dm, match %dm, dispatch %dm, cleanup 03:00",
+                tick, norm, life, dedup, match_min, disp_min)
 
 
 def shutdown_scheduler() -> None:
@@ -468,10 +477,51 @@ async def cleanup_job() -> dict[str, Any]:
                 raise
 
 
+async def match_job() -> dict[str, Any]:
+    """RN-006: casa itens recem-publicados com os filtros salvos."""
+    if _lock("match").locked():
+        return {"skipped": True}
+    async with _lock("match"):
+        async with AsyncSessionLocal() as db:
+            if not await get_setting_bool(db, "alerts_enabled", True):
+                return {"disabled": True}
+            job = await _start_job(db, "match")
+            try:
+                stats = await run_matcher(db)
+                await _finish_job(db, job, "success", stats.get("new", 0) + stats.get("price_drop", 0), details=stats)
+                return stats
+            except Exception as exc:
+                await db.rollback()
+                await _finish_job(db, job, "failed", 0, str(exc))
+                raise
+
+
+async def dispatch_job() -> dict[str, Any]:
+    """RN-006/RN-007: envia os alertas pendentes respeitando janela, plano e teto."""
+    if _lock("dispatch").locked():
+        return {"skipped": True}
+    async with _lock("dispatch"):
+        async with AsyncSessionLocal() as db:
+            if not await get_setting_bool(db, "alerts_enabled", True):
+                return {"disabled": True}
+            job = await _start_job(db, "dispatch")
+            try:
+                stats = await run_dispatcher(db)
+                status = "failed" if stats.get("stopped") else "success"
+                await _finish_job(db, job, status, stats.get("sent", 0), stats.get("stopped"), stats)
+                return stats
+            except Exception as exc:
+                await db.rollback()
+                await _finish_job(db, job, "failed", 0, str(exc))
+                raise
+
+
 JOB_RUNNERS = {
     "scrape_tick": scrape_tick,
     "normalize": normalize_job,
     "lifecycle": lifecycle_job,
     "dedup": dedup_job,
+    "match": match_job,
+    "dispatch": dispatch_job,
     "cleanup": cleanup_job,
 }

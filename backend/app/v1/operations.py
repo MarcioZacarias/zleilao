@@ -9,7 +9,7 @@ from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.auth import get_current_user
+from app.auth import get_current_admin
 from app.timeutil import now_brt
 from app.database import get_db
 from app.engine.health import resolve_incident
@@ -43,7 +43,7 @@ async def list_incidents(status: Optional[str] = Query("open"), source_id: Optio
 
 
 @incidents_router.patch("/{incident_id}", response_model=IncidentOut)
-async def update_incident(incident_id: int, data: IncidentUpdate, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+async def update_incident(incident_id: int, data: IncidentUpdate, user: User = Depends(get_current_admin), db: AsyncSession = Depends(get_db)):
     inc = await db.get(ScrapeIncident, incident_id)
     if not inc:
         raise HTTPException(404, "Incidente não encontrado")
