@@ -35,9 +35,17 @@ until docker exec zleilao-db pg_isready -U "${POSTGRES_USER:-zleilao}" >/dev/nul
 echo "[3/3] Verificando..."
 BACKEND_PORT="${BACKEND_PORT:-8005}"
 DASHBOARD_PORT="${DASHBOARD_PORT:-5177}"
-sleep 3
-B=$(curl -s -o /dev/null -w "%{http_code}" "http://localhost:${BACKEND_PORT}/health" || echo 000)
-D=$(curl -s -o /dev/null -w "%{http_code}" "http://localhost:${DASHBOARD_PORT}/" || echo 000)
+
+# O banco responder nao significa que o backend ja' subiu: ele ainda cria as
+# tabelas, semeia e monta o scheduler. Esperar um tempo fixo dava "falhou"
+# num ambiente que estava so' lento.
+code() { curl -s -o /dev/null -w "%{http_code}" "$1" 2>/dev/null || true; }
+for _ in $(seq 1 30); do
+    [ "$(code "http://localhost:${BACKEND_PORT}/health")" = "200" ] && break
+    sleep 2
+done
+B=$(code "http://localhost:${BACKEND_PORT}/health")
+D=$(code "http://localhost:${DASHBOARD_PORT}/")
 echo "  Backend:   $B (http://localhost:${BACKEND_PORT}/docs)"
 echo "  Dashboard: $D (http://localhost:${DASHBOARD_PORT} | /admin)"
 [ "$B" = "200" ] && [ "$D" = "200" ] && echo "=== Ambiente local no ar! ===" || echo "=== Verifique: docker logs zleilao-backend ==="

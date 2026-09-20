@@ -345,10 +345,11 @@ uma correção de regra nunca limparia um dado errado já gravado.
 - 72 testes unitários. Validação de ponta a ponta em Docker local contra as três
   fontes reais, contra a API FIPE e com as telas renderizadas no Playwright
   (sem erro de console, sem overflow em 1440 e em 390 px).
-- 454 itens coletados, 298 publicados na vitrine, 3 fontes saudáveis, 8 jobs
-  agendados.
+- 546 itens coletados, 370 na vitrine, 74 pregões, 3 fontes saudáveis, 8 jobs
+  agendados, 27 lotes com score de oportunidade. **Nenhum lote em revisão.**
 - **Não publicado** no servidor. Sem API key de LLM e sem SMTP configurados: o
-  pipeline roda com regras determinísticas e os alertas ficam na fila até o SMTP
-  existir.
-- Próximos passos: publicar no servidor (DEPLOY.md), configurar LLM e SMTP,
-  acompanhar a primeira semana. Depois, decidir a onda 5.
+  pipeline roda com regras determinísticas, o comparador usa a premissa de
+  condição e os alertas ficam na fila até o SMTP existir.
+- Próximos passos, todos dependentes de acesso ao servidor: publicar (DEPLOY.md),
+  apontar o DNS, configurar SMTP e a chave de LLM, acompanhar a primeira semana.
+  O relatório de parcerias nasce vazio e ganha sentido com o tráfego.
