@@ -290,6 +290,28 @@ que não tem denominador de audiência. Agora a taxa é cliques ÷ aberturas, e 
 ranking que ninguém está pagando; o mecanismo é pequeno e entra quando o
 primeiro contrato existir — e, quando entrar, com selo visível de publicidade.
 
+## 8.7 Classificacao de categoria: o titulo manda
+
+A dica de categoria que a fonte manda e' grossa — muitos leiloeiros so' tem
+"leves" e "pesados", e jogam trator, implemento agricola e carcaca no balde
+mais proximo. Por isso a dica so' vale quando o titulo nao traz palavra-chave
+nenhuma; havendo palavra-chave, **a primeira delas define o bem**:
+
+- "Trator John Deere" com dica "pesados" -> maquinas agricolas.
+- "Carcaca de Carro Fiat Doblo" com dica "carros" -> outros veiculos, porque
+  "carcaca" vem antes de "carro".
+- "Caminhao com munck" com dica "pesados" -> caminhoes, porque "caminhao" e' a
+  primeira.
+
+Palavra-chave curta ou ambigua nao entra na lista: `hr ` casava "HONDA/HR-V" e
+mandava o SUV para Utilitarios, e `fazer` (da Yamaha Fazer) e' verbo em
+portugues. O mesmo criterio vale para marcas: `cat`, `bull` e `still` ficam de
+fora de proposito, porque marca errada publicada e' pior que lote em revisao.
+
+`marca` e' obrigatoria em Veiculos e em Maquinas, mas **opcional em Outros
+veiculos**: carcaca, sucata e monobloco sao lotes reais que a fonte publica sem
+marca, e exigi-la manda o lote para uma revisao de onde ele nunca sai.
+
 ## 9. Qualidade do dado — o que a coleta descarta
 
 Regras aplicadas na coleta para não exibir lixo como se fosse informação do lote
@@ -320,7 +342,7 @@ uma correção de regra nunca limparia um dado errado já gravado.
 | 5 | Parcerias — relatório de CTR/leads por fonte | pronto (critério de aceite da EF) |
 | 5 | Parcerias — login de parceiro e destaque pago | adiado por decisão comercial (20/09/2026) |
 
-- 70 testes unitários. Validação de ponta a ponta em Docker local contra as três
+- 72 testes unitários. Validação de ponta a ponta em Docker local contra as três
   fontes reais, contra a API FIPE e com as telas renderizadas no Playwright
   (sem erro de console, sem overflow em 1440 e em 390 px).
 - 454 itens coletados, 298 publicados na vitrine, 3 fontes saudáveis, 8 jobs

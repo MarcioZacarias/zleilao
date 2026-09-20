@@ -34,13 +34,18 @@ async def effective_fields(db: AsyncSession, category: Category) -> list[tuple[C
         select(CategoryField).where(CategoryField.category_id.in_(ids)).order_by(CategoryField.sort_order, CategoryField.id)
     )).scalars().all()
     by_cat = {c.id: c for c in chain}
-    seen: set[str] = set()
+    # A definicao mais especifica vence: varre da folha para a raiz para
+    # escolher, e so' depois reordena para exibir (pai primeiro). Varrer na
+    # ordem de exibicao faria o pai ganhar, que e' o oposto da heranca.
+    chosen: dict[str, CategoryField] = {}
+    for cat in reversed(chain):
+        for f in rows:
+            if f.category_id == cat.id and f.key not in chosen:
+                chosen[f.key] = f
     out: list[tuple[CategoryField, Category]] = []
-    # pai primeiro; filho pode sobrescrever chave do pai
     for cat in chain:
         for f in rows:
-            if f.category_id == cat.id and f.key not in seen:
-                seen.add(f.key)
+            if chosen.get(f.key) is f:
                 out.append((f, by_cat[f.category_id]))
     return out
 

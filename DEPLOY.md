@@ -85,7 +85,7 @@ DATABASE_URL=postgresql+asyncpg://zleilao:<senha>@localhost:5439/zleilao SCHEDUL
 
 Na máquina de desenvolvimento a porta 5434 já é usada por outro projeto; o `.env` local usa `DB_PORT=5439`.
 
-## Configuração pós-deploy das ondas 2 a 4
+## Configuração pós-deploy das ondas 2 a 5
 
 Ordem que importa: **sem SMTP, nenhum alerta sai** — eles ficam na fila e o job
 de envio para o ciclo, em vez de marcá-los como entregues.
@@ -106,6 +106,16 @@ de envio para o ciclo, em vez de marcá-los como entregues.
 5. **Comparador.** Já vem ligado. A API FIPE tem limite de requisições: o job
    busca até 40 bens por ciclo e retoma no próximo. As referências valem 30 dias.
 
+### Onda 5 — audiência por fonte
+
+Nada a configurar: a contagem de aberturas de ficha e de cliques começa no
+primeiro acesso, em **Admin → Parcerias**. Dois pontos que importam na leitura:
+
+- O relatório nasce vazio e só ganha sentido depois de alguns dias de tráfego.
+  Não há dado retroativo — a medição não existia antes de ser ligada.
+- "Aberturas" é abertura de página de lote, não visitante único. Ao levar o
+  número para uma conversa com o leiloeiro, use a palavra que está na tela.
+
 ### Planos
 
 Não há gateway de pagamento. O plano pago é ativado à mão em
@@ -125,6 +135,9 @@ decisão sobre qual.
 | Alertas não chegam | Configurações → Testar e-mail. Admin → Alertas mostra o erro de cada um. Assinante com e-mail não verificado não recebe. |
 | Assinante reclama de spam | Admin → Usuários → filtros do usuário. Confira a janela de silêncio e o teto diário em Configurações → Alertas. |
 | Lote sem score de oportunidade | Normal quando não há referência FIPE ou a condição é desconhecida. Admin → Jobs → comparador mostra o motivo agregado. |
+| Lote parado em revisão | Admin → Revisão mostra o campo que faltou. Se for `marca` num bem que a fonte publica sem marca, o caminho é a categoria (Outros veículos não exige marca), não preencher à mão. |
+| Lote na categoria errada | A palavra-chave da categoria vence a dica da fonte, e a primeira do título define o bem. Corrija em Admin → Categorias → palavras-chave; evite termos de duas letras ou que sejam palavra comum. |
+| Relatório de parcerias zerado | Esperado antes de haver tráfego. Acesso de robô não conta. |
 | Fonte suspensa sem parar | Resolver o incidente recalibra a média de volume. Se o volume mudou de vez, três coletas estáveis já resolvem sozinhas. |
 
 Logs: `docker logs -f zleilao-backend`.

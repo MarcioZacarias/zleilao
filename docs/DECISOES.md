@@ -278,3 +278,54 @@ nova sem usuário, e destaque pago é viés de ranking que ninguém está pagand
 Quando o primeiro contrato existir, o destaque entra com selo visível de
 publicidade — uma vitrine que empurra lote pago sem dizer que é pago perde a
 única coisa que ela tem para vender, que é ser confiável.
+
+
+---
+
+# A fila de revisão, e por que ela estava presa
+
+Sete lotes reais estavam fora da vitrine com o mesmo erro — "campo obrigatório
+ausente: marca" — e quatro causas diferentes por trás dele.
+
+**1. A dica da fonte sobrepunha a evidência do título.** O classificador
+aceitava a categoria que o leiloeiro informa sempre que ela apontava uma folha
+da árvore, sem sequer olhar o título. Como muitos leiloeiros só têm "leves" e
+"pesados", "Trator John Deere 5090E" e "PLAINA AGRICOLA BALDAN" foram parar em
+Caminhões. Agora a dica só vale quando o título não traz palavra-chave; tendo,
+a primeira delas define o bem. "Caminhão com munck" continua caminhão porque
+"caminhão" vem antes de "munck".
+
+**2. A herança de campos fazia o contrário do que dizia.** O comentário de
+`effective_fields` afirmava que a categoria filha sobrescreve o campo do pai; o
+código varria a cadeia da raiz para a folha e ficava com a primeira definição,
+ou seja, com a do pai. Nenhuma categoria exercia isso ainda, então o bug estava
+dormindo — e era exatamente o que faltava para tornar `marca` opcional em
+Outros veículos.
+
+**3. A tabela de marcas não acompanhou a onda 4.** A categoria de máquinas e
+equipamentos nasceu ali, mas a lista de marcas continuou sendo só de veículos:
+John Deere, Baldan, Case e Caterpillar não existiam. Entraram junto as marcas
+exclusivamente de moto que faltavam (Ducati, KTM, Xinling), a sigla `MMC` que o
+CRLV usa para Mitsubishi, e um punhado de grafias erradas que as fontes
+publicam — "Renalt Kwid" não é inferência nossa: o leiloeiro informou a marca e
+digitou errado.
+
+**4. "Veículo Carcaça" não tem marca, e nunca vai ter.** Carcaça, sucata e
+monobloco são lotes reais publicados sem marca. Exigi-la é exigir o que a fonte
+não tem, e o lote fica numa revisão de onde não sai. `marca` passou a ser
+opcional em Outros veículos.
+
+## O que o teste em massa pegou depois
+
+Antes de reclassificar os 546 itens coletados, rodei a regra nova contra todos
+eles sem gravar. Doze mudariam — e dois eram **HONDA/HR-V indo para
+Utilitários**, porque a palavra-chave `hr ` perdia o espaço na normalização e
+casava dentro de "HR-V". O erro já existia no banco antes desta mudança; só
+apareceu porque o título passou a ter voz. `hr ` e `fazer` saíram da lista:
+palavra-chave de duas letras ou que também é verbo em português não classifica
+nada, só erra.
+
+Das doze mudanças restantes, todas eram correções: trailer e carcaças saindo de
+Carros, Kangoo e Transit furgão indo para Utilitários. Fila de revisão zerada,
+e um único lote segue sem marca — a carcaça, que agora está publicada na
+categoria certa.

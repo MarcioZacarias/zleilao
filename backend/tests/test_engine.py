@@ -143,6 +143,59 @@ def _cats():
     ]
 
 
+def _cats_completo():
+    """Arvore com maquinas e outros-veiculos, como o seed cria hoje."""
+    cats = _cats()
+    cats += [
+        Category(id=5, slug="outros-veiculos", name="Outros veículos", path="veiculos/outros-veiculos",
+                 parent_id=1, is_active=True,
+                 keywords=["reboque", "sucata", "carcaca", "carcaça", "monobloco"], sort_order=4),
+        Category(id=6, slug="maquinas-equipamentos", name="Máquinas e equipamentos", path="maquinas-equipamentos",
+                 is_active=True, keywords=["trator", "retroescavadeira", "plaina agricola", "munck"], sort_order=5),
+        Category(id=7, slug="maquinas-agricolas", name="Máquinas agrícolas",
+                 path="maquinas-equipamentos/maquinas-agricolas", parent_id=6, is_active=True,
+                 keywords=["trator", "plaina agricola", "arado"], sort_order=6),
+        Category(id=8, slug="maquinas-construcao", name="Máquinas de construção",
+                 path="maquinas-equipamentos/maquinas-construcao", parent_id=6, is_active=True,
+                 keywords=["retroescavadeira", "munck", "guindaste"], sort_order=7),
+    ]
+    motos = next(c for c in cats if c.slug == "motos")
+    # marcas que so' fazem moto entram como palavra-chave da categoria
+    motos.keywords = list(motos.keywords) + ["ducati", "ktm", "harley"]
+    return cats
+
+
+def test_classify_dica_da_fonte_nao_sobrepoe_o_titulo():
+    """O leiloeiro so' tem "leves" e "pesados", e joga trator em pesados.
+
+    A dica manda enquanto o titulo nao a contradiz; havendo palavra-chave so'
+    do outro lado, o titulo ganha.
+    """
+    cats = _cats_completo()
+    assert classify("Trator John Deere 5090E", "pesados", cats).slug == "maquinas-agricolas"
+    assert classify("PLAINA AGRICOLA BALDAN PDM-1800", "pesados", cats).slug == "maquinas-agricolas"
+    assert classify("RETROESCAVADEIRA CASE 580N", "pesados", cats).slug == "maquinas-construcao"
+    # carcaca e sucata nao sao carro, por mais que a fonte diga "leves"
+    assert classify("Veículo Carcaça", "carros", cats).slug == "outros-veiculos"
+    assert classify("Sucata de Fiat Uno", "carros", cats).slug == "outros-veiculos"
+    # a primeira palavra-chave e' o bem: carcaca vem antes de carro
+    assert classify("Carcaça de Carro Fiat Doblo", "carros", cats).slug == "outros-veiculos"
+    # marca exclusiva de moto identifica o bem
+    assert classify("DUCATI/MTS-1200 S, 17/17", "carros", cats).slug == "motos"
+
+
+def test_classify_dica_vence_quando_o_titulo_a_confirma():
+    """Caminhao com munck e' caminhao: "caminhao" esta' no titulo, entao a
+    evidencia nao esta' so' do lado das maquinas."""
+    cats = _cats_completo()
+    assert classify("Caminhão Munck Ford Cargo 2428", "pesados", cats).slug == "caminhoes"
+    assert classify("Caminhão com guindaste", "pesados", cats).slug == "caminhoes"
+    assert classify("Carro Volkswagen Gol 1.0", "leves", cats).slug == "carros"
+    # sem palavra-chave nenhuma, a dica continua mandando
+    assert classify("FORD/TRANSIT 350", "pesados", cats).slug == "caminhoes"
+    assert classify("MMC/ASX 2.0 AWD CVT FLEX", "carros", cats).slug == "carros"
+
+
 def test_classify():
     cats = _cats()
     assert classify("Caminhão Iveco Tector 170E25 2010", None, cats).slug == "caminhoes"
