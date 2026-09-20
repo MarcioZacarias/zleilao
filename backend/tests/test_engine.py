@@ -166,3 +166,42 @@ def test_similarity():
     assert sim_ac < 0.3
     a.plate_hash = b.plate_hash = "x" * 64
     assert similarity(a, b) == (1.0, {"placa": 1.0})
+
+
+# ── saude da coleta (RN-008) ───────────────────────────────────────
+
+from app.engine.health import PLATEAU_RUNS, is_stable
+
+
+def test_novo_patamar_de_volume():
+    """Volume que mudou e se manteve estavel e' o novo normal, nao um incidente.
+    Sem isso a fonte fica suspensa para sempre: medido em producao, o Freitas
+    coletou 24 itens por 40 h contra uma media congelada em 12."""
+    # tres coletas consistentes entre si -> novo patamar
+    assert is_stable([24, 24, 24], 60.0)
+    assert is_stable([87, 84, 90], 60.0)
+    # oscilacao real nao e' patamar
+    assert not is_stable([24, 4, 40], 60.0)
+    # historico curto nao decide
+    assert not is_stable([24, 24], 60.0)
+    assert not is_stable([], 60.0)
+    # zero nao serve de referencia
+    assert not is_stable([0, 0, 0], 60.0)
+    assert len([24, 24, 24][:PLATEAU_RUNS]) == PLATEAU_RUNS
+
+
+# ── varredura parcial (RN-005) ─────────────────────────────────────
+
+from app.scrapers.base import ScrapeStats
+
+
+def test_scrape_stats_parcial():
+    """Ausencia de evidencia so' vira evidencia de ausencia quando a varredura
+    viu o catalogo inteiro."""
+    st = ScrapeStats()
+    assert st.complete is True
+    st.mark_partial("parou em 2 paginas")
+    assert st.complete is False
+    assert "parou em 2 paginas" in st.notes
+    st.mark_partial("parou em 2 paginas")  # idempotente
+    assert len(st.notes) == 1

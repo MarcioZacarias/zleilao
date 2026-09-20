@@ -105,6 +105,8 @@ class GenericHtmlScraper(BaseScraper):
                 if not parsed:
                     break
                 items.extend(parsed)
+                if page == max_pages and len(parsed) > 0:
+                    self.stats.mark_partial(f"parou em {max_pages} paginas de {path}")
                 await self.delay()
         if self.fetch_details and (self.cfg("detail") or {}).get("description_selector"):
             fetched = 0

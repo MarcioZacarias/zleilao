@@ -60,6 +60,13 @@ backend/app/
 
 ## 3. Modelo de dados — o que confunde
 
+> **Novo patamar de volume.** A RN-008 existe para detectar parser quebrado, não para
+> brigar com mudança legítima de volume. Se o volume muda e se mantém estável por três
+> coletas, isso vira o novo normal: a média se recalibra e o incidente se auto-resolve.
+> Resolver um incidente de volume no admin também recalibra a média — senão a coleta
+> seguinte reabriria o mesmo incidente. Sem isso a fonte fica suspensa para sempre:
+> medido, o Freitas passou 40 horas trazendo 24 itens contra uma média congelada em 12.
+
 **Source** tem três interruptores distintos:
 - `is_active` — a fonte é **coletada**
 - `dispatch_enabled` — os itens dela são **publicados** na vitrine
@@ -111,6 +118,13 @@ Cinco jobs (APScheduler, `max_instances=1`, intervalos em settings lidos **no bo
 | `lifecycle` | 30 min | publica, marca pregão próximo, encerra, oculta não reencontrados |
 | `dedup` | 60 min | vínculos suspeitos entre fontes |
 | `cleanup` | 03:00 | apaga `raw_items` velhos e encerrados antigos |
+
+> **Varredura parcial.** Quando o parser para por limite de páginas, por limite de
+> leilões ou porque a fonte pagina no cliente, ele marca `ScrapeStats.complete=False`.
+> Numa varredura parcial **a ausência de um item não conta como retirada** (RN-005): ele
+> pode estar apenas fora da janela vista. Sem isso, 76 lotes que existiam sumiram da
+> vitrine nas primeiras 34 horas de operação. O motivo fica nos detalhes do job, visível
+> no admin.
 
 ### 4.1 Scrape (`scheduler/jobs.run_scrape_job`)
 

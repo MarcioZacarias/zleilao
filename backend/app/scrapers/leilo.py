@@ -109,8 +109,8 @@ class LeiloScraper(BaseScraper):
         self.stats.pages += 1
         state = parse_initial_state(html)
         items = self.items_from_state(state)
-        logger.info("[Leilo] pagina geral: %d lotes (total informado: %s)", len(items),
-                    state.get("elastic", {}).get("totalRegistros"))
+        total = (state.get("elastic") or {}).get("totalRegistros")
+        logger.info("[Leilo] pagina geral: %d lotes (total informado: %s)", len(items), total)
 
         if str(self.cfg("per_auction", True)).lower() in ("1", "true", "yes"):
             auctions = (state.get("leiloesSite") or {}).get("leiloes") or []
@@ -137,6 +137,13 @@ class LeiloScraper(BaseScraper):
                 except Exception as exc:
                     self.stats.errors += 1
                     logger.warning("[Leilo] falha em %s: %s", nome, exc)
+            if count >= int(self.cfg("max_auctions", 60)):
+                self.stats.mark_partial("limite de leiloes por ciclo atingido")
+
+        # A paginacao do Leilo e' client-side: cada consulta devolve 36 lotes.
+        # So' e' completa se o total informado couber no que foi visto.
+        if isinstance(total, int) and len(items) < total:
+            self.stats.mark_partial(f"{len(items)} de {total} lotes (paginacao client-side)")
         return items
 
     @staticmethod

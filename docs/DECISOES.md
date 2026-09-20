@@ -76,6 +76,13 @@ difere do texto da EF e por quê. Data: 18/09/2026.
     determinísticas. Uma instalação nova não pode ficar com a vitrine vazia esperando
     alguém configurar o modelo.
 
+17. **Varredura parcial não gera retirada.** O parser informa se viu o catálogo
+    inteiro; só então a ausência de um item conta para `misses` (RN-005).
+18. **Volume estável vira o novo normal.** A RN-008 recalibra a média depois de três
+    coletas consistentes, e resolver o incidente no admin também recalibra.
+19. **Jobs perdidos são reexecutados** (`misfire_grace_time` de 1 h). A limpeza diária
+    foi pulada por 7h20 numa hibernação da máquina, sem nenhum aviso.
+
 ## Limitações conhecidas (F1)
 
 - **Mascaramento de placa tem falso positivo** em códigos de modelo com o formato

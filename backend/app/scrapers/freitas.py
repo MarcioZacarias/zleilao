@@ -76,6 +76,9 @@ class FreitasScraper(BaseScraper):
             items.extend(parsed)
             if len(parsed) < top:
                 break
+            if page == max_pages:
+                self.stats.mark_partial(f"parou em {max_pages} paginas com a ultima cheia ({top} lotes)")
+                break
             await self.delay()
 
         if self.fetch_details:

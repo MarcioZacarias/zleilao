@@ -60,7 +60,13 @@ async def start_scheduler() -> None:
     # Datas de inicio timezone-aware: o container roda em UTC e o scheduler em
     # Brasilia; um `datetime.now()` naive seria interpretado no fuso errado.
     boot = datetime.now(BRT)
-    _scheduler = AsyncIOScheduler(timezone=BRT)
+    # coalesce + misfire_grace_time: se a maquina suspende ou o processo demora
+    # a subir, o job roda assim que possivel em vez de ser pulado em silencio.
+    # Medido: a limpeza das 03:00 foi perdida por 7h20 numa hibernacao.
+    _scheduler = AsyncIOScheduler(
+        timezone=BRT,
+        job_defaults={"coalesce": True, "misfire_grace_time": 3600, "max_instances": 1},
+    )
     _scheduler.add_job(scrape_tick, IntervalTrigger(minutes=max(1, tick), start_date=boot + timedelta(seconds=20), timezone=BRT),
                        id="scrape_tick", max_instances=1, coalesce=True)
     _scheduler.add_job(normalize_job, IntervalTrigger(minutes=max(1, norm), start_date=boot + timedelta(seconds=60), timezone=BRT),
@@ -196,16 +202,18 @@ async def run_scrape_job(db: AsyncSession, source_id: int, dry_run: bool = False
             "ok": True, "items_found": len(scraped),
             "sample": [_sample(s) for s in scraped[:5]],
             "duration_ms": int((now_brt() - started).total_seconds() * 1000),
+            "complete": stats.complete,
             "stats": stats.__dict__,
         }
 
-    count = await persist_scraped(db, source, scraped)
+    count = await persist_scraped(db, source, scraped, complete=stats.complete)
     source.last_run_at = now_brt()
     source.last_run_status = "success"
     source.last_items_count = count
     await evaluate_run(db, source, count, False, None)
     await _finish_job(db, job, "success", count, details={
-        "pages": stats.pages, "details": stats.details, "errors": stats.errors, "notes": stats.notes,
+        "pages": stats.pages, "details": stats.details, "errors": stats.errors,
+        "complete": stats.complete, "notes": stats.notes,
     })
     logger.info("[%s] coleta concluida: %d itens", source.name, count)
     return {"ok": True, "items_found": count}
@@ -335,7 +343,7 @@ async def _persist_one(db: AsyncSession, source_id: int, s: ScrapedItem, now: da
             db.add(RawItem(source_id=source_id, external_id=ext_id, content_hash=chash, payload=s.raw_payload[:200_000], fetched_at=now))
 
 
-async def persist_scraped(db: AsyncSession, source: Source, scraped: list[ScrapedItem]) -> int:
+async def persist_scraped(db: AsyncSession, source: Source, scraped: list[ScrapedItem], complete: bool = True) -> int:
     """Um SAVEPOINT por item: um lote quebrado nao derruba a coleta da fonte."""
     now = now_brt()
     source_id, source_name = source.id, source.name
@@ -351,12 +359,17 @@ async def persist_scraped(db: AsyncSession, source: Source, scraped: list[Scrape
                 await db.commit()
         except Exception as exc:
             logger.warning("[%s] item %s nao persistido: %s", source_name, s.external_id, str(exc)[:300])
-    # RN-005: nao reencontrados
-    if seen_ids:
+    # RN-005: nao reencontrados. Só conta quando a varredura viu o catálogo
+    # inteiro — numa coleta parcial (limite de páginas, paginação client-side)
+    # o item pode estar apenas fora da janela vista, e marcá-lo como retirado
+    # esconderia da vitrine um lote que existe. Medido: 76 lotes sumiram assim.
+    if seen_ids and complete:
         missing = (await db.execute(select(Item).where(
             Item.source_id == source_id, Item.status.notin_(("closed", "withdrawn")), Item.external_id.notin_(seen_ids)))).scalars().all()
         for it in missing:
             it.misses += 1
+    elif seen_ids:
+        logger.info("[%s] varredura parcial: ausencias nao contam como retirada", source_name)
     await db.commit()
     return count
 

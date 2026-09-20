@@ -81,6 +81,17 @@ class ScrapeStats:
     details: int = 0
     errors: int = 0
     notes: list[str] = field(default_factory=list)
+    #: A varredura chegou ao fim do catalogo da fonte? `False` quando parou por
+    #: limite de paginas, de leiloes ou por erro. So' uma varredura completa
+    #: autoriza concluir que um item sumiu (RN-005): numa coleta parcial, o item
+    #: pode apenas estar fora da janela vista.
+    complete: bool = True
+
+    def mark_partial(self, reason: str) -> None:
+        if self.complete:
+            self.complete = False
+        if reason not in self.notes:
+            self.notes.append(reason)
 
 
 class BaseScraper(ABC):

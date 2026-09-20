@@ -54,6 +54,10 @@ class MegaLeiloesScraper(BaseScraper):
                 items.extend(parsed)
                 if not parsed or not self._has_next_page(html, page):
                     break
+                if page == max_pages:
+                    # Ha' proxima pagina e o limite acabou: catalogo nao foi visto por inteiro.
+                    self.stats.mark_partial(f"parou em {max_pages} paginas de {path} com mais paginas disponiveis")
+                    break
                 await self.delay()
 
         if self.fetch_details:
