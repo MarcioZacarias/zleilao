@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { Link } from "react-router-dom";
 import { Search, X } from "lucide-react";
 import { toast } from "sonner";
@@ -36,6 +36,9 @@ export function FilterFormDrawer({
   onSaved,
 }: FilterFormDrawerProps) {
   const editing = !!filter;
+  // Mais de um formulário pode estar montado na mesma página; sem isso o
+  // `htmlFor` do rótulo fica ambíguo e o id se repete no documento.
+  const nameId = useId();
   const [name, setName] = useState("");
   const [crit, setCrit] = useState<Criteria>({});
   const [channels, setChannels] = useState<AlertChannel[]>(["email"]);
@@ -116,11 +119,11 @@ export function FilterFormDrawer({
     >
       <div className="space-y-6">
         <div>
-          <label className="mb-1 block text-sm font-medium text-radar-text/90" htmlFor="filter-name">
+          <label className="mb-1 block text-sm font-medium text-radar-text/90" htmlFor={nameId}>
             Nome do alerta
           </label>
           <input
-            id="filter-name"
+            id={nameId}
             value={name}
             onChange={(e) => setName(e.target.value)}
             maxLength={120}

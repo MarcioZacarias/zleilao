@@ -227,10 +227,10 @@ export default function Alerts() {
                         <button
                           type="button"
                           onClick={() => update({ user_id: String(a.user!.id) })}
-                          className="min-w-0 text-left"
-                          title="Filtrar por este usuário"
+                          className="block max-w-[190px] text-left"
+                          title={`Filtrar pelos alertas de ${a.user.email}`}
                         >
-                          <div className="font-medium text-gray-900">{a.user.name || "—"}</div>
+                          <div className="truncate font-medium text-gray-900">{a.user.name || "—"}</div>
                           <div className="truncate text-xs text-gray-500">{a.user.email}</div>
                         </button>
                       ) : (
@@ -239,7 +239,12 @@ export default function Alerts() {
                     </Td>
                     <Td>
                       {a.item ? (
-                        <Link to={`/lote/${a.item.id}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                        <Link
+                          to={`/lote/${a.item.id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex max-w-[240px] items-center gap-2"
+                        >
                           <SafeImage
                             src={a.item.image_url}
                             alt=""
@@ -272,7 +277,7 @@ export default function Alerts() {
                     <Td className="text-xs">
                       {a.channel ? ALERT_CHANNEL_LABELS[a.channel] ?? a.channel : <span className="text-gray-400">—</span>}
                     </Td>
-                    <Td className="max-w-[280px]">
+                    <Td className="max-w-[240px]">
                       {a.error ? (
                         <div className="flex items-start gap-1 text-xs text-red-700" title={a.error}>
                           <AlertCircle size={12} className="mt-0.5 shrink-0" />

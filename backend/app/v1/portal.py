@@ -13,15 +13,17 @@ from sqlalchemy.orm import selectinload
 
 from app.database import get_db
 from app.timeutil import now_brt
+from app.engine.geo import search_cities
 from app.engine.lifecycle import VISIBLE_STATUSES
-from app.models import Auction, BrandingAsset, Category, ClickEvent, Item, Source
+from app.engine.search import apply_filters, base_query, haversine_sql, normalize_criteria, radius_center
+from app.models import Auction, BrandingAsset, Category, ClickEvent, Item, ItemOpportunity, Source
 from app.schemas import AuctionOut, CategoryTreeOut, FacetValue, ItemDetailOut, ItemPage, PageMeta
 from app.settings_service import get_setting, get_setting_int
 from app.v1.serializers import SerializerContext
 
 router = APIRouter()
 
-SORTS = {"relevance", "price_asc", "price_desc", "session_asc", "newest"}
+SORTS = {"relevance", "price_asc", "price_desc", "session_asc", "newest", "distance", "opportunity"}
 
 
 # ── branding / stats ───────────────────────────────────────────────
@@ -92,53 +94,9 @@ async def categories(db: AsyncSession = Depends(get_db)):
 
 # ── busca ──────────────────────────────────────────────────────────
 
-def _apply_filters(stmt, *, q, category_path, brand, model, year_min, year_max, price_min, price_max, state, city,
-                   source_slug, condition, auction_type, session_from, session_to, status):
-    stmt = stmt.where(Item.status.in_(VISIBLE_STATUSES if status in (None, "", "all") else (status,)))
-    if category_path:
-        stmt = stmt.where(Category.path.like(f"{category_path}%"))
-    if q:
-        like = f"%{q.strip()}%"
-        stmt = stmt.where(or_(
-            Item.search_tsv.op("@@")(func.plainto_tsquery("portuguese", q)),
-            Item.title.ilike(like), Item.brand.ilike(like), Item.model.ilike(like),
-        ))
-    if brand:
-        stmt = stmt.where(func.lower(Item.brand) == brand.lower())
-    if model:
-        stmt = stmt.where(Item.model.ilike(f"%{model}%"))
-    if year_min is not None:
-        stmt = stmt.where(Item.year_model >= year_min)
-    if year_max is not None:
-        stmt = stmt.where(Item.year_model <= year_max)
-    if price_min is not None:
-        stmt = stmt.where(Item.price >= price_min)
-    if price_max is not None:
-        stmt = stmt.where(Item.price <= price_max)
-    if state:
-        stmt = stmt.where(Item.state == state.upper())
-    if city:
-        stmt = stmt.where(Item.city.ilike(f"%{city}%"))
-    if source_slug:
-        stmt = stmt.where(Source.slug == source_slug)
-    if condition:
-        stmt = stmt.where(Item.condition == condition)
-    if auction_type:
-        stmt = stmt.where(Auction.auction_type == auction_type)
-    if session_from:
-        stmt = stmt.where(Item.next_session_at >= session_from)
-    if session_to:
-        stmt = stmt.where(Item.next_session_at <= session_to)
-    return stmt
-
-
-def _base_query():
-    return (
-        select(Item)
-        .join(Source, Source.id == Item.source_id)
-        .outerjoin(Category, Category.id == Item.category_id)
-        .outerjoin(Auction, Auction.id == Item.auction_id)
-    )
+# O filtro e a query base moram em `engine/search.py`, compartilhados com o
+# motor de alertas: o filtro salvo precisa casar exatamente com o que a busca
+# mostra, e duas implementações divergiriam na primeira mudança.
 
 
 @router.get("/portal/items", response_model=ItemPage)
@@ -159,6 +117,9 @@ async def search_items(
     auction_type: Optional[str] = None,
     session_from: Optional[datetime] = None,
     session_to: Optional[datetime] = None,
+    near_city: Optional[str] = Query(None, description="cidade de referencia para busca por raio"),
+    near_state: Optional[str] = Query(None, description="UF da cidade de referencia"),
+    radius_km: Optional[float] = Query(None, ge=1, le=3000),
     status: Optional[str] = None,
     sort: str = "relevance",
     page: int = Query(1, ge=1),
@@ -172,11 +133,18 @@ async def search_items(
         if not cat:
             raise HTTPException(404, "Categoria não encontrada")
         category_path = cat.path
-    filters = dict(q=q, category_path=category_path, brand=brand, model=model, year_min=year_min, year_max=year_max,
-                   price_min=price_min, price_max=price_max, state=state, city=city, source_slug=source,
-                   condition=condition, auction_type=auction_type, session_from=session_from, session_to=session_to, status=status)
 
-    stmt = _apply_filters(_base_query(), **filters)
+    criteria = normalize_criteria({
+        "q": q, "category": category, "brand": brand, "model": model,
+        "year_min": year_min, "year_max": year_max, "price_min": price_min, "price_max": price_max,
+        "state": state, "city": city, "source": source, "condition": condition,
+        "auction_type": auction_type, "near_city": near_city, "near_state": near_state,
+        "radius_km": radius_km,
+    })
+    extras = dict(category_path=category_path, status=status,
+                  session_from=session_from, session_to=session_to)
+
+    stmt = apply_filters(base_query(), criteria, **extras)
     total = await db.scalar(select(func.count()).select_from(stmt.order_by(None).subquery())) or 0
 
     if sort not in SORTS:
@@ -187,6 +155,15 @@ async def search_items(
         stmt = stmt.order_by(Item.price.desc().nulls_last(), Item.id.desc())
     elif sort == "newest":
         stmt = stmt.order_by(Item.first_seen_at.desc(), Item.id.desc())
+    elif sort == "distance" and (center := radius_center(criteria)):
+        # Ordenação natural da busca por raio: do mais perto para o mais longe.
+        (clat, clng), _ = center
+        stmt = stmt.order_by(haversine_sql(clat, clng).asc(), Item.price.asc().nulls_last())
+    elif sort == "opportunity":
+        # RN-010: maior desconto primeiro. Lote sem score fica no fim — ausência
+        # de referência não é desconto zero, é "não sabemos".
+        stmt = stmt.outerjoin(ItemOpportunity, ItemOpportunity.item_id == Item.id).order_by(
+            ItemOpportunity.score.desc().nulls_last(), Item.next_session_at.asc().nulls_last())
     elif sort == "session_asc" or not q:
         stmt = stmt.order_by(Item.next_session_at.asc().nulls_last(), Item.first_seen_at.desc())
     else:
@@ -198,7 +175,7 @@ async def search_items(
 
     facet_out: dict[str, list[FacetValue]] = {}
     if facets:
-        base = _apply_filters(_base_query(), **filters).order_by(None)
+        base = apply_filters(base_query(), criteria, **extras).order_by(None)
 
         async def facet(col, label_col=None, limit=30):
             sub = base.with_only_columns(col.label("v"), (label_col if label_col is not None else col).label("l")).subquery()
@@ -219,6 +196,13 @@ async def search_items(
         meta=PageMeta(page=page, page_size=page_size, total=total, pages=max(1, math.ceil(total / page_size))),
         facets=facet_out,
     )
+
+
+@router.get("/portal/cities")
+async def cities(q: str = Query(..., min_length=2), limit: int = Query(8, ge=1, le=20)):
+    """Autocomplete de município para a busca por raio. Resolve na base local
+    de 5.571 municípios — sem chamada externa."""
+    return search_cities(q, limit)
 
 
 @router.get("/portal/brands", response_model=list[FacetValue])

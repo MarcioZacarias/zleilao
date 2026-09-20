@@ -1,10 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Package, Sparkles, Gavel, AlertTriangle, Copy, Percent, RefreshCw } from "lucide-react";
+import {
+  Package,
+  Sparkles,
+  Gavel,
+  AlertTriangle,
+  Copy,
+  Percent,
+  RefreshCw,
+  Users,
+  MailCheck,
+  Filter,
+  BellRing,
+  Clock,
+  XCircle,
+} from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { toast } from "sonner";
 import { dashboardApi } from "../../services/operations";
-import type { DashboardData, JobType } from "../../services/types";
+import { usersApi } from "../../services/usersAdmin";
+import type { DashboardData, JobType, UsersSummary } from "../../services/types";
 import { Card, CardContent, CardHeader } from "../../components/ui/Card";
 import { Badge, BadgeVariant } from "../../components/ui/Badge";
 import { Table, Thead, Th, Tr, Td } from "../../components/ui/Table";
@@ -17,6 +32,7 @@ import {
   HEALTH_LABELS,
   JOB_STATUS_LABELS,
   JOB_TYPE_LABELS,
+  PLAN_LABELS,
   STATUS_LABELS_ADMIN,
 } from "../../lib/labels";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
@@ -34,6 +50,7 @@ function jobVariant(s: string | undefined): BadgeVariant {
 export default function Dashboard() {
   useDocumentTitle("Dashboard");
   const [data, setData] = useState<DashboardData | null>(null);
+  const [users, setUsers] = useState<UsersSummary | null>(null);
   const [loading, setLoading] = useState(true);
 
   const load = () => {
@@ -43,6 +60,11 @@ export default function Dashboard() {
       .then(setData)
       .catch((e) => toast.error(errorMessage(e, "Erro ao carregar o dashboard")))
       .finally(() => setLoading(false));
+    // Bloco da Onda 2: falha aqui não derruba o resto do painel.
+    usersApi
+      .summary()
+      .then(setUsers)
+      .catch(() => setUsers(null));
   };
 
   useEffect(load, []);
@@ -115,6 +137,93 @@ export default function Dashboard() {
           ))}
         </div>
       )}
+
+      {/* Assinantes e alertas (Onda 2) */}
+      <Card className="mb-4 md:mb-6">
+        <CardHeader className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h2 className="text-base font-semibold text-gray-900 md:text-lg">Assinantes e alertas</h2>
+            <p className="text-xs text-gray-500">Contas, filtros salvos e fila de envio (RN-006/RN-007)</p>
+          </div>
+          <div className="flex gap-3 text-xs">
+            <Link to="/admin/usuarios" className="text-primary-600 hover:underline">
+              Usuários
+            </Link>
+            <Link to="/admin/alertas" className="text-primary-600 hover:underline">
+              Alertas
+            </Link>
+          </div>
+        </CardHeader>
+        <CardContent>
+          {loading && !users ? (
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <Skeleton key={i} className="h-14 w-full" />
+              ))}
+            </div>
+          ) : !users ? (
+            <EmptyState
+              compact
+              icon={Users}
+              title="Resumo de assinantes indisponível"
+              description="Não foi possível ler /users/summary agora."
+            />
+          ) : (
+            <>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+                {[
+                  { label: "Assinantes", value: users.users_total, icon: Users, color: "text-blue-600 bg-blue-50", to: "/admin/usuarios" },
+                  { label: "E-mail verificado", value: users.users_verified, icon: MailCheck, color: "text-emerald-600 bg-emerald-50", to: "/admin/usuarios" },
+                  { label: "Filtros ativos", value: users.active_filters, icon: Filter, color: "text-indigo-600 bg-indigo-50", to: "/admin/usuarios" },
+                  { label: "Enviados hoje", value: users.alerts_sent_today, icon: BellRing, color: "text-green-600 bg-green-50", to: "/admin/alertas?status=sent" },
+                  { label: "Na fila", value: users.alerts_pending, icon: Clock, color: "text-amber-600 bg-amber-50", to: "/admin/alertas?status=pending" },
+                  {
+                    label: "Falharam",
+                    value: users.alerts_failed,
+                    icon: XCircle,
+                    color: users.alerts_failed ? "text-red-600 bg-red-50" : "text-gray-500 bg-gray-100",
+                    to: "/admin/alertas?status=failed",
+                  },
+                ].map((k) => (
+                  <Link key={k.label} to={k.to} className="block">
+                    <div className="flex items-center gap-3 rounded-lg border border-gray-200 p-3 transition-colors hover:border-primary-300">
+                      <div className={`rounded-lg p-2 ${k.color}`}>
+                        <k.icon size={18} />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xl font-bold tabular-nums text-gray-900">{formatInt(k.value)}</p>
+                        <p className="truncate text-[11px] text-gray-500">{k.label}</p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
+                <span className="text-gray-500">Assinaturas ativas por plano:</span>
+                {Object.keys(users.by_plan).length === 0 ? (
+                  <span className="text-gray-400">nenhuma registrada</span>
+                ) : (
+                  Object.entries(users.by_plan).map(([plan, n]) => (
+                    <Link
+                      key={plan}
+                      to={`/admin/usuarios?plan=${plan}`}
+                      className="rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-700 hover:border-primary-300"
+                    >
+                      {PLAN_LABELS[plan] ?? plan}: <strong className="tabular-nums">{formatInt(n)}</strong>
+                    </Link>
+                  ))
+                )}
+                {users.users_total > users.users_verified && (
+                  <span className="text-amber-600">
+                    {formatInt(users.users_total - users.users_verified)} sem e-mail verificado não recebem alerta
+                  </span>
+                )}
+              </div>
+            </>
+          )}
+        </CardContent>
+      </Card>
 
       <div className="grid gap-4 md:gap-6 lg:grid-cols-3">
         {/* Gráfico */}

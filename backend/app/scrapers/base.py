@@ -299,6 +299,7 @@ class BaseScraper(ABC):
     UNKNOWN_VALUES = {
         "si", "s/i", "sem informacao", "sem informacoes", "nao informado", "nao informada",
         "n/i", "ni", "-", "--", "nd", "n/d", "indefinido", "outros", "outro",
+        "nao informando", "nao informou", "a informar", "a definir", "diversos", "varios",
     }
 
     @classmethod

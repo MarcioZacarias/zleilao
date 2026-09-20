@@ -1,0 +1,14 @@
+import { chromium } from "playwright";
+const b = await chromium.launch();
+const p = await b.newPage();
+p.on("response", (r) => { if (r.status() >= 400) console.log(r.status(), r.url()); });
+await p.goto("http://localhost:5178/login", { waitUntil: "networkidle" });
+await p.fill("#email", "admin@zconnect.ia.br"); await p.fill("#password", "admin123");
+await p.getByRole("button", { name: /^Entrar$/ }).click();
+await p.waitForFunction(() => location.pathname.startsWith("/admin"), null, { timeout: 15000 });
+await p.waitForTimeout(2500);
+console.log("--- usuarios");
+await p.goto("http://localhost:5178/admin/usuarios", { waitUntil: "networkidle" }); await p.waitForTimeout(2000);
+console.log("--- alertas");
+await p.goto("http://localhost:5178/admin/alertas", { waitUntil: "networkidle" }); await p.waitForTimeout(2000);
+await b.close();

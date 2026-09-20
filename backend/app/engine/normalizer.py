@@ -20,6 +20,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.engine.category_fields import effective_fields, json_schema_for, validate_attributes
 from app.engine.classifier import classify
 from app.engine.deterministic import DET_VERSION, extract_vehicle_fields
+from app.engine.geo import coords_for
 from app.engine.masking import mask_text
 from app.models import Category, ExtractionCache, Item, Source
 from app.settings_service import get_setting, get_setting_bool, get_setting_int
@@ -120,6 +121,15 @@ async def normalize_item(db: AsyncSession, item: Item, source: Source, categorie
         item.extraction_status = "skipped"
         item.extraction_error = "sem categoria"
         return item.extraction_status
+
+    # 1b. Geolocalizacao pelo municipio (busca por raio).
+    # Roda ANTES de qualquer saida por erro: a cidade vem da COLETA, nao da
+    # extracao. Um lote sem marca identificada continua tendo endereco, e
+    # sumir da busca por raio por causa disso seria perder dado bom.
+    if item.city and item.state and (item.lat is None or item.lng is None):
+        coords = coords_for(item.city, item.state)
+        if coords:
+            item.lat, item.lng = coords
 
     # 2. Mascaramento (idempotente: texto ja' mascarado nao casa de novo)
     masked_desc = mask_text(item.description)

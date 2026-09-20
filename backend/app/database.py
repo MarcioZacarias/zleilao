@@ -52,6 +52,8 @@ EXTRA_DDL = [
     # O admin semeado na F1 nasceu com role='admin'; contas novas nascem
     # 'user'. O default da coluna precisa acompanhar o modelo.
     "ALTER TABLE users ALTER COLUMN role SET DEFAULT 'user'",
+    # ── Busca por raio: o retângulo do bounding box usa este índice ─────
+    "CREATE INDEX IF NOT EXISTS ix_items_lat_lng ON items (lat, lng) WHERE lat IS NOT NULL",
 ]
 
 

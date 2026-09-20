@@ -33,8 +33,9 @@ export function FiltrosSection({
   const [filters, setFilters] = useState<SavedFilter[] | null>(null);
   const [limit, setLimit] = useState(me.filters_limit);
   const [error, setError] = useState("");
-  const [editing, setEditing] = useState<SavedFilter | null>(null);
-  const [creating, setCreating] = useState(false);
+  // Um único formulário: `formFilter` null significa criação.
+  const [formOpen, setFormOpen] = useState(false);
+  const [formFilter, setFormFilter] = useState<SavedFilter | null>(null);
   const [preview, setPreview] = useState<SavedFilter | null>(null);
   const [busy, setBusy] = useState<number | null>(null);
 
@@ -56,10 +57,20 @@ export function FiltrosSection({
 
   useEffect(() => {
     if (autoCreate) {
-      setCreating(true);
+      setFormFilter(null);
+      setFormOpen(true);
       onAutoCreateHandled?.();
     }
   }, [autoCreate, onAutoCreateHandled]);
+
+  const openCreate = () => {
+    setFormFilter(null);
+    setFormOpen(true);
+  };
+  const openEdit = (f: SavedFilter) => {
+    setFormFilter(f);
+    setFormOpen(true);
+  };
 
   const used = filters?.length ?? me.filters_used;
   const atLimit = used >= limit;
@@ -120,7 +131,7 @@ export function FiltrosSection({
           <Button
             variant="accent"
             size="sm"
-            onClick={() => setCreating(true)}
+            onClick={openCreate}
             disabled={atLimit}
             title={atLimit ? "Limite de filtros do plano atingido" : undefined}
           >
@@ -169,7 +180,7 @@ export function FiltrosSection({
             title="Nenhum filtro salvo ainda"
             description="Faça uma busca com os filtros que te interessam e use “Criar alerta desta busca”, ou crie um filtro aqui."
             action={
-              <Button variant="accent" size="sm" onClick={() => setCreating(true)} disabled={atLimit}>
+              <Button variant="accent" size="sm" onClick={openCreate} disabled={atLimit}>
                 <BellPlus size={14} /> Criar meu primeiro filtro
               </Button>
             }
@@ -233,7 +244,7 @@ export function FiltrosSection({
                   </button>
                   <button
                     type="button"
-                    onClick={() => setEditing(f)}
+                    onClick={() => openEdit(f)}
                     className="rounded-lg p-2 text-radar-muted transition-colors hover:bg-white/5 hover:text-radar-text"
                     title="Editar filtro"
                     aria-label="Editar filtro"
@@ -268,15 +279,9 @@ export function FiltrosSection({
       )}
 
       <FilterFormDrawer
-        open={creating}
-        onClose={() => setCreating(false)}
-        whatsappAvailable={me.whatsapp_channel_available}
-        onSaved={onSaved}
-      />
-      <FilterFormDrawer
-        open={!!editing}
-        onClose={() => setEditing(null)}
-        filter={editing}
+        open={formOpen}
+        onClose={() => setFormOpen(false)}
+        filter={formFilter}
         whatsappAvailable={me.whatsapp_channel_available}
         onSaved={onSaved}
       />

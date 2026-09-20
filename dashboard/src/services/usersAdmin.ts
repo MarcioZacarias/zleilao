@@ -16,7 +16,7 @@ export interface UsersParams {
   page_size?: number;
 }
 
-function clean(params: Record<string, unknown>): Record<string, string | number> {
+function clean<T extends object>(params: T): Record<string, string | number> {
   const out: Record<string, string | number> = {};
   for (const [k, v] of Object.entries(params)) {
     if (v === undefined || v === null || v === "") continue;

@@ -271,3 +271,69 @@ interface UserAdmin {
 - **Plano gratuito recebe resumo diário**, plano pago recebe quase em tempo real
   (`realtime_alerts`). Deixar isso explícito na tela de planos.
 - **Janela de silêncio** é opcional e pessoal; vazia significa usar a global do sistema.
+
+---
+
+# Ondas 3 e 4 — comparador e busca por raio
+
+## Score de oportunidade (RN-010)
+
+Aparece em `ItemCard` (resumido) e em `ItemDetail` (completo). **Ausente quando
+não dá para comparar com honestidade** — sem referência FIPE, ou com condição
+desconhecida e sem premissa aceitável. Nesse caso a interface mostra
+"sem referência de mercado suficiente", nunca um score fraco.
+
+```ts
+// no card, para destacar e ordenar
+opportunity_score: number | null;      // 0-100
+opportunity_discount: number | null;   // % sobre a referência ajustada
+
+// no detalhe
+interface Opportunity {
+  score: number; discount_pct: number;
+  reference_value: string;   // FIPE do bem
+  total_cost: string;        // lance + comissão + despesas
+  reference_label: string | null;   // "FIPE setembro de 2026 — MOBI LIKE 1.0 Fire Flex 5p."
+  computed_at: string;
+  reasons: {
+    lance: number; comissao_pct: number; comissao: number; despesas: number; custo_total: number;
+    referencia: number; referencia_ajustada: number; desconto_pct: number;
+    condicao: string; condicao_presumida: boolean; fator_condicao: number;
+    base_calculo: "lance_inicial" | "lance_atual" | string;
+    nota_preco?: string;      // ressalva do lance inicial ser o piso
+    nota_condicao?: string;   // quando a condição foi presumida
+    nota?: string;            // quando a referência foi ajustada por sinistro/sucata
+    alerta?: string;          // quando o custo está acima da referência
+  };
+}
+```
+
+**A interface precisa mostrar as ressalvas.** O score só é honesto acompanhado
+delas: `nota_preco` explica que o lance inicial é o piso do pregão;
+`nota_condicao` avisa que o estado do bem foi presumido; `alerta` marca lote
+mais caro que a referência. Exibir o número sozinho transforma uma estimativa
+em promessa.
+
+## Busca por raio
+
+Três parâmetros em `GET /portal/items`, sempre juntos:
+
+| Parâmetro | Exemplo |
+|---|---|
+| `near_city` | `São Paulo` |
+| `near_state` | `SP` |
+| `radius_km` | `100` (entre 1 e 3000) |
+
+| Método | Rota | Resposta |
+|---|---|---|
+| GET | `/portal/cities?q=camp&limit=8` | `[{city, state, lat, lng}]` — autocomplete offline, base de 5.571 municípios |
+
+Item sem coordenada reconhecida **não entra** na busca por raio, em vez de
+entrar no lugar errado. A precisão é a do centroide do município.
+
+## Ordenações novas em `sort`
+
+| Valor | Efeito |
+|---|---|
+| `distance` | do mais perto para o mais longe (exige os parâmetros de raio) |
+| `opportunity` | maior desconto primeiro; lote sem score vai para o fim |

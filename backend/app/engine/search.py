@@ -13,6 +13,7 @@ from typing import Any, Optional
 from sqlalchemy import Select, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.engine.geo import bounding_box, coords_for
 from app.engine.lifecycle import VISIBLE_STATUSES
 from app.models import Auction, Category, Item, Source
 
@@ -20,10 +21,12 @@ from app.models import Auction, Category, Item, Source
 CRITERIA_KEYS = (
     "q", "category", "brand", "model", "year_min", "year_max", "price_min", "price_max",
     "state", "city", "source", "condition", "auction_type",
+    # busca por raio: cidade de referência + distância
+    "near_city", "near_state", "radius_km",
 )
 
 _INT_KEYS = {"year_min", "year_max"}
-_FLOAT_KEYS = {"price_min", "price_max"}
+_FLOAT_KEYS = {"price_min", "price_max", "radius_km"}
 
 
 def normalize_criteria(raw: dict[str, Any] | None) -> dict[str, Any]:
@@ -56,6 +59,7 @@ def describe_criteria(criteria: dict[str, Any]) -> str:
         "year_min": "ano de", "year_max": "ano ate", "price_min": "preco de",
         "price_max": "preco ate", "state": "UF", "city": "cidade", "source": "fonte",
         "condition": "condicao", "auction_type": "tipo",
+        "near_city": "perto de", "near_state": "UF de referencia", "radius_km": "raio (km)",
     }
     parts = [f"{labels.get(k, k)}: {v}" for k, v in criteria.items() if v not in (None, "")]
     return ", ".join(parts) if parts else "todos os lotes"
@@ -125,4 +129,45 @@ def apply_filters(
         stmt = stmt.where(Item.next_session_at >= session_from)
     if session_to:
         stmt = stmt.where(Item.next_session_at <= session_to)
+
+    # Busca por raio: o retângulo usa o índice (lat, lng) e a distância exata
+    # (Haversine) filtra as pontas. Sem o retângulo, um raio de 100 km leria a
+    # tabela inteira.
+    center = radius_center(criteria)
+    if center:
+        (lat, lng), radius = center
+        lat_min, lat_max, lng_min, lng_max = bounding_box(lat, lng, radius)
+        stmt = stmt.where(
+            Item.lat.isnot(None), Item.lng.isnot(None),
+            Item.lat.between(lat_min, lat_max), Item.lng.between(lng_min, lng_max),
+            haversine_sql(lat, lng) <= radius,
+        )
     return stmt
+
+
+def radius_center(criteria: dict[str, Any]) -> tuple[tuple[float, float], float] | None:
+    """(coordenada, raio) quando o critério pede busca por raio."""
+    radius = criteria.get("radius_km")
+    city, state = criteria.get("near_city"), criteria.get("near_state")
+    if not radius or not city or not state:
+        return None
+    try:
+        radius = float(radius)
+    except (TypeError, ValueError):
+        return None
+    if radius <= 0 or radius > 3000:
+        return None
+    coords = coords_for(str(city), str(state))
+    return (coords, radius) if coords else None
+
+
+def haversine_sql(lat: float, lng: float):
+    """Distância em km entre o item e o ponto, em SQL puro — sem PostGIS."""
+    return 6371.0 * func.acos(
+        func.least(
+            1.0,
+            func.cos(func.radians(lat)) * func.cos(func.radians(Item.lat))
+            * func.cos(func.radians(Item.lng) - func.radians(lng))
+            + func.sin(func.radians(lat)) * func.sin(func.radians(Item.lat)),
+        )
+    )

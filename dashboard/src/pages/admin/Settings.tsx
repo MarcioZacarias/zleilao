@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { Save, Loader2, RefreshCw, Plug, CheckCircle2, XCircle, Eye, EyeOff } from "lucide-react";
+import { Save, Loader2, RefreshCw, Plug, CheckCircle2, XCircle, Eye, EyeOff, Send } from "lucide-react";
 import { toast } from "sonner";
 import { settingsApi } from "../../services/settings";
-import type { LlmTestResult, SettingItem, SettingsResponse } from "../../services/types";
+import type { LlmTestResult, SettingItem, SettingsResponse, TestSendResult } from "../../services/types";
 import { errorMessage } from "../../services/api";
+import { maskPhone, phoneDigits } from "../../lib/format";
 import { refreshBranding } from "../../hooks/useBranding";
 import { Card, CardContent, CardHeader } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
@@ -12,12 +13,27 @@ import { Skeleton } from "../../components/ui/Skeleton";
 import BrandingUpload from "../../components/BrandingUpload";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
-const GROUP_ORDER = ["llm", "pipeline", "health", "scraping", "portal", "branding"];
+const GROUP_ORDER = [
+  "llm",
+  "pipeline",
+  "health",
+  "scraping",
+  "alerts",
+  "email",
+  "whatsapp",
+  "accounts",
+  "portal",
+  "branding",
+];
 const GROUP_DESCRIPTIONS: Record<string, string> = {
   llm: "Provedor, modelo e limites da extração por LLM.",
   pipeline: "Intervalos dos jobs, tentativas de extração, ciclo de vida e retenção.",
   health: "Detecção de incidentes e suspensão automática (RN-008).",
   scraping: "Comportamento dos scrapers: user-agent, atrasos e robots.txt (RN-009).",
+  alerts: "Casamento de filtros, limites por plano e janela de silêncio global (RN-006/RN-007).",
+  email: "SMTP usado nos alertas, na confirmação de cadastro e na recuperação de senha.",
+  whatsapp: "Canal de WhatsApp. Desligado aqui, o canal nem aparece para o assinante.",
+  accounts: "Cadastro público, verificação de e-mail e validade dos links enviados.",
   portal: "Vitrine pública: paginação e disclaimer das fichas.",
   branding: "Título e slogan. Logos e favicon são enviados na seção acima.",
 };
@@ -32,6 +48,80 @@ function isBoolSetting(item: SettingItem): boolean {
 
 function isNumberSetting(item: SettingItem): boolean {
   return !item.is_secret && item.value.trim() !== "" && /^-?\d+(\.\d+)?$/.test(item.value.trim());
+}
+
+/**
+ * Teste de envio real (e-mail ou WhatsApp). Pede o destinatário: o backend
+ * manda a mensagem de verdade, então não dá para adivinhar para quem.
+ */
+function TestSender({ kind }: { kind: "email" | "whatsapp" }) {
+  const [to, setTo] = useState("");
+  const [sending, setSending] = useState(false);
+  const [result, setResult] = useState<TestSendResult | null>(null);
+
+  const isEmail = kind === "email";
+
+  const send = async () => {
+    const target = isEmail ? to.trim() : phoneDigits(to);
+    if (!target) {
+      toast.error(isEmail ? "Informe o e-mail de destino." : "Informe o telefone de destino.");
+      return;
+    }
+    setSending(true);
+    setResult(null);
+    try {
+      const r = isEmail ? await settingsApi.testEmail(target) : await settingsApi.testWhatsapp(target);
+      setResult(r);
+      if (r.ok) toast.success(isEmail ? "E-mail enviado" : "Mensagem enviada");
+      else toast.error(r.detail);
+    } catch (e) {
+      const detail = errorMessage(e, "Falha ao chamar o teste no backend.");
+      setResult({ ok: false, detail });
+      toast.error(detail);
+    }
+    setSending(false);
+  };
+
+  return (
+    <div className="mt-5 border-t border-gray-200 pt-4">
+      <label className="admin-label" htmlFor={`test-${kind}`}>
+        {isEmail ? "Testar e-mail" : "Testar WhatsApp"}
+      </label>
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <input
+          id={`test-${kind}`}
+          type={isEmail ? "email" : "tel"}
+          inputMode={isEmail ? "email" : "numeric"}
+          value={to}
+          onChange={(e) => setTo(isEmail ? e.target.value : maskPhone(e.target.value))}
+          placeholder={isEmail ? "destinatario@empresa.com.br" : "(11) 98765-4321"}
+          className="admin-input"
+          autoComplete="off"
+        />
+        <Button variant="secondary" size="sm" className="shrink-0" onClick={send} disabled={sending}>
+          {sending ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
+          Enviar teste
+        </Button>
+      </div>
+      <p className="mt-2 text-xs text-gray-500">
+        Envia uma mensagem real com a configuração <strong>já gravada</strong>. Salve antes de testar.
+      </p>
+      {result && (
+        <div
+          className={`mt-3 flex items-start gap-2 rounded-lg px-3 py-2 text-sm ${
+            result.ok ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"
+          }`}
+        >
+          {result.ok ? (
+            <CheckCircle2 size={16} className="mt-0.5 shrink-0" />
+          ) : (
+            <XCircle size={16} className="mt-0.5 shrink-0" />
+          )}
+          <div>{result.detail}</div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function Settings() {
@@ -211,6 +301,9 @@ export default function Settings() {
                     </div>
                   ))}
                 </div>
+
+                {groupKey === "email" && <TestSender kind="email" />}
+                {groupKey === "whatsapp" && <TestSender kind="whatsapp" />}
 
                 {groupKey === "llm" && (
                   <div className="mt-5 border-t border-gray-200 pt-4">

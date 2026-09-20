@@ -19,6 +19,8 @@ const RUN_TYPES: { run: JobRunType; list: string; label: string; description: st
   { run: "normalize", list: "normalize", label: "Normalização", description: "Extrai campos estruturados (LLM / regras)" },
   { run: "lifecycle", list: "lifecycle", label: "Ciclo de vida", description: "Pregão em breve, encerrados, possivelmente retirados (RN-005)" },
   { run: "dedup", list: "dedup", label: "Deduplicação", description: "Procura pares semelhantes entre fontes (RN-004)" },
+  { run: "match", list: "match", label: "Casamento de filtros", description: "Compara os lotes novos com os filtros salvos e enfileira alertas (RN-006)" },
+  { run: "dispatch", list: "dispatch", label: "Envio de alertas", description: "Envia a fila por e-mail e WhatsApp, respeitando a janela de silêncio (RN-007)" },
   { run: "cleanup", list: "cleanup", label: "Limpeza", description: "Aplica as retenções de payload bruto e itens encerrados" },
 ];
 
@@ -91,7 +93,7 @@ export default function Jobs() {
       </div>
 
       {/* Scheduler */}
-      <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {RUN_TYPES.map((t) => {
           const s = schedById[t.run] ?? schedById[t.list] ?? Object.values(schedById).find((x) => x.id.includes(t.list));
           return (
