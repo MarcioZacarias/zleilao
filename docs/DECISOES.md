@@ -191,3 +191,22 @@ com "Golf", porque o que separa modelos é a primeira palavra. Dos 11 scores
 calculados, um (Honda XRE 2021) saiu com desconto negativo: o lance inicial já
 estava acima da FIPE. É exatamente o tipo de armadilha que o comparador existe
 para expor.
+
+
+---
+
+# Onda 4 — cadastrar fontes novas sem código
+
+O parser genérico ganhou um **modo de duas etapas**: a home lista pregões e
+cada pregão lista os lotes. É a estrutura mais comum entre leiloeiros de porte
+médio, e sem ela o parser só serviria para o formato de lista única, que é
+minoria. Com ela, adicionar uma fonte vira preencher um JSON no admin.
+
+Validado contra o Parque dos Leilões (robots.txt: `Disallow:` vazio, tudo
+liberado): 56 lotes reais coletados em dois pregões, sem uma linha de código
+nova. A configuração usada está em `backend/tests/test_generic_parser.py`, que
+serve de modelo para cadastrar outras fontes.
+
+Candidatos já sondados e com robots.txt permissivo, prontos para cadastro:
+Parque dos Leilões e Palácio dos Leilões. Rogério Menezes respondeu bem mas não
+foi calibrado.
