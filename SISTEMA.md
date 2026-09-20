@@ -1,8 +1,8 @@
 # ZConnect Leilão — bíblia do sistema
 
 Documento de transferência de contexto. O que o sistema é, como funciona por dentro e
-quais armadilhas já se conhecem. Estado: **18/09/2026, F1 (MVP Leilão) implementada,
-ainda não publicada no servidor**. Especificação em `docs/EF-ZLE-001-ZConnect-Leilao.md`;
+quais armadilhas já se conhecem. Estado: **20/09/2026, ondas 1 a 4 implementadas,
+ainda não publicado no servidor**. Especificação em `docs/EF-ZLE-001-ZConnect-Leilao.md`;
 desvios em `docs/DECISOES.md`.
 
 ---
@@ -17,7 +17,10 @@ não recebe lance, não intermedeia nada (EF, seção 7).
 | Público | Onde | O que vê |
 |---|---|---|
 | Visitante | `/` | busca, ficha do lote, página do pregão, botão "Ver no leilão oficial" |
-| Operador | `/admin` | fontes, categorias/campos, itens, revisão, incidentes, duplicados, jobs, config |
+| Assinante | `/conta` | filtros salvos, alertas recebidos, perfil, plano |
+| Operador | `/admin` | fontes, categorias/campos, itens, revisão, incidentes, duplicados, usuários, alertas, jobs, config |
+
+Rotas de operação exigem **papel admin**: um token válido de assinante recebe 403.
 
 Herdado do ZConnect Promo: infraestrutura de compose isolado, tabela `system_settings`,
 `BaseScraper` (httpx + atraso aleatório + retry), branding no banco, auth JWT.
@@ -117,6 +120,9 @@ Cinco jobs (APScheduler, `max_instances=1`, intervalos em settings lidos **no bo
 | `normalize` | 5 min | extrai campos de até `llm_max_items_per_cycle` itens pendentes |
 | `lifecycle` | 30 min | publica, marca pregão próximo, encerra, oculta não reencontrados |
 | `dedup` | 60 min | vínculos suspeitos entre fontes |
+| `match` | 10 min | casa itens novos com os filtros salvos (RN-006) |
+| `dispatch` | 5 min | envia os alertas pendentes (RN-006/RN-007) |
+| `comparator` | 180 min | referência FIPE por bem + score de oportunidade (RN-010) |
 | `cleanup` | 03:00 | apaga `raw_items` velhos e encerrados antigos |
 
 > **Varredura parcial.** Quando o parser para por limite de páginas, por limite de
@@ -229,6 +235,34 @@ placeholders SVG em `dashboard/public/branding/`.
 
 ---
 
+## 8.5 Alertas, comparador e busca por raio (ondas 2 a 4)
+
+**Filtro salvo = query da busca.** `saved_filters.criteria` guarda exatamente as
+chaves de `GET /portal/items`, e o matcher roda o mesmo código
+(`engine/search.py`, compartilhado com o portal). Duas implementações divergiriam
+na primeira mudança, e o usuário receberia alerta de lote que a busca não mostra.
+
+**Um filtro novo não recebe histórico.** Nem lotes publicados antes dele, nem
+quedas de preço anteriores ao seu último check. Um filtro recém-criado que
+dispara dezenas de alertas parece spam e queima o canal.
+
+**Falha de infraestrutura interrompe o envio** em vez de marcar os alertas como
+enviados. Um alerta perdido é pior que um atrasado: o pregão acontece uma vez só.
+
+**WhatsApp nasce desligado.** Envio 1:1 para não-contatos por API não oficial tem
+risco real de banimento do número. O e-mail é o canal principal; para escala em
+WhatsApp, o caminho é a API oficial da Meta.
+
+**Comparador usa a tabela FIPE**, não mediana de anúncios — ver `docs/DECISOES.md`
+para a avaliação de cada marketplace. O score só existe quando dá para comparar
+com honestidade, e carrega as ressalvas que o tornam legível: o custo é lance +
+comissão + despesas, a condição do bem ajusta a referência, e o lance inicial é
+declarado como piso do pregão, não preço de arremate.
+
+**Busca por raio sem PostGIS**: base dos 5.571 municípios versionada em
+`app/data/municipios.json`, retângulo mais Haversine em SQL puro. Item sem
+coordenada reconhecida não entra na busca, em vez de entrar no lugar errado.
+
 ## 9. Qualidade do dado — o que a coleta descarta
 
 Regras aplicadas na coleta para não exibir lixo como se fosse informação do lote
@@ -248,15 +282,22 @@ Regras aplicadas na coleta para não exibir lixo como se fosse informação do l
 Uma extração concluída **substitui** as colunas promovidas, inclusive com nulo — senão
 uma correção de regra nunca limparia um dado errado já gravado.
 
-## 10. Estado atual (18/09/2026)
+## 10. Estado atual (20/09/2026)
 
-- Backend e frontend completos para a F1. 17 testes unitários de parsers e engine.
-- Validado de ponta a ponta em Docker local contra as três fontes reais: coleta,
-  normalização, ciclo de vida, deduplicação, vitrine e painel. Todas as rotas da API
-  respondem (`scripts/smoke_api.py`, 0 falhas) e as 17 telas renderizam com dados reais.
-- Fluxo de incidente validado na prática: mudar o limite de páginas dobrou o volume, a
-  RN-008 suspendeu as duas fontes e o admin reativou pelo endpoint de incidentes.
-- **Não publicado** no servidor; sem API key de LLM configurada (o pipeline roda só com
-  as regras determinísticas, como projetado).
-- Próximos passos: subir no servidor, configurar o LLM, acompanhar a primeira semana de
-  coleta. Depois, F2/F3 conforme DECISOES.md.
+| Onda | Escopo | Situação |
+|---|---|---|
+| 1 | Coleta, normalização, vitrine, painel | pronta |
+| 2 | Contas, filtros salvos, alertas (RN-006/RN-007) | backend pronto e validado; telas construídas |
+| 3 | Comparador com referência FIPE (RN-010) | pronta |
+| 4 | Busca por raio, máquinas e equipamentos | pronta |
+| 5 | Parcerias (painel de leiloeiro, destaque pago) | depende de decisão comercial |
+
+- 60 testes unitários. Validação de ponta a ponta em Docker local contra as três
+  fontes reais e contra a API FIPE.
+- 454 itens coletados, 298 publicados na vitrine, 3 fontes saudáveis, 8 jobs
+  agendados.
+- **Não publicado** no servidor. Sem API key de LLM e sem SMTP configurados: o
+  pipeline roda com regras determinísticas e os alertas ficam na fila até o SMTP
+  existir.
+- Próximos passos: publicar no servidor (DEPLOY.md), configurar LLM e SMTP,
+  acompanhar a primeira semana. Depois, decidir a onda 5.

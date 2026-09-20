@@ -85,6 +85,34 @@ DATABASE_URL=postgresql+asyncpg://zleilao:<senha>@localhost:5439/zleilao SCHEDUL
 
 Na máquina de desenvolvimento a porta 5434 já é usada por outro projeto; o `.env` local usa `DB_PORT=5439`.
 
+## Configuração pós-deploy das ondas 2 a 4
+
+Ordem que importa: **sem SMTP, nenhum alerta sai** — eles ficam na fila e o job
+de envio para o ciclo, em vez de marcá-los como entregues.
+
+1. **E-mail (obrigatório para alertas).** Configurações → E-mail (SMTP): servidor,
+   porta, usuário, senha, remetente. Use **Testar e-mail** antes de seguir: manda
+   uma mensagem real, que é o único teste que vale.
+2. **URL pública.** Configurações → Contas → `public_base_url`. É o endereço que
+   entra nos links de confirmação de e-mail e nos alertas. Errado aqui significa
+   links quebrados na caixa do assinante.
+3. **WhatsApp (opcional, desligado por padrão).** Só ligue sabendo do risco: envio
+   1:1 para não-contatos por API não oficial pode levar ao banimento do número.
+   Exige `whatsapp_tenant` — sem o header `x-tenant` a API responde 404 e o envio
+   falha em silêncio.
+4. **LLM (opcional).** Sem chave o sistema publica com as regras determinísticas,
+   e o comparador usa a premissa de condição (ver DECISOES.md). Com chave, a
+   extração fica bem melhor e o score deixa de ser presumido.
+5. **Comparador.** Já vem ligado. A API FIPE tem limite de requisições: o job
+   busca até 40 bens por ciclo e retoma no próximo. As referências valem 30 dias.
+
+### Planos
+
+Não há gateway de pagamento. O plano pago é ativado à mão em
+**Admin → Usuários → Mudar plano**, com prazo em meses (`0` = sem vencimento,
+para cortesia ou parceiro). A estrutura já prevê um gateway quando houver
+decisão sobre qual.
+
 ## Operação
 
 | Sintoma | Onde olhar |
@@ -94,5 +122,9 @@ Na máquina de desenvolvimento a porta 5434 já é usada por outro projeto; o `.
 | Itens em revisão | Admin → Revisão: editar atributos ou reextrair. Ver `extraction_error`. |
 | LLM não roda | Configurações → Testar LLM. Job `normalize` com `stopped` em details. |
 | Layout da fonte mudou | Parser em `backend/app/scrapers/<fonte>.py`; fixtures em `backend/tests/fixtures/`. |
+| Alertas não chegam | Configurações → Testar e-mail. Admin → Alertas mostra o erro de cada um. Assinante com e-mail não verificado não recebe. |
+| Assinante reclama de spam | Admin → Usuários → filtros do usuário. Confira a janela de silêncio e o teto diário em Configurações → Alertas. |
+| Lote sem score de oportunidade | Normal quando não há referência FIPE ou a condição é desconhecida. Admin → Jobs → comparador mostra o motivo agregado. |
+| Fonte suspensa sem parar | Resolver o incidente recalibra a média de volume. Se o volume mudou de vez, três coletas estáveis já resolvem sozinhas. |
 
 Logs: `docker logs -f zleilao-backend`.
