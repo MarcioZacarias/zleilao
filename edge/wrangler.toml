@@ -1,0 +1,14 @@
+name = "zleilao-poc"
+main = "src/poc.ts"
+compatibility_date = "2026-09-01"
+
+# Fixtures HTML entram no bundle como string — só para a prova de conceito.
+[[rules]]
+type = "Text"
+globs = ["**/*.html"]
+fallthrough = true
+
+# Faz o runtime local aplicar o teto do plano gratuito: se a invocação
+# estourar, ela morre, e aí não há discussão sobre relógio vs CPU.
+[limits]
+cpu_ms = 10

@@ -42,3 +42,7 @@ dashboard/test-results/
 dashboard/__*.mjs
 dashboard/_*.mjs
 dashboard/shots/
+
+# Cloudflare Workers (POC)
+edge/node_modules/
+edge/.wrangler/
