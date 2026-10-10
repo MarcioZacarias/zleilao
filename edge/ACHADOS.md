@@ -5,8 +5,10 @@ gratuito do Cloudflare Workers. Tudo aqui é medição, não estimativa.
 
 ## Resultado em uma linha
 
-**A vitrine cabe no plano gratuito. A coleta não cabe — e não é por falta de
-otimização.**
+**Tudo cabe no plano gratuito, desde que a coleta seja fatiada.** Parsear a
+página inteira numa invocação custa 96 ms contra um teto de 10 ms; parsear
+três lotes por invocação custa 6,4 ms. O teto é por invocação, e nada obriga
+a fazer a página de uma vez.
 
 ## O teto
 
@@ -62,6 +64,18 @@ A fonte serve uma cadeia de certificado incompleta. Por isso ela tem
 `verify_ssl: false` na configuração do scraper em Python. O `fetch` do Workers
 não expõe como ignorar validação de certificado — e isso não muda no plano pago.
 
+Testado também sem TLS e sem `www`, por via das dúvidas: todas falham igual,
+porque o site redireciona para HTTPS antes de servir.
+
+```
+http://www.freitasleiloeiro.com.br/   → internal error
+https://freitasleiloeiro.com.br/      → internal error
+http://freitasleiloeiro.com.br/       → internal error
+```
+
+**Esta fonte precisa de decisão à parte**: ou sai do ar enquanto o certificado
+deles estiver quebrado, ou passa por um relay fora da Cloudflare.
+
 ## Duas armadilhas de medição encontradas no caminho
 
 **`wrangler dev --local` não aplica `[limits] cpu_ms`.** Configurar o teto e ver
@@ -74,12 +88,43 @@ desse enforcement é falsa.
 JS por chunk. A intuição de "descartar é mais barato que materializar" está
 errada aqui.
 
+## A saída: recortar antes de parsear
+
+Buscar string é ordens de grandeza mais barato que construir árvore. O
+coletor acha cada `data-key="` com `indexOf`, recua até a abertura da `<div>`
+e corta o bloco daquele lote. A página de 225 KB vira 48 blocos de ~3,8 KB.
+
+| Operação | CPU (relógio) |
+|---|---|
+| Recortar a página inteira em 48 blocos | **0,5 ms** |
+| Parsear 1 bloco | 2,25 ms |
+| Parsear 2 blocos numa passada | 3,6 ms |
+| **Parsear 3 blocos numa passada** | **6,4 ms** ✅ |
+| Parsear 4 blocos | 13,2 ms ❌ |
+
+Parsear em lote divide o custo fixo do HTMLRewriter (compilar os seletores)
+entre os blocos, por isso 3 blocos custam menos que 3× um bloco. Acima de 3 o
+tamanho domina e estoura.
+
+**Três lotes por invocação** é o ponto de operação, com 36% de folga — e
+folga importa, porque o número acima é relógio medido no `wrangler dev` local.
+
+Isso vira uma fila em estágios, cada um com seu próprio orçamento de 10 ms:
+
+1. `coletar` — busca a listagem, recorta, enfileira os blocos. Fetch não conta
+   CPU; o recorte custa 0,5 ms.
+2. `parsear` — tira 3 blocos da fila, extrai os campos, grava o registro cru.
+3. `normalizar` — aplica marca/modelo/condição e promove as colunas.
+
+Uma página do Mega vira ~16 invocações de parsing. Com 3 fontes coletadas a
+cada 4 h, são algumas centenas de invocações por dia contra um teto de 100 mil.
+
 ## O que isso implica
 
 - **Vitrine** (Pages + Worker de leitura + D1): cabe folgado. Ler do D1 e
   serializar JSON não tem parsing de HTML, que é o que estoura o orçamento.
-- **Coleta**: precisa de 30 s de CPU, o que só existe no Workers Paid (US$ 5/mês)
-  — e mesmo lá o Freitas continua inalcançável.
+- **Coleta**: cabe, fatiada em estágios de 3 lotes por invocação. O que não
+  cabe é a página inteira de uma vez.
 - **D1** aguenta este produto com folga em volume e armazenamento. O banco nunca
   foi o problema.
 
