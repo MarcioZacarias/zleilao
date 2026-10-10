@@ -12,3 +12,8 @@ fallthrough = true
 # estourar, ela morre, e aí não há discussão sobre relógio vs CPU.
 [limits]
 cpu_ms = 10
+
+[[d1_databases]]
+binding = "DB"
+database_name = "zleilao"
+database_id = "local-dev-placeholder"
