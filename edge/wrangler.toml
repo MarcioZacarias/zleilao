@@ -1,19 +1,12 @@
-name = "zleilao-poc"
-main = "src/diag.ts"
+name = "zleilao-api"
+main = "src/index.ts"
 compatibility_date = "2026-09-01"
-
-# Fixtures HTML entram no bundle como string — só para a prova de conceito.
-[[rules]]
-type = "Text"
-globs = ["**/*.html"]
-fallthrough = true
-
-# Faz o runtime local aplicar o teto do plano gratuito: se a invocação
-# estourar, ela morre, e aí não há discussão sobre relógio vs CPU.
-[limits]
-cpu_ms = 10
 
 [[d1_databases]]
 binding = "DB"
 database_name = "zleilao"
 database_id = "local-dev-placeholder"
+
+[vars]
+# Em produção vira segredo: wrangler secret put INGEST_TOKEN
+INGEST_TOKEN = "dev-token-local"
