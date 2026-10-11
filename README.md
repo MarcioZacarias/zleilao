@@ -5,6 +5,11 @@ alertas por e-mail, comparação com a tabela FIPE e busca por raio. **Não real
 nem intermedeia lances** — toda ficha aponta para a fonte oficial, com a data da última
 coleta à vista.
 
+**No ar:** [zleilao.marcio-zacariass.workers.dev](https://zleilao.marcio-zacariass.workers.dev)
+— vitrine e API no plano gratuito da Cloudflare; a coleta roda no computador do
+operador e envia por API. O porquê dessa divisão, e como operar, em
+[CLOUDFLARE.md](CLOUDFLARE.md).
+
 - Especificação: [docs/EF-ZLE-001-ZConnect-Leilao.md](docs/EF-ZLE-001-ZConnect-Leilao.md)
 - Decisões e desvios da EF: [docs/DECISOES.md](docs/DECISOES.md)
 - Contrato da API: [docs/API.md](docs/API.md)
@@ -37,6 +42,8 @@ backend/    FastAPI + SQLAlchemy async + APScheduler (Python 3.11)
   app/data/       base de municípios (coordenada, população IBGE, nome)
   tests/          72 testes com fixtures HTML reais
 dashboard/  React 18 + TypeScript + Vite + Tailwind (portal em / e admin em /admin)
+edge/       Worker da Cloudflare (API + ingestão) e esquema do D1
+agente/     ciclo de coleta agendado no computador do operador
 docker/     compose base + overrides dev/prod + server block do nginx do host
 docs/       EF, decisões, contrato da API
 ```
