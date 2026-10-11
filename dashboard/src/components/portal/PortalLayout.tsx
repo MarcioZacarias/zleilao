@@ -257,6 +257,18 @@ export default function PortalLayout() {
                   <li>Fonte e última coleta em todo lote</li>
                   <li>Lances só no site oficial</li>
                   <li>Dados pessoais mascarados</li>
+                  {/* Exigência da LGPD e condição do AdSense: as duas páginas
+                      precisam estar alcançáveis de qualquer tela. */}
+                  <li>
+                    <Link to="/privacidade" className="hover:text-radar-text">
+                      Política de privacidade
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/termos" className="hover:text-radar-text">
+                      Termos de uso
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>

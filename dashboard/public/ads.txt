@@ -1,0 +1,9 @@
+# Authorized Digital Sellers (IAB) — https://iabtechlab.com/ads-txt/
+#
+# Declara quem pode vender o inventário de anúncios deste domínio. Sem este
+# arquivo o AdSense passa a tratar o inventário como não autorizado, e o
+# preço pago cai.
+#
+# Ao ativar o AdSense, troque pub-0000000000000000 pelo ID da conta (o mesmo
+# ca-pub-... que vai em Configurações > Publicidade, sem o prefixo "ca-").
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

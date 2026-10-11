@@ -1,0 +1,10 @@
+# A vitrine é para ser encontrada: busca e fichas de lote abertas.
+User-agent: *
+Allow: /
+# Área administrativa e conta do assinante não têm por que ser indexadas.
+Disallow: /admin
+Disallow: /conta
+Disallow: /login
+Disallow: /entrar
+
+Sitemap: https://zleilao.marcio-zacariass.workers.dev/sitemap.xml

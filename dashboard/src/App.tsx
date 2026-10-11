@@ -33,6 +33,8 @@ const VerificarEmail = lazy(() => import("./pages/portal/VerificarEmail"));
 const EsqueciSenha = lazy(() => import("./pages/portal/EsqueciSenha"));
 const RedefinirSenha = lazy(() => import("./pages/portal/RedefinirSenha"));
 const Conta = lazy(() => import("./pages/portal/Conta"));
+const Privacidade = lazy(() => import("./pages/portal/Privacidade"));
+const Termos = lazy(() => import("./pages/portal/Termos"));
 
 function Loading() {
   return <div className="flex min-h-screen items-center justify-center bg-gray-50 text-gray-400">Carregando...</div>;
@@ -65,6 +67,8 @@ export default function App() {
           <Route path="/lote/:id" element={<LotDetail />} />
           <Route path="/pregao/:id" element={<AuctionPage />} />
           <Route path="/conta" element={<Conta />} />
+          <Route path="/privacidade" element={<Privacidade />} />
+          <Route path="/termos" element={<Termos />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 
