@@ -3,8 +3,17 @@ import axios from "axios";
 export const TOKEN_KEY = "zleilao_token";
 export const UNAUTHORIZED_EVENT = "zleilao:unauthorized";
 
+/**
+ * Onde fica a API.
+ *
+ * No Docker o nginx do container faz o proxy de `/api` para o backend, e o
+ * padrão relativo serve. Publicado no Cloudflare Pages não há nginx: o build
+ * recebe a URL do Worker em `VITE_API_URL` e fala direto com ela.
+ */
+const BASE = import.meta.env.VITE_API_URL || "/api";
+
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: BASE,
   timeout: 30000,
   headers: {
     "Content-Type": "application/json",

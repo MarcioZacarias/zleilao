@@ -46,3 +46,6 @@ dashboard/shots/
 # Cloudflare Workers (POC)
 edge/node_modules/
 edge/.wrangler/
+edge/.wrangler/
+dashboard/.wrangler/
+backend/scripts/.sync_edge.json

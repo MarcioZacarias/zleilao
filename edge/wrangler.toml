@@ -5,8 +5,4 @@ compatibility_date = "2026-09-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "zleilao"
-database_id = "local-dev-placeholder"
-
-[vars]
-# Em produção vira segredo: wrangler secret put INGEST_TOKEN
-INGEST_TOKEN = "dev-token-local"
+database_id = "0470ba01-1887-47bc-9201-86f8118d09eb"

@@ -473,3 +473,27 @@ export async function pregoesProximos(u: URL, env: Env): Promise<Response> {
     })),
   );
 }
+
+/**
+ * Identidade visual e textos da vitrine, lidos de `system_settings`.
+ *
+ * As imagens (logo, favicon) ficam como `null`: no backend em Python elas
+ * moram numa tabela de blobs, e aqui o lugar certo para elas é o próprio
+ * bundle do site, servido pela borda. O dashboard já cai no SVG local quando
+ * recebe `null`.
+ */
+export async function branding(env: Env): Promise<Response> {
+  const r = await env.DB.prepare(
+    `SELECT key, value FROM system_settings
+      WHERE key IN ('brand_site_title','brand_tagline','portal_disclaimer')`,
+  ).all<{ key: string; value: string }>();
+  const v = new Map(r.results.map((x) => [x.key, x.value]));
+  return Response.json({
+    logo_dark: null,
+    logo_light: null,
+    favicon: null,
+    site_title: v.get("brand_site_title") || "ZConnect Leilão",
+    tagline: v.get("brand_tagline") || "",
+    disclaimer: v.get("portal_disclaimer") || "",
+  });
+}

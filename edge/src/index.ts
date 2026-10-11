@@ -8,7 +8,7 @@
  */
 import { ingerir } from "./rotas/ingestao";
 import {
-  categorias, cidades, detalharItem, estatisticas, irParaFonte,
+  branding, categorias, cidades, detalharItem, estatisticas, irParaFonte,
   listarItens, marcas, modelos, pregoesProximos,
 } from "./rotas/portal";
 import type { Env } from "./tipos";
@@ -45,6 +45,7 @@ export default {
       // Rotas da vitrine. O prefixo /v1 mantém o contrato do backend atual.
       if (p === "/v1/portal/items") return comCors(await listarItens(u, env));
       if (p === "/v1/portal/stats") return comCors(await estatisticas(env));
+      if (p === "/v1/portal/branding") return comCors(await branding(env));
       if (p === "/v1/portal/categories") return comCors(await categorias(env));
       if (p === "/v1/portal/cities") return comCors(await cidades(u, env));
       if (p === "/v1/portal/brands") return comCors(await marcas(u, env));
