@@ -6,6 +6,9 @@
  * CPU — buscar páginas, parsear HTML, extrair marca e modelo — roda aqui;
  * isso é do agente de coleta, no computador do operador.
  */
+import {
+  eu, gravarSettings, listarSettings, login, painel, resumoUsuarios, semearAdmin,
+} from "./rotas/admin";
 import { ingerir } from "./rotas/ingestao";
 import {
   anuncios, branding, categorias, cidades, detalharItem, estatisticas, irParaFonte,
@@ -15,7 +18,7 @@ import type { Env } from "./tipos";
 
 const CORS = {
   "access-control-allow-origin": "*",
-  "access-control-allow-methods": "GET,POST,OPTIONS",
+  "access-control-allow-methods": "GET,POST,PUT,DELETE,OPTIONS",
   "access-control-allow-headers": "content-type,x-ingest-token,authorization",
 };
 
@@ -41,6 +44,17 @@ export default {
       if (p === "/ingest/batch" && req.method === "POST") {
         return comCors(await ingerir(req, env));
       }
+
+      // Painel: login e configuração. O resto do admin continua no backend
+      // em Python, junto da coleta.
+      if (p === "/v1/auth/login" && req.method === "POST") return comCors(await login(req, env));
+      if (p === "/v1/auth/me") return comCors(await eu(req, env));
+      if (p === "/v1/settings" && req.method === "GET") return comCors(await listarSettings(req, env, u));
+      if (p === "/v1/settings" && (req.method === "PUT" || req.method === "POST"))
+        return comCors(await gravarSettings(req, env));
+      if (p === "/v1/admin/seed" && req.method === "POST") return comCors(await semearAdmin(env));
+      if (p === "/v1/dashboard") return comCors(await painel(req, env));
+      if (p === "/v1/users/summary") return comCors(await resumoUsuarios(req, env));
 
       // Rotas da vitrine. O prefixo /v1 mantém o contrato do backend atual.
       if (p === "/v1/portal/items") return comCors(await listarItens(u, env));

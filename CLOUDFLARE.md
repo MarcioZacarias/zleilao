@@ -89,8 +89,44 @@ Get-Content ..\agente\config.json | ConvertFrom-Json |
   Select-Object -ExpandProperty edge_token | npx wrangler secret put INGEST_TOKEN
 ```
 
+## Painel administrativo
+
+`https://zleilao.marcio-zacariass.workers.dev/admin`, com o e-mail e a senha
+definidos nos segredos `ADMIN_EMAIL` e `ADMIN_PASSWORD` do Worker.
+
+**Só duas telas funcionam aqui: o painel inicial e Configurações.** As outras
+(Fontes, Itens, Revisão, Incidentes, Duplicados, Jobs) continuam no backend em
+Python, que roda junto da coleta — é lá que está o banco de trabalho, com a
+fila de extração e o histórico de execuções, e lá não há teto de CPU.
+
+| Onde | Para quê |
+|---|---|
+| `/admin` na Cloudflare | configuração que a vitrine lê: publicidade, textos, limites |
+| `http://localhost:5177/admin` (Docker local) | operação da coleta: fontes, revisão, incidentes, jobs |
+
+A senha não é a mesma do backend local: os formatos de hash são diferentes. O
+Worker usa PBKDF2 pelo Web Crypto, porque bcrypt em JS leva dezenas de
+milissegundos e não cabe no teto de 10 ms de CPU. O número de iterações é mais
+baixo do que se usaria numa base de senhas de usuários, e a defesa contra
+tentativa em massa é o bloqueio por origem após 20 erros no dia
+(`login_failures`).
+
+Para trocar a senha do painel:
+
+```powershell
+cd edge
+npx wrangler secret put ADMIN_PASSWORD      # cole a nova senha
+# depois, apague o admin e recrie:
+npx wrangler d1 execute zleilao --remote --command "DELETE FROM users WHERE role='admin'"
+curl -X POST https://zleilao-api.marcio-zacariass.workers.dev/v1/admin/seed
+```
+
+`/v1/admin/seed` só funciona enquanto não existe nenhum admin; depois responde
+409 e não serve de porta dos fundos.
+
 ## Publicidade
 
+Configurável em **Admin → Configurações → Publicidade**, sem precisar de SQL.
 Desligada por padrão. Dois modos, que não competem:
 
 **Próprio** — espaço vendido direto, tipicamente ao leiloeiro que já está na
