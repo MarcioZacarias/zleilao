@@ -34,6 +34,7 @@ import { StatusBadge } from "../../components/portal/StatusBadge";
 import { ConditionBadge } from "../../components/portal/ConditionBadge";
 import { Countdown } from "../../components/portal/Countdown";
 import { OpportunityPanel } from "../../components/portal/OpportunityPanel";
+import { Anuncio } from "../../components/portal/Anuncio";
 import { Skeleton, SkeletonText } from "../../components/ui/Skeleton";
 import { EmptyState } from "../../components/ui/EmptyState";
 import { Button } from "../../components/ui/Button";
@@ -172,6 +173,7 @@ export default function LotDetail() {
               Fica sob a galeria, e não na coluna fixa: a memória de cálculo
               precisa de largura, e a coluna da direita já é a mais alta. */}
           {item.opportunity && <OpportunityPanel opportunity={item.opportunity} />}
+          <Anuncio posicao="ficha" />
         </div>
 
         {/* Painel principal */}

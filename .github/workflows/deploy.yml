@@ -1,4 +1,11 @@
 # =========================================================
+# ALTERNATIVO: deploy no servidor compartilhado, por SSH.
+#
+# O caminho em uso hoje é a Cloudflare (ver cloudflare.yml): a vitrine e a
+# API rodam lá, e a coleta roda no computador do operador. Este arquivo fica
+# porque o Docker Compose continua válido e é para onde migrar quando o
+# tráfego justificar sair do plano gratuito.
+# =========================================================
 # ZConnect Leilão — deploy no servidor compartilhado (disparo MANUAL).
 # ---------------------------------------------------------
 # Secrets: DEPLOY_HOST, DEPLOY_USER, DEPLOY_SSH_KEY, DEPLOY_PORT (opcional).

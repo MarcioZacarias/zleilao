@@ -10,6 +10,7 @@ import type {
   ItemPage,
   PortalSearchParams,
   PortalStats,
+  AdsConfig,
 } from "./types";
 
 function clean<T extends object>(params: T): Record<string, string | number | boolean> {
@@ -39,6 +40,19 @@ export const portalApi = {
     api.get<Auction[]>("/portal/auctions/upcoming", { params: { days, limit } }).then((r) => r.data),
   auction: (id: number | string) =>
     api.get<{ auction: Auction; items: ItemCard[] }>(`/portal/auctions/${id}`).then((r) => r.data),
-  /** URL do redirect oficial (RN-001). Usar como href, nunca via XHR. */
-  goUrl: (id: number) => `/api/portal/items/${id}/go`,
+  /**
+   * URL do redirect oficial (RN-001). Usar como href, nunca via XHR.
+   *
+   * Monta a partir da base da API, e não de "/api" fixo: publicado no
+   * Cloudflare Pages não existe o proxy do nginx, e o caminho relativo
+   * cairia no próprio site.
+   */
+  goUrl: (id: number) => `${api.defaults.baseURL ?? "/api"}/portal/items/${id}/go`,
+
+  /** Configuração de publicidade da vitrine. */
+  ads: () => api.get<AdsConfig>("/portal/ads").then((r) => r.data),
+
+  /** Impressão ou clique de anúncio. Melhor-esforço: nunca bloqueia a tela. */
+  adEvent: (posicao: "busca" | "ficha", tipo: "impressao" | "clique") =>
+    api.post("/portal/ads/event", { posicao, tipo }).then((r) => r.data),
 };

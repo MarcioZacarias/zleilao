@@ -1,0 +1,142 @@
+# =====================================================================
+# Publica na Cloudflare a cada push na main.
+#
+# Dois alvos independentes: a API (Worker + D1) e a vitrine (assets).
+# Cada um só roda quando o que lhe interessa muda — publicar o dashboard
+# porque uma rota do Worker mudou é desperdício de minuto de runner.
+#
+# Segredos necessários no repositório (Settings > Secrets and variables >
+# Actions):
+#   CLOUDFLARE_API_TOKEN   token com permissão de Workers Scripts:Edit,
+#                          D1:Edit e Workers KV:Edit
+#   CLOUDFLARE_ACCOUNT_ID  201ad091060c60c018fdedd2153fdc15
+#
+# O token de ingestão NÃO fica aqui: ele é segredo do Worker, definido uma
+# vez com `wrangler secret put INGEST_TOKEN`, e sobrevive aos deploys.
+# =====================================================================
+name: Publicar na Cloudflare
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: cloudflare-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  api:
+    name: API (Worker + D1)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Precisa do commit anterior para saber o que mudou.
+          fetch-depth: 2
+
+      - name: O que mudou?
+        id: mudou
+        run: |
+          if git diff --name-only HEAD~1 HEAD | grep -qE '^edge/'; then
+            echo "sim=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "sim=false" >> "$GITHUB_OUTPUT"
+            echo "nada em edge/ mudou; pulando"
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.mudou.outputs.sim == 'true'
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: edge/package-lock.json
+
+      - name: Instalar dependências
+        if: steps.mudou.outputs.sim == 'true'
+        working-directory: edge
+        run: npm ci
+
+      - name: Conferir tipos
+        if: steps.mudou.outputs.sim == 'true'
+        working-directory: edge
+        run: npx tsc --noEmit
+
+      - name: Publicar Worker
+        if: steps.mudou.outputs.sim == 'true'
+        working-directory: edge
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy
+
+  vitrine:
+    name: Vitrine (dashboard)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: O que mudou?
+        id: mudou
+        run: |
+          if git diff --name-only HEAD~1 HEAD | grep -qE '^dashboard/'; then
+            echo "sim=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "sim=false" >> "$GITHUB_OUTPUT"
+            echo "nada em dashboard/ mudou; pulando"
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.mudou.outputs.sim == 'true'
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: dashboard/package-lock.json
+
+      - name: Instalar dependências
+        if: steps.mudou.outputs.sim == 'true'
+        working-directory: dashboard
+        run: npm ci
+
+      - name: Conferir tipos
+        if: steps.mudou.outputs.sim == 'true'
+        working-directory: dashboard
+        run: npx tsc --noEmit
+
+      - name: Construir
+        if: steps.mudou.outputs.sim == 'true'
+        working-directory: dashboard
+        env:
+          # Sem isto o build cai em "/api", que só existe atrás do nginx do
+          # Docker — publicado, a vitrine ficaria sem dados.
+          VITE_API_URL: https://zleilao-api.marcio-zacariass.workers.dev/v1
+        run: npx vite build
+
+      - name: Publicar
+        if: steps.mudou.outputs.sim == 'true'
+        working-directory: dashboard
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy
+
+  testes:
+    name: Testes do backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Instalar dependências
+        working-directory: backend
+        run: pip install -r requirements.txt -r requirements-dev.txt
+      - name: Rodar testes
+        working-directory: backend
+        env:
+          SECRET_KEY: ci-secret
+          SCHEDULER_ENABLED: "false"
+        run: python -m pytest -q

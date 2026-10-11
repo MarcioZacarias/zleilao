@@ -755,3 +755,27 @@ export interface TestSendResult {
   ok: boolean;
   detail: string;
 }
+
+/* ───────── Publicidade ───────── */
+
+export interface AdSensePeca {
+  slot: string;
+}
+
+export interface AdPropriaPeca {
+  imagem: string;
+  alvo: string;
+  texto: string;
+}
+
+export interface AdsConfig {
+  enabled: boolean;
+  provider: "adsense" | "proprio";
+  adsense_client: string;
+  /** Um anúncio a cada N lotes na listagem. */
+  intervalo_cards: number;
+  posicoes: {
+    busca: AdSensePeca | AdPropriaPeca | null;
+    ficha: AdSensePeca | AdPropriaPeca | null;
+  };
+}

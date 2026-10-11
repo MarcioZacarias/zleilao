@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { SlidersHorizontal, X, SearchX, ChevronRight } from "lucide-react";
 import { portalApi } from "../../services/portal";
@@ -13,6 +13,7 @@ import {
 } from "../../lib/labels";
 import { dateInputToIso, formatBRL, isoToDateInput } from "../../lib/format";
 import { ItemCard } from "../../components/portal/ItemCard";
+import { Anuncio } from "../../components/portal/Anuncio";
 import { Facet } from "../../components/portal/Facet";
 import { RadiusFilter } from "../../components/portal/RadiusFilter";
 import { Pagination } from "../../components/ui/Pagination";
@@ -24,6 +25,8 @@ import { CreateAlertButton } from "../../components/portal/CreateAlertButton";
 import { errorMessage } from "../../services/api";
 
 const PAGE_SIZE = 24;
+/** O servidor manda o intervalo; isto é o padrão até a config chegar. */
+const ANUNCIO_A_CADA = 12;
 const FILTER_KEYS = [
   "q",
   "category",
@@ -636,8 +639,15 @@ export default function Search() {
           ) : page ? (
             <>
               <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 ${loading ? "opacity-60 transition-opacity" : ""}`}>
-                {page.items.map((it) => (
-                  <ItemCard key={it.id} item={it} />
+                {page.items.map((it, idx) => (
+                  <Fragment key={it.id}>
+                    <ItemCard item={it} />
+                    {/* Entra como item do grid, não flutuando por cima: o
+                        anúncio ocupa uma célula e nada se desloca. */}
+                    {(idx + 1) % ANUNCIO_A_CADA === 0 && idx + 1 < page.items.length && (
+                      <Anuncio posicao="busca" />
+                    )}
+                  </Fragment>
                 ))}
               </div>
               <div className="mt-6">

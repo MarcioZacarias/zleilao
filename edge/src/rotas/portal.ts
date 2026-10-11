@@ -497,3 +497,64 @@ export async function branding(env: Env): Promise<Response> {
     disclaimer: v.get("portal_disclaimer") || "",
   });
 }
+
+/**
+ * Configuração de publicidade que a vitrine precisa conhecer.
+ *
+ * Só o necessário para montar o bloco: nada aqui é segredo, e o cliente
+ * precisa saber de antemão se deve reservar espaço — anúncio que aparece
+ * depois empurra o conteúdo e é pior que anúncio nenhum.
+ */
+export async function anuncios(env: Env): Promise<Response> {
+  const r = await env.DB.prepare(
+    `SELECT key, value FROM system_settings WHERE "group" = 'ads'`,
+  ).all<{ key: string; value: string }>();
+  const v = new Map(r.results.map((x) => [x.key, x.value]));
+  const ligado = v.get("ads_enabled") === "1";
+  const origem = v.get("ads_provider") || "proprio";
+
+  const proprio = (pos: string) => {
+    const imagem = v.get(`ads_proprio_${pos}_imagem`) || "";
+    const alvo = v.get(`ads_proprio_${pos}_alvo`) || "";
+    return imagem && alvo ? { imagem, alvo, texto: v.get(`ads_proprio_${pos}_texto`) || "" } : null;
+  };
+  const adsense = (pos: string) => {
+    const slot = v.get(`ads_adsense_slot_${pos}`) || "";
+    return slot ? { slot } : null;
+  };
+
+  return Response.json({
+    enabled: ligado,
+    provider: origem,
+    adsense_client: origem === "adsense" ? v.get("ads_adsense_client") || "" : "",
+    intervalo_cards: Number(v.get("ads_intervalo_cards") || 12),
+    posicoes: {
+      busca: !ligado ? null : origem === "adsense" ? adsense("busca") : proprio("busca"),
+      ficha: !ligado ? null : origem === "adsense" ? adsense("ficha") : proprio("ficha"),
+    },
+  });
+}
+
+/** Impressão e clique por posição, agregados por dia. */
+export async function registrarAnuncio(req: Request, env: Env): Promise<Response> {
+  let corpo: { posicao?: string; tipo?: string };
+  try {
+    corpo = (await req.json()) as { posicao?: string; tipo?: string };
+  } catch {
+    return Response.json({ ok: false }, { status: 400 });
+  }
+  const pos = corpo.posicao === "ficha" ? "ficha" : "busca";
+  const tipo = corpo.tipo === "clique" ? "clique" : "impressao";
+  const dia = new Date(Date.now() - 3 * 3600 * 1000).toISOString().slice(0, 10);
+  try {
+    await env.DB.prepare(
+      `INSERT INTO ad_events (posicao, tipo, dia, total) VALUES (?,?,?,1)
+       ON CONFLICT (posicao, tipo, dia) DO UPDATE SET total = total + 1`,
+    )
+      .bind(pos, tipo, dia)
+      .run();
+  } catch {
+    // Métrica não derruba a página.
+  }
+  return Response.json({ ok: true });
+}

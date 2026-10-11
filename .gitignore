@@ -49,3 +49,6 @@ edge/.wrangler/
 edge/.wrangler/
 dashboard/.wrangler/
 backend/scripts/.sync_edge.json
+
+agente/config.json
+agente/coleta.log*
