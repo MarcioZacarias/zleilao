@@ -73,8 +73,42 @@ https://freitasleiloeiro.com.br/      → internal error
 http://freitasleiloeiro.com.br/       → internal error
 ```
 
-**Esta fonte precisa de decisão à parte**: ou sai do ar enquanto o certificado
-deles estiver quebrado, ou passa por um relay fora da Cloudflare.
+### Causa raiz, provada
+
+Não é bloqueio de rede: falando TCP na mão pela porta 80, o servidor **conecta
+e responde** (301 para HTTPS, em 182 ms). O que quebra é só o TLS.
+
+```
+Certificado do site:      CN=*.freitasleiloeiro.com.br
+  emitido por:            GlobalSign GCC R6 AlphaSSL CA 2025
+Intermediário entregue:   AlphaSSL CA - SHA256 - G2   (expirado em 20/02/2024)
+```
+
+O servidor entrega um intermediário que não é o emissor do certificado dele, e
+que por cima está vencido. A cadeia não fecha. O intermediário correto está
+publicado no próprio AIA do certificado:
+
+```
+http://secure.globalsign.com/cacert/gsgccr6alphasslca2025.crt
+```
+
+Navegador busca esse arquivo sozinho e por isso não acusa nada; `fetch` de
+Worker, curl e integrações em geral não buscam, e falham.
+
+Testado e descartado:
+- `http://` e sem `www` — o servidor responde 301 para HTTPS antes de servir.
+- Outros hosts da mesma zona (`app.`, `api.`, `portal.`) — todos com o mesmo
+  certificado e o mesmo erro 21.
+- O endpoint AJAX que o scraper usa (`/Leiloes/PesquisarLotes`) — mesmo host.
+
+**Não há rota alternativa.** A correção é de minutos e é do lado deles: trocar
+o intermediário no arquivo de cadeia do servidor. O texto pronto para enviar
+está em `AVISO-FREITAS.md`.
+
+Enquanto isso não acontece, restam duas saídas, e uma delas pode já estar
+resolvida sem fazer nada: **o `fetch` em produção pode buscar o intermediário
+pelo AIA**, o que o runtime local não faz. Isso só se confirma no primeiro
+deploy — e é barato descobrir.
 
 ## Duas armadilhas de medição encontradas no caminho
 

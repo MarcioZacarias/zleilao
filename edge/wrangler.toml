@@ -1,5 +1,5 @@
 name = "zleilao-poc"
-main = "src/poc2.ts"
+main = "src/diag.ts"
 compatibility_date = "2026-09-01"
 
 # Fixtures HTML entram no bundle como string — só para a prova de conceito.
