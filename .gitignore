@@ -16,7 +16,8 @@ venv/
 # Node
 node_modules/
 dashboard/dist/
-dashboard/package-lock.json
+# O package-lock do dashboard É versionado: sem ele o `npm ci` da esteira
+# não roda, e builds sem lock reproduzem versões diferentes a cada dia.
 
 # Docker
 docker/pgdata/
