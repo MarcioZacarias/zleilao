@@ -91,8 +91,11 @@ Get-Content ..\agente\config.json | ConvertFrom-Json |
 
 ## Painel administrativo
 
-`https://zleilao.marcio-zacariass.workers.dev/admin`, com o e-mail e a senha
-definidos nos segredos `ADMIN_EMAIL` e `ADMIN_PASSWORD` do Worker.
+`https://zleilao.marcio-zacariass.workers.dev/admin`
+
+O acesso sai dos segredos `ADMIN_EMAIL` e `ADMIN_PASSWORD` do Worker. **Troque
+a senha inicial no primeiro acesso** — ela foi definida para destravar a
+entrada, não para ficar.
 
 **Só duas telas funcionam aqui: o painel inicial e Configurações.** As outras
 (Fontes, Itens, Revisão, Incidentes, Duplicados, Jobs) continuam no backend em
@@ -111,18 +114,29 @@ baixo do que se usaria numa base de senhas de usuários, e a defesa contra
 tentativa em massa é o bloqueio por origem após 20 erros no dia
 (`login_failures`).
 
-Para trocar a senha do painel:
+### Trocar a senha
+
+Não há tela para isso ainda; são três comandos. O `seed` recria o
+administrador a partir do segredo, e só funciona enquanto não existe nenhum —
+depois responde 409 e não serve de porta dos fundos.
 
 ```powershell
 cd edge
-npx wrangler secret put ADMIN_PASSWORD      # cole a nova senha
-# depois, apague o admin e recrie:
-npx wrangler d1 execute zleilao --remote --command "DELETE FROM users WHERE role='admin'"
+npx wrangler secret put ADMIN_PASSWORD   # digite a nova senha e Enter
+
+# apaga o admin atual e zera o bloqueio por tentativa
+npx wrangler d1 execute zleilao --remote --command "DELETE FROM users WHERE role='admin'; DELETE FROM login_failures;"
+
+# recria com a senha nova
 curl -X POST https://zleilao-api.marcio-zacariass.workers.dev/v1/admin/seed
 ```
 
-`/v1/admin/seed` só funciona enquanto não existe nenhum admin; depois responde
-409 e não serve de porta dos fundos.
+Se errar a senha 20 vezes no mesmo dia, a origem é bloqueada até o dia
+seguinte. Para destravar antes disso:
+
+```powershell
+npx wrangler d1 execute zleilao --remote --command "DELETE FROM login_failures"
+```
 
 ## Publicidade
 
