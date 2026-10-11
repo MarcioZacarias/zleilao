@@ -9,7 +9,7 @@ Escrito para: quem opera o sistema (você).
 | Vitrine | https://zleilao.marcio-zacariass.workers.dev |
 | API | https://zleilao-api.marcio-zacariass.workers.dev |
 | Banco | D1 `zleilao` (`0470ba01-1887-47bc-9201-86f8118d09eb`) |
-| Conta | marcio.zacariass@gmail.com |
+| Conta | a conta Cloudflare do projeto |
 
 Tudo no plano gratuito.
 

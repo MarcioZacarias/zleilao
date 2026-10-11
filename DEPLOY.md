@@ -41,7 +41,7 @@ fontes da F1 (Mega Leilões, Freitas, Leilo). O scheduler começa a coletar em ~
 sudo cp docker/nginx/leilao.zconnect.ia.br.conf /etc/nginx/sites-available/leilao.zconnect.ia.br
 sudo ln -sf /etc/nginx/sites-available/leilao.zconnect.ia.br /etc/nginx/sites-enabled/
 sudo nginx -t && sudo systemctl reload nginx
-sudo certbot --nginx -d leilao.zconnect.ia.br --redirect --agree-tos --email marcio.zacarias@radconsult.com.br -n
+sudo certbot --nginx -d leilao.zconnect.ia.br --redirect --agree-tos --email <seu-email> -n
 ```
 
 Requisito: DNS A de `leilao.zconnect.ia.br` apontando para o servidor.

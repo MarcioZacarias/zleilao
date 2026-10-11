@@ -77,7 +77,7 @@ def test_normalize_phone():
 
 
 def test_is_valid_email():
-    assert is_valid_email("marcio@radconsult.com.br")
+    assert is_valid_email("contato@exemplo.com.br")
     assert not is_valid_email("sem-arroba")
     assert not is_valid_email("a@b")
     assert not is_valid_email(None)

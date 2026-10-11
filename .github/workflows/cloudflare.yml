@@ -9,7 +9,7 @@
 # Actions):
 #   CLOUDFLARE_API_TOKEN   token com permissão de Workers Scripts:Edit,
 #                          D1:Edit e Workers KV:Edit
-#   CLOUDFLARE_ACCOUNT_ID  201ad091060c60c018fdedd2153fdc15
+#   CLOUDFLARE_ACCOUNT_ID  o ID da conta (dash.cloudflare.com, barra lateral)
 #
 # O token de ingestão NÃO fica aqui: ele é segredo do Worker, definido uma
 # vez com `wrangler secret put INGEST_TOKEN`, e sobrevive aos deploys.
