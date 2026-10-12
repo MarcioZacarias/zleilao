@@ -59,9 +59,24 @@ Get-Content .\agente\coleta.log -Tail 40 -Wait
 .\agente\coletar.ps1 -Full
 ```
 
-O ciclo roda de hora em hora, mas cada fonte só é coletada a cada 4 h
-(`scrape_frequency`). Nas horas intermediárias o ciclo confere quem venceu e
-envia o que mudou — custa segundos.
+São **duas tarefas**, e a diferença importa:
+
+| Tarefa | Quando | O que faz |
+|---|---|---|
+| `ZConnect Leilao - coleta` | a cada hora | 2 páginas por fonte — pega o que muda na frente da lista |
+| `ZConnect Leilao - coleta (profunda)` | todo dia às 03:30 | 12 páginas por fonte — encontra o que está no fundo do catálogo |
+
+A rasa sozinha não basta, e isso foi medido: depois de 27 ciclos de hora em
+hora sem **nenhum** lote novo, a primeira varredura profunda trouxe **200
+lotes** que nunca tinham sido vistos. As primeiras páginas de cada fonte mudam
+pouco; lote novo costuma entrar ordenado por data de pregão, lá atrás.
+
+A profunda roda de madrugada porque faz muito mais requisições aos sites dos
+leiloeiros. Para rodar uma na mão:
+
+```powershell
+.gente\coletar.ps1 -Profunda
+```
 
 ## Quando algo não aparece na vitrine
 

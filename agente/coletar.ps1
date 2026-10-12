@@ -17,6 +17,11 @@
 param(
     # Sem --full o envio leva só o que mudou desde a última execução.
     [switch]$Full,
+    # Varredura profunda: percorre muito mais páginas por fonte. O ciclo de
+    # hora em hora só vê as primeiras páginas, onde os lotes mudam pouco;
+    # sem uma passada funda de vez em quando, lote novo que entra no fim da
+    # lista nunca é descoberto.
+    [switch]$Profunda,
     [string]$ConfigPath
 )
 
@@ -121,8 +126,13 @@ function Invocar($rotulo, $argumentos) {
 
 Push-Location (Join-Path $raiz "backend")
 try {
-    Escrever "coletando das fontes..."
-    $maxPaginas = if ($cfg.max_pages) { $cfg.max_pages } else { 2 }
+    if ($Profunda) {
+        $maxPaginas = if ($cfg.max_pages_profunda) { $cfg.max_pages_profunda } else { 12 }
+        Escrever "coletando das fontes (varredura PROFUNDA: $maxPaginas páginas)..."
+    } else {
+        $maxPaginas = if ($cfg.max_pages) { $cfg.max_pages } else { 2 }
+        Escrever "coletando das fontes ($maxPaginas páginas)..."
+    }
     $codigo = Invocar "pipeline" @("scripts/run_pipeline_once.py", "--max-pages", "$maxPaginas")
     if ($codigo -ne 0) { Escrever "pipeline terminou com código $codigo" "AVISO" }
 

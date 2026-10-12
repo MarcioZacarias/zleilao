@@ -37,7 +37,23 @@ $cfg = New-ScheduledTaskSettingsSet -StartWhenAvailable `
 Register-ScheduledTask -TaskName $Nome -Action $acao -Trigger $gatilho `
     -Settings $cfg -Description "Coleta os leilões e envia para a Cloudflare" -Force | Out-Null
 
+# ── Varredura profunda, uma vez por dia ───────────────────────────────
+# O ciclo de hora em hora só vê as primeiras páginas de cada fonte, onde a
+# lista muda pouco. Sem uma passada funda, lote que entra no fim do catálogo
+# nunca é descoberto. Vai de madrugada porque faz muito mais requisições.
+$nomeFundo = "$Nome (profunda)"
+$acaoFunda = New-ScheduledTaskAction -Execute "powershell.exe" `
+    -Argument "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$script`" -Profunda"
+$gatilhoFundo = New-ScheduledTaskTrigger -Daily -At "03:30"
+$cfgFundo = New-ScheduledTaskSettingsSet -StartWhenAvailable `
+    -DontStopOnIdleEnd -ExecutionTimeLimit (New-TimeSpan -Hours 4) `
+    -MultipleInstances IgnoreNew
+
+Register-ScheduledTask -TaskName $nomeFundo -Action $acaoFunda -Trigger $gatilhoFundo `
+    -Settings $cfgFundo -Description "Varredura profunda diária das fontes" -Force | Out-Null
+
 Write-Host "Tarefa '$Nome' agendada: a cada $IntervaloHoras h, começando em 5 min."
+Write-Host "Tarefa '$nomeFundo' agendada: todo dia às 03:30."
 Write-Host "Conferir:  Get-ScheduledTask -TaskName '$Nome'"
 Write-Host "Rodar já:  Start-ScheduledTask -TaskName '$Nome'"
 Write-Host "Remover:   Unregister-ScheduledTask -TaskName '$Nome' -Confirm:`$false"
