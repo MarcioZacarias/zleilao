@@ -558,3 +558,46 @@ export async function registrarAnuncio(req: Request, env: Env): Promise<Response
   }
   return Response.json({ ok: true });
 }
+
+/**
+ * Sitemap das fichas de lote.
+ *
+ * Importa por dois motivos: é como o buscador acha as fichas (a vitrine é um
+ * SPA, e sem sitemap o rastreador depende de seguir links), e uma rede de
+ * publicidade que avalia o site olha se as páginas são indexáveis.
+ *
+ * Só lotes visíveis entram. Apontar o buscador para ficha encerrada gera
+ * visita que termina em decepção, e isso conta contra o domínio.
+ */
+export async function sitemap(env: Env, origem: string): Promise<Response> {
+  const r = await env.DB.prepare(
+    `SELECT id, last_seen_at FROM items
+      WHERE status IN ('published','auction_soon')
+      ORDER BY last_seen_at DESC LIMIT 5000`,
+  ).all<{ id: number; last_seen_at: string }>();
+
+  const estaticas = ["", "/busca", "/pregoes", "/privacidade", "/termos"];
+  const partes: string[] = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  ];
+  for (const p of estaticas) {
+    partes.push(
+      `<url><loc>${origem}${p}</loc><changefreq>${p === "" || p === "/busca" ? "hourly" : "monthly"}</changefreq></url>`,
+    );
+  }
+  for (const it of r.results) {
+    const d = (it.last_seen_at || "").slice(0, 10);
+    partes.push(`<url><loc>${origem}/lote/${it.id}</loc>${d ? `<lastmod>${d}</lastmod>` : ""}<changefreq>daily</changefreq></url>`);
+  }
+  partes.push("</urlset>");
+
+  return new Response(partes.join("\n"), {
+    headers: {
+      "content-type": "application/xml; charset=utf-8",
+      // O conteúdo muda a cada coleta; uma hora de cache evita refazer a
+      // consulta a cada passagem de rastreador.
+      "cache-control": "public, max-age=3600",
+    },
+  });
+}

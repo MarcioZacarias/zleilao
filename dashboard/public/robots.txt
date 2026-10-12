@@ -7,4 +7,6 @@ Disallow: /conta
 Disallow: /login
 Disallow: /entrar
 
-Sitemap: https://zleilao.marcio-zacariass.workers.dev/sitemap.xml
+# O sitemap é gerado pela API, que é quem tem os lotes. Com domínio próprio,
+# site e API passam a ficar sob a mesma raiz e este endereço muda junto.
+Sitemap: https://zleilao-api.marcio-zacariass.workers.dev/sitemap.xml

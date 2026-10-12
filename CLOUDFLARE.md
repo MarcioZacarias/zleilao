@@ -229,3 +229,64 @@ O aperto não é volume: é CPU por invocação, e é por isso que o parsing fic
 fora. Com tração, o caminho é o Workers Paid (US$ 5/mês, 30 s de CPU), que
 traria a coleta para a borda — menos o Freitas, enquanto o certificado deles
 estiver quebrado.
+
+## Domínio próprio e AdSense
+
+O endereço atual é `*.workers.dev`, subdomínio de plataforma. Para o AdSense
+isso é o obstáculo principal: o Google costuma recusar a inscrição, porque o
+domínio não é seu e qualquer um pode criar um ali.
+
+`zconnect.ia.br` **não serve para isso hoje**: a zona está numa conta
+Cloudflare diferente da que hospeda este projeto, e domínio customizado exige
+que zona e Worker estejam na mesma conta.
+
+Verificado em 12/10/2026: **`zleilao.com.br` está disponível** no registro.br
+(~R$ 40/ano), e é o mesmo nome do repositório e do Worker.
+
+### Depois de registrar
+
+1. No registro.br, apontar os nameservers para os que a Cloudflare indicar ao
+   adicionar o site (Add a site → plano Free).
+2. Ligar o domínio aos dois serviços:
+
+```powershell
+cd edge      ; npx wrangler deploy          # depois: Workers > zleilao-api > Settings > Domains
+cd dashboard ; npx wrangler deploy          # idem para zleilao
+```
+
+   Pelo painel é mais direto: **Workers & Pages → o Worker → Settings →
+   Domains & Routes → Add → Custom domain**. Sugestão de divisão:
+
+   | Serviço | Endereço |
+   |---|---|
+   | vitrine | `zleilao.com.br` e `www.zleilao.com.br` |
+   | API | `api.zleilao.com.br` |
+
+3. Reconstruir a vitrine apontando para a API nova:
+
+```powershell
+cd dashboard
+$env:VITE_API_URL="https://api.zleilao.com.br/v1"
+npx vite build ; npx wrangler deploy
+```
+
+4. Atualizar três arquivos que ainda citam o endereço antigo:
+   `dashboard/public/robots.txt` (linha do Sitemap),
+   `.github/workflows/cloudflare.yml` (VITE_API_URL) e
+   `agente/config.json` (edge_url).
+
+### Checklist do AdSense
+
+- [ ] Domínio próprio apontando para a vitrine
+- [x] Política de privacidade em `/privacidade`, com seção de cookies de terceiros
+- [x] Termos de uso em `/termos`
+- [x] `robots.txt` liberando busca e fichas
+- [x] `sitemap.xml` com as fichas publicadas (997 URLs hoje)
+- [ ] `ads.txt` com o `pub-...` real (hoje tem um ID de exemplo)
+- [ ] Revisão jurídica das duas páginas legais
+- [ ] Conta no AdSense e os dois blocos criados
+
+O que ainda pode derrubar a inscrição, mesmo com tudo acima: o Google avalia se
+o conteúdo é **próprio**. Agregador que só repete anúncio de terceiro às vezes
+é recusado como conteúdo de pouco valor. O que joga a favor aqui é o comparador
+FIPE e o score de oportunidade — análise nossa, não cópia da fonte.

@@ -12,7 +12,7 @@ import {
 import { ingerir } from "./rotas/ingestao";
 import {
   anuncios, branding, categorias, cidades, detalharItem, estatisticas, irParaFonte,
-  listarItens, marcas, modelos, pregoesProximos, registrarAnuncio,
+  listarItens, marcas, modelos, pregoesProximos, registrarAnuncio, sitemap,
 } from "./rotas/portal";
 import type { Env } from "./tipos";
 
@@ -59,6 +59,9 @@ export default {
       // Rotas da vitrine. O prefixo /v1 mantém o contrato do backend atual.
       if (p === "/v1/portal/items") return comCors(await listarItens(u, env));
       if (p === "/v1/portal/stats") return comCors(await estatisticas(env));
+      // O sitemap fica na API porque é aqui que estão os lotes; o site o
+      // serve pelo mesmo caminho, via redirecionamento no robots.txt.
+      if (p === "/sitemap.xml") return await sitemap(env, u.searchParams.get("site") || "https://zleilao.marcio-zacariass.workers.dev");
       if (p === "/v1/portal/branding") return comCors(await branding(env));
       if (p === "/v1/portal/ads") return comCors(await anuncios(env));
       if (p === "/v1/portal/ads/event" && req.method === "POST")
