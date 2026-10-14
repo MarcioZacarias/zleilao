@@ -226,6 +226,12 @@ SELECT posicao, tipo, SUM(total) FROM ad_events
 
 ## Publicar à mão
 
+**Desde 11/10/2026 o GitHub Actions não roda nada**: a conta do GitHub está
+bloqueada por problema de cobrança ("account is locked due to a billing
+issue"), e todo push termina em falha sem executar nenhum passo. Até resolver
+isso em github.com/settings/billing, o push só guarda o código; publicar é
+com os comandos abaixo.
+
 ```powershell
 cd edge      ; npx wrangler deploy                      # API
 cd dashboard ; $env:VITE_API_URL="https://zleilao-api.marcio-zacariass.workers.dev/v1"
