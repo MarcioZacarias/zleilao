@@ -55,7 +55,7 @@ export default function Sidebar({ onClose }: SidebarProps) {
   return (
     <aside className="flex min-h-screen w-64 flex-col bg-gray-900 text-white">
       <div className="flex items-center justify-between gap-3 border-b border-gray-800 p-4">
-        <img src={branding.logo_dark} alt={branding.site_title} className="h-12 w-auto object-contain" />
+        <img src={branding.logo_dark} alt={branding.site_title} className="h-14 w-auto object-contain" />
         {onClose && (
           <button onClick={onClose} className="rounded-lg p-1 transition-colors hover:bg-gray-800 lg:hidden" aria-label="Fechar menu">
             <X size={18} className="text-gray-400" />

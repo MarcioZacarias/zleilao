@@ -106,7 +106,7 @@ export default function PortalLayout() {
       <header className="sticky top-0 z-40 border-b border-radar-border bg-radar-bg/85 backdrop-blur supports-[backdrop-filter]:bg-radar-bg/70">
         <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6">
           <Link to="/" className="flex shrink-0 items-center gap-2" aria-label={branding.site_title}>
-            <img src={branding.logo_dark} alt={branding.site_title} className="h-9 w-auto object-contain" />
+            <img src={branding.logo_dark} alt={branding.site_title} className="h-12 w-auto object-contain" />
           </Link>
 
           {!isHome && (
@@ -221,7 +221,7 @@ export default function PortalLayout() {
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div className="max-w-md">
-              <img src={branding.logo_dark} alt={branding.site_title} className="h-8 w-auto object-contain" />
+              <img src={branding.logo_dark} alt={branding.site_title} className="h-12 w-auto object-contain" />
               {branding.tagline && <p className="mt-3 text-sm text-radar-muted">{branding.tagline}</p>}
             </div>
             <div className="grid grid-cols-2 gap-6 text-sm sm:grid-cols-3">

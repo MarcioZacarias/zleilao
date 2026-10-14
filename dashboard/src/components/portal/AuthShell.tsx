@@ -27,7 +27,7 @@ export function AuthShell({ title, subtitle, children, footer, width = "max-w-md
       <div className={`w-full ${width}`}>
         <div className="mb-8 text-center">
           <Link to="/" aria-label={branding.site_title}>
-            <img src={branding.logo_dark} alt={branding.site_title} className="mx-auto h-14 w-auto object-contain" />
+            <img src={branding.logo_dark} alt={branding.site_title} className="mx-auto h-20 w-auto object-contain" />
           </Link>
           <h1 className="mt-5 text-xl font-bold text-radar-text">{title}</h1>
           {subtitle && <div className="mt-2 text-sm text-radar-muted">{subtitle}</div>}
