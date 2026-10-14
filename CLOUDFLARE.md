@@ -131,31 +131,24 @@ tentativa em massa é o bloqueio por origem após 20 erros no dia
 
 ### Trocar a senha
 
-Não há tela para isso ainda. O caminho é um script, que pede a senha nova e
-faz o resto: grava os segredos do Worker, apaga o admin atual, recria pelo
-`seed` e testa o login.
+Não há tela para isso ainda. O caminho é um script, que pede a senha nova,
+gera o hash dela na sua máquina (PBKDF2, o mesmo formato que o Worker
+confere), grava o admin direto no D1 e testa o login:
 
 ```powershell
-.\edge\redefinir-admin.ps1                          # e-mail padrão: marcio.zacariass@gmail.com
-.\edge\redefinir-admin.ps1 -Email outro@email.com
+powershell -ExecutionPolicy Bypass -File .\edge\redefinir-admin.ps1
+powershell -ExecutionPolicy Bypass -File .\edge\redefinir-admin.ps1 -Email outro@email.com
 ```
 
-O `seed` recria o administrador a partir do segredo, e só funciona enquanto
-não existe nenhum — depois responde 409 e não serve de porta dos fundos. A
-senha não fica gravada em lugar nenhum: segredo do Worker não é legível de
-volta, então quem perdê-la roda o script de novo.
+O e-mail padrão é `marcio.zacariass@gmail.com`. A senha não fica gravada em
+lugar nenhum; quem perdê-la roda o script de novo.
 
-Os passos à mão, se precisar:
-
-```powershell
-cd edge
-npx wrangler secret put ADMIN_PASSWORD   # digite a nova senha e Enter
-npx wrangler d1 execute zleilao --remote --command "DELETE FROM users WHERE role='admin'; DELETE FROM login_failures;"
-Invoke-RestMethod -Method Post -Uri https://zleilao-api.marcio-zacariass.workers.dev/v1/admin/seed
-```
-
-No Windows PowerShell, `curl` é apelido de `Invoke-WebRequest` e não aceita
-`-X POST`; por isso o último passo usa `Invoke-RestMethod`.
+O caminho antigo — `wrangler secret put ADMIN_PASSWORD` e `POST /v1/admin/seed`
+— ficou só para o primeiro administrador de uma instalação nova. Para trocar
+senha ele é traiçoeiro: o `seed` pode rodar antes de o segredo novo propagar
+(e cria o admin com a senha anterior), e o PowerShell 5.1 corrompe acento ao
+passar a senha por pipe. O `seed` só funciona enquanto não existe admin;
+depois responde 409 e não serve de porta dos fundos.
 
 Se errar a senha 20 vezes no mesmo dia, a origem é bloqueada até o dia
 seguinte. Para destravar antes disso:
