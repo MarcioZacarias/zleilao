@@ -136,8 +136,8 @@ faz o resto: grava os segredos do Worker, apaga o admin atual, recria pelo
 `seed` e testa o login.
 
 ```powershell
-.\edgeedefinir-admin.ps1                          # e-mail padrão: marcio.zacariass@gmail.com
-.\edgeedefinir-admin.ps1 -Email outro@email.com
+.\edge\redefinir-admin.ps1                          # e-mail padrão: marcio.zacariass@gmail.com
+.\edge\redefinir-admin.ps1 -Email outro@email.com
 ```
 
 O `seed` recria o administrador a partir do segredo, e só funciona enquanto
