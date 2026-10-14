@@ -9,16 +9,20 @@
 import {
   eu, gravarSettings, listarSettings, login, painel, resumoUsuarios, semearAdmin,
 } from "./rotas/admin";
+import {
+  alterarFiltro, apagarFiltro, atualizarPerfil, cadastrar, criarFiltro, esqueciSenha, listarFiltros,
+  meuPerfil, meusAlertas, previaFiltro, redefinirSenha, reenviarVerificacao, trocarSenha, verificarEmail,
+} from "./rotas/conta";
 import { ingerir } from "./rotas/ingestao";
 import {
-  anuncios, branding, categorias, cidades, detalharItem, estatisticas, irParaFonte,
+  anuncios, branding, categorias, cidades, detalharItem, detalharPregao, estatisticas, irParaFonte,
   listarItens, marcas, modelos, pregoesProximos, registrarAnuncio, sitemap,
 } from "./rotas/portal";
 import type { Env } from "./tipos";
 
 const CORS = {
   "access-control-allow-origin": "*",
-  "access-control-allow-methods": "GET,POST,PUT,DELETE,OPTIONS",
+  "access-control-allow-methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
   "access-control-allow-headers": "content-type,x-ingest-token,authorization",
 };
 
@@ -49,6 +53,27 @@ export default {
       // em Python, junto da coleta.
       if (p === "/v1/auth/login" && req.method === "POST") return comCors(await login(req, env));
       if (p === "/v1/auth/me") return comCors(await eu(req, env));
+      // Conta do assinante: cadastro, verificação, senha, perfil e filtros.
+      if (req.method === "POST") {
+        if (p === "/v1/auth/register") return comCors(await cadastrar(req, env));
+        if (p === "/v1/auth/verify-email") return comCors(await verificarEmail(u, env));
+        if (p === "/v1/auth/resend-verification") return comCors(await reenviarVerificacao(req, env));
+        if (p === "/v1/auth/forgot-password") return comCors(await esqueciSenha(req, env));
+        if (p === "/v1/auth/reset-password") return comCors(await redefinirSenha(req, env));
+        if (p === "/v1/auth/change-password" || p === "/v1/me/change-password")
+          return comCors(await trocarSenha(req, env));
+      }
+      if (p === "/v1/me" && req.method === "GET") return comCors(await meuPerfil(req, env));
+      if (p === "/v1/me" && req.method === "PATCH") return comCors(await atualizarPerfil(req, env));
+      if (p === "/v1/me/alerts") return comCors(await meusAlertas(u, req, env));
+      if (p === "/v1/me/filters" && req.method === "GET") return comCors(await listarFiltros(req, env));
+      if (p === "/v1/me/filters" && req.method === "POST") return comCors(await criarFiltro(req, env));
+      const previa = /^\/v1\/me\/filters\/(\d+)\/preview$/.exec(p);
+      if (previa) return comCors(await previaFiltro(Number(previa[1]), u, req, env));
+      const filtro = /^\/v1\/me\/filters\/(\d+)$/.exec(p);
+      if (filtro && req.method === "PUT") return comCors(await alterarFiltro(Number(filtro[1]), req, env));
+      if (filtro && req.method === "DELETE") return comCors(await apagarFiltro(Number(filtro[1]), req, env));
+
       if (p === "/v1/settings" && req.method === "GET") return comCors(await listarSettings(req, env, u));
       if (p === "/v1/settings" && (req.method === "PUT" || req.method === "POST"))
         return comCors(await gravarSettings(req, env));
@@ -71,6 +96,9 @@ export default {
       if (p === "/v1/portal/brands") return comCors(await marcas(u, env));
       if (p === "/v1/portal/models") return comCors(await modelos(u, env));
       if (p === "/v1/portal/auctions/upcoming") return comCors(await pregoesProximos(u, env));
+
+      const pregao = /^\/v1\/portal\/auctions\/(\d+)$/.exec(p);
+      if (pregao) return comCors(await detalharPregao(Number(pregao[1]), env));
 
       const indoParaFonte = /^\/v1\/portal\/items\/(\d+)\/go$/.exec(p);
       if (indoParaFonte) return await irParaFonte(Number(indoParaFonte[1]), env, req);

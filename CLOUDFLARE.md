@@ -153,6 +153,31 @@ seguinte. Para destravar antes disso:
 npx wrangler d1 execute zleilao --remote --command "DELETE FROM login_failures"
 ```
 
+## Contas de assinante
+
+Cadastro, login, verificação de e-mail, recuperação de senha, perfil, filtros
+salvos e histórico de alertas rodam no Worker (`edge/src/rotas/conta.ts`), com
+o mesmo contrato do backend em Python. Até 13/10/2026 só existiam no Python, e
+o cadastro pela vitrine publicada respondia "Not Found".
+
+O que ainda falta para a conta ficar completa:
+
+- **Envio de e-mail.** O Worker não fala SMTP. `edge/src/lib/email.ts` está
+  pronto para receber um provedor com API HTTP (Resend, Brevo…); enquanto
+  nenhum é ligado, a conta é criada, a resposta diz que o e-mail não pôde ser
+  enviado e o assinante fica sem verificar. Esqueci a senha não chega.
+- **`public_base_url`** no D1 ainda aponta para `http://localhost:5177`. É
+  dele que saem os links dos e-mails: trocar em Configurações > Contas de
+  usuário assim que houver provedor.
+- **Disparo dos alertas.** Os filtros moram no D1, mas o matcher e o
+  dispatcher rodam no agente local contra o Postgres. Falta o agente ler os
+  filtros e os assinantes do D1 e devolver os alertas gerados.
+
+Senhas de assinante usam o mesmo PBKDF2 do painel, com o mesmo teto de
+iterações imposto pelos 10 ms de CPU. A defesa contra tentativa em massa é a
+mesma tabela `login_failures`: 20 erros de login por IP ao dia, e também 10
+cadastros por IP ao dia (origem `cadastro:<ip>`).
+
 ## Publicidade
 
 Configurável em **Admin → Configurações → Publicidade**, sem precisar de SQL.

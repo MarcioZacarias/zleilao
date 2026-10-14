@@ -25,7 +25,7 @@ function retangulo(lat: number, lng: number, raioKm: number) {
   return { latMin: lat - dLat, latMax: lat + dLat, lngMin: lng - dLng, lngMax: lng + dLng };
 }
 
-interface Filtros {
+export interface Filtros {
   q?: string;
   category?: string;
   brand?: string;
@@ -49,7 +49,7 @@ interface Filtros {
  * Devolve também o trecho de JOIN porque alguns filtros (busca textual,
  * categoria, pregão) exigem tabelas que nem toda consulta precisa.
  */
-function montarFiltro(f: Filtros) {
+export function montarFiltro(f: Filtros) {
   const where: string[] = [];
   const params: unknown[] = [];
   const joins: string[] = [];
@@ -129,7 +129,7 @@ function lerFiltros(u: URL, near: Filtros["near"]): Filtros {
 }
 
 /** Linha do banco → card da vitrine, com RN-001 (fonte e data de coleta). */
-function serializarCard(r: Record<string, unknown>) {
+export function serializarCard(r: Record<string, unknown>) {
   return {
     id: r.id,
     item_type: r.item_type,
@@ -167,7 +167,7 @@ function serializarCard(r: Record<string, unknown>) {
   };
 }
 
-const SELECT_CARD = `
+export const SELECT_CARD = `
   items.id, items.item_type, items.title, items.lot_number, items.price_cents, items.price_kind,
   items.price_second_cents, items.image_url, items.city, items.state, items.brand, items.model,
   items.year_model, items.km, items.condition, items.status, items.next_session_at, items.last_seen_at,
@@ -177,7 +177,7 @@ const SELECT_CARD = `
   a2.auction_type AS auction_type,
   o2.score AS opportunity_score, o2.discount_pct AS discount_pct`;
 
-const JOIN_CARD = `
+export const JOIN_CARD = `
   LEFT JOIN sources s2 ON s2.id = items.source_id
   LEFT JOIN categories c2 ON c2.id = items.category_id
   LEFT JOIN auctions a2 ON a2.id = items.auction_id
@@ -271,7 +271,7 @@ async function facetas(env: Env, where: string, params: unknown[], joins: string
 }
 
 /** Busca a coordenada do município na tabela de apoio carregada no D1. */
-async function coordenadaDe(env: Env, cidade: string, uf: string | null): Promise<{ lat: number; lng: number } | null> {
+export async function coordenadaDe(env: Env, cidade: string, uf: string | null): Promise<{ lat: number; lng: number } | null> {
   const chave = normalizarCidade(cidade);
   const r = await env.DB.prepare(
     `SELECT lat, lng FROM municipios WHERE nome_norm = ?${uf ? " AND uf = ?" : ""} LIMIT 1`,
@@ -472,6 +472,46 @@ export async function pregoesProximos(u: URL, env: Env): Promise<Response> {
       items_count: a.items_count, sessions: [],
     })),
   );
+}
+
+/** Página do pregão: dados do leilão, sessões (praças) e os lotes dele. */
+export async function detalharPregao(id: number, env: Env): Promise<Response> {
+  const [pregao, sessoes, lotes] = await env.DB.batch<Record<string, unknown>>([
+    env.DB.prepare(
+      `SELECT a.*, s.name AS source_name FROM auctions a
+         LEFT JOIN sources s ON s.id = a.source_id WHERE a.id = ?`,
+    ).bind(id),
+    env.DB.prepare(
+      "SELECT id, kind, sequence, starts_at, ends_at, min_bid_cents FROM auction_sessions WHERE auction_id = ? ORDER BY sequence, id",
+    ).bind(id),
+    // Encerrado entra: quem chega pelo link de um pregão que já passou ainda
+    // quer ver o que foi a pregão.
+    env.DB.prepare(
+      `SELECT ${SELECT_CARD} FROM items ${JOIN_CARD}
+        WHERE items.auction_id = ? AND items.status IN ('published','auction_soon','closed')
+        ORDER BY items.lot_number IS NULL, CAST(items.lot_number AS INTEGER), items.lot_number, items.id`,
+    ).bind(id),
+  ]);
+  const a = pregao.results[0];
+  if (!a) return Response.json({ detail: "Pregão não encontrado" }, { status: 404 });
+
+  return Response.json({
+    auction: {
+      id: a.id, source_id: a.source_id, source_name: a.source_name ?? null,
+      external_id: a.external_id, title: a.title,
+      auctioneer_name: a.auctioneer_name, auctioneer_registration: a.auctioneer_registration,
+      committer_name: a.committer_name, modality: a.modality, auction_type: a.auction_type,
+      official_url: a.official_url, status: a.status,
+      starts_at: paraIso(a.starts_at as string | null), ends_at: paraIso(a.ends_at as string | null),
+      sessions: sessoes.results.map((x) => ({
+        id: x.id, kind: x.kind, sequence: x.sequence,
+        starts_at: paraIso(x.starts_at as string | null), ends_at: paraIso(x.ends_at as string | null),
+        min_bid: x.min_bid_cents === null ? null : String(paraReais(x.min_bid_cents as number)),
+      })),
+      items_count: lotes.results.length,
+    },
+    items: lotes.results.map(serializarCard),
+  });
 }
 
 /**

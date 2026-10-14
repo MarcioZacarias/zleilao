@@ -62,10 +62,10 @@ export async function login(req: Request, env: Env): Promise<Response> {
   }
 
   const u = await env.DB.prepare(
-    "SELECT id, email, hashed_password, role, is_active FROM users WHERE LOWER(email) = ?",
+    "SELECT id, email, name, hashed_password, role, is_active FROM users WHERE LOWER(email) = ?",
   )
     .bind(email)
-    .first<{ id: number; email: string; hashed_password: string; role: string; is_active: number }>();
+    .first<{ id: number; email: string; name: string | null; hashed_password: string; role: string; is_active: number }>();
 
   // Mesma resposta para usuário inexistente e senha errada: diferenciar
   // informaria quais endereços têm conta.
@@ -80,17 +80,27 @@ export async function login(req: Request, env: Env): Promise<Response> {
     .bind(agora(), u.id)
     .run();
 
+  // O dashboard lê os campos achatados (`user_email`, `role`), como o
+  // backend em Python devolve; `user` fica por compatibilidade.
   return Response.json({
     access_token: token,
     token_type: "bearer",
-    user: { id: u.id, email: u.email, role: u.role, name: null },
+    user_email: u.email,
+    user_name: u.name,
+    role: u.role,
+    user: { id: u.id, email: u.email, role: u.role, name: u.name },
   });
 }
 
 export async function eu(req: Request, env: Env): Promise<Response> {
   const s = await sessaoDe(req, env);
   if (!s) return naoAutorizado();
-  return Response.json({ id: s.id, email: s.email, role: s.role, name: null });
+  const u = await env.DB.prepare("SELECT id, email, name, role, is_active FROM users WHERE id = ?")
+    .bind(s.id)
+    .first<{ id: number; email: string; name: string | null; role: string; is_active: number }>();
+  // Conta apagada ou desativada derruba a sessão, mesmo com token válido.
+  if (!u || u.is_active !== 1) return naoAutorizado();
+  return Response.json({ id: u.id, email: u.email, name: u.name, role: u.role, is_active: true });
 }
 
 /** Nome de cada grupo na tela, igual ao do backend em Python. */
