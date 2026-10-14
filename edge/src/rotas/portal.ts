@@ -7,6 +7,7 @@
  */
 import { booleano, lerJson, paraIso, paraReais } from "../lib/valores";
 import type { Env } from "../tipos";
+import { urlAsset } from "./marca";
 
 const VISIVEIS = ["published", "auction_soon"];
 
@@ -515,23 +516,25 @@ export async function detalharPregao(id: number, env: Env): Promise<Response> {
 }
 
 /**
- * Identidade visual e textos da vitrine, lidos de `system_settings`.
- *
- * As imagens (logo, favicon) ficam como `null`: no backend em Python elas
- * moram numa tabela de blobs, e aqui o lugar certo para elas é o próprio
- * bundle do site, servido pela borda. O dashboard já cai no SVG local quando
- * recebe `null`.
+ * Identidade visual e textos da vitrine: textos de `system_settings`,
+ * imagens de `branding_assets`. Chave sem imagem enviada sai `null`, e o
+ * dashboard cai no SVG do pacote.
  */
-export async function branding(env: Env): Promise<Response> {
-  const r = await env.DB.prepare(
-    `SELECT key, value FROM system_settings
-      WHERE key IN ('brand_site_title','brand_tagline','portal_disclaimer')`,
-  ).all<{ key: string; value: string }>();
-  const v = new Map(r.results.map((x) => [x.key, x.value]));
+export async function branding(env: Env, origem: string): Promise<Response> {
+  const [cfg, imagens] = await env.DB.batch<Record<string, string>>([
+    env.DB.prepare(
+      `SELECT key, value FROM system_settings
+        WHERE key IN ('brand_site_title','brand_tagline','portal_disclaimer')`,
+    ),
+    env.DB.prepare("SELECT key, updated_at FROM branding_assets"),
+  ]);
+  const v = new Map(cfg.results.map((x) => [x.key, x.value]));
+  const enviadas = new Map(imagens.results.map((x) => [x.key, x.updated_at]));
+  const url = (k: string) => (enviadas.has(k) ? urlAsset(origem, k, enviadas.get(k)!) : null);
   return Response.json({
-    logo_dark: null,
-    logo_light: null,
-    favicon: null,
+    logo_dark: url("logo_dark"),
+    logo_light: url("logo_light"),
+    favicon: url("favicon"),
     site_title: v.get("brand_site_title") || "ZConnect Leilão",
     tagline: v.get("brand_tagline") || "",
     disclaimer: v.get("portal_disclaimer") || "",

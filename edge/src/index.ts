@@ -18,6 +18,7 @@ import {
   listarFontes, listarParsers, listarUsuarios, reenviarAlerta,
 } from "./rotas/gestao";
 import { ingerir } from "./rotas/ingestao";
+import { apagarAsset, enviarAsset, servirAsset } from "./rotas/marca";
 import {
   anuncios, branding, categorias, cidades, detalharItem, detalharPregao, estatisticas, irParaFonte,
   listarItens, marcas, modelos, pregoesProximos, registrarAnuncio, sitemap,
@@ -101,13 +102,19 @@ export default {
       if (fonte && req.method === "GET") return comCors(await detalharFonte(Number(fonte[1]), req, env));
       if (p === "/v1/categories" && req.method === "GET") return comCors(await listarCategorias(req, env));
 
+      // Logo e favicon: leitura pública, envio e remoção pelo painel.
+      if (p === "/v1/branding/upload" && req.method === "POST") return comCors(await enviarAsset(req, env, u.origin));
+      const asset = /^\/v1\/branding\/([a-z_]+)$/.exec(p);
+      if (asset && req.method === "GET") return comCors(await servirAsset(asset[1], env, req));
+      if (asset && req.method === "DELETE") return comCors(await apagarAsset(asset[1], req, env));
+
       // Rotas da vitrine. O prefixo /v1 mantém o contrato do backend atual.
       if (p === "/v1/portal/items") return comCors(await listarItens(u, env));
       if (p === "/v1/portal/stats") return comCors(await estatisticas(env));
       // O sitemap fica na API porque é aqui que estão os lotes; o site o
       // serve pelo mesmo caminho, via redirecionamento no robots.txt.
       if (p === "/sitemap.xml") return await sitemap(env, u.searchParams.get("site") || "https://zleilao.marcio-zacariass.workers.dev");
-      if (p === "/v1/portal/branding") return comCors(await branding(env));
+      if (p === "/v1/portal/branding") return comCors(await branding(env, u.origin));
       if (p === "/v1/portal/ads") return comCors(await anuncios(env));
       if (p === "/v1/portal/ads/event" && req.method === "POST")
         return comCors(await registrarAnuncio(req, env));

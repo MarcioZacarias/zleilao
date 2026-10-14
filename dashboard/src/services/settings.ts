@@ -28,6 +28,7 @@ export const brandingApi = {
       .then((r) => r.data);
   },
   remove: (key: BrandingKey) => api.delete(`/branding/${key}`).then((r) => r.data),
-  /** URL pública do asset (via proxy /api). */
-  url: (key: BrandingKey, bust = true) => `/api/branding/${key}${bust ? `?t=${Date.now()}` : ""}`,
+  /** URL pública do asset, na mesma origem da API: o nginx local ou o Worker. */
+  url: (key: BrandingKey, bust = true) =>
+    `${api.defaults.baseURL ?? "/api"}/branding/${key}${bust ? `?t=${Date.now()}` : ""}`,
 };

@@ -130,6 +130,12 @@ Cloudflare que se administram.
 | `/admin` na Cloudflare | assinantes e planos, alertas, publicidade, textos, limites |
 | `http://localhost:5177/admin` (Docker local) | operação da coleta: fontes, categorias, itens, revisão, incidentes, jobs |
 
+**Logo e favicon** se trocam em Configurações > Marca: o upload grava no D1
+(`branding_assets`, até 2 MB cada) e vale na hora para vitrine, telas de conta
+e painel, sem republicar nada. Os SVGs em `dashboard/public/branding/` são só
+o padrão de quando nada foi enviado. O cabeçalho mostra o logo com 36 px de
+altura, então o ideal é uma arte horizontal.
+
 A senha não é a mesma do backend local: os formatos de hash são diferentes. O
 Worker usa PBKDF2 pelo Web Crypto, porque bcrypt em JS leva dezenas de
 milissegundos e não cabe no teto de 10 ms de CPU. O número de iterações é mais
