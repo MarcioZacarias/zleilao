@@ -131,20 +131,31 @@ tentativa em massa é o bloqueio por origem após 20 erros no dia
 
 ### Trocar a senha
 
-Não há tela para isso ainda; são três comandos. O `seed` recria o
-administrador a partir do segredo, e só funciona enquanto não existe nenhum —
-depois responde 409 e não serve de porta dos fundos.
+Não há tela para isso ainda. O caminho é um script, que pede a senha nova e
+faz o resto: grava os segredos do Worker, apaga o admin atual, recria pelo
+`seed` e testa o login.
+
+```powershell
+.\edgeedefinir-admin.ps1                          # e-mail padrão: marcio.zacariass@gmail.com
+.\edgeedefinir-admin.ps1 -Email outro@email.com
+```
+
+O `seed` recria o administrador a partir do segredo, e só funciona enquanto
+não existe nenhum — depois responde 409 e não serve de porta dos fundos. A
+senha não fica gravada em lugar nenhum: segredo do Worker não é legível de
+volta, então quem perdê-la roda o script de novo.
+
+Os passos à mão, se precisar:
 
 ```powershell
 cd edge
 npx wrangler secret put ADMIN_PASSWORD   # digite a nova senha e Enter
-
-# apaga o admin atual e zera o bloqueio por tentativa
 npx wrangler d1 execute zleilao --remote --command "DELETE FROM users WHERE role='admin'; DELETE FROM login_failures;"
-
-# recria com a senha nova
-curl -X POST https://zleilao-api.marcio-zacariass.workers.dev/v1/admin/seed
+Invoke-RestMethod -Method Post -Uri https://zleilao-api.marcio-zacariass.workers.dev/v1/admin/seed
 ```
+
+No Windows PowerShell, `curl` é apelido de `Invoke-WebRequest` e não aceita
+`-X POST`; por isso o último passo usa `Invoke-RestMethod`.
 
 Se errar a senha 20 vezes no mesmo dia, a origem é bloqueada até o dia
 seguinte. Para destravar antes disso:
