@@ -17,21 +17,26 @@ import {
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useBranding } from "../hooks/useBranding";
+import { NA_BORDA } from "../services/api";
 
+// Telas marcadas `local` dependem do banco de trabalho da coleta (fila de
+// extração, incidentes, execuções de job), que não vai para a Cloudflare.
+// Lá elas somem do menu em vez de abrir e falhar com "Not Found".
 const links = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { to: "/admin/fontes", label: "Fontes", icon: Radio },
   { to: "/admin/categorias", label: "Categorias", icon: FolderTree },
-  { to: "/admin/itens", label: "Itens", icon: Package },
-  { to: "/admin/revisao", label: "Revisão", icon: ClipboardCheck },
-  { to: "/admin/incidentes", label: "Incidentes", icon: AlertTriangle },
-  { to: "/admin/duplicados", label: "Duplicados", icon: Copy },
+  { to: "/admin/itens", label: "Itens", icon: Package, local: true },
+  { to: "/admin/revisao", label: "Revisão", icon: ClipboardCheck, local: true },
+  { to: "/admin/incidentes", label: "Incidentes", icon: AlertTriangle, local: true },
+  { to: "/admin/duplicados", label: "Duplicados", icon: Copy, local: true },
   { to: "/admin/usuarios", label: "Usuários", icon: Users },
   { to: "/admin/alertas", label: "Alertas", icon: BellRing },
-  { to: "/admin/parcerias", label: "Parcerias", icon: Handshake },
-  { to: "/admin/jobs", label: "Jobs", icon: Timer },
+  { to: "/admin/parcerias", label: "Parcerias", icon: Handshake, local: true },
+  { to: "/admin/jobs", label: "Jobs", icon: Timer, local: true },
   { to: "/admin/configuracoes", label: "Configurações", icon: Settings },
 ];
+const visiveis = NA_BORDA ? links.filter((l) => !l.local) : links;
 
 interface SidebarProps {
   onClose?: () => void;
@@ -59,7 +64,7 @@ export default function Sidebar({ onClose }: SidebarProps) {
       </div>
 
       <nav className="flex-1 overflow-y-auto py-4">
-        {links.map((link) => (
+        {visiveis.map((link) => (
           <NavLink
             key={link.to}
             to={link.to}
@@ -75,6 +80,12 @@ export default function Sidebar({ onClose }: SidebarProps) {
             {link.label}
           </NavLink>
         ))}
+        {NA_BORDA && (
+          <p className="px-6 pt-5 text-xs leading-relaxed text-gray-500">
+            Fontes e categorias aqui são só leitura. Itens, revisão, incidentes, duplicados,
+            parcerias e jobs ficam no painel local, junto da coleta.
+          </p>
+        )}
       </nav>
 
       <div className="space-y-3 border-t border-gray-800 p-4">

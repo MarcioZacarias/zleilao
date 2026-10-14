@@ -13,6 +13,10 @@ import {
   alterarFiltro, apagarFiltro, atualizarPerfil, cadastrar, criarFiltro, esqueciSenha, listarFiltros,
   meuPerfil, meusAlertas, previaFiltro, redefinirSenha, reenviarVerificacao, trocarSenha, verificarEmail,
 } from "./rotas/conta";
+import {
+  atualizarUsuario, definirPlano, detalharFonte, filtrosDoUsuario, listarAlertas, listarCategorias,
+  listarFontes, listarParsers, listarUsuarios, reenviarAlerta,
+} from "./rotas/gestao";
 import { ingerir } from "./rotas/ingestao";
 import {
   anuncios, branding, categorias, cidades, detalharItem, detalharPregao, estatisticas, irParaFonte,
@@ -49,8 +53,9 @@ export default {
         return comCors(await ingerir(req, env));
       }
 
-      // Painel: login e configuração. O resto do admin continua no backend
-      // em Python, junto da coleta.
+      // Painel: login, configuração, assinantes, alertas, e leitura de fontes
+      // e categorias. O que mexe no banco de trabalho da coleta continua no
+      // backend em Python, junto dela.
       if (p === "/v1/auth/login" && req.method === "POST") return comCors(await login(req, env));
       if (p === "/v1/auth/me") return comCors(await eu(req, env));
       // Conta do assinante: cadastro, verificação, senha, perfil e filtros.
@@ -80,6 +85,21 @@ export default {
       if (p === "/v1/admin/seed" && req.method === "POST") return comCors(await semearAdmin(env));
       if (p === "/v1/dashboard") return comCors(await painel(req, env));
       if (p === "/v1/users/summary") return comCors(await resumoUsuarios(req, env));
+      if (p === "/v1/users" && req.method === "GET") return comCors(await listarUsuarios(u, req, env));
+      const usuarioFiltros = /^\/v1\/users\/(\d+)\/filters$/.exec(p);
+      if (usuarioFiltros) return comCors(await filtrosDoUsuario(Number(usuarioFiltros[1]), req, env));
+      const usuarioPlano = /^\/v1\/users\/(\d+)\/plan$/.exec(p);
+      if (usuarioPlano && req.method === "PUT") return comCors(await definirPlano(Number(usuarioPlano[1]), req, env));
+      const usuario = /^\/v1\/users\/(\d+)$/.exec(p);
+      if (usuario && req.method === "PATCH") return comCors(await atualizarUsuario(Number(usuario[1]), req, env));
+      if (p === "/v1/alerts" && req.method === "GET") return comCors(await listarAlertas(u, req, env));
+      const reenvio = /^\/v1\/alerts\/(\d+)\/retry$/.exec(p);
+      if (reenvio && req.method === "POST") return comCors(await reenviarAlerta(Number(reenvio[1]), req, env));
+      if (p === "/v1/sources" && req.method === "GET") return comCors(await listarFontes(req, env));
+      if (p === "/v1/sources/parsers") return comCors(await listarParsers(req, env));
+      const fonte = /^\/v1\/sources\/(\d+)$/.exec(p);
+      if (fonte && req.method === "GET") return comCors(await detalharFonte(Number(fonte[1]), req, env));
+      if (p === "/v1/categories" && req.method === "GET") return comCors(await listarCategorias(req, env));
 
       // Rotas da vitrine. O prefixo /v1 mantém o contrato do backend atual.
       if (p === "/v1/portal/items") return comCors(await listarItens(u, env));
@@ -105,6 +125,15 @@ export default {
 
       const ficha = /^\/v1\/portal\/items\/(\d+)$/.exec(p);
       if (ficha) return comCors(await detalharItem(Number(ficha[1]), env, req));
+
+      // O que só existe no painel local, junto da coleta. Dizer o motivo
+      // evita o "Not Found" seco na tela do painel.
+      if (/^\/v1\/(sources|categories|items|incidents|jobs|duplicates|partners|review|alerts|users|settings)(\/|$)/.test(p)) {
+        return comCors(Response.json(
+          { detail: "Esta ação é do painel local, junto da coleta (http://localhost:5177/admin). Na Cloudflare, fontes e categorias são só leitura." },
+          { status: 501 },
+        ));
+      }
 
       return comCors(Response.json({ detail: "Not Found", path: p }, { status: 404 }));
     } catch (e) {

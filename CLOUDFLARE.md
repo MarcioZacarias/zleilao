@@ -112,15 +112,23 @@ O acesso sai dos segredos `ADMIN_EMAIL` e `ADMIN_PASSWORD` do Worker. **Troque
 a senha inicial no primeiro acesso** — ela foi definida para destravar a
 entrada, não para ficar.
 
-**Só duas telas funcionam aqui: o painel inicial e Configurações.** As outras
-(Fontes, Itens, Revisão, Incidentes, Duplicados, Jobs) continuam no backend em
-Python, que roda junto da coleta — é lá que está o banco de trabalho, com a
-fila de extração e o histórico de execuções, e lá não há teto de CPU.
+**O que funciona aqui:** Dashboard, Usuários, Alertas e Configurações por
+inteiro; Fontes e Categorias só em leitura. Itens, Revisão, Incidentes,
+Duplicados, Parcerias e Jobs nem aparecem no menu da versão publicada:
+dependem do banco de trabalho da coleta (fila de extração, incidentes,
+execuções de job), que fica no backend em Python, junto da coleta, onde não há
+teto de CPU. Se alguma dessas ações chegar ao Worker, ele responde 501 com o
+aviso, em vez de um "Not Found" seco.
+
+Fontes e categorias são espelho do que o agente local envia; uma edição feita
+na borda seria desfeita na sincronização seguinte, por isso as rotas de
+escrita não existem lá. Já usuários, planos e alertas moram no D1, e é na
+Cloudflare que se administram.
 
 | Onde | Para quê |
 |---|---|
-| `/admin` na Cloudflare | configuração que a vitrine lê: publicidade, textos, limites |
-| `http://localhost:5177/admin` (Docker local) | operação da coleta: fontes, revisão, incidentes, jobs |
+| `/admin` na Cloudflare | assinantes e planos, alertas, publicidade, textos, limites |
+| `http://localhost:5177/admin` (Docker local) | operação da coleta: fontes, categorias, itens, revisão, incidentes, jobs |
 
 A senha não é a mesma do backend local: os formatos de hash são diferentes. O
 Worker usa PBKDF2 pelo Web Crypto, porque bcrypt em JS leva dezenas de

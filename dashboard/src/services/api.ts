@@ -12,6 +12,12 @@ export const UNAUTHORIZED_EVENT = "zleilao:unauthorized";
  */
 const BASE = import.meta.env.VITE_API_URL || "/api";
 
+/**
+ * Verdadeiro no build publicado na Cloudflare. O painel usa para esconder o
+ * que só existe no backend local (ver `Sidebar`).
+ */
+export const NA_BORDA = Boolean(import.meta.env.VITE_API_URL);
+
 const api = axios.create({
   baseURL: BASE,
   timeout: 30000,
