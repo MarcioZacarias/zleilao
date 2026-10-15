@@ -5,7 +5,7 @@
  * O contrato é o mesmo do backend em Python (`docs/API.md`), para o dashboard
  * não precisar saber onde está rodando.
  */
-import { booleano, lerJson, paraIso, paraReais } from "../lib/valores";
+import { agora, booleano, deDataParaBanco, lerJson, paraIso, paraReais } from "../lib/valores";
 import type { Env } from "../tipos";
 import { urlAsset } from "./marca";
 
@@ -373,27 +373,48 @@ export async function irParaFonte(id: number, env: Env, req: Request): Promise<R
   return Response.redirect(r.official_url, 302);
 }
 
+/** Números da página inicial, no contrato do Python (`/portal/stats`). */
 export async function estatisticas(env: Env): Promise<Response> {
-  const r = await env.DB.prepare(
-    `SELECT
-       (SELECT COUNT(*) FROM items WHERE status IN ('published','auction_soon')) AS items_published,
-       (SELECT COUNT(*) FROM auctions WHERE starts_at >= datetime('now','-3 hours')) AS auctions_upcoming,
-       (SELECT COUNT(*) FROM sources WHERE is_active = 1) AS sources_active,
-       (SELECT MAX(last_seen_at) FROM items) AS last_collected_at`,
-  ).first<Record<string, unknown>>();
+  // As datas do banco estão em horário de Brasília sem fuso; comparar com
+  // datetime('now') do SQLite (UTC) erraria por três horas.
+  const hoje = agora();
+  const em7dias = deDataParaBanco(new Date(Date.now() + 7 * 86_400_000));
+  const [resumo, porCategoria] = await env.DB.batch<Record<string, unknown>>([
+    env.DB.prepare(
+      `SELECT
+         (SELECT COUNT(*) FROM items WHERE status IN ('published','auction_soon')) AS items_published,
+         (SELECT COUNT(*) FROM sources WHERE is_active = 1) AS sources_active,
+         (SELECT COUNT(*) FROM auctions WHERE starts_at >= ? AND starts_at <= ?) AS auctions_upcoming_7d,
+         (SELECT MIN(next_session_at) FROM items
+           WHERE status IN ('published','auction_soon') AND next_session_at >= ?) AS next_session_at,
+         (SELECT MAX(last_seen_at) FROM items) AS last_collected_at`,
+    ).bind(hoje, em7dias, hoje),
+    env.DB.prepare(
+      `SELECT c.slug, c.name, COUNT(i.id) AS count
+         FROM items i JOIN categories c ON c.id = i.category_id
+        WHERE i.status IN ('published','auction_soon')
+        GROUP BY c.slug, c.name`,
+    ),
+  ]);
+  const r = resumo.results[0] ?? {};
   return Response.json({
-    items_published: r?.items_published ?? 0,
-    auctions_upcoming: r?.auctions_upcoming ?? 0,
-    sources_active: r?.sources_active ?? 0,
-    last_collected_at: paraIso(r?.last_collected_at as string | null),
+    items_published: r.items_published ?? 0,
+    sources_active: r.sources_active ?? 0,
+    auctions_upcoming_7d: r.auctions_upcoming_7d ?? 0,
+    next_session_at: paraIso(r.next_session_at as string | null),
+    last_collected_at: paraIso(r.last_collected_at as string | null),
+    by_category: porCategoria.results.map((x) => ({ slug: x.slug, name: x.name, count: x.count })),
   });
 }
 
 export async function categorias(env: Env): Promise<Response> {
   const r = await env.DB.prepare(
+    // A contagem inclui as subcategorias: o lote fica em "veiculos/carros",
+    // e "Veículos" sem os filhos somaria zero na vitrine.
     `SELECT c.id, c.parent_id, c.name, c.slug, c.path, c.sort_order,
-            (SELECT COUNT(*) FROM items i
-              WHERE i.category_id = c.id AND i.status IN ('published','auction_soon')) AS items_count
+            (SELECT COUNT(*) FROM items i JOIN categories ci ON ci.id = i.category_id
+              WHERE (ci.path = c.path OR ci.path LIKE c.path || '/%')
+                AND i.status IN ('published','auction_soon')) AS items_count
        FROM categories c WHERE c.is_active = 1 ORDER BY c.sort_order, c.id`,
   ).all<Record<string, unknown>>();
 
