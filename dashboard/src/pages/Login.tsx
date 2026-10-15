@@ -41,7 +41,7 @@ export default function Login() {
     <div className="portal flex min-h-screen items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
-          <img src={branding.logo_dark} alt={branding.site_title} className="mx-auto h-20 w-auto object-contain" />
+          <img src={branding.logo_dark} alt={branding.site_title} className="mx-auto h-24 w-auto object-contain" />
           <p className="mt-3 text-sm text-radar-muted">Acesso ao painel administrativo</p>
         </div>
 
