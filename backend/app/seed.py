@@ -162,6 +162,46 @@ SOURCES = [
         "is_active": False, "scraping_allowed": False,
         "config": {"tipo_bem": 421, "max_auctions": 10, "include_private": False, "fetch_details": False, "max_details_per_run": 0},
     },
+    # Campo Grande/MS (DETRAN, prefeitura, varas), no parser generico: capa
+    # lista pregoes, cada pregao traz todos os lotes numa pagina. A capa so
+    # da "Encerra dd/mm" sem ano; abertura e encerramento completos vem do
+    # cabecalho do pregao (`page_fields`). Tipo judicial/extrajudicial sai do
+    # titulo do pregao (`auction_type: auto`).
+    {
+        "name": "Casa de Leilões", "slug": "casadeleiloes", "parser_type": "generic_html",
+        "base_url": "https://www.casadeleiloes.com.br", "scrape_frequency": 240,
+        "config": {
+            "auction_list": {
+                "url": "/", "item_selector": "a[href^='/leilao/']:not([href$='/1'])",
+                "link": {"attr": "href"}, "id_regex": "/leilao/[^/]+/(\\d+)$",
+                "title": {"selector": ".box-titulo"}, "end_date": {"selector": ".box-subtitulo strong"},
+                "max_auctions": 20,
+            },
+            "page_fields": {
+                "title": {"selector": "h3"},
+                "date": {"selector": ".leilao-dados", "regex": "Abertura\\s*(\\d{2}/\\d{2}/\\d{4}\\s*\\d{1,2}:\\d{2})"},
+                "end_date": {"selector": ".leilao-dados", "regex": "Encerra[^:]*:\\s*(\\d{2}/\\d{2}/\\d{4}\\s*\\d{1,2}:\\d{2})"},
+                "modality": {"selector": ".leilao-dados", "regex": "Modalidade\\s*([A-Za-z]+)"},
+            },
+            "item_selector": "a.lote-lista",
+            "fields": {
+                "external_id": {"attr": "href", "regex": "/(\\d+)$"},
+                "title": {"selector": "blockquote"},
+                "url": {"attr": "href"},
+                "price": {"selector": ".lote-lista-direita span.botao-azul[style*='display: block']"},
+                "image": {"selector": ".lazy", "attr": "data-src", "sub": ["p\\.(jpe?g|png)$", ".\\1"]},
+                "location": {"selector": ".col-md-6 b"},
+                "lot_number": {"selector": ".col-md-6", "regex": "Lote:\\s*(\\d+)"},
+                "status": {"selector": ".circulo-item-grande", "map": {"em leilao": "open"}},
+                "category": {
+                    "selector": ".col-md-6", "regex": "^(.*?)\\s*»",
+                    "map": {"veiculo": "veiculos", "motocicleta": "motos", "caminhao": "caminhoes", "sucata": "sucatas", "imovel": "imoveis"},
+                },
+            },
+            "category_hint": "diversos", "auction_type": "auto", "default_state": "MS", "fetch_details": False,
+            "detail": {"images_regex": "/envios/leilao_lote_imagem\\d+\\.jpe?g"},
+        },
+    },
 ]
 
 
