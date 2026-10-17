@@ -232,6 +232,18 @@ SOURCES = [
             "patios": {"Juatuba": ["Juatuba", "MG"], "Salvador": ["Salvador", "BA"], "Cajamar": ["Cajamar", "SP"]},
         },
     },
+    # Fortaleza/CE; judicial (TJCE, TRT 7a) e prefeituras, via API JSON
+    # publica (120 req/min). A Cloudflare do site barra o httpx padrao pela
+    # impressao digital TLS: o coletor usa TLS 1.3 e cabecalhos de navegador,
+    # e se o bloqueio endurecer a fonte cai no caso Milan/Lance Certo.
+    {
+        "name": "Montenegro Leilões", "slug": "montenegro", "parser_type": "montenegro",
+        "base_url": "https://montenegroleiloes.com.br", "scrape_frequency": 240,
+        "config": {
+            "tipo": "veicular", "categoria": "veiculos", "max_pages": 20,
+            "fetch_auctions": True, "fetch_details": True, "max_details_per_run": 60,
+        },
+    },
 ]
 
 

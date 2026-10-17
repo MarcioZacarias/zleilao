@@ -4,6 +4,7 @@ from app.scrapers.generic_html import GenericHtmlScraper
 from app.scrapers.leilo import LeiloScraper
 from app.scrapers.leiloesjudiciais import LeiloesJudiciaisScraper
 from app.scrapers.megaleiloes import MegaLeiloesScraper
+from app.scrapers.montenegro import MontenegroScraper
 from app.scrapers.nakakogue import NakakogueScraper
 from app.scrapers.palacio import PalacioScraper
 from app.scrapers.parquedosleiloes import ParqueDosLeiloesScraper
@@ -20,6 +21,7 @@ SCRAPERS: dict[str, type[BaseScraper]] = {
     "pestana": PestanaScraper,
     "leiloesjudiciais": LeiloesJudiciaisScraper,
     "palacio": PalacioScraper,
+    "montenegro": MontenegroScraper,
     "generic_html": GenericHtmlScraper,
 }
 

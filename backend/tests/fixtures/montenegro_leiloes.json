@@ -1,0 +1,460 @@
+[
+ {
+  "rn": "1",
+  "id": 2627,
+  "id_status_leilao": "1",
+  "tipo_leilao": "7",
+  "offset_views": "0",
+  "titulo": "Imóveis, Veículos e Materais - Tribunal de Justiça do Estado do Ceará - TJCE (1ª Chamada)",
+  "descricao": "Evento online com transmissão no dia 20/10/2026, às 10h. A visitação para veículos dos lotes 02, 04,",
+  "data_hora_inicio": "2026-10-20 10:00:00",
+  "data_hora_inicio_segundo_leilao": null,
+  "data_hora_publicacao": null,
+  "data_hora_publicacao_segundo_leilao": null,
+  "dois_leiloes": "0",
+  "id_comitente": "75012",
+  "id_localidade": "7",
+  "externo": "0",
+  "link_parceiro": null,
+  "primeiro_leilao_concluido": "0",
+  "segundo_leilao_concluido": "0",
+  "venda_direta": "0",
+  "lotes_count": 13,
+  "lotes_vendidos": "0",
+  "lotes_cancelados": "0",
+  "lotes_retirados": "0",
+  "menorlanceInicial": "240",
+  "menorlanceInicialSegLeilao": null,
+  "lanceInicialPrimeiroLote": "350000",
+  "lanceAtualPrimeiroLote": null,
+  "incrementoPrimeiroLote": "1000",
+  "lanceInicialSegLeilaoPrimeiroLote": null,
+  "incrementoSegLeilaoPrimeiroLote": null,
+  "proximoStatus": {
+   "timestamp": 1792501200,
+   "texto": "Pregão em",
+   "cor": "primary"
+  },
+  "views": 20606,
+  "status_leilao": {
+   "id": 1,
+   "nome": "Aberto",
+   "pode_receber_lances": "1",
+   "cor_site": "#31CCEC",
+   "cor_site_venda_direta": "#BCCF30",
+   "completo": "0",
+   "arquivado": "0",
+   "loteamento_em_progresso": "0",
+   "retirado_pelo_comitente": "0",
+   "suspenso": "0",
+   "texto_site": null,
+   "texto_site_venda_direta": null,
+   "identificador": "ABERTO"
+  },
+  "imagens_leilao": [
+   {
+    "id": 53233,
+    "id_arquivo": "d0d91ac5-e417-4e0d-bdfc-706b7a2b0f07",
+    "id_leilao": "2627",
+    "sequencia": "0",
+    "arquivo": {
+     "id": "d0d91ac5-e417-4e0d-bdfc-706b7a2b0f07"
+    }
+   }
+  ],
+  "comitente": {
+   "id": 75012,
+   "exibir_site": "0",
+   "nome_fantasia": "TRIBUNAL DE JUSTIÇA DO ESTADO DO CEARÁ",
+   "id_arquivo_logo": "104c0145-e3bd-4262-83c7-2bff0a74386f",
+   "id_arquivo_capa_padrao": "bccc27b1-7781-4b13-9e51-336547b08e1a",
+   "arquivo": {
+    "id": "104c0145-e3bd-4262-83c7-2bff0a74386f"
+   },
+   "arquivo_capa_padrao": {
+    "id": "bccc27b1-7781-4b13-9e51-336547b08e1a"
+   }
+  }
+ },
+ {
+  "rn": "2",
+  "id": 2680,
+  "id_status_leilao": "1",
+  "tipo_leilao": "4",
+  "offset_views": "0",
+  "titulo": "Imóveis, Veículos e Materiais - TRT 7ª Região/CE - Alienação por Iniciativa Particular",
+  "descricao": "Evento online com encerramento às 17h no dia 16/10/2026. Para mais informações, entrar em contato pe",
+  "data_hora_inicio": "2026-10-20 17:00:00",
+  "data_hora_inicio_segundo_leilao": null,
+  "data_hora_publicacao": null,
+  "data_hora_publicacao_segundo_leilao": null,
+  "dois_leiloes": "0",
+  "id_comitente": "69416",
+  "id_localidade": "7",
+  "externo": "0",
+  "link_parceiro": null,
+  "primeiro_leilao_concluido": "0",
+  "segundo_leilao_concluido": "0",
+  "venda_direta": "0",
+  "lotes_count": 45,
+  "lotes_vendidos": "0",
+  "lotes_cancelados": "0",
+  "lotes_retirados": "0",
+  "menorlanceInicial": "675",
+  "menorlanceInicialSegLeilao": null,
+  "lanceInicialPrimeiroLote": "390000",
+  "lanceAtualPrimeiroLote": null,
+  "incrementoPrimeiroLote": "39000",
+  "lanceInicialSegLeilaoPrimeiroLote": null,
+  "incrementoSegLeilaoPrimeiroLote": null,
+  "proximoStatus": {
+   "timestamp": 1792526400,
+   "texto": "Pregão em",
+   "cor": "primary"
+  },
+  "views": 13199,
+  "status_leilao": {
+   "id": 1,
+   "nome": "Aberto",
+   "pode_receber_lances": "1",
+   "cor_site": "#31CCEC",
+   "cor_site_venda_direta": "#BCCF30",
+   "completo": "0",
+   "arquivado": "0",
+   "loteamento_em_progresso": "0",
+   "retirado_pelo_comitente": "0",
+   "suspenso": "0",
+   "texto_site": null,
+   "texto_site_venda_direta": null,
+   "identificador": "ABERTO"
+  },
+  "imagens_leilao": [
+   {
+    "id": 53463,
+    "id_arquivo": "aef8745f-bb50-40cb-a246-4b6493e927b3",
+    "id_leilao": "2680",
+    "sequencia": "0",
+    "arquivo": {
+     "id": "aef8745f-bb50-40cb-a246-4b6493e927b3"
+    }
+   }
+  ],
+  "comitente": {
+   "id": 69416,
+   "exibir_site": "0",
+   "nome_fantasia": "TRIBUNAL REGIONAL DO TRABALHO DA 7ª REGIÃO (CE)",
+   "id_arquivo_logo": "ba5fb6ba-1580-479c-8774-0371be5facea",
+   "id_arquivo_capa_padrao": "bccc27b1-7781-4b13-9e51-336547b08e1a",
+   "arquivo": {
+    "id": "ba5fb6ba-1580-479c-8774-0371be5facea"
+   },
+   "arquivo_capa_padrao": {
+    "id": "bccc27b1-7781-4b13-9e51-336547b08e1a"
+   }
+  }
+ },
+ {
+  "rn": "3",
+  "id": 2681,
+  "id_status_leilao": "1",
+  "tipo_leilao": "3",
+  "offset_views": "0",
+  "titulo": "Veículos e Materiais - Prefeitura de Ipueiras",
+  "descricao": "Evento online com transmissão no dia 26/10/2026, às 10h. A visitação dos lotes ocorrerá no dia 23/10",
+  "data_hora_inicio": "2026-10-26 10:00:00",
+  "data_hora_inicio_segundo_leilao": null,
+  "data_hora_publicacao": null,
+  "data_hora_publicacao_segundo_leilao": null,
+  "dois_leiloes": "0",
+  "id_comitente": "73388",
+  "id_localidade": "7",
+  "externo": "0",
+  "link_parceiro": null,
+  "primeiro_leilao_concluido": "0",
+  "segundo_leilao_concluido": "0",
+  "venda_direta": "0",
+  "lotes_count": 39,
+  "lotes_vendidos": "0",
+  "lotes_cancelados": "0",
+  "lotes_retirados": "0",
+  "menorlanceInicial": "300",
+  "menorlanceInicialSegLeilao": null,
+  "lanceInicialPrimeiroLote": "400",
+  "lanceAtualPrimeiroLote": "500",
+  "incrementoPrimeiroLote": "100",
+  "lanceInicialSegLeilaoPrimeiroLote": null,
+  "incrementoSegLeilaoPrimeiroLote": null,
+  "proximoStatus": {
+   "timestamp": 1793019600,
+   "texto": "Pregão em",
+   "cor": "primary"
+  },
+  "views": 4858,
+  "status_leilao": {
+   "id": 1,
+   "nome": "Aberto",
+   "pode_receber_lances": "1",
+   "cor_site": "#31CCEC",
+   "cor_site_venda_direta": "#BCCF30",
+   "completo": "0",
+   "arquivado": "0",
+   "loteamento_em_progresso": "0",
+   "retirado_pelo_comitente": "0",
+   "suspenso": "0",
+   "texto_site": null,
+   "texto_site_venda_direta": null,
+   "identificador": "ABERTO"
+  },
+  "imagens_leilao": [
+   {
+    "id": 53502,
+    "id_arquivo": "988d6887-552f-4891-9bd3-d9023adfefcc",
+    "id_leilao": "2681",
+    "sequencia": "0",
+    "arquivo": {
+     "id": "988d6887-552f-4891-9bd3-d9023adfefcc"
+    }
+   }
+  ],
+  "comitente": {
+   "id": 73388,
+   "exibir_site": null,
+   "nome_fantasia": "PREFEITURA MUNICIPAL DE IPUEIRAS/CE",
+   "id_arquivo_logo": "cefd4429-ad14-40b4-8157-ebec9fe6ffba",
+   "id_arquivo_capa_padrao": "bccc27b1-7781-4b13-9e51-336547b08e1a",
+   "arquivo": {
+    "id": "cefd4429-ad14-40b4-8157-ebec9fe6ffba"
+   },
+   "arquivo_capa_padrao": {
+    "id": "bccc27b1-7781-4b13-9e51-336547b08e1a"
+   }
+  }
+ },
+ {
+  "rn": "4",
+  "id": 2696,
+  "id_status_leilao": "1",
+  "tipo_leilao": "0",
+  "offset_views": "0",
+  "titulo": "Veículo - Leilão Particular",
+  "descricao": "Evento online com transmissão no dia 30/10/2026, às 10h. O lote se encontra na rua Ademar Paula, nº ",
+  "data_hora_inicio": "2026-10-30 10:00:00",
+  "data_hora_inicio_segundo_leilao": null,
+  "data_hora_publicacao": null,
+  "data_hora_publicacao_segundo_leilao": null,
+  "dois_leiloes": "0",
+  "id_comitente": "108102",
+  "id_localidade": "7",
+  "externo": "0",
+  "link_parceiro": null,
+  "primeiro_leilao_concluido": "0",
+  "segundo_leilao_concluido": "0",
+  "venda_direta": "0",
+  "lotes_count": 1,
+  "lotes_vendidos": "0",
+  "lotes_cancelados": "0",
+  "lotes_retirados": "0",
+  "menorlanceInicial": "53000",
+  "menorlanceInicialSegLeilao": null,
+  "lanceInicialPrimeiroLote": "53000",
+  "lanceAtualPrimeiroLote": null,
+  "incrementoPrimeiroLote": "500",
+  "lanceInicialSegLeilaoPrimeiroLote": null,
+  "incrementoSegLeilaoPrimeiroLote": null,
+  "proximoStatus": {
+   "timestamp": 1793365200,
+   "texto": "Pregão em",
+   "cor": "primary"
+  },
+  "views": 198,
+  "status_leilao": {
+   "id": 1,
+   "nome": "Aberto",
+   "pode_receber_lances": "1",
+   "cor_site": "#31CCEC",
+   "cor_site_venda_direta": "#BCCF30",
+   "completo": "0",
+   "arquivado": "0",
+   "loteamento_em_progresso": "0",
+   "retirado_pelo_comitente": "0",
+   "suspenso": "0",
+   "texto_site": null,
+   "texto_site_venda_direta": null,
+   "identificador": "ABERTO"
+  },
+  "imagens_leilao": [
+   {
+    "id": 53589,
+    "id_arquivo": "9750d769-e0cd-4e0a-b9bb-227eb2de7814",
+    "id_leilao": "2696",
+    "sequencia": "0",
+    "arquivo": {
+     "id": "9750d769-e0cd-4e0a-b9bb-227eb2de7814"
+    }
+   }
+  ],
+  "comitente": {
+   "id": 108102,
+   "exibir_site": "0",
+   "nome_fantasia": "Particular (108102)",
+   "id_arquivo_logo": null,
+   "id_arquivo_capa_padrao": null,
+   "arquivo": null,
+   "arquivo_capa_padrao": null
+  }
+ },
+ {
+  "rn": "5",
+  "id": 2653,
+  "id_status_leilao": "1",
+  "tipo_leilao": "1",
+  "offset_views": "0",
+  "titulo": "Imóvel e Veículos - Tribunal de Justiça do Estado do Ceará - TJCE (1ª Chamada)",
+  "descricao": "Evento online com transmissão no dia 17/11/2026, às 10h. A visitação dos veículos será no dia 16/11/",
+  "data_hora_inicio": "2026-11-17 10:00:00",
+  "data_hora_inicio_segundo_leilao": null,
+  "data_hora_publicacao": null,
+  "data_hora_publicacao_segundo_leilao": null,
+  "dois_leiloes": "0",
+  "id_comitente": "75012",
+  "id_localidade": "7",
+  "externo": "0",
+  "link_parceiro": null,
+  "primeiro_leilao_concluido": "0",
+  "segundo_leilao_concluido": "0",
+  "venda_direta": "0",
+  "lotes_count": 6,
+  "lotes_vendidos": "0",
+  "lotes_cancelados": "0",
+  "lotes_retirados": "0",
+  "menorlanceInicial": "1000",
+  "menorlanceInicialSegLeilao": null,
+  "lanceInicialPrimeiroLote": "1000",
+  "lanceAtualPrimeiroLote": null,
+  "incrementoPrimeiroLote": "100",
+  "lanceInicialSegLeilaoPrimeiroLote": null,
+  "incrementoSegLeilaoPrimeiroLote": null,
+  "proximoStatus": {
+   "timestamp": 1794920400,
+   "texto": "Pregão em",
+   "cor": "primary"
+  },
+  "views": 11426,
+  "status_leilao": {
+   "id": 1,
+   "nome": "Aberto",
+   "pode_receber_lances": "1",
+   "cor_site": "#31CCEC",
+   "cor_site_venda_direta": "#BCCF30",
+   "completo": "0",
+   "arquivado": "0",
+   "loteamento_em_progresso": "0",
+   "retirado_pelo_comitente": "0",
+   "suspenso": "0",
+   "texto_site": null,
+   "texto_site_venda_direta": null,
+   "identificador": "ABERTO"
+  },
+  "imagens_leilao": [
+   {
+    "id": 53267,
+    "id_arquivo": "a52ff5f9-100c-42b4-9003-a16ab16e129f",
+    "id_leilao": "2653",
+    "sequencia": "0",
+    "arquivo": {
+     "id": "a52ff5f9-100c-42b4-9003-a16ab16e129f"
+    }
+   }
+  ],
+  "comitente": {
+   "id": 75012,
+   "exibir_site": "0",
+   "nome_fantasia": "TRIBUNAL DE JUSTIÇA DO ESTADO DO CEARÁ",
+   "id_arquivo_logo": "104c0145-e3bd-4262-83c7-2bff0a74386f",
+   "id_arquivo_capa_padrao": "bccc27b1-7781-4b13-9e51-336547b08e1a",
+   "arquivo": {
+    "id": "104c0145-e3bd-4262-83c7-2bff0a74386f"
+   },
+   "arquivo_capa_padrao": {
+    "id": "bccc27b1-7781-4b13-9e51-336547b08e1a"
+   }
+  }
+ },
+ {
+  "rn": "6",
+  "id": 2684,
+  "id_status_leilao": "1",
+  "tipo_leilao": "7",
+  "offset_views": "0",
+  "titulo": "Veículo - Tribunal de Justiça do Estado do Ceará - TJCE (1ª Chamada)",
+  "descricao": "Evento online com transmissão no dia 01/12/2026, às 10h. A visitação dos veículos será no dia 30/11/",
+  "data_hora_inicio": "2026-12-01 10:00:00",
+  "data_hora_inicio_segundo_leilao": null,
+  "data_hora_publicacao": null,
+  "data_hora_publicacao_segundo_leilao": null,
+  "dois_leiloes": "0",
+  "id_comitente": "75012",
+  "id_localidade": "7",
+  "externo": "0",
+  "link_parceiro": null,
+  "primeiro_leilao_concluido": "0",
+  "segundo_leilao_concluido": "0",
+  "venda_direta": "0",
+  "lotes_count": 1,
+  "lotes_vendidos": "0",
+  "lotes_cancelados": "0",
+  "lotes_retirados": "0",
+  "menorlanceInicial": "6000",
+  "menorlanceInicialSegLeilao": null,
+  "lanceInicialPrimeiroLote": "6000",
+  "lanceAtualPrimeiroLote": null,
+  "incrementoPrimeiroLote": "400",
+  "lanceInicialSegLeilaoPrimeiroLote": null,
+  "incrementoSegLeilaoPrimeiroLote": null,
+  "proximoStatus": {
+   "timestamp": 1796130000,
+   "texto": "Pregão em",
+   "cor": "primary"
+  },
+  "views": 2407,
+  "status_leilao": {
+   "id": 1,
+   "nome": "Aberto",
+   "pode_receber_lances": "1",
+   "cor_site": "#31CCEC",
+   "cor_site_venda_direta": "#BCCF30",
+   "completo": "0",
+   "arquivado": "0",
+   "loteamento_em_progresso": "0",
+   "retirado_pelo_comitente": "0",
+   "suspenso": "0",
+   "texto_site": null,
+   "texto_site_venda_direta": null,
+   "identificador": "ABERTO"
+  },
+  "imagens_leilao": [
+   {
+    "id": 53460,
+    "id_arquivo": "e68bf7c5-951b-48e5-bf0e-52a93e195fec",
+    "id_leilao": "2684",
+    "sequencia": "0",
+    "arquivo": {
+     "id": "e68bf7c5-951b-48e5-bf0e-52a93e195fec"
+    }
+   }
+  ],
+  "comitente": {
+   "id": 75012,
+   "exibir_site": "0",
+   "nome_fantasia": "TRIBUNAL DE JUSTIÇA DO ESTADO DO CEARÁ",
+   "id_arquivo_logo": "104c0145-e3bd-4262-83c7-2bff0a74386f",
+   "id_arquivo_capa_padrao": "bccc27b1-7781-4b13-9e51-336547b08e1a",
+   "arquivo": {
+    "id": "104c0145-e3bd-4262-83c7-2bff0a74386f"
+   },
+   "arquivo_capa_padrao": {
+    "id": "bccc27b1-7781-4b13-9e51-336547b08e1a"
+   }
+  }
+ }
+]
