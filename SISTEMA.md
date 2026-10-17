@@ -210,6 +210,7 @@ Sodré Santoro, Superbid, Copart, Milan e Lance Certo ficaram para a F4 (ver DEC
 | Nakakogue (PR) | listagem `/lotes/consulta/{2,3}/` (tudo numa página) + detalhe em duas requisições (casca + `POST /proximo_lote.php` na sessão PHP) | judicial do Paraná, veículos e máquinas | charset misto (latin-1 com UTF-8 gravado por campo, `fix_mojibake`); "Valor Mínimo" é o piso da 2ª praça; `lotes/NNN` na capa são pregões |
 | Parque dos Leilões (DF) | listas `/leiloes` e `/leiloes-judiciais` (`type_id=1`) → página do pregão paginada → detalhe com `div[data-json="auctionLot"]` | bancos (pregões quinzenais de ~100 lotes) e varas do DF | preço só no detalhe, por isso só emite lote detalhado; praças judiciais lidas das Observações; `default_city/state` é conhecimento do operador |
 | Pestana Leilões (SP) — **inativa** | API JSON pública (`/api/v2/leilao`, `/api/v2/lote/por-leilao`) | ~800 veículos de financeiras em 7 pregões | termos de uso vedam "robôs para navegação da plataforma": fica cadastrada desligada até o operador decidir (RN-009) |
+| Casa de Leilões (MS) | `generic_html` só por configuração: capa lista pregões, cada pregão traz todos os lotes; `page_fields` lê abertura/encerramento do cabeçalho | DETRAN, prefeitura e varas de Campo Grande; ~150 veículos | capa dá "Encerra dd/mm" sem ano; bens móveis vêm sem cidade; 2ª praça dos judiciais fica de fora (o genérico modela sessão única) |
 
 Leilões BR foi descartado (arte e colecionáveis), Kleiber também (10 veículos,
 termos restritivos) e D1 Lance proíbe robôs no `robots.txt`.
