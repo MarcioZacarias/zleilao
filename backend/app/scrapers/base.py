@@ -135,14 +135,35 @@ class BaseScraper(ABC):
             return 60
 
     def headers(self) -> dict[str, str]:
-        return self.config.get("headers") or {
-            "User-Agent": self.rt("user_agent") or (
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
-            ),
+        if self.config.get("headers"):
+            return dict(self.config["headers"])
+        ua = self.rt("user_agent") or (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+        )
+        h = {
+            "User-Agent": ua,
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+            "Upgrade-Insecure-Requests": "1",
+            "Sec-Fetch-Dest": "document",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-Site": "none",
+            "Sec-Fetch-User": "?1",
         }
+        # Client hints coerentes com a versao do User-Agent: o bot manager do
+        # Sodre Santoro (Azion) devolvia 403 so' por eles faltarem, e nenhuma
+        # das outras fontes se importa com a presenca deles.
+        m = re.search(r"Chrome/(\d+)", ua)
+        if m:
+            v = m.group(1)
+            h["sec-ch-ua"] = f'"Chromium";v="{v}", "Google Chrome";v="{v}", "Not-A.Brand";v="99"'
+            h["sec-ch-ua-mobile"] = "?0"
+            h["sec-ch-ua-platform"] = '"Windows"'
+        return h
+
+    #: Cabecalhos de uma chamada feita por script (fetch/XHR), nao de navegacao.
+    XHR = {"Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-origin"}
 
     # ── ciclo de vida do client ──────────────────────────────────────
 
@@ -193,12 +214,46 @@ class BaseScraper(ABC):
 
     async def fetch_json(self, url: str, params: dict | None = None, headers: dict | None = None) -> Any:
         assert self.client is not None
-        h = {"Accept": "application/json, text/plain, */*"}
+        h = {"Accept": "application/json, text/plain, */*", **self.XHR}
         if headers:
             h.update(headers)
         resp = await self.client.get(url, params=params, headers=h)
         resp.raise_for_status()
         return resp.json()
+
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=2, min=2, max=30),
+        retry=retry_if_exception_type((httpx.HTTPStatusError, httpx.ConnectError, httpx.ReadTimeout)),
+        reraise=True,
+    )
+    async def post(
+        self, url: str, *, data: dict | None = None, json: Any = None,
+        params: dict | None = None, headers: dict | None = None,
+    ) -> httpx.Response:
+        """POST com o mesmo retry e os mesmos status tratados do `fetch`.
+        `data` vai como formulario, `json` como corpo JSON. Fontes AJAX
+        (Palacio, Sodre) e APIs de busca (Elasticsearch por tras do site)
+        precisam disso; devolve a resposta inteira porque cada uma le de um
+        jeito (HTML, JSON, "0" como erro)."""
+        assert self.client is not None, "use 'async with scraper:'"
+        h = dict(self.XHR)
+        if headers:
+            h.update(headers)
+        resp = await self.client.post(url, data=data, json=json, params=params, headers=h)
+        if resp.status_code in (403, 429, 503):
+            raise httpx.HTTPStatusError(f"{resp.status_code} em {url}", request=resp.request, response=resp)
+        resp.raise_for_status()
+        return resp
+
+    async def post_json(
+        self, url: str, *, data: dict | None = None, json: Any = None,
+        params: dict | None = None, headers: dict | None = None,
+    ) -> Any:
+        h = {"Accept": "application/json, text/plain, */*"}
+        if headers:
+            h.update(headers)
+        return (await self.post(url, data=data, json=json, params=params, headers=h)).json()
 
     # ── contrato ─────────────────────────────────────────────────────
 

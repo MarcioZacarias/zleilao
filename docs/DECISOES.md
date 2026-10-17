@@ -375,3 +375,31 @@ rejeição do admin também vão, pelo `reviewed_at`.
 
 Leilões BR saiu da lista das sete fontes HTML: é portal de arte, antiguidades e
 colecionáveis; os "preços e marcas" da sondagem eram miniaturas. Sobraram seis.
+
+## Fontes com JavaScript: duas saem sem navegador, uma espera decisão (17/10/2026)
+
+Estudo de viabilidade com Playwright instalado só no venv do projeto (1.64.0,
+Chromium 1248; ~820 MB em `%LOCALAPPDATA%\ms-playwright`):
+
+- **Sodré Santoro** respondia 403 só porque faltavam os client hints
+  (`sec-ch-ua*`, `Sec-Fetch-*`). Com cabeçalhos completos a capa abre, o bot
+  manager (Azion) dá cookies de 24 h, e a rota `POST /api/search-lots` (o
+  Elasticsearch por trás do site) devolve 100 lotes por chamada com tudo no
+  card. Coletor sem navegador. Os cabeçalhos completos passaram a ser o
+  padrão do `BaseScraper`, junto com `post`/`post_json` com retry.
+- **Superbid** está inteiro atrás de desafio Cloudflare, mas o front chama
+  microserviços (`offer-query.superbid.net`, `event-query.superbid.net`) sem
+  desafio, sem cookie e sem token. `searchType=opened` é o que filtra lotes
+  abertos: 6.865 carros e motos, 941 caminhões e ônibus, 1.825 máquinas.
+  Coletor sem navegador.
+- **Copart** usa Imperva: só abre com navegador (o headless padrão passou),
+  e depois a API `POST /public/lots/search` aceita os cookies por pelo menos
+  12 minutos. Tecnicamente é um coletor híbrido (navegador aquece, httpx
+  coleta). Mas os termos (member-terms, item 47) limitam a "uso estritamente
+  pessoal e não comercial" e vedam download e cópia sem consentimento
+  escrito, somados ao anti-bot — o sinal de recusa mais forte entre os três.
+  Fica fora até o Márcio decidir (pedir autorização, coletar mesmo assim ou
+  deixar de fora), como a Pestana.
+
+Enquanto nenhuma fonte exige o navegador, a camada Playwright não entra no
+`BaseScraper`: código sem uso é código que quebra sem ninguém ver.
