@@ -221,6 +221,17 @@ SOURCES = [
             "harvest_auction_lots": True, "segments": ["veiculos"],
         },
     },
+    # Juatuba/MG; extrajudicial (PAN, Honda, Mapfre, Movida, Porto, Localiza).
+    # Um POST por categoria traz o catalogo inteiro (~1.000 veiculos); o
+    # patio do card vira cidade/UF pelo mapa `patios`.
+    {
+        "name": "Palácio dos Leilões", "slug": "palacio", "parser_type": "palacio",
+        "base_url": "https://www.palaciodosleiloes.com.br", "scrape_frequency": 240,
+        "config": {
+            "categorias": [1], "fetch_details": True, "max_details_per_run": 60,
+            "patios": {"Juatuba": ["Juatuba", "MG"], "Salvador": ["Salvador", "BA"], "Cajamar": ["Cajamar", "SP"]},
+        },
+    },
 ]
 
 
