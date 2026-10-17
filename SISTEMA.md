@@ -202,6 +202,18 @@ Só entre fontes diferentes. Placa igual → 1,0. Senão: Jaccard do título (0,
 `generic_html` cobre leiloeiros simples via seletores CSS no `config` (exemplo no docstring).
 Sodré Santoro, Superbid, Copart, Milan e Lance Certo ficaram para a F4 (ver DECISOES.md).
 
+### Fontes da F4 (a partir de 17/10/2026)
+
+| Fonte | Como | Cobertura | Armadilhas |
+|---|---|---|---|
+| Rogério Menezes (RJ) | HTML SSR por categoria (`/categorias/carros` etc., sem paginação) + agenda em `var AGENDA` + detalhe com `var lote`/`var leilao` | seguradoras, financeiras, locadoras; ~240 veículos | cidade só no detalhe (pátio em Campo Grande/RJ); "Consulte" vira preço nulo; comitente do lote em `raw_attributes.comitente` |
+| Nakakogue (PR) | listagem `/lotes/consulta/{2,3}/` (tudo numa página) + detalhe em duas requisições (casca + `POST /proximo_lote.php` na sessão PHP) | judicial do Paraná, veículos e máquinas | charset misto (latin-1 com UTF-8 gravado por campo, `fix_mojibake`); "Valor Mínimo" é o piso da 2ª praça; `lotes/NNN` na capa são pregões |
+| Parque dos Leilões (DF) | listas `/leiloes` e `/leiloes-judiciais` (`type_id=1`) → página do pregão paginada → detalhe com `div[data-json="auctionLot"]` | bancos (pregões quinzenais de ~100 lotes) e varas do DF | preço só no detalhe, por isso só emite lote detalhado; praças judiciais lidas das Observações; `default_city/state` é conhecimento do operador |
+| Pestana Leilões (SP) — **inativa** | API JSON pública (`/api/v2/leilao`, `/api/v2/lote/por-leilao`) | ~800 veículos de financeiras em 7 pregões | termos de uso vedam "robôs para navegação da plataforma": fica cadastrada desligada até o operador decidir (RN-009) |
+
+Leilões BR foi descartado (arte e colecionáveis), Kleiber também (10 veículos,
+termos restritivos) e D1 Lance proíbe robôs no `robots.txt`.
+
 Fixtures reais em `backend/tests/fixtures/`; quando um layout quebrar, refaça a fixture e
 ajuste o parser com o teste guiando.
 
