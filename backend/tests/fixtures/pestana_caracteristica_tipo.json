@@ -1,0 +1,266 @@
+[
+ {
+  "id": 1759180483479,
+  "nome": "Descrição completa",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180490557,
+  "nome": "Valor 1º Leilão",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180494620,
+  "nome": "Valor 2º Leilão",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180487526,
+  "nome": "Data 1º Leilão",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180492589,
+  "nome": "Data 2º Leilão",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180497769,
+  "nome": "Área Privativa",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180486051,
+  "nome": "Situação",
+  "podeFiltrar": true,
+  "icone": ""
+ },
+ {
+  "id": 1759180496725,
+  "nome": "Área Total",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180502843,
+  "nome": "Permite visitação",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180501812,
+  "nome": "Área Construída",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180500119,
+  "nome": "Área de Terreno",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180508941,
+  "nome": "Matrícula",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180503875,
+  "nome": "Débitos",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180515049,
+  "nome": "Bairro",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180506907,
+  "nome": "Tipo",
+  "podeFiltrar": true,
+  "icone": ""
+ },
+ {
+  "id": 22222,
+  "nome": "Cidade",
+  "podeFiltrar": true,
+  "icone": ""
+ },
+ {
+  "id": 11111,
+  "nome": "UF",
+  "podeFiltrar": true,
+  "icone": ""
+ },
+ {
+  "id": 1759180526185,
+  "nome": "Distância do Metrô",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180529217,
+  "nome": "Ação Judicial",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180523151,
+  "nome": "Complemento",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180517085,
+  "nome": "Logradouro",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180520114,
+  "nome": "Nº",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180612302,
+  "nome": "Ar Condicionado",
+  "podeFiltrar": true,
+  "icone": ""
+ },
+ {
+  "id": 1759180614340,
+  "nome": "Direção",
+  "podeFiltrar": true,
+  "icone": ""
+ },
+ {
+  "id": 1759180608235,
+  "nome": "Origem",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180609270,
+  "nome": "Monta",
+  "podeFiltrar": true,
+  "icone": ""
+ },
+ {
+  "id": 1759180621467,
+  "nome": "Câmbio",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180618408,
+  "nome": "Chaves",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180620439,
+  "nome": "Estepe",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180626601,
+  "nome": "Modelo",
+  "podeFiltrar": true,
+  "icone": ""
+ },
+ {
+  "id": 1759180622503,
+  "nome": "Placa",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180624569,
+  "nome": "Marca",
+  "podeFiltrar": true,
+  "icone": ""
+ },
+ {
+  "id": 1759180623535,
+  "nome": "Cor",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180616374,
+  "nome": "KM",
+  "podeFiltrar": true,
+  "icone": ""
+ },
+ {
+  "id": 1759180636735,
+  "nome": "Condição do bem",
+  "podeFiltrar": true,
+  "icone": ""
+ },
+ {
+  "id": 1759180641842,
+  "nome": "Combustível",
+  "podeFiltrar": true,
+  "icone": ""
+ },
+ {
+  "id": 1759180639803,
+  "nome": "Qtd. Portas",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180637768,
+  "nome": "Blindagem",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180628637,
+  "nome": "Versão",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180634701,
+  "nome": "Mod.",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 12345,
+  "nome": "Ano",
+  "podeFiltrar": true,
+  "icone": ""
+ },
+ {
+  "id": 1759180649587,
+  "nome": "Modelo do equipamento",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180648551,
+  "nome": "Marca do equipamento",
+  "podeFiltrar": false,
+  "icone": ""
+ },
+ {
+  "id": 1759180645521,
+  "nome": "Descrição do bem",
+  "podeFiltrar": false,
+  "icone": ""
+ }
+]

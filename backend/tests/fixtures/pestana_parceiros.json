@@ -1,0 +1,211 @@
+[
+ {
+  "id": 138536,
+  "nome": "Itapeva Xi Multicarteira Fundo de Investimento Em Direitos Creditórios Não Padronizados",
+  "imagem": "",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 31115,
+  "nome": "Banco Digimais S.A.",
+  "imagem": "8715950.png",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 62848,
+  "nome": "Banco Pan S/A",
+  "imagem": "7063153.png",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 106755,
+  "nome": "Nc Comunicações S/A",
+  "imagem": "8716995.png",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 1513,
+  "nome": "Banco Santander Brasil S/A",
+  "imagem": "4641317.png",
+  "tiposBem": [
+   462
+  ]
+ },
+ {
+  "id": 1321,
+  "nome": "Banco Bradesco S/A",
+  "imagem": "5685737.png",
+  "tiposBem": [
+   462,
+   421
+  ]
+ },
+ {
+  "id": 1510,
+  "nome": "Santander Sociedade de Crédito Financiamento e Investimento S.A.",
+  "imagem": "4641305.png",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 18613,
+  "nome": "Mapfre Seguros Gerais S/A",
+  "imagem": "17943910.png",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 22507,
+  "nome": "Banco Votorantim S/A",
+  "imagem": "8573860.png",
+  "tiposBem": []
+ },
+ {
+  "id": 143554,
+  "nome": "Cooperativa de Credito da Foz do Rio Itajai Acu - Credifoz",
+  "imagem": "18180642.jpg",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 33274,
+  "nome": "Coop. de Créd. Poup. e Inv. Progresso Sicredi Progresso Pr/Sp",
+  "imagem": "3484055.jpg",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 1458,
+  "nome": "Banco Bradesco Financiamentos S/A",
+  "imagem": "5685738.png",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 229869,
+  "nome": "Cooperativa de Crédito - Credicomin",
+  "imagem": "18820602.png",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 1460,
+  "nome": "Bradesco Adm. Consórcios LTDA.",
+  "imagem": "5685739.png",
+  "tiposBem": []
+ },
+ {
+  "id": 239116,
+  "nome": "Cooperativa de Crédito, Poupança e Investimento Univales - Sicredi Univales Mt/Ro",
+  "imagem": "",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 81701,
+  "nome": "Omni S/A - Crédito, Financiamento e Investimento",
+  "imagem": "10218005.png",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 238898,
+  "nome": "Coop. de Créd. Poup. e Inv. Univales - Sicredi Univales Mt/Ro - Juína 1",
+  "imagem": "",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 238887,
+  "nome": "Coop. de Créd. Poup. e Inv. Univales - Sicredi Univales Mt/Ro - Porto Velho",
+  "imagem": "",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 238894,
+  "nome": "Coop. de Créd. Poup. e Inv. Univales - Sicredi Univales Mt/Ro - Candeias do Jamari",
+  "imagem": "",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 239115,
+  "nome": "Coop. de Créd. Poup. e Inv. Univales - Sicredi Univales Mt/Ro - Nova Monte Verde",
+  "imagem": "",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 239130,
+  "nome": "Coop. de Créd. Poup. e Inv. Univales - Sicredi Univales Mt/Ro - Juruena",
+  "imagem": "",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 239131,
+  "nome": "Coop. de Créd. Poup. e Inv. Univales - Sicredi Univales Mt/Ro - Nova Bandeirantes",
+  "imagem": "",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 206775,
+  "nome": "Tabor Fundo de Investimento Em Direitos Creditorios Nao-Padronizados Responsabilidade Limitada",
+  "imagem": "",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 60642,
+  "nome": "Cooperativa de Crédito de Livre Admissão de Associados – Norte Mato-Grossense – Sicredi Norte – Mt",
+  "imagem": "20653337.png",
+  "tiposBem": [
+   421
+  ]
+ },
+ {
+  "id": 24180,
+  "nome": "Administradora de Consórcios Sicredi LTDA.",
+  "imagem": "20653339.png",
+  "tiposBem": [
+   462
+  ]
+ },
+ {
+  "id": 900001,
+  "nome": "Banco Exemplo S.A. X Fulano de Tal e Outros",
+  "imagem": "",
+  "tiposBem": []
+ },
+ {
+  "id": 900002,
+  "nome": "Fulana de Tal",
+  "imagem": "",
+  "tiposBem": []
+ }
+]

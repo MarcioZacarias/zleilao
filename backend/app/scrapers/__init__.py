@@ -5,6 +5,7 @@ from app.scrapers.leilo import LeiloScraper
 from app.scrapers.megaleiloes import MegaLeiloesScraper
 from app.scrapers.nakakogue import NakakogueScraper
 from app.scrapers.parquedosleiloes import ParqueDosLeiloesScraper
+from app.scrapers.pestana import PestanaScraper
 from app.scrapers.rogeriomenezes import RogerioMenezesScraper
 
 SCRAPERS: dict[str, type[BaseScraper]] = {
@@ -14,6 +15,7 @@ SCRAPERS: dict[str, type[BaseScraper]] = {
     "rogeriomenezes": RogerioMenezesScraper,
     "nakakogue": NakakogueScraper,
     "parquedosleiloes": ParqueDosLeiloesScraper,
+    "pestana": PestanaScraper,
     "generic_html": GenericHtmlScraper,
 }
 

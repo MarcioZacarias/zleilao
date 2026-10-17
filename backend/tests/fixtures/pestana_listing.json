@@ -1,0 +1,1940 @@
+[
+ {
+  "id": 441880,
+  "leilao": 6260,
+  "numero": null,
+  "descricao": "Fiat Palio FIRE FLEX 2006 2006 Gas/Alc",
+  "status": "Disponível",
+  "tipoMoeda": "REAL",
+  "situacaoId": 1,
+  "lanceInicial": 9600,
+  "lanceMinimo": 0,
+  "valorFiltro": 9600,
+  "valor": 0,
+  "idValor": 0,
+  "valorInicial": 9600,
+  "arrematante": "",
+  "destaque": false,
+  "exibirMensagemRetirada": false,
+  "mensagemRetirada": null,
+  "ordem": "1",
+  "incrementoMinimo": 200,
+  "informacoesLei9514": {
+   "pertenceLei": false,
+   "valorLeilao2": null,
+   "classificacao": null,
+   "valorLeilao1": null
+  },
+  "bens": [
+   {
+    "id": 326992,
+    "descricao": "Automóvel Fiat Palio FIRE FLEX 2006 2006 Gas/Alc Vermelha 00875534953 Retomado",
+    "observacao": "IPVA 2026 Pago. Consta no documento: CHASSI REMARCADO. Caso necessário reparos e regularização dos itens citados ou não, será por conta do arrematante.Não será permitido o arremate e pagamento em nome de terceiros. Arrematante PF = Comprador PF = Pagador PF ou Arrematante PJ = Comprador PJ = Pagador PJ.",
+    "ordem": 1,
+    "origem": "Retomado",
+    "tipoBem": {
+     "id": 421,
+     "nome": "Veículos"
+    },
+    "subTipoBem": {
+     "id": 481,
+     "nome": "Automóveis",
+     "tipoBem": 421
+    },
+    "videos": [
+     {
+      "urlVideo": "https://storage.pestanaleiloes.com.br/production/image/817614735db8e59ae456afae2631ea78.mp4",
+      "destaque": true
+     }
+    ],
+    "cidade": {
+     "name": "Nova Santa Rita"
+    },
+    "estado": {
+     "name": "RS"
+    },
+    "imagens": [
+     {
+      "original": "20611164.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Fotos Externas",
+       "id": 437722
+      },
+      "tooltip": "Diagonal Frontal Esquerda",
+      "ordem": 1,
+      "destaque": true,
+      "media": "20611165.jpg",
+      "descricaoImagem": null,
+      "pequena": "20611166.jpg"
+     },
+     {
+      "original": "20611219.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Fotos Externas",
+       "id": 437722
+      },
+      "tooltip": "Diagonal Frontal Direita",
+      "ordem": 2,
+      "destaque": false,
+      "media": "20611220.jpg",
+      "descricaoImagem": null,
+      "pequena": "20611221.jpg"
+     },
+     {
+      "original": "20611176.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Fotos Externas",
+       "id": 437722
+      },
+      "tooltip": "Diagonal Traseira Direita",
+      "ordem": 3,
+      "destaque": false,
+      "media": "20611177.jpg",
+      "descricaoImagem": null,
+      "pequena": "20611178.jpg"
+     }
+    ],
+    "aplicaSeloFinanciamento": false,
+    "caracteristicas": [
+     {
+      "tipo": 1759180608235,
+      "valor": "Retomado",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSwitchLeft"
+     },
+     {
+      "tipo": 1759180609270,
+      "valor": "Não se aplica",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180612302,
+      "valor": "Não",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineThermostat"
+     },
+     {
+      "tipo": 1759180614340,
+      "valor": "Mecânica",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineTripOrigin"
+     },
+     {
+      "tipo": 1759180616374,
+      "valor": "Indisponível",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSpeed"
+     },
+     {
+      "tipo": 1759180618408,
+      "valor": "Com Chave",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineVpnKey"
+     },
+     {
+      "tipo": 1759180620439,
+      "valor": "Sim",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineRadioButtonChecked"
+     },
+     {
+      "tipo": 1759180621467,
+      "valor": "Manual",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineMiscellaneousServices"
+     },
+     {
+      "tipo": 1759180506907,
+      "valor": "Automóvel",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdCommute"
+     },
+     {
+      "tipo": 1759180622503,
+      "valor": "I*****0",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlinePin"
+     },
+     {
+      "tipo": 1759180623535,
+      "valor": "Vermelha",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineColorLens"
+     },
+     {
+      "tipo": 1759180624569,
+      "valor": "Fiat",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180626601,
+      "valor": "Palio",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180628637,
+      "valor": "FIRE FLEX",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 12345,
+      "valor": "2006",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180634701,
+      "valor": "2006",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180636735,
+      "valor": "Para circulação",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineBuildCircle"
+     },
+     {
+      "tipo": 1759180637768,
+      "valor": "Não",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineGarage"
+     },
+     {
+      "tipo": 1759180639803,
+      "valor": "4",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSensorDoor"
+     },
+     {
+      "tipo": 1759180641842,
+      "valor": "Gas/Alc",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineLocalGasStation"
+     }
+    ],
+    "documentos": [],
+    "exposicao": {
+     "data": "",
+     "endereco": "BR 386, S/N - Km 431 - Nova Santa Rita RS",
+     "idPeriodoVisitacao": 5987,
+     "urlMapa": "<iframe></iframe>"
+    }
+   }
+  ],
+  "documentos": [],
+  "visivel": true,
+  "permiteParticipacaoOnline": true,
+  "parceiro": {
+   "id": 1458
+  },
+  "condicoesPagamentoArremate": {},
+  "valoresAdicionais": {
+   "valorDebitos": null,
+   "taxasAdministrativasPorParceiro": [
+    {
+     "valorInicial": 0,
+     "valorTaxa": 0,
+     "valorFinal": 0,
+     "idTipoBem": 0,
+     "idParceiro": 0
+    }
+   ],
+   "comissaoPadraoOuDefinida": "P",
+   "bens": [
+    {
+     "idBem": 326992,
+     "percentualComissao": 5,
+     "idTipoBemPai": 421,
+     "idTipoBem": 481,
+     "idParceiro": 1458,
+     "avaliacaoLeiloeiro": null
+    }
+   ],
+   "valorDespesasDiversas": null,
+   "taxasAdministrativas": {
+    "taxasPorTipoBem": [],
+    "taxasPorFaixaValor": [
+     {
+      "valorInicial": 0,
+      "anoFinal": 2100,
+      "anoInicial": 1900,
+      "valorTaxa": 2350,
+      "valorFinal": 999999999,
+      "idTipoBem": 481
+     }
+    ]
+   },
+   "taxaAdmPadraoOuDefinida": "P",
+   "percentualComissao": 0,
+   "idLote": 441880,
+   "valorTaxaAdministrativa": 0
+  },
+  "seloLigaPartida": false,
+  "seloIpvaPago": true,
+  "seloFinanciamento": false,
+  "tarjaEnchente": false,
+  "seloDespesa": null,
+  "exibirLanceInicial": true,
+  "exibirLanceMinimo": false,
+  "exibirTransmissao": false,
+  "descontoTaxa": {}
+ },
+ {
+  "id": 441977,
+  "leilao": 6260,
+  "numero": "110",
+  "descricao": "Lote contendo Caminhao/Trator DAF XF FTT 530 SSC 2021 2021 Diesel Branca e 3 Semirreboques Facchini ",
+  "status": "Disponível",
+  "tipoMoeda": "REAL",
+  "situacaoId": 1,
+  "lanceInicial": 360000,
+  "lanceMinimo": 0,
+  "valorFiltro": 360000,
+  "valor": 0,
+  "idValor": 0,
+  "valorInicial": 360000,
+  "arrematante": "",
+  "destaque": false,
+  "exibirMensagemRetirada": false,
+  "mensagemRetirada": null,
+  "ordem": "6",
+  "incrementoMinimo": 2000,
+  "informacoesLei9514": {
+   "pertenceLei": false,
+   "valorLeilao2": null,
+   "classificacao": null,
+   "valorLeilao1": null
+  },
+  "bens": [
+   {
+    "id": 334208,
+    "descricao": "Caminhao/Trator DAF XF FTT 530 SSC 2021 2021 Diesel Branca 01261234321 Retomado",
+    "observacao": null,
+    "ordem": 1,
+    "origem": "Retomado",
+    "tipoBem": {
+     "id": 421,
+     "nome": "Veículos"
+    },
+    "subTipoBem": {
+     "id": 482,
+     "nome": "Caminhões",
+     "tipoBem": 421
+    },
+    "videos": [],
+    "cidade": {
+     "name": "Colíder"
+    },
+    "estado": {
+     "name": "MT"
+    },
+    "imagens": [
+     {
+      "original": "20621496.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Fotos Externas",
+       "id": 438265
+      },
+      "tooltip": "Diagonal Frontal Esquerda",
+      "ordem": 1,
+      "destaque": true,
+      "media": "20621497.jpg",
+      "descricaoImagem": null,
+      "pequena": "20621498.jpg"
+     },
+     {
+      "original": "20621490.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Fotos Externas",
+       "id": 438265
+      },
+      "tooltip": "Diagonal Frontal Direita",
+      "ordem": 6,
+      "destaque": false,
+      "media": "20621491.jpg",
+      "descricaoImagem": null,
+      "pequena": "20621492.jpg"
+     },
+     {
+      "original": "20621505.jpg",
+      "categoria": {
+       "ordem": 2,
+       "nome": "Fotos Internas",
+       "id": 438269
+      },
+      "tooltip": "Painel",
+      "ordem": 2,
+      "destaque": false,
+      "media": "20621506.jpg",
+      "descricaoImagem": null,
+      "pequena": "20621507.jpg"
+     }
+    ],
+    "aplicaSeloFinanciamento": false,
+    "caracteristicas": [
+     {
+      "tipo": 1759180608235,
+      "valor": "Retomado",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSwitchLeft"
+     },
+     {
+      "tipo": 1759180609270,
+      "valor": "Não se aplica",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180612302,
+      "valor": "Não",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineThermostat"
+     },
+     {
+      "tipo": 1759180614340,
+      "valor": "Assistida",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineTripOrigin"
+     },
+     {
+      "tipo": 1759180616374,
+      "valor": "449.806",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSpeed"
+     },
+     {
+      "tipo": 1759180618408,
+      "valor": "Com Chave",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineVpnKey"
+     },
+     {
+      "tipo": 1759180620439,
+      "valor": "Não",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineRadioButtonChecked"
+     },
+     {
+      "tipo": 1759180621467,
+      "valor": "Manual",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineMiscellaneousServices"
+     },
+     {
+      "tipo": 1759180506907,
+      "valor": "Caminhao/Trator",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdCommute"
+     },
+     {
+      "tipo": 1759180622503,
+      "valor": "R*****5",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlinePin"
+     },
+     {
+      "tipo": 1759180623535,
+      "valor": "Branca",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineColorLens"
+     },
+     {
+      "tipo": 1759180624569,
+      "valor": "DAF",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180626601,
+      "valor": "XF",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180628637,
+      "valor": "FTT 530 SSC",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 12345,
+      "valor": "2021",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180634701,
+      "valor": "2021",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180636735,
+      "valor": "Para circulação",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineBuildCircle"
+     },
+     {
+      "tipo": 1759180637768,
+      "valor": "Não se aplica",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineGarage"
+     },
+     {
+      "tipo": 1759180639803,
+      "valor": "2",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSensorDoor"
+     },
+     {
+      "tipo": 1759180641842,
+      "valor": "Diesel",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineLocalGasStation"
+     }
+    ],
+    "documentos": [],
+    "exposicao": {
+     "data": "",
+     "endereco": "Estrada Santa Fé, S/N - Santa Fé - Colíder MT",
+     "idPeriodoVisitacao": null,
+     "urlMapa": null
+    }
+   },
+   {
+    "id": 334211,
+    "descricao": "Semirreboque Facchini SRF CB 2020 2021 Preta Renavam:01254007595 Retomado",
+    "observacao": null,
+    "ordem": 4,
+    "origem": "Retomado",
+    "tipoBem": {
+     "id": 421,
+     "nome": "Veículos"
+    },
+    "subTipoBem": {
+     "id": 522,
+     "nome": "Reboques",
+     "tipoBem": 421
+    },
+    "videos": [],
+    "cidade": {
+     "name": "Colíder"
+    },
+    "estado": {
+     "name": "MT"
+    },
+    "imagens": [
+     {
+      "original": "20621604.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Fotos Externas",
+       "id": 438268
+      },
+      "tooltip": "Diagonal Traseira Direita",
+      "ordem": 5,
+      "destaque": true,
+      "media": "20621605.jpg",
+      "descricaoImagem": null,
+      "pequena": "20621606.jpg"
+     },
+     {
+      "original": "20621608.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Fotos Externas",
+       "id": 438268
+      },
+      "tooltip": "Diagonal Traseira Esquerda",
+      "ordem": 8,
+      "destaque": false,
+      "media": "20621609.jpg",
+      "descricaoImagem": null,
+      "pequena": "20621610.jpg"
+     }
+    ],
+    "aplicaSeloFinanciamento": false,
+    "caracteristicas": [
+     {
+      "tipo": 1759180608235,
+      "valor": "Retomado",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSwitchLeft"
+     },
+     {
+      "tipo": 1759180609270,
+      "valor": "Não se aplica",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180620439,
+      "valor": "Não informado",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineRadioButtonChecked"
+     },
+     {
+      "tipo": 1759180506907,
+      "valor": "Semirreboque",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdCommute"
+     },
+     {
+      "tipo": 1759180622503,
+      "valor": "R*****2",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlinePin"
+     },
+     {
+      "tipo": 1759180623535,
+      "valor": "Preta",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineColorLens"
+     },
+     {
+      "tipo": 1759180624569,
+      "valor": "Facchini",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180626601,
+      "valor": "SRF",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180628637,
+      "valor": "CB",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 12345,
+      "valor": "2020",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180634701,
+      "valor": "2021",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180636735,
+      "valor": "Para circulação",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineBuildCircle"
+     }
+    ],
+    "documentos": [],
+    "exposicao": {
+     "data": "",
+     "endereco": "Estrada Santa Fé, S/N - Santa Fé - Colíder MT",
+     "idPeriodoVisitacao": null,
+     "urlMapa": null
+    }
+   },
+   {
+    "id": 334209,
+    "descricao": "Reboque R/ Facchini RE DL 2020 2021 Preta Renavam:01254014737 Retomado",
+    "observacao": null,
+    "ordem": 2,
+    "origem": "Retomado",
+    "tipoBem": {
+     "id": 421,
+     "nome": "Veículos"
+    },
+    "subTipoBem": {
+     "id": 522,
+     "nome": "Reboques",
+     "tipoBem": 421
+    },
+    "videos": [],
+    "cidade": {
+     "name": "Colíder"
+    },
+    "estado": {
+     "name": "MT"
+    },
+    "imagens": [
+     {
+      "original": "20621502.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Peças Soltas",
+       "id": 438266
+      },
+      "tooltip": "Peças Soltas 1",
+      "ordem": 3,
+      "destaque": true,
+      "media": "20621503.jpg",
+      "descricaoImagem": null,
+      "pequena": "20621504.jpg"
+     }
+    ],
+    "aplicaSeloFinanciamento": false,
+    "caracteristicas": [
+     {
+      "tipo": 1759180608235,
+      "valor": "Retomado",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSwitchLeft"
+     },
+     {
+      "tipo": 1759180609270,
+      "valor": "Não se aplica",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180620439,
+      "valor": "Não informado",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineRadioButtonChecked"
+     },
+     {
+      "tipo": 1759180506907,
+      "valor": "Reboque",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdCommute"
+     },
+     {
+      "tipo": 1759180622503,
+      "valor": "R*****2",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlinePin"
+     },
+     {
+      "tipo": 1759180623535,
+      "valor": "Preta",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineColorLens"
+     },
+     {
+      "tipo": 1759180624569,
+      "valor": "R/",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180626601,
+      "valor": "Facchini",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180628637,
+      "valor": "RE DL",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 12345,
+      "valor": "2020",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180634701,
+      "valor": "2021",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180636735,
+      "valor": "Para circulação",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineBuildCircle"
+     }
+    ],
+    "documentos": [],
+    "exposicao": {
+     "data": "",
+     "endereco": "Estrada Santa Fé, S/N - Santa Fé - Colíder MT",
+     "idPeriodoVisitacao": null,
+     "urlMapa": null
+    }
+   },
+   {
+    "id": 334210,
+    "descricao": "Semirreboque Facchini SRF 2CB 2020 2021 Preta Renavam:01254017582 Retomado",
+    "observacao": null,
+    "ordem": 3,
+    "origem": "Retomado",
+    "tipoBem": {
+     "id": 421,
+     "nome": "Veículos"
+    },
+    "subTipoBem": {
+     "id": 522,
+     "nome": "Reboques",
+     "tipoBem": 421
+    },
+    "videos": [],
+    "cidade": {
+     "name": "Colíder"
+    },
+    "estado": {
+     "name": "MT"
+    },
+    "imagens": [
+     {
+      "original": "20621512.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Peças Soltas",
+       "id": 438267
+      },
+      "tooltip": "Peças Soltas 1",
+      "ordem": 4,
+      "destaque": true,
+      "media": "20621513.jpg",
+      "descricaoImagem": null,
+      "pequena": "20621514.jpg"
+     }
+    ],
+    "aplicaSeloFinanciamento": false,
+    "caracteristicas": [
+     {
+      "tipo": 1759180608235,
+      "valor": "Retomado",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSwitchLeft"
+     },
+     {
+      "tipo": 1759180609270,
+      "valor": "Não se aplica",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180620439,
+      "valor": "Não informado",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineRadioButtonChecked"
+     },
+     {
+      "tipo": 1759180506907,
+      "valor": "Semirreboque",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdCommute"
+     },
+     {
+      "tipo": 1759180622503,
+      "valor": "R*****2",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlinePin"
+     },
+     {
+      "tipo": 1759180623535,
+      "valor": "Preta",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineColorLens"
+     },
+     {
+      "tipo": 1759180624569,
+      "valor": "Facchini",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180626601,
+      "valor": "SRF",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180628637,
+      "valor": "2CB",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 12345,
+      "valor": "2020",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180634701,
+      "valor": "2021",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180636735,
+      "valor": "Para circulação",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineBuildCircle"
+     }
+    ],
+    "documentos": [],
+    "exposicao": {
+     "data": "",
+     "endereco": "Estrada Santa Fé, S/N - Santa Fé - Colíder MT",
+     "idPeriodoVisitacao": null,
+     "urlMapa": null
+    }
+   }
+  ],
+  "documentos": [],
+  "visivel": true,
+  "permiteParticipacaoOnline": true,
+  "parceiro": {
+   "id": 60642
+  },
+  "condicoesPagamentoArremate": {},
+  "valoresAdicionais": {
+   "valorDebitos": null,
+   "taxasAdministrativasPorParceiro": [
+    {
+     "valorInicial": 0,
+     "valorTaxa": 0,
+     "valorFinal": 0,
+     "idTipoBem": 0,
+     "idParceiro": 0
+    }
+   ],
+   "comissaoPadraoOuDefinida": "P",
+   "bens": [
+    {
+     "idBem": 334211,
+     "percentualComissao": 5,
+     "idTipoBemPai": 421,
+     "idTipoBem": 522,
+     "idParceiro": 60642,
+     "avaliacaoLeiloeiro": null
+    },
+    {
+     "idBem": 334208,
+     "percentualComissao": 5,
+     "idTipoBemPai": 421,
+     "idTipoBem": 482,
+     "idParceiro": 60642,
+     "avaliacaoLeiloeiro": null
+    },
+    {
+     "idBem": 334209,
+     "percentualComissao": 5,
+     "idTipoBemPai": 421,
+     "idTipoBem": 522,
+     "idParceiro": 60642,
+     "avaliacaoLeiloeiro": null
+    },
+    {
+     "idBem": 334210,
+     "percentualComissao": 5,
+     "idTipoBemPai": 421,
+     "idTipoBem": 522,
+     "idParceiro": 60642,
+     "avaliacaoLeiloeiro": null
+    }
+   ],
+   "valorDespesasDiversas": 1200,
+   "taxasAdministrativas": {
+    "taxasPorTipoBem": [],
+    "taxasPorFaixaValor": [
+     {
+      "valorInicial": 0,
+      "anoFinal": 2100,
+      "anoInicial": 1900,
+      "valorTaxa": 4900,
+      "valorFinal": 999999999,
+      "idTipoBem": 522
+     },
+     {
+      "valorInicial": 0,
+      "anoFinal": 2100,
+      "anoInicial": 1900,
+      "valorTaxa": 4900,
+      "valorFinal": 999999999,
+      "idTipoBem": 482
+     }
+    ]
+   },
+   "taxaAdmPadraoOuDefinida": "V",
+   "percentualComissao": 0,
+   "idLote": 441977,
+   "valorTaxaAdministrativa": 3000
+  },
+  "seloLigaPartida": false,
+  "seloIpvaPago": true,
+  "seloFinanciamento": false,
+  "tarjaEnchente": false,
+  "seloDespesa": null,
+  "exibirLanceInicial": true,
+  "exibirLanceMinimo": false,
+  "exibirTransmissao": false,
+  "descontoTaxa": {}
+ },
+ {
+  "id": 441935,
+  "leilao": 6260,
+  "numero": "90",
+  "descricao": "Renault Kwid ZEN 10MT 2018 2018 Gas/Alc",
+  "status": "Disponível",
+  "tipoMoeda": "REAL",
+  "situacaoId": 1,
+  "lanceInicial": 15900,
+  "lanceMinimo": 0,
+  "valorFiltro": 15900,
+  "valor": 15900,
+  "idValor": 2185693,
+  "valorInicial": 15900,
+  "arrematante": "m***v",
+  "destaque": false,
+  "exibirMensagemRetirada": false,
+  "mensagemRetirada": null,
+  "ordem": "1",
+  "incrementoMinimo": 300,
+  "informacoesLei9514": {
+   "valorLeilao2": null,
+   "valorLeilao1": null,
+   "pertenceLei": false,
+   "classificacao": null
+  },
+  "bens": [
+   {
+    "id": 323933,
+    "descricao": "Automóvel Renault Kwid ZEN 10MT 2018 2018 Gas/Alc Preta 01144714254 Retomado",
+    "observacao": "Motor regularizo. Caso necessário reparos e regularização de itens citados ou não, será por conta do arrematante.",
+    "ordem": 1,
+    "origem": "Retomado",
+    "tipoBem": {
+     "id": 421,
+     "nome": "Veículos"
+    },
+    "subTipoBem": {
+     "id": 481,
+     "nome": "Automóveis",
+     "tipoBem": 421
+    },
+    "videos": [
+     {
+      "urlVideo": "https://storage.pestanaleiloes.com.br/production/image/fe90a02fcbb9e69b80ace6d64ec2ca30.mp4",
+      "destaque": true
+     }
+    ],
+    "cidade": {
+     "name": "Suzano"
+    },
+    "estado": {
+     "name": "SP"
+    },
+    "imagens": [
+     {
+      "original": "20618831.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Fotos Externas",
+       "id": 438048
+      },
+      "tooltip": "Diagonal Frontal Esquerda",
+      "ordem": 1,
+      "destaque": true,
+      "media": "20618832.jpg",
+      "descricaoImagem": null,
+      "pequena": "20618833.jpg"
+     },
+     {
+      "original": "20618897.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Fotos Externas",
+       "id": 438048
+      },
+      "tooltip": "Diagonal Frontal Direita",
+      "ordem": 2,
+      "destaque": false,
+      "media": "20618898.jpg",
+      "descricaoImagem": null,
+      "pequena": "20618899.jpg"
+     },
+     {
+      "original": "20618825.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Fotos Externas",
+       "id": 438048
+      },
+      "tooltip": "Diagonal Traseira Direita",
+      "ordem": 3,
+      "destaque": false,
+      "media": "20618826.jpg",
+      "descricaoImagem": null,
+      "pequena": "20618827.jpg"
+     }
+    ],
+    "aplicaSeloFinanciamento": false,
+    "caracteristicas": [
+     {
+      "tipo": 1759180608235,
+      "valor": "Retomado",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSwitchLeft"
+     },
+     {
+      "tipo": 1759180609270,
+      "valor": "Não se aplica",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180612302,
+      "valor": "Sim",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineThermostat"
+     },
+     {
+      "tipo": 1759180614340,
+      "valor": "Assistida",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineTripOrigin"
+     },
+     {
+      "tipo": 1759180616374,
+      "valor": "163.040",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSpeed"
+     },
+     {
+      "tipo": 1759180618408,
+      "valor": "Com Chave",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineVpnKey"
+     },
+     {
+      "tipo": 1759180620439,
+      "valor": "Não",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineRadioButtonChecked"
+     },
+     {
+      "tipo": 1759180621467,
+      "valor": "Manual",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineMiscellaneousServices"
+     },
+     {
+      "tipo": 1759180506907,
+      "valor": "Automóvel",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdCommute"
+     },
+     {
+      "tipo": 1759180622503,
+      "valor": "Q*****0",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlinePin"
+     },
+     {
+      "tipo": 1759180623535,
+      "valor": "Preta",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineColorLens"
+     },
+     {
+      "tipo": 1759180624569,
+      "valor": "Renault",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180626601,
+      "valor": "Kwid",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180628637,
+      "valor": "ZEN 10MT",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 12345,
+      "valor": "2018",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180634701,
+      "valor": "2018",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180636735,
+      "valor": "Para circulação",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineBuildCircle"
+     },
+     {
+      "tipo": 1759180637768,
+      "valor": "Não",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineGarage"
+     },
+     {
+      "tipo": 1759180639803,
+      "valor": "4",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSensorDoor"
+     },
+     {
+      "tipo": 1759180641842,
+      "valor": "Gas/Alc",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineLocalGasStation"
+     }
+    ],
+    "documentos": [],
+    "exposicao": {
+     "data": "",
+     "endereco": "Estrada Keida Harada, 390 - Ipelândia - Suzano SP",
+     "idPeriodoVisitacao": 5989,
+     "urlMapa": "<iframe></iframe>"
+    }
+   }
+  ],
+  "documentos": [],
+  "visivel": true,
+  "permiteParticipacaoOnline": true,
+  "parceiro": {
+   "id": 138536
+  },
+  "condicoesPagamentoArremate": {},
+  "valoresAdicionais": {
+   "valorDebitos": null,
+   "taxasAdministrativasPorParceiro": [
+    {
+     "idTipoBem": 0,
+     "valorInicial": 0,
+     "valorTaxa": 0,
+     "valorFinal": 0,
+     "idParceiro": 0
+    }
+   ],
+   "comissaoPadraoOuDefinida": "P",
+   "bens": [
+    {
+     "idTipoBem": 481,
+     "idBem": 323933,
+     "percentualComissao": 5,
+     "idTipoBemPai": 421,
+     "idParceiro": 138536,
+     "avaliacaoLeiloeiro": null
+    }
+   ],
+   "valorDespesasDiversas": null,
+   "taxasAdministrativas": {
+    "taxasPorFaixaValor": [
+     {
+      "anoFinal": 2100,
+      "anoInicial": 1900,
+      "idTipoBem": 481,
+      "valorInicial": 0,
+      "valorTaxa": 2350,
+      "valorFinal": 999999999
+     }
+    ],
+    "taxasPorTipoBem": []
+   },
+   "taxaAdmPadraoOuDefinida": "P",
+   "percentualComissao": 0,
+   "idLote": 441935,
+   "valorTaxaAdministrativa": 0
+  },
+  "seloLigaPartida": true,
+  "seloIpvaPago": false,
+  "seloFinanciamento": false,
+  "tarjaEnchente": false,
+  "seloDespesa": null,
+  "exibirLanceInicial": true,
+  "exibirLanceMinimo": false,
+  "exibirTransmissao": false,
+  "descontoTaxa": {}
+ },
+ {
+  "id": 442117,
+  "leilao": 6260,
+  "numero": "58",
+  "descricao": "Yamaha XTZ 250 LANDER 2024 2024 Gas/Alc",
+  "status": "Disponível",
+  "tipoMoeda": "REAL",
+  "situacaoId": 1,
+  "lanceInicial": 18800,
+  "lanceMinimo": 0,
+  "valorFiltro": 18800,
+  "valor": 0,
+  "idValor": 0,
+  "valorInicial": 18800,
+  "arrematante": "",
+  "destaque": false,
+  "exibirMensagemRetirada": false,
+  "mensagemRetirada": null,
+  "ordem": "5",
+  "incrementoMinimo": 300,
+  "informacoesLei9514": {
+   "pertenceLei": false,
+   "valorLeilao2": null,
+   "classificacao": null,
+   "valorLeilao1": null
+  },
+  "bens": [
+   {
+    "id": 328614,
+    "descricao": "Motocicleta Yamaha XTZ 250 LANDER 2024 2024 Gas/Alc Vermelha 01418125048 Retomado",
+    "observacao": null,
+    "ordem": 1,
+    "origem": "Retomado",
+    "tipoBem": {
+     "id": 421,
+     "nome": "Veículos"
+    },
+    "subTipoBem": {
+     "id": 483,
+     "nome": "Motos",
+     "tipoBem": 421
+    },
+    "videos": [
+     {
+      "urlVideo": "https://storage.pestanaleiloes.com.br/production/image/c783c28aa88fc694ee4f6e070d5c297a.mp4",
+      "destaque": true
+     }
+    ],
+    "cidade": {
+     "name": "Tijucas"
+    },
+    "estado": {
+     "name": "SC"
+    },
+    "imagens": [
+     {
+      "original": "20641110.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Geral",
+       "id": 439137
+      },
+      "tooltip": "Diagonal Frontal Direita",
+      "ordem": 1,
+      "destaque": true,
+      "media": "20641111.jpg",
+      "descricaoImagem": null,
+      "pequena": "20641112.jpg"
+     },
+     {
+      "original": "20641086.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Geral",
+       "id": 439137
+      },
+      "tooltip": "Diagonal Frontal Esquerda",
+      "ordem": 2,
+      "destaque": false,
+      "media": "20641087.jpg",
+      "descricaoImagem": null,
+      "pequena": "20641088.jpg"
+     },
+     {
+      "original": "20641113.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Geral",
+       "id": 439137
+      },
+      "tooltip": "Central - Lateral Esquerda",
+      "ordem": 3,
+      "destaque": false,
+      "media": "20641114.jpg",
+      "descricaoImagem": null,
+      "pequena": "20641115.jpg"
+     }
+    ],
+    "aplicaSeloFinanciamento": false,
+    "caracteristicas": [
+     {
+      "tipo": 1759180608235,
+      "valor": "Retomado",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSwitchLeft"
+     },
+     {
+      "tipo": 1759180609270,
+      "valor": "Não se aplica",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180616374,
+      "valor": "22.323",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSpeed"
+     },
+     {
+      "tipo": 1759180618408,
+      "valor": "Com Chave",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineVpnKey"
+     },
+     {
+      "tipo": 1759180506907,
+      "valor": "Motocicleta",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdCommute"
+     },
+     {
+      "tipo": 1759180622503,
+      "valor": "S*****9",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlinePin"
+     },
+     {
+      "tipo": 1759180623535,
+      "valor": "Vermelha",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineColorLens"
+     },
+     {
+      "tipo": 1759180624569,
+      "valor": "Yamaha",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180626601,
+      "valor": "XTZ",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180628637,
+      "valor": "250 LANDER",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 12345,
+      "valor": "2024",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180634701,
+      "valor": "2024",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180636735,
+      "valor": "Para circulação",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineBuildCircle"
+     },
+     {
+      "tipo": 1759180641842,
+      "valor": "Gas/Alc",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineLocalGasStation"
+     }
+    ],
+    "documentos": [],
+    "exposicao": {
+     "data": "",
+     "endereco": "Rua Angelo José da Silva, 311 - Pernambuco - Tijucas SC",
+     "idPeriodoVisitacao": 5988,
+     "urlMapa": null
+    }
+   }
+  ],
+  "documentos": [],
+  "visivel": true,
+  "permiteParticipacaoOnline": true,
+  "parceiro": {
+   "id": 143554
+  },
+  "condicoesPagamentoArremate": {},
+  "valoresAdicionais": {
+   "valorDebitos": null,
+   "taxasAdministrativasPorParceiro": [
+    {
+     "valorInicial": 0,
+     "valorTaxa": 0,
+     "valorFinal": 0,
+     "idTipoBem": 0,
+     "idParceiro": 0
+    }
+   ],
+   "comissaoPadraoOuDefinida": "P",
+   "bens": [
+    {
+     "idBem": 328614,
+     "percentualComissao": 5,
+     "idTipoBemPai": 421,
+     "idTipoBem": 483,
+     "idParceiro": 143554,
+     "avaliacaoLeiloeiro": null
+    }
+   ],
+   "valorDespesasDiversas": 250,
+   "taxasAdministrativas": {
+    "taxasPorTipoBem": [],
+    "taxasPorFaixaValor": [
+     {
+      "valorInicial": 0,
+      "anoFinal": 2100,
+      "anoInicial": 1900,
+      "valorTaxa": 550,
+      "valorFinal": 999999999,
+      "idTipoBem": 483
+     }
+    ]
+   },
+   "taxaAdmPadraoOuDefinida": "P",
+   "percentualComissao": 0,
+   "idLote": 442117,
+   "valorTaxaAdministrativa": 0
+  },
+  "seloLigaPartida": true,
+  "seloIpvaPago": false,
+  "seloFinanciamento": false,
+  "tarjaEnchente": false,
+  "seloDespesa": null,
+  "exibirLanceInicial": true,
+  "exibirLanceMinimo": false,
+  "exibirTransmissao": false,
+  "descontoTaxa": {}
+ },
+ {
+  "id": 441837,
+  "leilao": 6260,
+  "numero": "48",
+  "descricao": "Chevrolet Captiva SPORT FWD 2008 2009 Gasolina Sem Chaves",
+  "status": "Disponível",
+  "tipoMoeda": "REAL",
+  "situacaoId": 1,
+  "lanceInicial": 9900,
+  "lanceMinimo": 0,
+  "valorFiltro": 9900,
+  "valor": 0,
+  "idValor": 0,
+  "valorInicial": 9900,
+  "arrematante": "",
+  "destaque": false,
+  "exibirMensagemRetirada": false,
+  "mensagemRetirada": null,
+  "ordem": "1",
+  "incrementoMinimo": 200,
+  "informacoesLei9514": {
+   "pertenceLei": false,
+   "valorLeilao2": null,
+   "classificacao": null,
+   "valorLeilao1": null
+  },
+  "bens": [
+   {
+    "id": 333293,
+    "descricao": "Camioneta Chevrolet Captiva SPORT FWD 2008 2009 Gasolina Preta 00120144646 Retomado Chaves:Sem Chaves",
+    "observacao": "Veiculo sem bateria. Sistema de escape danificado. Cofre do motor incompleto e sem conferência de peças. Caso necessário reparos e regularização de itens citados ou não, será por conta do arrematante.",
+    "ordem": 1,
+    "origem": "Retomado",
+    "tipoBem": {
+     "id": 421,
+     "nome": "Veículos"
+    },
+    "subTipoBem": {
+     "id": 502,
+     "nome": "Camionetas",
+     "tipoBem": 421
+    },
+    "videos": [
+     {
+      "urlVideo": "https://storage.pestanaleiloes.com.br/production/image/2e067292dfdecaef1e8d27085a490492.mp4",
+      "destaque": true
+     }
+    ],
+    "cidade": {
+     "name": "Nova Santa Rita"
+    },
+    "estado": {
+     "name": "RS"
+    },
+    "imagens": [
+     {
+      "original": "20606205.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Fotos Externas",
+       "id": 437484
+      },
+      "tooltip": "Diagonal Frontal Esquerda",
+      "ordem": 1,
+      "destaque": true,
+      "media": "20606206.jpg",
+      "descricaoImagem": null,
+      "pequena": "20606207.jpg"
+     },
+     {
+      "original": "20606209.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Fotos Externas",
+       "id": 437484
+      },
+      "tooltip": "Diagonal Frontal Direita",
+      "ordem": 2,
+      "destaque": false,
+      "media": "20606210.jpg",
+      "descricaoImagem": null,
+      "pequena": "20606211.jpg"
+     },
+     {
+      "original": "20606213.jpg",
+      "categoria": {
+       "ordem": 1,
+       "nome": "Fotos Externas",
+       "id": 437484
+      },
+      "tooltip": "Diagonal Traseira Direita",
+      "ordem": 3,
+      "destaque": false,
+      "media": "20606214.jpg",
+      "descricaoImagem": null,
+      "pequena": "20606215.jpg"
+     }
+    ],
+    "aplicaSeloFinanciamento": false,
+    "caracteristicas": [
+     {
+      "tipo": 1759180608235,
+      "valor": "Retomado",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSwitchLeft"
+     },
+     {
+      "tipo": 1759180609270,
+      "valor": "Não se aplica",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180612302,
+      "valor": "Sim",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineThermostat"
+     },
+     {
+      "tipo": 1759180614340,
+      "valor": "Assistida",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineTripOrigin"
+     },
+     {
+      "tipo": 1759180616374,
+      "valor": "Indisponível",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSpeed"
+     },
+     {
+      "tipo": 1759180618408,
+      "valor": "Sem Chaves",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineVpnKey"
+     },
+     {
+      "tipo": 1759180620439,
+      "valor": "Sim",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineRadioButtonChecked"
+     },
+     {
+      "tipo": 1759180621467,
+      "valor": "Automático",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineMiscellaneousServices"
+     },
+     {
+      "tipo": 1759180506907,
+      "valor": "Camioneta",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdCommute"
+     },
+     {
+      "tipo": 1759180622503,
+      "valor": "J*****0",
+      "destaque": true,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlinePin"
+     },
+     {
+      "tipo": 1759180623535,
+      "valor": "Preta",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineColorLens"
+     },
+     {
+      "tipo": 1759180624569,
+      "valor": "Chevrolet",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180626601,
+      "valor": "Captiva",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 1759180628637,
+      "valor": "SPORT FWD",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineDirectionsCarFilled"
+     },
+     {
+      "tipo": 12345,
+      "valor": "2008",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180634701,
+      "valor": "2009",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineCalendarToday"
+     },
+     {
+      "tipo": 1759180636735,
+      "valor": "Para circulação",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineBuildCircle"
+     },
+     {
+      "tipo": 1759180637768,
+      "valor": "Não",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineGarage"
+     },
+     {
+      "tipo": 1759180639803,
+      "valor": "4",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineSensorDoor"
+     },
+     {
+      "tipo": 1759180641842,
+      "valor": "Gasolina",
+      "destaque": false,
+      "idTipoAtributo": 7,
+      "icone": "MdOutlineLocalGasStation"
+     }
+    ],
+    "documentos": [],
+    "exposicao": {
+     "data": "",
+     "endereco": "BR 386, S/N - Km 431 - Nova Santa Rita RS",
+     "idPeriodoVisitacao": 5987,
+     "urlMapa": "<iframe></iframe>"
+    }
+   }
+  ],
+  "documentos": [],
+  "visivel": true,
+  "permiteParticipacaoOnline": true,
+  "parceiro": {
+   "id": 81701
+  },
+  "condicoesPagamentoArremate": {},
+  "valoresAdicionais": {
+   "valorDebitos": null,
+   "taxasAdministrativasPorParceiro": [
+    {
+     "valorInicial": 0,
+     "valorTaxa": 0,
+     "valorFinal": 0,
+     "idTipoBem": 0,
+     "idParceiro": 0
+    }
+   ],
+   "comissaoPadraoOuDefinida": "P",
+   "bens": [
+    {
+     "idBem": 333293,
+     "percentualComissao": 5,
+     "idTipoBemPai": 421,
+     "idTipoBem": 502,
+     "idParceiro": 81701,
+     "avaliacaoLeiloeiro": null
+    }
+   ],
+   "valorDespesasDiversas": 440,
+   "taxasAdministrativas": {
+    "taxasPorTipoBem": [],
+    "taxasPorFaixaValor": [
+     {
+      "valorInicial": 0,
+      "anoFinal": 2100,
+      "anoInicial": 1900,
+      "valorTaxa": 2350,
+      "valorFinal": 999999999,
+      "idTipoBem": 502
+     }
+    ]
+   },
+   "taxaAdmPadraoOuDefinida": "P",
+   "percentualComissao": 0,
+   "idLote": 441837,
+   "valorTaxaAdministrativa": 0
+  },
+  "seloLigaPartida": false,
+  "seloIpvaPago": false,
+  "seloFinanciamento": false,
+  "tarjaEnchente": false,
+  "seloDespesa": null,
+  "exibirLanceInicial": true,
+  "exibirLanceMinimo": false,
+  "exibirTransmissao": false,
+  "descontoTaxa": {}
+ }
+]

@@ -153,6 +153,15 @@ SOURCES = [
             "default_city": "Brasília", "default_state": "DF",
         },
     },
+    # Entra DESATIVADA e sem permissao de coleta: o robots.txt libera tudo,
+    # mas os termos de uso (pdf/termo-uso.pdf, clausula d) vedam "robos para
+    # navegacao ... da plataforma". Ligar e' decisao do operador (RN-009).
+    {
+        "name": "Pestana Leilões", "slug": "pestana", "parser_type": "pestana",
+        "base_url": "https://www.pestanaleiloes.com.br", "scrape_frequency": 240,
+        "is_active": False, "scraping_allowed": False,
+        "config": {"tipo_bem": 421, "max_auctions": 10, "include_private": False, "fetch_details": False, "max_details_per_run": 0},
+    },
 ]
 
 
@@ -203,7 +212,9 @@ async def seed_sources(db: AsyncSession):
         existing = await db.scalar(select(Source).where(Source.slug == spec["slug"]))
         if existing:
             continue
-        db.add(Source(kind="auction", is_active=True, dispatch_enabled=True, scraping_allowed=True, **spec))
+        # A spec pode desligar a fonte ao nascer (fonte com termos restritivos).
+        params = {"kind": "auction", "is_active": True, "dispatch_enabled": True, "scraping_allowed": True, **spec}
+        db.add(Source(**params))
         created += 1
     await db.commit()
     if created:

@@ -1,0 +1,908 @@
+[
+ {
+  "id": 1816,
+  "nome": "Leilão de Funcionários Santander",
+  "leiloeiro": "LILIAMAR PESTANA GOMES - Leiloeira Oficial",
+  "leiloeiroApresentacao": "",
+  "informacoesLei9514": {
+   "dataLeilao2": null,
+   "dataLeilao1": null,
+   "pertenceLei": false,
+   "classificacao": null
+  },
+  "data": "2018-12-04T09:00:00",
+  "emPregao": false,
+  "loteEmPregao": 0,
+  "mantido": true,
+  "modalidadeLeilao": {
+   "id": 2,
+   "descricao": "Eletrônico"
+  },
+  "exposicao": [
+   {
+    "observacoes": null,
+    "cidade": "Nova Santa Rita",
+    "estado": "RS",
+    "complemento": "Km 431",
+    "numero": "S/N",
+    "logradouro": "BR 386",
+    "bairro": null,
+    "idPeriodoVisitacao": 1977,
+    "horarioVisitacao": "Do dia 30/11 à 04/12/18 das 10h às 15h."
+   }
+  ],
+  "status": "Loteamento",
+  "facaSuaProposta": false,
+  "local": {
+   "endereco": " - Porto Alegre (RS)",
+   "horario": null
+  },
+  "documentos": [
+   {
+    "nome": "Edital",
+    "link": "https://api.pestanaleiloes.com.br/sgl/v1/leiloes/1816/edital/5693793"
+   }
+  ],
+  "informacoes": [],
+  "lotes": [
+   168587,
+   168590,
+   168599,
+   168600,
+   168589,
+   168588
+  ],
+  "parceiros": [
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 0,
+    "id": 1510,
+    "condicoesEspecificas": null
+   }
+  ],
+  "subTipoBens": [
+   {
+    "nome": "Camionetas",
+    "id": 502,
+    "tipoBem": 421
+   },
+   {
+    "nome": "Automóveis",
+    "id": 481,
+    "tipoBem": 421
+   }
+  ],
+  "privado": true,
+  "leilaoRestrito": false,
+  "permitePropostaAntecipada": false,
+  "exibirImagensCapa": false,
+  "idSessaoTransmissaoVideo": null,
+  "idSessaoVideoSecundario": null,
+  "exibirData": true,
+  "exibirLocal": true,
+  "exibirValorTaxas": false,
+  "imagens": [
+   {
+    "tipo": 0,
+    "arquivo": null,
+    "id": 0
+   }
+  ],
+  "imagensCapa": []
+ },
+ {
+  "id": 6314,
+  "nome": "Leilão Judicial TJRS - Imóveis e Veículo",
+  "leiloeiro": "LILIAMAR PESTANA GOMES - Leiloeira Oficial",
+  "leiloeiroApresentacao": "",
+  "informacoesLei9514": {
+   "dataLeilao2": null,
+   "dataLeilao1": null,
+   "pertenceLei": false,
+   "classificacao": null
+  },
+  "data": "2026-12-14T13:00:00",
+  "emPregao": false,
+  "loteEmPregao": 0,
+  "mantido": false,
+  "modalidadeLeilao": {
+   "id": 3,
+   "descricao": "Online"
+  },
+  "exposicao": [
+   {
+    "observacoes": null,
+    "cidade": "Nova Santa Rita",
+    "estado": "RS",
+    "complemento": "Km 431",
+    "numero": "S/N",
+    "logradouro": "BR 386",
+    "bairro": null,
+    "idPeriodoVisitacao": 6045,
+    "horarioVisitacao": "Mediante prévio agendamento junto à equipe da leiloeira, pelo telefone (51) 3535-1000, ramal 7608."
+   }
+  ],
+  "status": "Loteamento",
+  "facaSuaProposta": false,
+  "local": {
+   "endereco": "Avenida João Wallig, 1800, Conj. 4005 – 4º andar - Escritórios Boutique - Shopping Iguatemi - Porto Alegre (RS)",
+   "horario": null
+  },
+  "documentos": [
+   {
+    "nome": "Edital",
+    "link": "https://api.pestanaleiloes.com.br/sgl/v1/leiloes/6314/edital/20606062"
+   },
+   {
+    "nome": "Edital",
+    "link": "https://api.pestanaleiloes.com.br/sgl/v1/leiloes/6314/edital/20606063"
+   },
+   {
+    "nome": "Edital",
+    "link": "https://api.pestanaleiloes.com.br/sgl/v1/leiloes/6314/edital/20606064"
+   }
+  ],
+  "informacoes": [],
+  "lotes": [
+   440648,
+   440647,
+   440618
+  ],
+  "parceiros": [
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 162754,
+    "condicoesEspecificas": null
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 162754,
+    "condicoesEspecificas": null
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 245024,
+    "condicoesEspecificas": null
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 245024,
+    "condicoesEspecificas": null
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 245004,
+    "condicoesEspecificas": null
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 245004,
+    "condicoesEspecificas": null
+   }
+  ],
+  "subTipoBens": [
+   {
+    "nome": "Automóveis",
+    "id": 481,
+    "tipoBem": 421
+   },
+   {
+    "nome": "Terreno Urbano",
+    "id": 578,
+    "tipoBem": 462
+   }
+  ],
+  "privado": false,
+  "leilaoRestrito": false,
+  "permitePropostaAntecipada": true,
+  "exibirImagensCapa": false,
+  "idSessaoTransmissaoVideo": null,
+  "idSessaoVideoSecundario": null,
+  "exibirData": true,
+  "exibirLocal": false,
+  "exibirValorTaxas": true,
+  "imagens": [
+   {
+    "tipo": 0,
+    "arquivo": null,
+    "id": 0
+   }
+  ],
+  "imagensCapa": [
+   {
+    "loteId": 440647,
+    "bemId": 335084,
+    "original": "20492607.png",
+    "media": "20492608.png",
+    "pequena": "20492609.png",
+    "destaque": true,
+    "ordem": 1,
+    "tooltip": "Foto.png",
+    "descricaoImagem": "Foto.png",
+    "categoria": {
+     "ordem": 1,
+     "nome": "Geral",
+     "id": 433243
+    },
+    "novaOrdem": 1
+   },
+   {
+    "loteId": 440618,
+    "bemId": 263141,
+    "original": "20556380.jpg",
+    "media": "20556382.jpg",
+    "pequena": "20556383.jpg",
+    "destaque": true,
+    "ordem": 6,
+    "tooltip": " ",
+    "descricaoImagem": " ",
+    "categoria": {
+     "ordem": 1,
+     "nome": "Fotos Externas",
+     "id": 433036
+    },
+    "novaOrdem": 2
+   }
+  ]
+ },
+ {
+  "id": 6320,
+  "nome": "Feilão: Feirão de Veículos em Leilão",
+  "leiloeiro": "LILIAMAR PESTANA GOMES - Leiloeira Oficial",
+  "leiloeiroApresentacao": "",
+  "informacoesLei9514": {
+   "dataLeilao2": null,
+   "dataLeilao1": null,
+   "pertenceLei": false,
+   "classificacao": null
+  },
+  "data": "2026-10-24T10:00:00",
+  "emPregao": false,
+  "loteEmPregao": 0,
+  "mantido": false,
+  "modalidadeLeilao": {
+   "id": 4,
+   "descricao": "Presencial e Online"
+  },
+  "exposicao": [
+   {
+    "observacoes": null,
+    "cidade": "Nova Santa Rita",
+    "estado": "RS",
+    "complemento": "Km 431",
+    "numero": "S/N",
+    "logradouro": "BR 386",
+    "bairro": null,
+    "idPeriodoVisitacao": 6063,
+    "horarioVisitacao": "Dia 24/10/2026 das 8h às 10h"
+   }
+  ],
+  "status": "Loteamento",
+  "facaSuaProposta": false,
+  "local": {
+   "endereco": "BR 386, S/N - Km 431 - Nova Santa Rita RS, S/N - Nova Santa Rita (RS)",
+   "horario": null
+  },
+  "documentos": [
+   {
+    "nome": "Regulamento",
+    "link": "https://api.pestanaleiloes.com.br/sgl/v1/leiloes/6320/regulamento/20600185"
+   }
+  ],
+  "informacoes": [],
+  "lotes": [
+   441805,
+   441865,
+   442167,
+   442171,
+   441803,
+   441807
+  ],
+  "parceiros": [
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 1321,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE - IPVA 2026 será por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arrematante. Os veículos s…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 1458,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE - IPVA 2026 será por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arrematante. Os veículos s…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 1460,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE - IPVA 2026 será por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arrematante. Os veículos s…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 22507,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 será por conta da Empresa Vendedora. Seguro DPVAT e Taxa de Licenciamento 2026 serão por conta do arrematante. Débit…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 1510,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 por conta da Empresa Vendedora. Seguro DPVAT e Taxa de Licenciamento 2026 serão por conta do arrematante. Débitos an…"
+   }
+  ],
+  "subTipoBens": [
+   {
+    "nome": "Camionetas",
+    "id": 502,
+    "tipoBem": 421
+   },
+   {
+    "nome": "Motos",
+    "id": 483,
+    "tipoBem": 421
+   },
+   {
+    "nome": "Automóveis",
+    "id": 481,
+    "tipoBem": 421
+   }
+  ],
+  "privado": false,
+  "leilaoRestrito": false,
+  "permitePropostaAntecipada": true,
+  "exibirImagensCapa": true,
+  "idSessaoTransmissaoVideo": null,
+  "idSessaoVideoSecundario": null,
+  "exibirData": true,
+  "exibirLocal": true,
+  "exibirValorTaxas": true,
+  "imagens": [
+   {
+    "tipo": 3,
+    "arquivo": "20619781.png",
+    "id": 32336
+   },
+   {
+    "tipo": 1,
+    "arquivo": "20604429.png",
+    "id": 32323
+   },
+   {
+    "tipo": 2,
+    "arquivo": "20604431.png",
+    "id": 32324
+   }
+  ],
+  "imagensCapa": [
+   {
+    "loteId": 442167,
+    "bemId": 334531,
+    "original": "20643905.jpg",
+    "media": "20643906.jpg",
+    "pequena": "20643907.jpg",
+    "destaque": true,
+    "ordem": 1,
+    "tooltip": "Diagonal Frontal Esquerda",
+    "descricaoImagem": null,
+    "categoria": {
+     "ordem": 1,
+     "nome": "Fotos Externas",
+     "id": 439329
+    },
+    "novaOrdem": 1
+   },
+   {
+    "loteId": 441823,
+    "bemId": 331662,
+    "original": "20604994.jpg",
+    "media": "20604995.jpg",
+    "pequena": "20604996.jpg",
+    "destaque": true,
+    "ordem": 1,
+    "tooltip": null,
+    "descricaoImagem": null,
+    "categoria": {
+     "ordem": 1,
+     "nome": "Fotos Externas",
+     "id": 437382
+    },
+    "novaOrdem": 2
+   },
+   {
+    "loteId": 441803,
+    "bemId": 334421,
+    "original": "20603296.jpg",
+    "media": "20603297.jpg",
+    "pequena": "20603298.jpg",
+    "destaque": true,
+    "ordem": 1,
+    "tooltip": "Diagonal Frontal Esquerda",
+    "descricaoImagem": null,
+    "categoria": {
+     "ordem": 1,
+     "nome": "Fotos Externas",
+     "id": 437275
+    },
+    "novaOrdem": 3
+   }
+  ]
+ },
+ {
+  "id": 6334,
+  "nome": "Leilão de Imóveis Santander Lei 9.514",
+  "leiloeiro": "LILIAMAR PESTANA GOMES - Leiloeira Oficial",
+  "leiloeiroApresentacao": "",
+  "informacoesLei9514": {
+   "dataLeilao2": "2026-10-20T08:50:00",
+   "dataLeilao1": "2026-10-16T08:50:00",
+   "pertenceLei": true,
+   "classificacao": 2
+  },
+  "data": "2026-10-20T08:50:00",
+  "emPregao": false,
+  "loteEmPregao": 0,
+  "mantido": false,
+  "modalidadeLeilao": {
+   "id": 2,
+   "descricao": "Eletrônico"
+  },
+  "exposicao": [],
+  "status": "Loteamento",
+  "facaSuaProposta": true,
+  "local": {
+   "endereco": "Avenida João Wallig, 1800, Conj. 4005 – 4º andar - Escritórios Boutique - Shopping Iguatemi - Porto Alegre (RS)",
+   "horario": null
+  },
+  "documentos": [
+   {
+    "nome": "Regulamento",
+    "link": "https://api.pestanaleiloes.com.br/sgl/v1/leiloes/6334/regulamento/20642632"
+   }
+  ],
+  "informacoes": [],
+  "lotes": [
+   442128,
+   442136,
+   442131
+  ],
+  "parceiros": [
+   {
+    "multaPorDesistencia": 25,
+    "diasAdicionaisLotesHomologados": 0,
+    "id": 1513,
+    "condicoesEspecificas": null
+   },
+   {
+    "multaPorDesistencia": 25,
+    "diasAdicionaisLotesHomologados": 0,
+    "id": 1513,
+    "condicoesEspecificas": null
+   }
+  ],
+  "subTipoBens": [
+   {
+    "nome": "Residencial",
+    "id": 564,
+    "tipoBem": 462
+   },
+   {
+    "nome": "Comercial",
+    "id": 563,
+    "tipoBem": 462
+   }
+  ],
+  "privado": false,
+  "leilaoRestrito": false,
+  "permitePropostaAntecipada": true,
+  "exibirImagensCapa": true,
+  "idSessaoTransmissaoVideo": null,
+  "idSessaoVideoSecundario": null,
+  "exibirData": true,
+  "exibirLocal": false,
+  "exibirValorTaxas": true,
+  "imagens": [
+   {
+    "tipo": 1,
+    "arquivo": "20642629.png",
+    "id": 32340
+   },
+   {
+    "tipo": 2,
+    "arquivo": "20642630.png",
+    "id": 32341
+   },
+   {
+    "tipo": 3,
+    "arquivo": "20642631.png",
+    "id": 32342
+   }
+  ],
+  "imagensCapa": [
+   {
+    "loteId": 442128,
+    "bemId": 334527,
+    "original": "20641896.jpg",
+    "media": "20641897.jpg",
+    "pequena": "20641898.jpg",
+    "destaque": true,
+    "ordem": 6,
+    "tooltip": "Vista da Fachada",
+    "descricaoImagem": null,
+    "categoria": {
+     "ordem": 1,
+     "nome": "Geral",
+     "id": 439203
+    },
+    "novaOrdem": 1
+   },
+   {
+    "loteId": 442131,
+    "bemId": 334528,
+    "original": "20642093.jpg",
+    "media": "20642094.jpg",
+    "pequena": "20642095.jpg",
+    "destaque": true,
+    "ordem": 4,
+    "tooltip": "Vista da Fachada",
+    "descricaoImagem": null,
+    "categoria": {
+     "ordem": 1,
+     "nome": "Geral",
+     "id": 439218
+    },
+    "novaOrdem": 2
+   },
+   {
+    "loteId": 442136,
+    "bemId": 334536,
+    "original": "20642370.jpg",
+    "media": "20642371.jpg",
+    "pequena": "20642372.jpg",
+    "destaque": true,
+    "ordem": 4,
+    "tooltip": "Vista da Fachada",
+    "descricaoImagem": null,
+    "categoria": {
+     "ordem": 1,
+     "nome": "Geral",
+     "id": 439246
+    },
+    "novaOrdem": 3
+   }
+  ]
+ },
+ {
+  "id": 6260,
+  "nome": "Leilão de Veículos Retomados",
+  "leiloeiro": "LILIAMAR PESTANA GOMES - Leiloeira Oficial",
+  "leiloeiroApresentacao": "",
+  "informacoesLei9514": {
+   "dataLeilao2": null,
+   "dataLeilao1": null,
+   "pertenceLei": false,
+   "classificacao": null
+  },
+  "data": "2026-10-21T10:00:00",
+  "emPregao": false,
+  "loteEmPregao": 0,
+  "mantido": false,
+  "modalidadeLeilao": {
+   "id": 3,
+   "descricao": "Online"
+  },
+  "exposicao": [
+   {
+    "observacoes": null,
+    "cidade": "Porto Velho",
+    "estado": "RO",
+    "complemento": null,
+    "numero": "1200",
+    "logradouro": "Avenida Nações Unidas",
+    "bairro": "Roque",
+    "idPeriodoVisitacao": 6066,
+    "horarioVisitacao": "Interessados favor entrar em contato com nossa equipe."
+   },
+   {
+    "observacoes": null,
+    "cidade": "Suzano",
+    "estado": "SP",
+    "complemento": null,
+    "numero": "390",
+    "logradouro": "Estrada Keida Harada",
+    "bairro": "Ipelândia",
+    "idPeriodoVisitacao": 5989,
+    "horarioVisitacao": "Dia 20/10/2026 das 14h às 17h e dia 21/10/2026 das 08:45h às 11:30h"
+   }
+  ],
+  "status": "Loteamento",
+  "facaSuaProposta": false,
+  "local": {
+   "endereco": "Avenida João Wallig, 1800, Conj. 4005 – 4º andar - Escritórios Boutique - Shopping Iguatemi - Porto Alegre (RS)",
+   "horario": null
+  },
+  "documentos": [
+   {
+    "nome": "Regulamento",
+    "link": "https://api.pestanaleiloes.com.br/sgl/v1/leiloes/6260/regulamento/20206819"
+   }
+  ],
+  "informacoes": [],
+  "lotes": [
+   441928,
+   441913,
+   441911,
+   441885,
+   441916,
+   441919
+  ],
+  "parceiros": [
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 60642,
+    "condicoesEspecificas": "VISITAÇÃO AOS BENS: A visitação deverá ser agendada com a equipe da Leiloeira pelo telefone (51) 3535-1000. DÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026, Seguro …"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 31115,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE - IPVA 2026, se houver, será por conta do arrematante e o mesmo deverá quitar o débito em até 30 dias após o leilão, sob pena d…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 206775,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE - IPVA 2025 e 2026, Seguro DPVAT e Taxa de Licenciamento 2025 e 2026, se houver, serão por conta do arrematante e o mesmo dever…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 81701,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE:  IPVA, Seguro DPVAT e Taxas Detran 2025 e 2026 serão por conta do arrematante. Caso o mesmo não seja pago e exista inscrição d…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 1510,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 por conta da Empresa Vendedora. Seguro DPVAT e Taxa de Licenciamento 2026 serão por conta do arrematante. Débitos an…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 24180,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 será por conta da empresa vendedora. Seguro DPVAT e Taxa de Licenciamento 2026 serão por conta do arrematante e o me…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 62848,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 será por conta da Empresa Vendedora. Seguro DPVAT e Taxa de Licenciamento 2026 serão por conta do arrematante. Débit…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 1458,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE - IPVA 2026 será por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arrematante. Os veículos s…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 1460,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE - IPVA 2026 será por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arrematante. Os veículos s…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 1321,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE - IPVA 2026 será por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arrematante. Os veículos s…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 238894,
+    "condicoesEspecificas": "\nDÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arrematante. Débitos anteriores…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 238898,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arrematante. Débitos anteriores …"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 239115,
+    "condicoesEspecificas": "CONDIÇÕES ESPECÍFICAS:\nDÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arrematan…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 239131,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arrematante. Débitos anteriores …"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 238887,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arrematante. Débitos anteriores …"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 239130,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arrematante. Débitos anteriores …"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 239116,
+    "condicoesEspecificas": "CONDIÇÕES ESPECÍFICAS:\nDÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arrematan…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 33274,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 vencido até a data do leilão será por conta da Empresa Vendedora. IPVA 2026 a vencer, Seguro DPVAT e Taxas Detran 20…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 138536,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE:  IPVA 2025 e 2026, Seguro DPVAT e Taxa de Licenciamento 2025 e 2026, se houver, serão por conta do arrematante e o mesmo dever…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 229869,
+    "condicoesEspecificas": "CONDIÇÕES ESPECÍFICAS:\r\nDÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 será por conta da Empresa Vendedora. Seguro DPVAT e Taxas Detran 2026 serão por conta do arr…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 143554,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026, Seguro DPVAT e Taxa de Licenciamento 2026, se houver, serão por conta do arrematante e o mesmo deverá quitar os déb…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 106755,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE: IPVA 2026 por conta da Empresa Vendedora. Seguro DPVAT e Taxa de Licenciamento serão por conta do arrematante. Débitos de mult…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 18613,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE - IPVA 2026 e anos anteriores serão pagos pela Mapfre. O arrematante não deverá efetuar nenhum tipo de pagamento relacionado ao…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 18613,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE - IPVA 2026 e anos anteriores serão pagos pela Mapfre. O arrematante não deverá efetuar nenhum tipo de pagamento relacionado ao…"
+   },
+   {
+    "multaPorDesistencia": 20,
+    "diasAdicionaisLotesHomologados": 1,
+    "id": 18613,
+    "condicoesEspecificas": "DÉBITOS POR CONTA DO ARREMATANTE - IPVA 2026 e anos anteriores serão pagos pela Mapfre. O arrematante não deverá efetuar nenhum tipo de pagamento relacionado ao…"
+   }
+  ],
+  "subTipoBens": [
+   {
+    "nome": "Automóveis",
+    "id": 481,
+    "tipoBem": 421
+   },
+   {
+    "nome": "Camionetas",
+    "id": 502,
+    "tipoBem": 421
+   },
+   {
+    "nome": "Caminhões",
+    "id": 482,
+    "tipoBem": 421
+   },
+   {
+    "nome": "Reboques",
+    "id": 522,
+    "tipoBem": 421
+   },
+   {
+    "nome": "Ônibus",
+    "id": 501,
+    "tipoBem": 421
+   },
+   {
+    "nome": "Motos",
+    "id": 483,
+    "tipoBem": 421
+   }
+  ],
+  "privado": false,
+  "leilaoRestrito": false,
+  "permitePropostaAntecipada": true,
+  "exibirImagensCapa": true,
+  "idSessaoTransmissaoVideo": null,
+  "idSessaoVideoSecundario": null,
+  "exibirData": true,
+  "exibirLocal": true,
+  "exibirValorTaxas": true,
+  "imagens": [
+   {
+    "tipo": 2,
+    "arquivo": "20206810.png",
+    "id": 32099
+   },
+   {
+    "tipo": 1,
+    "arquivo": "20206808.png",
+    "id": 32098
+   },
+   {
+    "tipo": 3,
+    "arquivo": "20206811.png",
+    "id": 32100
+   }
+  ],
+  "imagensCapa": [
+   {
+    "loteId": 441977,
+    "bemId": 334208,
+    "original": "20621496.jpg",
+    "media": "20621497.jpg",
+    "pequena": "20621498.jpg",
+    "destaque": true,
+    "ordem": 1,
+    "tooltip": "Diagonal Frontal Esquerda",
+    "descricaoImagem": null,
+    "categoria": {
+     "ordem": 1,
+     "nome": "Fotos Externas",
+     "id": 438265
+    },
+    "novaOrdem": 1
+   },
+   {
+    "loteId": 442111,
+    "bemId": 332643,
+    "original": "20640710.jpg",
+    "media": "20640711.jpg",
+    "pequena": "20640712.jpg",
+    "destaque": true,
+    "ordem": 1,
+    "tooltip": "Diagonal Frontal Esquerda",
+    "descricaoImagem": null,
+    "categoria": {
+     "ordem": 1,
+     "nome": "Fotos Externas",
+     "id": 439105
+    },
+    "novaOrdem": 2
+   },
+   {
+    "loteId": 442091,
+    "bemId": 335719,
+    "original": "20639449.jpg",
+    "media": "20639450.jpg",
+    "pequena": "20639451.jpg",
+    "destaque": true,
+    "ordem": 1,
+    "tooltip": "Diagonal Frontal Esquerda",
+    "descricaoImagem": null,
+    "categoria": {
+     "ordem": 1,
+     "nome": "Fotos Externas",
+     "id": 438993
+    },
+    "novaOrdem": 3
+   }
+  ]
+ }
+]
