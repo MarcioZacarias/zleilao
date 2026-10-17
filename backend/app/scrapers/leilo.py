@@ -75,7 +75,25 @@ def parse_initial_state(html: str) -> dict[str, Any]:
                 if depth == 0:
                     break
         i += 1
-    return json.loads(html[start:i + 1])
+    return json.loads(js_para_json(html[start:i + 1]))
+
+
+#: Valor JavaScript sem equivalente em JSON, logo depois de `:`, `,` ou `[`.
+_SEM_JSON = re.compile(r"([:,\[]\s*)(?:undefined|NaN|-?Infinity)\b")
+#: `new Date("2026-09-09T22:47:30.000Z")` — a string de dentro ja' e' o valor.
+_DATA_JS = re.compile(r'new Date\(("[^"]*")\)')
+#: `new Date(1726000000000)` ou `new Date()` — sem texto para aproveitar.
+_DATA_JS_OUTRA = re.compile(r"new Date\([^)]*\)")
+
+
+def js_para_json(bruto: str) -> str:
+    """Desde 14/10/2026 o estado vem com `undefined` e `new Date(...)` —
+    JavaScript, nao JSON — e o json.loads parava no primeiro deles; a fonte
+    inteira ficou tres dias suspensa por isso. `undefined` vira null, que e'
+    o que o site quer dizer, e a data fica com a string ISO de dentro."""
+    bruto = _SEM_JSON.sub(r"\1null", bruto)
+    bruto = _DATA_JS.sub(r"\1", bruto)
+    return _DATA_JS_OUTRA.sub("null", bruto)
 
 
 def iso_to_brt_naive(value: str | None) -> Optional[datetime]:
