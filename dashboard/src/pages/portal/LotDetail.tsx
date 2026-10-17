@@ -28,6 +28,7 @@ import {
   CONDITION_LABELS,
 } from "../../lib/labels";
 import { formatAttribute, NOT_INFORMED } from "../../lib/attributes";
+import { ParcelamentoAviso } from "../../components/portal/ParcelamentoJudicial";
 import { Gallery } from "../../components/portal/Gallery";
 import { PriceTag } from "../../components/portal/PriceTag";
 import { StatusBadge } from "../../components/portal/StatusBadge";
@@ -211,6 +212,9 @@ export default function LotDetail() {
                 </p>
               )}
             </div>
+
+            {/* Judicial: parcelamento pelo CPC, art. 895 */}
+            {(auction?.auction_type ?? item.auction_type) === "judicial" && !closed && <ParcelamentoAviso />}
 
             {/* Pregão em breve / contagem regressiva (RN-005) */}
             {soon && item.next_session_at && (

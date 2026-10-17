@@ -315,7 +315,9 @@ function FilterPanel({ filters, facets, categories, models, update, clearAll, ac
         options={facets.auction_types ?? []}
         value={filters.auction_type}
         onChange={(v) => update({ auction_type: v })}
-        labelFor={(o) => o.label ?? AUCTION_TYPE_LABELS[o.value] ?? o.value}
+        labelFor={(o) =>
+          o.value === "judicial" ? "Judicial · pode parcelar" : o.label ?? AUCTION_TYPE_LABELS[o.value] ?? o.value
+        }
       />
 
       <Facet title="Data do pregão" active={!!(filters.session_from || filters.session_to)} onClear={() => update({ session_from: null, session_to: null })}>

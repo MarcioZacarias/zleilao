@@ -9,6 +9,7 @@ import { StatusBadge } from "./StatusBadge";
 import { ConditionBadge } from "./ConditionBadge";
 import { Countdown } from "./Countdown";
 import { OpportunityBadge } from "./OpportunityPanel";
+import { ParcelamentoBadge } from "./ParcelamentoJudicial";
 
 interface ItemCardProps {
   item: ItemCardType;
@@ -129,9 +130,13 @@ export function ItemCard({ item, compact = false }: ItemCardProps) {
 
         {/* RN-010: selo só quando há referência confiável. Ausência de score
             não é desconto zero — é "não sabemos". */}
-        {item.opportunity_discount !== null && item.opportunity_discount !== undefined && (
-          <div className="mt-2">
-            <OpportunityBadge discount={item.opportunity_discount} />
+        {(item.auction_type === "judicial" ||
+          (item.opportunity_discount !== null && item.opportunity_discount !== undefined)) && (
+          <div className="mt-2 flex flex-wrap items-center gap-1.5">
+            {item.opportunity_discount !== null && item.opportunity_discount !== undefined && (
+              <OpportunityBadge discount={item.opportunity_discount} />
+            )}
+            {item.auction_type === "judicial" && <ParcelamentoBadge />}
           </div>
         )}
 

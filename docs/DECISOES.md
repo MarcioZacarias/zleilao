@@ -329,3 +329,25 @@ Das doze mudanças restantes, todas eram correções: trailer e carcaças saindo
 Carros, Kangoo e Transit furgão indo para Utilitários. Fila de revisão zerada,
 e um único lote segue sem marca — a carcaça, que agora está publicada na
 categoria certa.
+
+## Parcelamento em leilão judicial é regra de lei, não do anúncio (17/10/2026)
+
+Pergunta do Márcio: o sistema traz os judiciais, que admitem entrada e
+parcelamento em até 30 vezes? Traz — 104 dos 1.915 lotes publicados, todos do
+Mega Leilões, a única das três fontes com leilão judicial (Freitas e Leilo são
+retomadas extrajudiciais; o "judicial" nos mapas deles é origem do veículo).
+
+O parcelamento vem do art. 895 do CPC de 2015: em leilão judicial de bem
+penhorado, proposta por escrito antes do pregão, mínimo de 25% à vista e o
+restante em até 30 meses, com garantia; pelo valor da avaliação até o 1º
+leilão, não vil no 2º; lance à vista tem preferência e o juiz decide. Como a
+regra vale para todo lote judicial, a vitrine sinaliza a partir de
+`auction_type` sem coletar nada: selo "pode parcelar" no card, aviso completo
+na ficha, atalho "Pode parcelar" na página inicial e rótulo na faceta de tipo
+(`components/portal/ParcelamentoJudicial.tsx`).
+
+Sempre "pode admitir", nunca promessa: falência e recuperação judicial seguem
+regras próprias, o edital pode restringir, e a proposta é feita no juízo ou
+com o leiloeiro. Condições de pagamento continuam fora da coleta — o
+normalizador ignora o texto jurídico padrão de propósito, porque ele não
+descreve o veículo.

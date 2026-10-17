@@ -108,6 +108,15 @@ export default function Home() {
                     <span className="text-radar-muted tabular-nums">{formatInt(c.items_count)}</span>
                   </Link>
                 ))}
+                {/* Judicial = pode propor parcelamento (CPC, art. 895); o atalho é o filtro por tipo. */}
+                <Link
+                  to="/busca?auction_type=judicial"
+                  title="Leilões judiciais: o CPC (art. 895) admite proposta parcelada — 25% à vista e o restante em até 30 meses"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-sky-400/30 bg-sky-500/10 px-3 py-1.5 text-xs text-sky-200 transition-colors hover:border-sky-300/60 hover:text-sky-100"
+                >
+                  Pode parcelar
+                  <span className="text-sky-200/60">judiciais</span>
+                </Link>
               </div>
             )}
           </div>
