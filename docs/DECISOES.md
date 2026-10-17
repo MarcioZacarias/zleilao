@@ -351,3 +351,27 @@ regras próprias, o edital pode restringir, e a proposta é feita no juízo ou
 com o leiloeiro. Condições de pagamento continuam fora da coleta — o
 normalizador ignora o texto jurídico padrão de propósito, porque ele não
 descreve o veículo.
+
+## Deduplicação plena funde só com evidência forte (F4, 17/10/2026)
+
+A F4 pede "duplicados fundidos acima de um limiar". O limiar existe
+(`dedup_merge_threshold`), mas o padrão é 1.0, e a pontuação por semelhança
+nunca chega lá: só placa igual (hash) ou a mesma URL oficial valem 1.0. O
+motivo é leilão de frota: uma locadora vende cinquenta Onix 2022 brancos, mesma
+UF, km parecido, e título, ano, km, UF e cor batem entre carros diferentes. A
+semelhança máxima sem evidência forte é 0,99, o que ainda gera o vínculo
+suspeito para o admin olhar, mas não funde sozinho. Placas conhecidas e
+diferentes agora valem zero, para a frota não virar um emaranhado de suspeitos.
+
+O que a fusão faz: o espelho some da busca, das facetas, das contagens e dos
+alertas enquanto o canônico (a publicação mais antiga) estiver visível; o card
+e a ficha do canônico ganham "também em <fonte>", com o link oficial de cada
+publicação. Se o canônico encerra, o espelho volta por conta própria — a
+regra está na consulta, não em estado.
+
+Os vínculos passaram a viajar para a borda (`POST /ingest/duplicates`), cada
+lado como (fonte, id externo), porque o D1 tem ids próprios. Confirmação e
+rejeição do admin também vão, pelo `reviewed_at`.
+
+Leilões BR saiu da lista das sete fontes HTML: é portal de arte, antiguidades e
+colecionáveis; os "preços e marcas" da sondagem eram miniaturas. Sobraram seis.

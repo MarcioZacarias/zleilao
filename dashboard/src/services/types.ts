@@ -86,6 +86,8 @@ export interface ItemCard {
   auction_type: string | null;
   card_fields: Record<string, unknown>;
   possible_duplicate: boolean;
+  /** F4: outras fontes onde o mesmo lote está publicado (fusão confirmada). */
+  also_in?: string[];
   /** RN-010. Nulo quando não há referência confiável — nunca tratar como zero. */
   opportunity_score: number | null;
   opportunity_discount: number | null;

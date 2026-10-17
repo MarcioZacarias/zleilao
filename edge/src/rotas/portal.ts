@@ -11,6 +11,17 @@ import { urlAsset } from "./marca";
 
 const VISIVEIS = ["published", "auction_soon"];
 
+/**
+ * Espelho fundido (F4) some enquanto o canônico estiver visível; se o
+ * canônico encerra, o espelho volta por conta própria. `alias` é o nome da
+ * tabela de itens na consulta que recebe o trecho.
+ */
+function semEspelho(alias = "items"): string {
+  return `NOT EXISTS (SELECT 1 FROM item_duplicates dd JOIN items cc ON cc.id = dd.canonical_item_id
+            WHERE dd.duplicate_item_id = ${alias}.id AND dd.status = 'confirmed'
+              AND cc.status IN ('published','auction_soon'))`;
+}
+
 /** Haversine em SQL puro, igual ao do Postgres. O D1 tem as funções de trigonometria. */
 function distanciaSql(lat: number, lng: number): string {
   return `6371.0 * acos(MIN(1.0,
@@ -58,6 +69,7 @@ export function montarFiltro(f: Filtros) {
   const status = f.status && f.status !== "all" ? [f.status] : VISIVEIS;
   where.push(`items.status IN (${status.map(() => "?").join(",")})`);
   params.push(...status);
+  if (!f.status || f.status === "all") where.push(semEspelho());
 
   if (f.q) {
     // FTS5 externo: casa o termo inteiro ou por prefixo, já que não há
@@ -160,6 +172,7 @@ export function serializarCard(r: Record<string, unknown>) {
     auction_type: r.auction_type ?? null,
     card_fields: {},
     possible_duplicate: false,
+    also_in: [] as string[],
     opportunity_score: r.opportunity_score ?? null,
     opportunity_discount: r.discount_pct ?? null,
     distance_km: r.distance_km !== undefined && r.distance_km !== null
@@ -238,8 +251,10 @@ export async function listarItens(u: URL, env: Env): Promise<Response> {
     .all<Record<string, unknown>>();
 
   const n = total?.n ?? 0;
+  const cards = linhas.results.map(serializarCard);
+  await anexarVinculos(env, cards);
   return Response.json({
-    items: linhas.results.map(serializarCard),
+    items: cards,
     meta: { page, page_size: pageSize, total: n, pages: Math.max(1, Math.ceil(n / pageSize)) },
     facets: u.searchParams.get("facets") === "false" ? {} : await facetas(env, where, params, joins),
   });
@@ -294,6 +309,73 @@ export function normalizarCidade(nome: string): string {
     .trim();
 }
 
+interface CardComVinculos {
+  id: unknown;
+  possible_duplicate: boolean;
+  also_in: string[];
+}
+
+/**
+ * Marca os cards de uma página: suspeito vira "possível duplicado", fundido
+ * (F4) vira "também em <fonte>". Uma ida ao banco por 45 cards, nunca uma
+ * por card — o D1 aceita 100 parâmetros por consulta e cada id entra duas vezes.
+ */
+async function anexarVinculos(env: Env, cards: CardComVinculos[]): Promise<void> {
+  const porId = new Map(cards.map((c) => [Number(c.id), c]));
+  const ids = [...porId.keys()].filter((x) => x > 0);
+  for (let i = 0; i < ids.length; i += 45) {
+    const fatia = ids.slice(i, i + 45);
+    const marcas = fatia.map(() => "?").join(",");
+    const r = await env.DB.prepare(
+      `SELECT d.status, d.canonical_item_id AS a, d.duplicate_item_id AS b,
+              sa.name AS nome_a, sb.name AS nome_b
+         FROM item_duplicates d
+         JOIN items ia ON ia.id = d.canonical_item_id JOIN sources sa ON sa.id = ia.source_id
+         JOIN items ib ON ib.id = d.duplicate_item_id JOIN sources sb ON sb.id = ib.source_id
+        WHERE d.status IN ('suspected','confirmed')
+          AND (d.canonical_item_id IN (${marcas}) OR d.duplicate_item_id IN (${marcas}))`,
+    )
+      .bind(...fatia, ...fatia)
+      .all<{ status: string; a: number; b: number; nome_a: string; nome_b: string }>();
+    for (const v of r.results) {
+      for (const [eu, outro] of [[v.a, v.nome_b], [v.b, v.nome_a]] as [number, string][]) {
+        const card = porId.get(eu);
+        if (!card) continue;
+        if (v.status === "suspected") card.possible_duplicate = true;
+        else if (!card.also_in.includes(outro)) card.also_in.push(outro);
+      }
+    }
+  }
+}
+
+/** Vínculos de um lote, no formato que a ficha mostra (RN-004 / F4). */
+async function vinculosDe(env: Env, id: number) {
+  const v = await env.DB.prepare(
+    `SELECT d.status, d.similarity,
+            CASE WHEN d.canonical_item_id = ? THEN d.duplicate_item_id ELSE d.canonical_item_id END AS other_id
+       FROM item_duplicates d
+      WHERE d.status IN ('suspected','confirmed') AND (d.canonical_item_id = ? OR d.duplicate_item_id = ?)`,
+  )
+    .bind(id, id, id)
+    .all<{ status: string; similarity: number; other_id: number }>();
+  if (!v.results.length) return [];
+  const outros = await env.DB.prepare(
+    `SELECT i.id, i.title, i.official_url, s.name AS source_name
+       FROM items i LEFT JOIN sources s ON s.id = i.source_id
+      WHERE i.id IN (${v.results.map(() => "?").join(",")})`,
+  )
+    .bind(...v.results.map((x) => x.other_id))
+    .all<{ id: number; title: string; official_url: string; source_name: string | null }>();
+  const porId = new Map(outros.results.map((o) => [o.id, o]));
+  return v.results.flatMap((x) => {
+    const o = porId.get(x.other_id);
+    return o
+      ? [{ item_id: o.id, title: o.title, source_name: o.source_name, official_url: o.official_url,
+           similarity: x.similarity, status: x.status }]
+      : [];
+  });
+}
+
 export async function detalharItem(id: number, env: Env, req: Request): Promise<Response> {
   const r = await env.DB.prepare(
     `SELECT ${SELECT_CARD}, items.description, items.attributes, items.images, items.official_url,
@@ -316,6 +398,7 @@ export async function detalharItem(id: number, env: Env, req: Request): Promise<
   }
 
   const base = serializarCard(r);
+  await anexarVinculos(env, [base]);
   return Response.json({
     ...base,
     description: r.description,
@@ -327,7 +410,7 @@ export async function detalharItem(id: number, env: Env, req: Request): Promise<
     images: lerJson<string[]>(r.images, []),
     attributes: lerJson<Record<string, unknown>>(r.attributes, {}),
     field_defs: [],
-    duplicates: [],
+    duplicates: await vinculosDe(env, id),
     price_history: [],
     opportunity: r.opportunity_score === null || r.opportunity_score === undefined ? null : {
       score: r.opportunity_score,
@@ -382,7 +465,8 @@ export async function estatisticas(env: Env): Promise<Response> {
   const [resumo, porCategoria] = await env.DB.batch<Record<string, unknown>>([
     env.DB.prepare(
       `SELECT
-         (SELECT COUNT(*) FROM items WHERE status IN ('published','auction_soon')) AS items_published,
+         (SELECT COUNT(*) FROM items WHERE status IN ('published','auction_soon')
+            AND ${semEspelho()}) AS items_published,
          (SELECT COUNT(*) FROM sources WHERE is_active = 1) AS sources_active,
          (SELECT COUNT(*) FROM auctions WHERE starts_at >= ? AND starts_at <= ?) AS auctions_upcoming_7d,
          (SELECT MIN(next_session_at) FROM items
@@ -392,7 +476,7 @@ export async function estatisticas(env: Env): Promise<Response> {
     env.DB.prepare(
       `SELECT c.slug, c.name, COUNT(i.id) AS count
          FROM items i JOIN categories c ON c.id = i.category_id
-        WHERE i.status IN ('published','auction_soon')
+        WHERE i.status IN ('published','auction_soon') AND ${semEspelho("i")}
         GROUP BY c.slug, c.name`,
     ),
   ]);
@@ -414,7 +498,7 @@ export async function categorias(env: Env): Promise<Response> {
     `SELECT c.id, c.parent_id, c.name, c.slug, c.path, c.sort_order,
             (SELECT COUNT(*) FROM items i JOIN categories ci ON ci.id = i.category_id
               WHERE (ci.path = c.path OR ci.path LIKE c.path || '/%')
-                AND i.status IN ('published','auction_soon')) AS items_count
+                AND i.status IN ('published','auction_soon') AND ${semEspelho("i")}) AS items_count
        FROM categories c WHERE c.is_active = 1 ORDER BY c.sort_order, c.id`,
   ).all<Record<string, unknown>>();
 

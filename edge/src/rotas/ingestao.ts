@@ -294,3 +294,95 @@ export async function ingerir(req: Request, env: Env): Promise<Response> {
     erros: [],
   });
 }
+
+/* ── vínculos de duplicidade (RN-004 / F4) ───────────────────────────── */
+
+interface RefLote {
+  source_slug?: string;
+  external_id?: string;
+}
+
+interface VinculoEntrada {
+  canonical?: RefLote;
+  duplicate?: RefLote;
+  similarity?: number;
+  reasons?: unknown;
+  status?: string;
+  created_at?: string | null;
+  reviewed_at?: string | null;
+}
+
+/** O D1 aceita no máximo 100 parâmetros por consulta; cada referência usa dois. */
+const REFS_POR_CONSULTA = 45;
+
+/**
+ * Recebe os vínculos do agente. A borda tem ids próprios, então cada lado do
+ * par chega como (fonte, id externo) e é resolvido aqui, em lotes de
+ * consulta — nunca uma ida ao banco por vínculo.
+ */
+export async function ingerirVinculos(req: Request, env: Env): Promise<Response> {
+  const token = req.headers.get("x-ingest-token");
+  if (!env.INGEST_TOKEN || token !== env.INGEST_TOKEN) {
+    return Response.json({ erro: "token de ingestão inválido" }, { status: 401 });
+  }
+  let corpo: { links?: VinculoEntrada[] };
+  try {
+    corpo = (await req.json()) as { links?: VinculoEntrada[] };
+  } catch {
+    return Response.json({ erro: "corpo não é JSON" }, { status: 400 });
+  }
+  const links = Array.isArray(corpo?.links) ? corpo.links : [];
+  const validos = links.filter(
+    (l) => l.canonical?.source_slug && l.canonical.external_id && l.duplicate?.source_slug && l.duplicate.external_id,
+  );
+  if (!validos.length) return Response.json({ recebidos: links.length, gravados: 0, ignorados: links.length });
+
+  const fontes = await env.DB.prepare("SELECT id, slug FROM sources").all<{ id: number; slug: string }>();
+  const idFonte = new Map(fontes.results.map((f) => [f.slug, f.id]));
+
+  const refs = new Map<string, [number, string]>();
+  for (const l of validos) {
+    for (const r of [l.canonical!, l.duplicate!]) {
+      const sid = idFonte.get(r.source_slug!);
+      if (sid) refs.set(`${sid}|${r.external_id}`, [sid, r.external_id!]);
+    }
+  }
+  const idItem = new Map<string, number>();
+  const lista = [...refs.values()];
+  for (let i = 0; i < lista.length; i += REFS_POR_CONSULTA) {
+    const fatia = lista.slice(i, i + REFS_POR_CONSULTA);
+    const r = await env.DB.prepare(
+      `SELECT id, source_id, external_id FROM items
+        WHERE (source_id, external_id) IN (${fatia.map(() => "(?,?)").join(",")})`,
+    )
+      .bind(...fatia.flat())
+      .all<{ id: number; source_id: number; external_id: string }>();
+    for (const x of r.results) idItem.set(`${x.source_id}|${x.external_id}`, x.id);
+  }
+
+  const ts = agora();
+  const comandos = [];
+  let ignorados = links.length - validos.length;
+  for (const l of validos) {
+    const a = idItem.get(`${idFonte.get(l.canonical!.source_slug!)}|${l.canonical!.external_id}`);
+    const b = idItem.get(`${idFonte.get(l.duplicate!.source_slug!)}|${l.duplicate!.external_id}`);
+    if (!a || !b || a === b) {
+      ignorados++;
+      continue;
+    }
+    comandos.push(
+      env.DB.prepare(
+        `INSERT INTO item_duplicates (canonical_item_id, duplicate_item_id, similarity, reasons, status, created_at, reviewed_at)
+         VALUES (?,?,?,?,?,?,?)
+         ON CONFLICT (canonical_item_id, duplicate_item_id) DO UPDATE SET
+           similarity = excluded.similarity, reasons = excluded.reasons,
+           status = excluded.status, reviewed_at = excluded.reviewed_at`,
+      ).bind(
+        a, b, Number(l.similarity ?? 0), gravarJson(l.reasons), l.status ?? "suspected",
+        paraDataBanco(l.created_at) ?? ts, paraDataBanco(l.reviewed_at),
+      ),
+    );
+  }
+  if (comandos.length) await env.DB.batch(comandos);
+  return Response.json({ recebidos: links.length, gravados: comandos.length, ignorados });
+}

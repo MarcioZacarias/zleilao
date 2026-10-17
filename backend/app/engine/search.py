@@ -10,12 +10,13 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any, Optional
 
-from sqlalchemy import Select, false, func, or_, select
+from sqlalchemy import Select, exists, false, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import aliased
 
 from app.engine.geo import bounding_box, coords_for
 from app.engine.lifecycle import VISIBLE_STATUSES
-from app.models import Auction, Category, Item, Source
+from app.models import Auction, Category, Item, ItemDuplicate, Source
 
 #: Chaves aceitas em `saved_filters.criteria` e na query string da vitrine.
 CRITERIA_KEYS = (
@@ -101,6 +102,17 @@ def apply_filters(
     """Aplica o criterio. `category_path` vem resolvido por `category_path_for`
     porque a busca guarda o slug, mas o filtro precisa pegar a subarvore."""
     stmt = stmt.where(Item.status.in_(VISIBLE_STATUSES if status in (None, "", "all") else (status,)))
+
+    if status in (None, "", "all"):
+        # Espelho fundido (F4) some enquanto o canonico estiver visivel; se o
+        # canonico encerra, o espelho volta a aparecer por conta propria.
+        canon = aliased(Item)
+        stmt = stmt.where(~exists().where(
+            ItemDuplicate.duplicate_item_id == Item.id,
+            ItemDuplicate.status == "confirmed",
+            canon.id == ItemDuplicate.canonical_item_id,
+            canon.status.in_(VISIBLE_STATUSES),
+        ))
 
     if category_path:
         stmt = stmt.where(Category.path.like(f"{category_path}%"))

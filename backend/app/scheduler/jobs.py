@@ -458,9 +458,12 @@ async def dedup_job() -> dict[str, Any]:
             job = await _start_job(db, "dedup")
             try:
                 threshold = await get_setting_float(db, "dedup_threshold", 0.85)
-                created = await run_dedup(db, threshold)
-                await _finish_job(db, job, "success", created, details={"created": created, "threshold": threshold})
-                return {"created": created}
+                merge = await get_setting_float(db, "dedup_merge_threshold", 1.0)
+                created, merged = await run_dedup(db, threshold, merge)
+                await _finish_job(db, job, "success", created, details={
+                    "created": created, "merged": merged, "threshold": threshold, "merge_threshold": merge,
+                })
+                return {"created": created, "merged": merged}
             except Exception as exc:
                 await db.rollback()
                 await _finish_job(db, job, "failed", 0, str(exc))

@@ -50,6 +50,7 @@ DEFAULTS = [
     {"key": "closed_retention_days", "value": "90", "label": "Retencao de itens encerrados (dias, 0 = nunca apagar)", "group": "pipeline", "is_secret": False},
     {"key": "dedup_enabled", "value": "true", "label": "RN-004: deduplicacao ligada", "group": "pipeline", "is_secret": False},
     {"key": "dedup_threshold", "value": "0.85", "label": "RN-004: similaridade minima (0-1)", "group": "pipeline", "is_secret": False},
+    {"key": "dedup_merge_threshold", "value": "1.0", "label": "F4: similaridade que funde automaticamente (1.0 = so placa ou URL oficial iguais)", "group": "pipeline", "is_secret": False},
     # ── Saude da coleta (RN-008) ───────────────────────────────────────
     {"key": "incident_variation_pct", "value": "60", "label": "RN-008: variacao % vs media que gera incidente", "group": "health", "is_secret": False},
     {"key": "incident_min_history", "value": "3", "label": "RN-008: coletas boas antes de avaliar variacao", "group": "health", "is_secret": False},

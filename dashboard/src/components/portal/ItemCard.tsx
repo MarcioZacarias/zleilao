@@ -96,6 +96,14 @@ export function ItemCard({ item, compact = false }: ItemCardProps) {
           {item.title}
         </h3>
         {sub && <p className="mt-0.5 truncate text-xs text-radar-muted">{sub}</p>}
+        {item.also_in && item.also_in.length > 0 && (
+          <p
+            className="mt-0.5 truncate text-[11px] text-sky-200/90"
+            title="O mesmo lote está publicado em mais de uma fonte; esta é a publicação mais antiga"
+          >
+            também em {item.also_in.join(", ")}
+          </p>
+        )}
 
         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-radar-muted">
           {(item.city || item.state) && (

@@ -122,6 +122,37 @@ SOURCES = [
         "base_url": "https://www.leilo.com.br", "scrape_frequency": 240,
         "config": {"path": "/leilao", "max_pages": 10, "fetch_details": False},
     },
+    # F4 (17/10/2026). A fonte nao pagina: cada entrada de `pages` traz a
+    # categoria inteira, e `max_pages` limita quantas entradas sao visitadas.
+    {
+        "name": "Rogério Menezes", "slug": "rogeriomenezes", "parser_type": "rogeriomenezes",
+        "base_url": "https://rogeriomenezes.com.br", "scrape_frequency": 240,
+        "config": {
+            "pages": ["/categorias/carros", "/categorias/motos", "/categorias/caminhoes", "/categorias/sucatas"],
+            "max_pages": 10, "fetch_details": True, "max_details_per_run": 60,
+        },
+    },
+    # Judicial do Parana. Categorias da fonte: 2 = veiculos, 3 = maquinas
+    # (5 traria tudo, inclusive imoveis). O detalhe custa duas requisicoes
+    # por lote (casca + JSON na sessao PHP).
+    {
+        "name": "Nakakogue Leilões", "slug": "nakakogue", "parser_type": "nakakogue",
+        "base_url": "https://www.nakakogueleiloes.com.br", "scrape_frequency": 240,
+        "config": {"categorias": [2, 3], "index_home": True, "fetch_details": True, "max_details_per_run": 60},
+    },
+    # Brasilia/DF; extrajudicial (bancos) e judicial em listas separadas. O
+    # preco so existe no detalhe, por isso `fetch_details` e um teto alto:
+    # um pregao de banco tem ~100 lotes e precisa caber numa rodada.
+    {
+        "name": "Parque dos Leilões", "slug": "parquedosleiloes", "parser_type": "parquedosleiloes",
+        "base_url": "https://www.parquedosleiloes.com.br", "scrape_frequency": 240,
+        "config": {
+            "auction_lists": ["/leiloes?searchMode=normal&type_id=1", "/leiloes-judiciais?searchMode=judicial&type_id=1"],
+            "include_closed": False, "max_list_pages": 5, "max_auctions": 10, "max_pages": 10,
+            "fetch_details": True, "max_details_per_run": 150,
+            "default_city": "Brasília", "default_state": "DF",
+        },
+    },
 ]
 
 

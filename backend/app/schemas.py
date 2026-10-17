@@ -198,6 +198,7 @@ class ItemCardOut(BaseModel):
     auction_type: Optional[str] = None
     card_fields: dict[str, Any] = {}  # campos show_in_card da categoria
     possible_duplicate: bool = False
+    also_in: list[str] = []                      # F4: outras fontes onde o mesmo lote está publicado
     opportunity_score: Optional[int] = None      # RN-010; ausente = sem referência confiável
     opportunity_discount: Optional[float] = None
     distance_km: Optional[float] = None          # só na busca por raio, a partir da cidade do lote

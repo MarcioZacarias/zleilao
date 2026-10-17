@@ -320,14 +320,33 @@ export default function LotDetail() {
             )}
           </Block>
 
+          {/* Fusão (F4): o mesmo lote em mais de uma fonte */}
+          {item.duplicates.some((d) => d.status === "confirmed") && (
+            <Block title="Também publicado em" icon={<Copy size={14} />}>
+              <p className="mb-3 text-xs text-radar-muted">
+                O mesmo lote aparece em outras fontes. Confira as condições em cada uma; o lance é sempre no site do leiloeiro.
+              </p>
+              <ul className="divide-y divide-radar-border">
+                {item.duplicates.filter((d) => d.status === "confirmed").map((d) => (
+                  <li key={d.item_id} className="flex items-center justify-between gap-3 py-2 text-sm">
+                    <span className="min-w-0 truncate font-medium text-radar-text">{d.source_name ?? "fonte não informada"}</span>
+                    <a href={d.official_url} target="_blank" rel="noopener" className="inline-flex shrink-0 items-center gap-1 text-accent hover:underline">
+                      Ver na fonte <ExternalLink size={14} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </Block>
+          )}
+
           {/* Duplicados (RN-004) */}
-          {item.duplicates.length > 0 && (
+          {item.duplicates.some((d) => d.status === "suspected") && (
             <Block title="Possíveis duplicados" icon={<Copy size={14} />}>
               <p className="mb-3 text-xs text-radar-muted">
                 Publicações semelhantes em outras fontes. Mantidas separadas por precaução.
               </p>
               <ul className="divide-y divide-radar-border">
-                {item.duplicates.map((d) => (
+                {item.duplicates.filter((d) => d.status === "suspected").map((d) => (
                   <li key={d.item_id} className="flex items-center justify-between gap-3 py-2 text-sm">
                     <div className="min-w-0">
                       <Link to={`/lote/${d.item_id}`} className="block truncate font-medium text-radar-text hover:text-accent">

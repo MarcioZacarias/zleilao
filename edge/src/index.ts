@@ -17,7 +17,7 @@ import {
   atualizarUsuario, definirPlano, detalharFonte, filtrosDoUsuario, listarAlertas, listarCategorias,
   listarFontes, listarParsers, listarUsuarios, reenviarAlerta,
 } from "./rotas/gestao";
-import { ingerir } from "./rotas/ingestao";
+import { ingerir, ingerirVinculos } from "./rotas/ingestao";
 import { apagarAsset, enviarAsset, servirAsset } from "./rotas/marca";
 import {
   anuncios, branding, categorias, cidades, detalharItem, detalharPregao, estatisticas, irParaFonte,
@@ -52,6 +52,9 @@ export default {
 
       if (p === "/ingest/batch" && req.method === "POST") {
         return comCors(await ingerir(req, env));
+      }
+      if (p === "/ingest/duplicates" && req.method === "POST") {
+        return comCors(await ingerirVinculos(req, env));
       }
 
       // Painel: login, configuração, assinantes, alertas, e leitura de fontes

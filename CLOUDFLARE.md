@@ -275,6 +275,9 @@ npx wrangler d1 execute zleilao --remote --file schema/001_schema.sql
 | `003_municipios.sql` | 5.618 municípios (gerado de `backend/app/data/municipios.json`) |
 | `004_seed.sql` | categorias, campos, fontes e configuração (exportados do Postgres) |
 | `005_ads.sql` | configuração de publicidade e `ad_events` |
+| `006_admin.sql` | `login_failures`, o bloqueio por tentativa do login |
+| `007_dedup.sql` | índices de `item_duplicates` e o limiar de fusão (F4) |
+| `008_fontes_f4.sql` | fontes novas da F4 (a ingestão só aceita fonte cadastrada) |
 
 Quatro decisões do esquema que mudam o significado das colunas estão
 documentadas no cabeçalho do `001_schema.sql` — dinheiro em centavos, data como

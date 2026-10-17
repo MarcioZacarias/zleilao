@@ -27,6 +27,8 @@ class SerializerContext:
         self.card_keys: dict[int, list[CategoryField]] = {}
         self.field_defs: dict[int, list[tuple[CategoryField, Category]]] = {}
         self.dup_ids: set[int] = set()
+        #: F4: item -> nomes das outras fontes onde o mesmo lote esta' publicado.
+        self.also_in: dict[int, list[str]] = {}
         self.opportunities: dict[int, ItemOpportunity] = {}
         #: centro da busca por raio, quando houver — preenchido pela rota.
         self.center: tuple[float, float] | None = None
@@ -38,13 +40,29 @@ class SerializerContext:
             self.categories = {c.id: c for c in (await self.db.execute(select(Category))).scalars().all()}
         ids = [i.id for i in items]
         if ids:
-            rows = (await self.db.execute(select(ItemDuplicate.canonical_item_id, ItemDuplicate.duplicate_item_id).where(
+            # Suspeito marca o card; confirmado (F4) vira "tambem em <fonte>".
+            rows = (await self.db.execute(select(
+                ItemDuplicate.canonical_item_id, ItemDuplicate.duplicate_item_id, ItemDuplicate.status,
+            ).where(
                 ItemDuplicate.status.in_(("suspected", "confirmed")),
                 or_(ItemDuplicate.canonical_item_id.in_(ids), ItemDuplicate.duplicate_item_id.in_(ids)),
             ))).all()
-            for a, b in rows:
-                self.dup_ids.add(a)
-                self.dup_ids.add(b)
+            confirmados = [(a, b) for a, b, st in rows if st == "confirmed"]
+            for a, b, st in rows:
+                if st == "suspected":
+                    self.dup_ids.add(a)
+                    self.dup_ids.add(b)
+            if confirmados:
+                parceiros = {x for par in confirmados for x in par}
+                fonte_de = dict((await self.db.execute(
+                    select(Item.id, Item.source_id).where(Item.id.in_(parceiros))
+                )).all())
+                meus = set(ids)
+                for a, b in confirmados:
+                    for eu, outro in ((a, b), (b, a)):
+                        src = self.sources.get(fonte_de.get(outro))
+                        if eu in meus and src and src.name not in self.also_in.setdefault(eu, []):
+                            self.also_in[eu].append(src.name)
         if ids:
             for opp in (await self.db.execute(
                 select(ItemOpportunity).where(ItemOpportunity.item_id.in_(ids))
@@ -77,6 +95,7 @@ class SerializerContext:
             category_id=item.category_id, category_slug=cat.slug if cat else None, category_name=cat.name if cat else None,
             auction_id=item.auction_id, auction_type=auction_type, card_fields=card_fields,
             possible_duplicate=item.id in self.dup_ids,
+            also_in=self.also_in.get(item.id, []),
             opportunity_score=opp.score if (opp := self.opportunities.get(item.id)) else None,
             opportunity_discount=opp.discount_pct if opp else None,
             distance_km=self._distance(item),

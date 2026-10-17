@@ -27,12 +27,12 @@ from decimal import Decimal
 from pathlib import Path
 
 import httpx
-from sqlalchemy import select, text
+from sqlalchemy import or_, select, text
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from app.database import AsyncSessionLocal  # noqa: E402
-from app.models import Auction, Category, Item, Source  # noqa: E402
+from app.models import Auction, Category, Item, ItemDuplicate, Source  # noqa: E402
 from app.timeutil import now_brt  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -135,6 +135,52 @@ async def montar_lote(db, itens: list[Item], cats: dict[int, str], pregoes: dict
     return saida
 
 
+async def sincronizar_vinculos(db, url: str, token: str, desde: str | None) -> int:
+    """Envia os vinculos de duplicidade (RN-004 / F4).
+
+    A borda tem ids proprios, entao cada lado do par viaja como (fonte, id
+    externo) e e' resolvido la'. Vai tudo que nasceu ou foi revisado desde o
+    marcador: a confirmacao do admin tambem precisa chegar a' vitrine.
+    """
+    consulta = select(ItemDuplicate)
+    if desde:
+        marco = text("'%s'" % desde)
+        consulta = consulta.where(or_(ItemDuplicate.created_at >= marco, ItemDuplicate.reviewed_at >= marco))
+    links = (await db.execute(consulta)).scalars().all()
+    if not links:
+        return 0
+
+    ids = {l.canonical_item_id for l in links} | {l.duplicate_item_id for l in links}
+    fontes = {s.id: s.slug for s in (await db.execute(select(Source))).scalars().all()}
+    ref = {
+        i: {"source_slug": fontes.get(sid), "external_id": ext}
+        for i, sid, ext in (await db.execute(select(Item.id, Item.source_id, Item.external_id).where(Item.id.in_(ids)))).all()
+    }
+    corpo = [
+        {
+            "canonical": ref[l.canonical_item_id], "duplicate": ref[l.duplicate_item_id],
+            "similarity": l.similarity, "reasons": l.reasons, "status": l.status,
+            "created_at": _dt(l.created_at), "reviewed_at": _dt(l.reviewed_at),
+        }
+        for l in links if l.canonical_item_id in ref and l.duplicate_item_id in ref
+    ]
+
+    enviados = 0
+    async with httpx.AsyncClient(timeout=60) as http:
+        for ini in range(0, len(corpo), 200):
+            r = await http.post(
+                f"{url.rstrip('/')}/ingest/duplicates",
+                json={"links": corpo[ini : ini + 200]},
+                headers={"x-ingest-token": token},
+            )
+            if r.status_code != 200:
+                logger.error("falha ao enviar vinculos [%s]: %s", r.status_code, r.text[:200])
+                return enviados
+            enviados += r.json().get("gravados", 0)
+    logger.info("vinculos de duplicidade: %d enviados", enviados)
+    return enviados
+
+
 async def sincronizar(url: str, token: str, completo: bool, limite: int | None) -> int:
     desde = None if completo else ler_marcador()
     inicio = now_brt().strftime("%Y-%m-%d %H:%M:%S")
@@ -142,6 +188,10 @@ async def sincronizar(url: str, token: str, completo: bool, limite: int | None) 
     async with AsyncSessionLocal() as db:
         cats = {c.id: c.slug for c in (await db.execute(select(Category))).scalars().all()}
         fontes = {s.id: s.slug for s in (await db.execute(select(Source))).scalars().all()}
+
+        # Vinculos vao antes e independem de haver lote mudado: a revisao do
+        # admin nao altera nenhum item.
+        await sincronizar_vinculos(db, url, token, desde)
 
         consulta = select(Item).order_by(Item.source_id, Item.id)
         if desde:
