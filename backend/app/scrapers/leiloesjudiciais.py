@@ -166,8 +166,13 @@ class LeiloesJudiciaisScraper(BaseScraper):
         "pages": ["/veiculos"],
         # Opcional: ["SP", "MG"] expande cada page em /{page}/estado/{UF}.
         "states": [],
-        # >1 usa ?pagina=N, que o robots.txt do site proibe. Decisao do operador.
+        # >1 usa ?pagina=N, que o robots.txt do site proibe. So' vale com
+        # `allow_pagination: true`, uma chave que o `--max-pages` do agente
+        # de coleta nao toca: o ciclo de hora em hora passa 2 e a varredura
+        # profunda 12 para TODAS as fontes, e sem a trava o limite viraria
+        # violacao do robots sem ninguem decidir.
         "max_pages": 1,
+        "allow_pagination": False,
         "fetch_details": True,
         # Paginas de LEILAO (uma por leilao, ~1,2 MB cada), nao de lote.
         "max_details_per_run": 40,
@@ -218,7 +223,7 @@ class LeiloesJudiciaisScraper(BaseScraper):
 
     async def scrape(self) -> list[ScrapedItem]:
         items: list[ScrapedItem] = []
-        max_pages = max(1, int(self.cfg("max_pages", 1)))
+        max_pages = max(1, int(self.cfg("max_pages", 1))) if self.cfg("allow_pagination", False) else 1
         for path in self._listing_paths():
             for page in range(1, max_pages + 1):
                 url = self._page_url(path, page)
