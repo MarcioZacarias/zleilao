@@ -202,6 +202,25 @@ SOURCES = [
             "detail": {"images_regex": "/envios/leilao_lote_imagem\\d+\\.jpe?g"},
         },
     },
+    # Portal judicial (Serrano), ~1.000 veiculos. O robots.txt veda robos na
+    # paginacao (`?pagina=`), por isso `max_pages` fica em 1 e a cobertura
+    # vem de fatiar o catalogo (subcategoria x ordenacao x faixa de valor x
+    # UF em `pages`) e de colher os lotes irmaos na pagina de cada leilao.
+    # `max_details_per_run` conta leiloes (paginas de ~1,2 MB), nao lotes.
+    {
+        "name": "Leilões Judiciais", "slug": "leiloesjudiciais", "parser_type": "leiloesjudiciais",
+        "base_url": "https://www.leiloesjudiciais.com.br", "scrape_frequency": 240,
+        "config": {
+            "pages": [
+                "/veiculos/carros?ordenacao=min", "/veiculos/carros?ordenacao=max",
+                "/veiculos/motos?ordenacao=min", "/veiculos/caminhoes?ordenacao=min",
+                "/veiculos/onibus", "/veiculos/veiculos-pesados",
+                "/maquinas-e-equipamentos/tratores-e-colheitadeiras",
+            ],
+            "states": [], "max_pages": 1, "fetch_details": True, "max_details_per_run": 40,
+            "harvest_auction_lots": True, "segments": ["veiculos"],
+        },
+    },
 ]
 
 

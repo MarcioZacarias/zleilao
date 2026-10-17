@@ -2,6 +2,7 @@ from app.scrapers.base import BaseScraper, ScrapedAuction, ScrapedItem, ScrapedS
 from app.scrapers.freitas import FreitasScraper
 from app.scrapers.generic_html import GenericHtmlScraper
 from app.scrapers.leilo import LeiloScraper
+from app.scrapers.leiloesjudiciais import LeiloesJudiciaisScraper
 from app.scrapers.megaleiloes import MegaLeiloesScraper
 from app.scrapers.nakakogue import NakakogueScraper
 from app.scrapers.parquedosleiloes import ParqueDosLeiloesScraper
@@ -16,6 +17,7 @@ SCRAPERS: dict[str, type[BaseScraper]] = {
     "nakakogue": NakakogueScraper,
     "parquedosleiloes": ParqueDosLeiloesScraper,
     "pestana": PestanaScraper,
+    "leiloesjudiciais": LeiloesJudiciaisScraper,
     "generic_html": GenericHtmlScraper,
 }
 
