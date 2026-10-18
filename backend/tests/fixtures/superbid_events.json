@@ -1,0 +1,256 @@
+{
+ "total": 3,
+ "start": 0,
+ "limit": 50,
+ "events": [
+  {
+   "id": 797249,
+   "modalityId": 4,
+   "statusId": 1,
+   "portalId": 2,
+   "desc": "LEILÃO JUDICIAL",
+   "endDate": "2026-10-19 00:00:00",
+   "fullDescription": "MESAS DE GRANITO CORUMBÁ",
+   "imageURL": "https://static.s4bdigital.net/logos_empresas/1613b4f0-5f65-46a5-ba60-ef8a3a4a52c8.jpg",
+   "localeId": "pt_BR",
+   "firstOfferCloseDate": "2026-10-19 00:00:00",
+   "lastOfferCloseDate": "2026-10-19 00:00:00",
+   "auctionJudicialPraca": 2,
+   "showOnFirstPage": false,
+   "subMarketplaces": [
+    {
+     "id": 3,
+     "desc": "Judicial"
+    }
+   ],
+   "semaphoreStatus": {
+    "comingSoon": false,
+    "allotment": false,
+    "inProgress": true,
+    "finished": false,
+    "live": false
+   },
+   "storeIds": [
+    16095
+   ],
+   "store": {
+    "id": 16095,
+    "name": "BEZERRA LEILÕES",
+    "visibleOnPortal": null,
+    "highlight": null,
+    "logoUri": null,
+    "visibleOnPortalBanner": null
+   },
+   "eventPipeline": {
+    "id": 1725459,
+    "description": "LEILÃO JUDICIAL",
+    "currentStage": 2,
+    "stages": [
+     {
+      "eventId": 797248,
+      "eventDesc": "LEILÃO JUDICIAL",
+      "beginDate": "2026-09-29 17:10:00",
+      "endDate": "2026-10-01 17:00:00",
+      "statusId": 1,
+      "isActive": false,
+      "isAfterMarket": false,
+      "initialBidValue": 4202,
+      "formattedInitialBidValue": "R$ 4.202,00"
+     },
+     {
+      "eventId": 797249,
+      "eventDesc": "LEILÃO JUDICIAL",
+      "beginDate": "2026-10-01 17:10:00",
+      "endDate": "2026-10-19 00:00:00",
+      "statusId": 1,
+      "isActive": true,
+      "isAfterMarket": false,
+      "initialBidValue": 2941.4,
+      "formattedInitialBidValue": "R$ 2.941,40"
+     }
+    ]
+   },
+   "betterOffer": {
+    "offerId": 5040116,
+    "auctionId": 797249,
+    "initialBidValue": 2941.4,
+    "releaseValue": 0,
+    "startDate": 1790885400000
+   },
+   "isAfterMarket": false
+  },
+  {
+   "id": 801425,
+   "modalityId": 1,
+   "statusId": 1,
+   "portalId": 2,
+   "desc": "Sicredi Biomas - A.F",
+   "endDate": "2026-10-19 09:00:00",
+   "fullDescription": "IMÓVEL RURAL | A.T. 15,4645HA FAZENDA NOVO HORIZONTE | GUARAJÁ/AM ",
+   "imageURL": "https://static.s4bdigital.net/logos_empresas/aad708c1-4ac2-4fe2-b549-20316d5100ce.jpg",
+   "highlightURL": "event/801425/images/a4ed8720-a1ff-409d-86dd-d42cdfb2a5d3.jpg",
+   "localeId": "pt_BR",
+   "firstOfferCloseDate": "2026-10-19 09:00:00",
+   "lastOfferCloseDate": "2026-10-19 09:00:00",
+   "showOnFirstPage": false,
+   "semaphoreStatus": {
+    "comingSoon": false,
+    "allotment": false,
+    "inProgress": true,
+    "finished": false,
+    "live": false
+   },
+   "storeIds": [
+    16198
+   ],
+   "store": {
+    "id": 16198,
+    "name": "BARRETO LEILÕES",
+    "visibleOnPortal": null,
+    "highlight": null,
+    "logoUri": null,
+    "visibleOnPortalBanner": null
+   },
+   "eventPipeline": {
+    "id": 1720297,
+    "description": "Sicredi Biomas - A.F",
+    "currentStage": 1,
+    "stages": [
+     {
+      "eventId": 801425,
+      "eventDesc": "Sicredi Biomas - A.F",
+      "beginDate": "2026-09-14 17:43:00",
+      "endDate": "2026-10-19 09:00:00",
+      "statusId": 1,
+      "isActive": true,
+      "isAfterMarket": false,
+      "initialBidValue": 597313.08,
+      "formattedInitialBidValue": "R$ 597.313,08"
+     },
+     {
+      "eventId": 801426,
+      "eventDesc": "Sicredi Biomas - A.F",
+      "beginDate": "2026-10-19 09:00:00",
+      "endDate": "2026-10-20 09:00:00",
+      "statusId": 5,
+      "isActive": false,
+      "isAfterMarket": false,
+      "initialBidValue": 298656.54,
+      "formattedInitialBidValue": "R$ 298.656,54"
+     }
+    ]
+   },
+   "betterOffer": {
+    "offerId": 5024478,
+    "auctionId": 801425,
+    "initialBidValue": 597313.08,
+    "releaseValue": 0,
+    "startDate": 1789418580000
+   },
+   "isAfterMarket": false,
+   "gallery": [
+    {
+     "id": null,
+     "link": "https://ms.sbwebservices.net/photos/35512620-1df5-48ea-8ffd-dbdd9379d37e.jpg",
+     "contentType": "image/jpeg",
+     "productId": null,
+     "uploadFileName": null,
+     "originalFileName": "ENC_nGgensjuiA7Jaf6YtxGTOCxYilt8aTxgemBCkn7WFJJH7j6JIfgM569uMfb5kHOS.jpg",
+     "title": null,
+     "fileName": "35512620-1df5-48ea-8ffd-dbdd9379d37e.jpg",
+     "highlight": false
+    }
+   ]
+  },
+  {
+   "id": 802214,
+   "modalityId": 4,
+   "statusId": 1,
+   "portalId": 2,
+   "desc": "02ª Vara Cível de Cianorte/PR",
+   "endDate": "2026-10-19 09:05:00",
+   "fullDescription": "Direitos sobre lote, com área de 275,00 metros quadrados, Cianorte/PR",
+   "imageURL": "https://static.s4bdigital.net/logos_empresas/c7491091-c82d-414b-bc1f-ea2592d7f022.jpg",
+   "highlightURL": "event/802214/images/6ac2dbd9-fc38-464f-8420-a62e08c976fc.jpg",
+   "localeId": "pt_BR",
+   "firstOfferCloseDate": "2026-10-19 09:05:00",
+   "lastOfferCloseDate": "2026-10-19 09:05:00",
+   "auctionJudicialPraca": 1,
+   "showOnFirstPage": false,
+   "subMarketplaces": [
+    {
+     "id": 3,
+     "desc": "Judicial"
+    }
+   ],
+   "semaphoreStatus": {
+    "comingSoon": false,
+    "allotment": false,
+    "inProgress": true,
+    "finished": false,
+    "live": false
+   },
+   "storeIds": [
+    16180
+   ],
+   "store": {
+    "id": 16180,
+    "name": "KRON LEILÕES",
+    "visibleOnPortal": null,
+    "highlight": null,
+    "logoUri": null,
+    "visibleOnPortalBanner": null
+   },
+   "eventPipeline": {
+    "id": 1720502,
+    "description": "02ª Vara Cível de Cianorte/PR",
+    "currentStage": 1,
+    "stages": [
+     {
+      "eventId": 802214,
+      "eventDesc": "02ª Vara Cível de Cianorte/PR",
+      "beginDate": "2026-10-01 18:09:00",
+      "endDate": "2026-10-19 09:05:00",
+      "statusId": 1,
+      "isActive": true,
+      "isAfterMarket": false,
+      "initialBidValue": 95000,
+      "formattedInitialBidValue": "R$ 95.000,00"
+     },
+     {
+      "eventId": 802215,
+      "eventDesc": "02ª Vara Cível de Cianorte/PR",
+      "beginDate": "2026-10-19 09:05:00",
+      "endDate": "2026-10-26 09:05:00",
+      "statusId": 5,
+      "isActive": false,
+      "isAfterMarket": false,
+      "initialBidValue": 47500,
+      "formattedInitialBidValue": "R$ 47.500,00"
+     }
+    ]
+   },
+   "betterOffer": {
+    "offerId": 5044163,
+    "auctionId": 802214,
+    "initialBidValue": 95000,
+    "releaseValue": null,
+    "startDate": 1790888940000
+   },
+   "isAfterMarket": false,
+   "gallery": [
+    {
+     "id": null,
+     "link": "https://ms.sbwebservices.net/photos/ef6adeea-2f4d-4d4b-98b1-f1ea01c5394c.jpg",
+     "contentType": "image/jpeg",
+     "productId": null,
+     "uploadFileName": null,
+     "originalFileName": "ENC_nv6lykkZrfulGo2eV-Q1gg.jpeg",
+     "title": null,
+     "fileName": "ef6adeea-2f4d-4d4b-98b1-f1ea01c5394c.jpg",
+     "highlight": true
+    }
+   ]
+  }
+ ]
+}

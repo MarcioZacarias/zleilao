@@ -20,3 +20,7 @@ INSERT OR IGNORE INTO sources (name, slug, kind, parser_type, base_url, config, 
 VALUES ('Palácio dos Leilões', 'palacio', 'auction', 'palacio', 'https://www.palaciodosleiloes.com.br', '{}', 1, 1, 1, 240, 10, 'unknown', '2026-10-17 00:00:00', '2026-10-17 00:00:00');
 INSERT OR IGNORE INTO sources (name, slug, kind, parser_type, base_url, config, is_active, dispatch_enabled, scraping_allowed, scrape_frequency, priority_weight, health_status, created_at, updated_at)
 VALUES ('Montenegro Leilões', 'montenegro', 'auction', 'montenegro', 'https://montenegroleiloes.com.br', '{}', 1, 1, 1, 240, 10, 'unknown', '2026-10-17 00:00:00', '2026-10-17 00:00:00');
+INSERT OR IGNORE INTO sources (name, slug, kind, parser_type, base_url, config, is_active, dispatch_enabled, scraping_allowed, scrape_frequency, priority_weight, health_status, created_at, updated_at)
+VALUES ('Sodré Santoro', 'sodresantoro', 'auction', 'sodresantoro', 'https://www.sodresantoro.com.br', '{}', 1, 1, 1, 240, 10, 'unknown', '2026-10-18 00:00:00', '2026-10-18 00:00:00');
+INSERT OR IGNORE INTO sources (name, slug, kind, parser_type, base_url, config, is_active, dispatch_enabled, scraping_allowed, scrape_frequency, priority_weight, health_status, created_at, updated_at)
+VALUES ('Superbid', 'superbid', 'auction', 'superbid', 'https://www.superbid.net', '{}', 1, 1, 1, 240, 10, 'unknown', '2026-10-18 00:00:00', '2026-10-18 00:00:00');

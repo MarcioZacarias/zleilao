@@ -244,6 +244,33 @@ SOURCES = [
             "fetch_auctions": True, "fetch_details": True, "max_details_per_run": 60,
         },
     },
+    # Guarulhos/SP e Curitiba/PR; Allianz, Banco Pan, Suhai e ~11% judicial.
+    # Elasticsearch do proprio site via POST, 100 lotes por pagina e tudo no
+    # card. O bot manager (Azion) exige cabecalhos de Chrome e cookies da
+    # capa, que o BaseScraper ja' cobre.
+    {
+        "name": "Sodré Santoro", "slug": "sodresantoro", "parser_type": "sodresantoro",
+        "base_url": "https://www.sodresantoro.com.br", "scrape_frequency": 240,
+        "config": {
+            "path": "/lotes", "api_path": "/api/search-lots",
+            "indices": ["veiculos", "judiciais-veiculos"],
+            "page_size": 100, "max_pages": 8, "fetch_details": False,
+        },
+    },
+    # Maior plataforma do pais (~7 mil carros e motos abertos). O site fica
+    # atras de desafio Cloudflare, mas os microservicos de busca nao: sem
+    # cookie, sem token. Ordenado por encerramento, o que vence antes e'
+    # sempre visto; a varredura profunda (12 paginas de 200) cobre motos,
+    # caminhoes e maquinas inteiros, e os carros conforme se aproximam do fim.
+    {
+        "name": "Superbid", "slug": "superbid", "parser_type": "superbid",
+        "base_url": "https://www.superbid.net", "scrape_frequency": 240,
+        "config": {
+            "categorias": ["carros-motos/carros", "carros-motos/motos", "caminhoes-onibus", "maquinas-pesadas-agricolas"],
+            "page_size": 200, "max_pages": 2, "order_by": "endDate:asc",
+            "include_parts": False, "fetch_events": False, "events_pages": 2, "fetch_details": False,
+        },
+    },
 ]
 
 

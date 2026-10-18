@@ -213,10 +213,16 @@ Sodré Santoro, Superbid, Copart, Milan e Lance Certo ficaram para a F4 (ver DEC
 | Leilões Judiciais (Serrano) | Nuxt SSR: listagem já vem com o payload `__NUXT_DATA__` (devalue) com os 42 lotes; detalhe é por leilão (datas das praças, Vara, lotes irmãos) | judicial, ~1.000 veículos no país | **robots veda `?pagina=`**: uma página por listagem, cobertura por fatiamento (`pages` com subcategoria, `?ordenacao=`, `valmin/valmax`, `/estado/UF`); páginas de 1,2–1,8 MB; descrição traz partes do processo e CPF, que o parser descarta por rótulo (RN-009) |
 | Palácio dos Leilões (MG) | um `POST site/camada_ajax/coluna_esquerda_m.php` (`paginacao=-1`) traz o catálogo inteiro em ISO-8859-1; detalhe por `POST camada_ajax/lote.php` | PAN, Honda, Mapfre, Movida, Porto, Localiza; ~1.000 veículos, o maior volume da F4 | 26% dos lotes vêm com "0,00 lance inicial" (lance livre → preço nulo); ~5% dos títulos colados sem anos ("GMMONTANA"); pátio vira cidade/UF por mapa; só a data do pregão, sem hora |
 | Montenegro Leilões (CE) | API JSON pública `/api-publica/stale/dados-home-lotes/veicular/categorias/veiculos?page=N` (12 por página, `[]` no fim) + agenda + detalhe no `#app[data-page]` | TJCE, TRT 7ª, prefeituras; ~50 veículos | **Cloudflare barra o httpx padrão pela impressão digital TLS**: o coletor usa TLS 1.3 + cabeçalhos de Chrome e passa pela home antes da API; se endurecer, vira caso de proxy. Valores vêm como "1552.5" (ponto decimal, não milhar) |
+| Sodré Santoro (SP/PR) | `GET /lotes` (cookies do bot manager Azion) + `POST /api/search-lots` (Elasticsearch do site, filtro padrão como constante datada), 100 por página, tudo no card | Allianz, Banco Pan, Suhai, ~11% judicial; ~500–650 veículos | respondia 403 só por faltar client hints; fonte indexa tudo em minúsculas (`nice_name`); descrições judiciais trazem partes, contato e endereço — `scrub_description` descarta segmentos inteiros (RN-009); "utilitarios leves" vai para `carros` pelo título |
+| Superbid | microserviços `offer-query.superbid.net` (`/seo/offers/` com `searchType=opened`) e `event-query`, sem cookie nem token; o site em si é desafio Cloudflare | ~7.000 carros e motos, 941 caminhões/ônibus, 1.825 máquinas; judicial e extrajudicial | `searchType=opened` é o que filtra abertos (sem ele vêm zumbis de 2021); vendedor pessoa física vira `origem: particular` sem nome; `vehicleOwner`/telefone nunca entram; robots.txt inacessível (403) → `unknown` |
 | Casa de Leilões (MS) | `generic_html` só por configuração: capa lista pregões, cada pregão traz todos os lotes; `page_fields` lê abertura/encerramento do cabeçalho | DETRAN, prefeitura e varas de Campo Grande; ~150 veículos | capa dá "Encerra dd/mm" sem ano; bens móveis vêm sem cidade; 2ª praça dos judiciais fica de fora (o genérico modela sessão única) |
 
 Leilões BR foi descartado (arte e colecionáveis), Kleiber também (10 veículos,
-termos restritivos) e D1 Lance proíbe robôs no `robots.txt`.
+termos restritivos) e D1 Lance proíbe robôs no `robots.txt`. **Copart** ficou de
+fora por decisão do Márcio (anti-bot Imperva mais termos de uso pessoal e não
+comercial). **OLX** não entra: o `robots.txt` veda busca por termo, paginação e
+filtros, e os termos vedam "realizar web crawling no Site" — o comparador segue
+na FIPE (ver DECISOES.md).
 
 Fixtures reais em `backend/tests/fixtures/`; quando um layout quebrar, refaça a fixture e
 ajuste o parser com o teste guiando.

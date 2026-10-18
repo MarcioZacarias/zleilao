@@ -1,0 +1,4140 @@
+{
+ "total": 14,
+ "start": 0,
+ "limit": 100,
+ "seoTitle": "Recorte de teste",
+ "seoProductTypeId": null,
+ "offers": [
+  {
+   "id": 5013183,
+   "indexationDate": "2026-10-17 17:45:52",
+   "lotNumber": 1,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "totalReceivedProposals": 0,
+   "hasReceivedProposals": false,
+   "visits": 350,
+   "totalBidders": 1,
+   "totalBids": 1,
+   "totalReceivedBidsOrProposals": 1,
+   "hasBids": true,
+   "hasReceivedBidsOrProposals": true,
+   "endDate": "2026-10-19 09:00:00",
+   "endDateTime": 1792411200000,
+   "offerTypeId": 1,
+   "createAt": "2026-09-14 16:32:34",
+   "updateAt": "2026-10-17 15:31:22",
+   "publishedAt": "2026-09-14 16:38:39",
+   "statusId": 1,
+   "price": 8958.3,
+   "priceFormatted": "R$ 8.958,30",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": true,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": false,
+    "closed": false
+   },
+   "store": {
+    "id": 16146,
+    "name": "HASTA SP",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "logoUri": "https://static.s4bdigital.net/logos_empresas/logo_topo_hasta.png"
+   },
+   "offerDetail": {
+    "id": 5013183,
+    "initialBidValue": 8958.3,
+    "initialBidValueFormatted": "R$ 8.958,30",
+    "currentMinBid": 8958.3,
+    "currentMinBidFormatted": "R$ 8.958,30",
+    "currentMaxBid": 8958.3,
+    "currentMaxBidFormatted": "R$ 8.958,30",
+    "reservedPrice": 13782,
+    "reservedPriceFormatted": "R$ 13.782,00"
+   },
+   "currentTimestamp": "2026-10-17 17:55:21",
+   "auction": {
+    "id": 801204,
+    "desc": "LEILÃO DE VEÍCULOS CONSERVADOS 19/2026 SBC",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 2,
+    "modalityId": 1,
+    "modalityDesc": "Leilão",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2026-10-04 09:00:00",
+    "endDate": "2026-10-19 09:00:00",
+    "maxEnddateOffer": "2026-10-19 09:57:30",
+    "subMarketplaces": [
+     {
+      "subMarketplaceId": 5,
+      "subMarketplaceDesc": "GOV"
+     }
+    ],
+    "judicialPraca": null,
+    "judicialPracaDescription": "Praça Única",
+    "judicialControlNumber": null,
+    "auctioneer": "Marcia Anny Mardirosian Nazar",
+    "registry": null,
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Sudeste",
+     "type": 5
+    },
+    "crier": false,
+    "eventPipeline": null,
+    "lotAuctionTypeId": 1,
+    "isAfterMarket": null
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {
+    "currentBidIncrement": 413.46,
+    "currentBidIncrementFormatted": "R$ 413,46"
+   },
+   "offerDescription": {
+    "offerDescription": "FIAT SIENA FIRE FLEX 2009 2010 PRATA <span>FIAT SIENA FIRE FLEX 2009 2010 PRATA Agendamento e Retirada de Veículos<br><br>Os veículos leiloados \"com direito a documento\" serão liberados para retirada pelo arrematante em até 3 (três) dias úteis, contados a partir da confirmação do pagamento integral "
+   },
+   "groupOffer": {
+    "acceptProposal": false,
+    "id": 360295
+   },
+   "product": {
+    "productId": 3784641,
+    "shortDesc": "FIAT SIENA FIRE FLEX 2009 2010 PRATA",
+    "galleryJson": [
+     {
+      "originalFileName": "ENC_Rzg8vzxXwFmz7wDmqM3SRw.jpg",
+      "highlight": false,
+      "fileName": "cd52ede2-1c71-43bb-b335-217197673b5d.jpg",
+      "link": "https://ms.sbwebservices.net/photos/cd52ede2-1c71-43bb-b335-217197673b5d.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/cd52ede2-1c71-43bb-b335-217197673b5d.jpg"
+     },
+     {
+      "originalFileName": "ENC_R-4-iSH4DOevbjH2-ZBzkg.jpg",
+      "highlight": false,
+      "fileName": "4775ba37-d1d0-491f-bb70-41345184450a.jpg",
+      "link": "https://ms.sbwebservices.net/photos/4775ba37-d1d0-491f-bb70-41345184450a.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/4775ba37-d1d0-491f-bb70-41345184450a.jpg"
+     },
+     {
+      "originalFileName": "ENC_A6j_6sEeudIBr0MR3WnvRA.jpg",
+      "highlight": false,
+      "fileName": "bee7102a-487e-4ed4-901e-e7268a06b8f0.jpg",
+      "link": "https://ms.sbwebservices.net/photos/bee7102a-487e-4ed4-901e-e7268a06b8f0.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/bee7102a-487e-4ed4-901e-e7268a06b8f0.jpg"
+     }
+    ],
+    "productCustomJson": "{}",
+    "photoCount": 6,
+    "videoUrlCount": 0,
+    "thumbnailUrl": "https://ms.sbwebservices.net/photos/cd52ede2-1c71-43bb-b335-217197673b5d.jpg",
+    "detailedDescription": "<span>FIAT SIENA FIRE FLEX 2009 2010 PRATA Agendamento e Retirada de Veículos<br><br>Os veículos leiloados \"com direito a documento\" serão liberados para retirada pelo arrematante em até 3 (três) dias úteis, contados a partir da confirmação do pagamento integral do valor da arrematação.<br><br>Após a liberação do veículo, o arrematante deverá acessar o site www.agendamentoentregas.com.br para enviar os documentos pertinentes à arrematação, os quais serão submetidos à análise e aprovação da HASTA SP.<br><br>Com a aprovação da documentação, o arrematante poderá selecionar a data e o horário disponíveis para a retirada do veículo, realizando o agendamento diretamente no site.<br><br>O sistema enviará confirmação automática por e-mail, devendo o arrematante comparecer ao pátio na data e horário agendados, munido da documentação necessária.<br><br>Transferência e Desvinculação de Débitos dos Veículos<br><br>Uma vez confirmado o pagamento do arremate, a HASTA SP realiza o recolhimento dos débitos incidentes sobre o veículo, se houver saldo, e envia a prestação de contas do leilão para o Município em até 15 (quinze) dias úteis.<br>No prazo de até 15 (quinze) dias úteis, contados do recebimento da prestação de contas, o Município realizará o protocolo do processo de desvinculação de débitos e inserção do comunicado de venda ao arrematante junto ao DETRAN, através do Sistema Eletrônico de Informações (SEI).<br>A partir desse momento, o DETRAN deverá proceder com o comunicado de venda ",
+    "template": {
+     "groups": [
+      {
+       "title": "Identificação",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "marca",
+         "title": "Marca",
+         "type": "string",
+         "value": "FIAT"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "modelo",
+         "title": "Modelo",
+         "type": "string",
+         "value": "SIENA FIRE FLEX"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "placa",
+         "title": "Placa",
+         "type": "string",
+         "value": "3"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "anofabricacao",
+         "title": "Ano Fabricação",
+         "type": "integer",
+         "value": "2009"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "anomodelo",
+         "title": "Ano Modelo",
+         "type": "integer",
+         "value": "2010"
+        }
+       ],
+       "id": "identificacao"
+      },
+      {
+       "title": "Informações",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "cor",
+         "title": "Cor",
+         "type": "string",
+         "value": "PRATA"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "valortabelafipe",
+         "title": "Valor Tabela FIPE",
+         "type": "string",
+         "value": "27564"
+        }
+       ],
+       "id": "informacoes"
+      }
+     ]
+    },
+    "subCategory": {
+     "id": 10004,
+     "description": "Hatches",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 4,
+     "category": {
+      "id": 10000,
+      "description": "Carros",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 1
+     }
+    },
+    "model": {},
+    "brand": {},
+    "productYourRef": "LEILAO 19 2026 MUNICIPAL SÃO BERNARDO DO CAMPO",
+    "location": {
+     "displayOnMap": false,
+     "city": "Casa Branca - SP",
+     "state": "São Paulo",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -21.772035,
+      "lon": -47.08708
+     }
+    },
+    "productType": {
+     "id": 10,
+     "description": "Carros & Motos",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {}
+   },
+   "seller": {
+    "id": 1845410,
+    "name": "PREFEITURA MUNICIPAL DE SÃO BERNARDO DO CAMPO",
+    "city": "São Bernardo do Campo",
+    "company": [
+     {
+      "fantasyName": "PREFEITURA MUNICIPAL DE SÃO BERNARDO DO CAMPO"
+     }
+    ]
+   },
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": null,
+    "maxInstallments": null,
+    "allowsCreditCard": false,
+    "scheduleType": null,
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": false,
+    "transactionLimit": null
+   }
+  },
+  {
+   "id": 5013180,
+   "indexationDate": "2026-10-17 16:42:48",
+   "lotNumber": 4,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "totalReceivedProposals": 0,
+   "hasReceivedProposals": false,
+   "visits": 249,
+   "totalBidders": 0,
+   "totalBids": 0,
+   "totalReceivedBidsOrProposals": 0,
+   "hasBids": false,
+   "hasReceivedBidsOrProposals": false,
+   "endDate": "2026-10-19 09:01:30",
+   "endDateTime": 1792411290000,
+   "offerTypeId": 1,
+   "createAt": "2026-09-14 16:32:32",
+   "updateAt": "2026-09-14 16:38:40",
+   "publishedAt": "2026-09-14 16:38:40",
+   "statusId": 1,
+   "price": 4741.62,
+   "priceFormatted": "R$ 4.741,62",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": true,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": false,
+    "closed": false
+   },
+   "store": {
+    "id": 16146,
+    "name": "HASTA SP",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "logoUri": "https://static.s4bdigital.net/logos_empresas/logo_topo_hasta.png"
+   },
+   "offerDetail": {
+    "id": 5013180,
+    "initialBidValue": 4741.62,
+    "initialBidValueFormatted": "R$ 4.741,62",
+    "currentMinBid": 4741.62,
+    "currentMinBidFormatted": "R$ 4.741,62",
+    "currentMaxBid": 4741.62,
+    "currentMaxBidFormatted": "R$ 4.741,62",
+    "reservedPrice": 7294.8,
+    "reservedPriceFormatted": "R$ 7.294,80"
+   },
+   "currentTimestamp": "2026-10-17 17:55:21",
+   "auction": {
+    "id": 801204,
+    "desc": "LEILÃO DE VEÍCULOS CONSERVADOS 19/2026 SBC",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 2,
+    "modalityId": 1,
+    "modalityDesc": "Leilão",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2026-10-04 09:00:00",
+    "endDate": "2026-10-19 09:00:00",
+    "maxEnddateOffer": "2026-10-19 09:57:30",
+    "subMarketplaces": [
+     {
+      "subMarketplaceId": 5,
+      "subMarketplaceDesc": "GOV"
+     }
+    ],
+    "judicialPraca": null,
+    "judicialPracaDescription": "Praça Única",
+    "judicialControlNumber": null,
+    "auctioneer": "Marcia Anny Mardirosian Nazar",
+    "registry": null,
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Sudeste",
+     "type": 5
+    },
+    "crier": false,
+    "eventPipeline": null,
+    "lotAuctionTypeId": 1,
+    "isAfterMarket": null
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {
+    "currentBidIncrement": 218.84,
+    "currentBidIncrementFormatted": "R$ 218,84"
+   },
+   "groupOffer": {
+    "acceptProposal": false,
+    "id": 360295
+   },
+   "product": {
+    "productId": 3784644,
+    "shortDesc": "IMP. VW POLO CLAS. 1.8 MI 1998 1999 PRATA",
+    "galleryJson": [
+     {
+      "originalFileName": "ENC_A6j_6sEeudIBr0MR3WnvRA.jpg",
+      "highlight": false,
+      "fileName": "9dbe4206-39d1-471a-abed-6f44b4834cb5.jpg",
+      "link": "https://ms.sbwebservices.net/photos/9dbe4206-39d1-471a-abed-6f44b4834cb5.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/9dbe4206-39d1-471a-abed-6f44b4834cb5.jpg"
+     },
+     {
+      "originalFileName": "ENC_JcmkQEnuTPI5Hpp_ytJn7w.jpg",
+      "highlight": false,
+      "fileName": "4af0c167-4d8d-404e-8c91-648bb9bf7ca4.jpg",
+      "link": "https://ms.sbwebservices.net/photos/4af0c167-4d8d-404e-8c91-648bb9bf7ca4.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/4af0c167-4d8d-404e-8c91-648bb9bf7ca4.jpg"
+     },
+     {
+      "originalFileName": "ENC_R-4-iSH4DOevbjH2-ZBzkg.jpg",
+      "highlight": false,
+      "fileName": "a0350461-43fb-493b-b36e-cb478c1543df.jpg",
+      "link": "https://ms.sbwebservices.net/photos/a0350461-43fb-493b-b36e-cb478c1543df.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/a0350461-43fb-493b-b36e-cb478c1543df.jpg"
+     }
+    ],
+    "productCustomJson": "{}",
+    "photoCount": 6,
+    "videoUrlCount": 0,
+    "thumbnailUrl": "https://ms.sbwebservices.net/photos/7e55c632-c0f3-4a5a-966b-4a7e34288598.jpg",
+    "detailedDescription": "<span>IMP. VW POLO CLAS. 1.8 MI 1998 1999 PRATA Agendamento e Retirada de Veículos<br><br>Os veículos leiloados \"com direito a documento\" serão liberados para retirada pelo arrematante em até 3 (três) dias úteis, contados a partir da confirmação do pagamento integral do valor da arrematação.<br><br>Após a liberação do veículo, o arrematante deverá acessar o site www.agendamentoentregas.com.br para enviar os documentos pertinentes à arrematação, os quais serão submetidos à análise e aprovação da HASTA SP.<br><br>Com a aprovação da documentação, o arrematante poderá selecionar a data e o horário disponíveis para a retirada do veículo, realizando o agendamento diretamente no site.<br><br>O sistema enviará confirmação automática por e-mail, devendo o arrematante comparecer ao pátio na data e horário agendados, munido da documentação necessária.<br><br>Transferência e Desvinculação de Débitos dos Veículos<br><br>Uma vez confirmado o pagamento do arremate, a HASTA SP realiza o recolhimento dos débitos incidentes sobre o veículo, se houver saldo, e envia a prestação de contas do leilão para o Município em até 15 (quinze) dias úteis.<br>No prazo de até 15 (quinze) dias úteis, contados do recebimento da prestação de contas, o Município realizará o protocolo do processo de desvinculação de débitos e inserção do comunicado de venda ao arrematante junto ao DETRAN, através do Sistema Eletrônico de Informações (SEI).<br>A partir desse momento, o DETRAN deverá proceder com o comunicado de v",
+    "template": {
+     "groups": [
+      {
+       "title": "Identificação",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "marca",
+         "title": "Marca",
+         "type": "string",
+         "value": "IMP."
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "modelo",
+         "title": "Modelo",
+         "type": "string",
+         "value": "VW POLO CLAS. 1.8 MI"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "placa",
+         "title": "Placa",
+         "type": "string",
+         "value": "4"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "anofabricacao",
+         "title": "Ano Fabricação",
+         "type": "integer",
+         "value": "1998"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "anomodelo",
+         "title": "Ano Modelo",
+         "type": "integer",
+         "value": "1999"
+        }
+       ],
+       "id": "identificacao"
+      },
+      {
+       "title": "Informações",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "cor",
+         "title": "Cor",
+         "type": "string",
+         "value": "PRATA"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "valortabelafipe",
+         "title": "Valor Tabela FIPE",
+         "type": "string",
+         "value": "12158"
+        }
+       ],
+       "id": "informacoes"
+      }
+     ]
+    },
+    "subCategory": {
+     "id": 10004,
+     "description": "Hatches",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 4,
+     "category": {
+      "id": 10000,
+      "description": "Carros",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 1
+     }
+    },
+    "model": {},
+    "brand": {},
+    "productYourRef": "LEILAO 19 2026 MUNICIPAL SÃO BERNARDO DO CAMPO",
+    "location": {
+     "displayOnMap": false,
+     "city": "Casa Branca - SP",
+     "state": "São Paulo",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -21.772035,
+      "lon": -47.08708
+     }
+    },
+    "productType": {
+     "id": 10,
+     "description": "Carros & Motos",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {}
+   },
+   "seller": {
+    "id": 1845410,
+    "name": "PREFEITURA MUNICIPAL DE SÃO BERNARDO DO CAMPO",
+    "city": "São Bernardo do Campo",
+    "company": [
+     {
+      "fantasyName": "PREFEITURA MUNICIPAL DE SÃO BERNARDO DO CAMPO"
+     }
+    ]
+   },
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": null,
+    "maxInstallments": null,
+    "allowsCreditCard": false,
+    "scheduleType": null,
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": false,
+    "transactionLimit": null
+   }
+  },
+  {
+   "id": 4858399,
+   "indexationDate": "2026-10-15 05:15:20",
+   "lotNumber": 1,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "totalReceivedProposals": 0,
+   "hasReceivedProposals": false,
+   "visits": 683,
+   "totalBidders": 0,
+   "totalBids": 0,
+   "totalReceivedBidsOrProposals": 0,
+   "hasBids": false,
+   "hasReceivedBidsOrProposals": false,
+   "endDate": "2026-11-03 14:30:00",
+   "endDateTime": 1793727000000,
+   "offerTypeId": 1,
+   "createAt": "2026-07-28 13:22:47",
+   "updateAt": "2026-07-28 13:22:57",
+   "publishedAt": "2026-07-28 13:22:57",
+   "statusId": 1,
+   "price": 8286.53,
+   "priceFormatted": "R$ 8.286,53",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": true,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": false,
+    "closed": false
+   },
+   "store": {
+    "id": 16538,
+    "name": "CENTRO DOS LEILÕES",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "logoUri": "https://static.s4bdigital.net/logos_empresas/centroLeiloesLogo1.png"
+   },
+   "offerDetail": {
+    "id": 4858399,
+    "initialBidValue": 8286.53,
+    "initialBidValueFormatted": "R$ 8.286,53",
+    "currentMinBid": 8286.53,
+    "currentMinBidFormatted": "R$ 8.286,53",
+    "currentMaxBid": 8286.53,
+    "currentMaxBidFormatted": "R$ 8.286,53",
+    "reservedPrice": 8286.53,
+    "reservedPriceFormatted": "R$ 8.286,53"
+   },
+   "currentTimestamp": "2026-10-17 17:37:03",
+   "auction": {
+    "id": 790462,
+    "desc": "Leilão Judicial",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 2,
+    "modalityId": 4,
+    "modalityDesc": "Leilão",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2026-07-28 00:00:00",
+    "endDate": "2026-11-03 14:30:00",
+    "maxEnddateOffer": "2026-11-03 14:31:00",
+    "subMarketplaces": [
+     {
+      "subMarketplaceId": 3,
+      "subMarketplaceDesc": "Judicial"
+     }
+    ],
+    "judicialPraca": 1,
+    "judicialPracaDescription": "1º Praça",
+    "judicialControlNumber": 790462,
+    "auctioneer": "Varones Pasqual Drabach Filho",
+    "registry": "AARC/429",
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Sul",
+     "type": 5
+    },
+    "crier": false,
+    "eventPipeline": {
+     "id": 1690683,
+     "description": "Leilão Judicial ",
+     "currentStage": 1,
+     "stages": [
+      {
+       "eventId": 790462,
+       "eventDesc": "Leilão Judicial ",
+       "beginDate": "2026-07-28 00:00:00",
+       "endDate": "2026-11-03 14:30:00",
+       "statusId": 1,
+       "isActive": true,
+       "isAfterMarket": false,
+       "initialBidValue": 8286.53,
+       "formattedInitialBidValue": null
+      },
+      {
+       "eventId": 790463,
+       "eventDesc": "Leilão Judicial ",
+       "beginDate": "2026-11-03 15:30:00",
+       "endDate": "2026-11-13 14:30:00",
+       "statusId": 5,
+       "isActive": false,
+       "isAfterMarket": false,
+       "initialBidValue": 8286.53,
+       "formattedInitialBidValue": null
+      }
+     ]
+    },
+    "lotAuctionTypeId": null,
+    "isAfterMarket": null
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {
+    "currentBidIncrement": 200,
+    "currentBidIncrementFormatted": "R$ 200,00"
+   },
+   "groupOffer": {
+    "acceptProposal": false,
+    "id": 355285
+   },
+   "product": {
+    "productId": 3722299,
+    "shortDesc": "Honda CG 150 Titan",
+    "attachments": [
+     {
+      "originalFileName": "DETRAN-DIGITAL-CG.pdf",
+      "createdAt": "28/07/2026 13:18:20",
+      "fileName": "9b43860f-3a05-4e62-8c1e-64ed32a0ca35.pdf",
+      "link": "https://s.superbid.net/attachment/9b/43/9b43860f-3a05-4e62-8c1e-64ed32a0ca35.pdf",
+      "type": "attachment",
+      "contentType": "application/pdf"
+     }
+    ],
+    "productCustomJson": "{\"vehicleRestrictions\": \"\", \"vehicleSearchSource\": \"\", \"vehicleDebts\": \"0,00\", \"vehicleFipeCode\": \"\", \"vehicleSearchType\": \"\", \"vehicleSearchDate\": \"\"}",
+    "photoCount": 0,
+    "videoUrlCount": 0,
+    "detailedDescription": "<p><span style=\"color: rgb(5, 34, 41);\">HONDA/CG 150 TITAN KS</span></p><p><span style=\"color: rgb(5, 34, 41);\">Placa FINAL 3</span></p><p><span style=\"color: rgb(5, 34, 41);\">Renavam 982064080</span></p><p><span style=\"color: rgb(5, 34, 41);\">Cor AZUL</span></p><p><span style=\"color: rgb(5, 34, 41);\">Ano fabricação 2008</span></p><p><span style=\"color: rgb(5, 34, 41);\">Ano modelo 2008</span></p><p><br></p><p><br></p><p><br></p><p class=\"ql-align-justify\">Os bens serão vendidos no estado de conservação em que se encontram, sem garantia, não cabendo ao comitente vendedor ou ao Leiloeiro qualquer responsabilidade por problemas ou defeitos que venha a ser constatado posteriormente, não podendo o arrematante alegar desconhecimento de suas condições, características, conservação, funcionamento, localização, pressupondo-se que a partir do oferecimento do lance conhecimento das características e situação do(s) bem(ns), não sendo aceitas reclamações posteriores, bem como alegações referentes a consertos, encargos sociais, transporte e transferência patrimonial dos bens arrematados.</p>",
+    "template": {
+     "groups": []
+    },
+    "subCategory": {
+     "id": 10013,
+     "description": "Motocicletas",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 11,
+     "category": {
+      "id": 10012,
+      "description": "Motos",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 2
+     }
+    },
+    "model": {
+     "id": 1171,
+     "description": "CG150"
+    },
+    "brand": {
+     "id": 7,
+     "description": "Honda"
+    },
+    "location": {
+     "displayOnMap": false,
+     "city": "Brusque - SC",
+     "state": "Santa Catarina",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -27.098205,
+      "lon": -48.911142
+     }
+    },
+    "productType": {
+     "id": 10,
+     "description": "Carros & Motos",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {
+     "processNumber": "5003166-73.2023.8.24.0011"
+    },
+    "galleryJson": []
+   },
+   "seller": {
+    "id": 1429680,
+    "name": "TRIBUNAL DE JUSTICA DE SANTA CATARINA",
+    "city": "Florianópolis",
+    "company": [
+     {
+      "fantasyName": "TRIBUNAL DE JUSTIÇA DE SANTA CATARINA"
+     }
+    ]
+   },
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": null,
+    "maxInstallments": null,
+    "allowsCreditCard": false,
+    "scheduleType": null,
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": false,
+    "transactionLimit": null
+   },
+   "eventPipeline": {
+    "id": 1690683,
+    "description": "Leilão Judicial ",
+    "currentStage": 1,
+    "stages": [
+     {
+      "eventId": 790462,
+      "eventDesc": "Leilão Judicial ",
+      "beginDate": "2026-07-28 00:00:00",
+      "endDate": "2026-11-03 14:30:00",
+      "statusId": 1,
+      "isActive": true,
+      "isAfterMarket": false,
+      "initialBidValue": 8286.53,
+      "formattedInitialBidValue": null
+     },
+     {
+      "eventId": 790463,
+      "eventDesc": "Leilão Judicial ",
+      "beginDate": "2026-11-03 15:30:00",
+      "endDate": "2026-11-13 14:30:00",
+      "statusId": 5,
+      "isActive": false,
+      "isAfterMarket": false,
+      "initialBidValue": 8286.53,
+      "formattedInitialBidValue": null
+     }
+    ]
+   }
+  },
+  {
+   "id": 5026455,
+   "indexationDate": "2026-10-17 09:12:29",
+   "lotNumber": 1,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "totalReceivedProposals": 0,
+   "hasReceivedProposals": false,
+   "quantityUnit": 0,
+   "visits": 146,
+   "totalBidders": 0,
+   "totalBids": 0,
+   "totalReceivedBidsOrProposals": 0,
+   "hasBids": false,
+   "hasReceivedBidsOrProposals": false,
+   "endDate": "2026-10-29 13:00:00",
+   "endDateTime": 1793289600000,
+   "offerTypeId": 12,
+   "createAt": "2026-09-22 14:51:50",
+   "updateAt": "2026-10-14 10:45:43",
+   "publishedAt": "2026-09-22 16:38:09",
+   "statusId": 1,
+   "price": 18000,
+   "priceFormatted": "R$ 18.000,00",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": true,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": false,
+    "closed": false
+   },
+   "store": {
+    "id": 2141,
+    "name": "RMoysés Leilões",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "logoUri": "https://static.s4bdigital.net/logos_empresas/logo_rmoyses_leiloes.jpg"
+   },
+   "offerDetail": {
+    "id": 5026455,
+    "initialBidValue": 18000,
+    "initialBidValueFormatted": "R$ 18.000,00",
+    "currentMinBid": 18000,
+    "currentMinBidFormatted": "R$ 18.000,00",
+    "currentMaxBid": 18000,
+    "currentMaxBidFormatted": "R$ 18.000,00",
+    "reservedPrice": 18000,
+    "reservedPriceFormatted": "R$ 18.000,00"
+   },
+   "currentTimestamp": "2026-10-17 17:37:03",
+   "auction": {
+    "id": 797004,
+    "desc": "2ª Vara Cível da Comarca de Votuporanga/SP",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 15,
+    "modalityId": 4,
+    "modalityDesc": "Leilão",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2026-10-27 13:00:00",
+    "endDate": "2026-10-29 13:00:00",
+    "maxEnddateOffer": "2026-10-29 13:00:00",
+    "subMarketplaces": [
+     {
+      "subMarketplaceId": 3,
+      "subMarketplaceDesc": "Judicial"
+     }
+    ],
+    "judicialPraca": 1,
+    "judicialPracaDescription": "1º Praça",
+    "judicialControlNumber": 797004,
+    "auctioneer": "Renato Schlobach Moyses",
+    "registry": "654",
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Sudeste",
+     "type": 5
+    },
+    "crier": false,
+    "eventPipeline": {
+     "id": 1725397,
+     "description": "2ª Vara Cível da Comarca de Votuporanga/SP",
+     "currentStage": 1,
+     "stages": [
+      {
+       "eventId": 797004,
+       "eventDesc": "2ª Vara Cível da Comarca de Votuporanga/SP",
+       "beginDate": "2026-10-27 13:00:00",
+       "endDate": "2026-10-29 13:00:00",
+       "statusId": 1,
+       "isActive": true,
+       "isAfterMarket": false,
+       "initialBidValue": 18000,
+       "formattedInitialBidValue": null
+      },
+      {
+       "eventId": 797005,
+       "eventDesc": "2ª Vara Cível da Comarca de Votuporanga/SP",
+       "beginDate": "2026-10-29 13:00:00",
+       "endDate": "2026-11-19 13:00:00",
+       "statusId": 5,
+       "isActive": false,
+       "isAfterMarket": false,
+       "initialBidValue": 10800,
+       "formattedInitialBidValue": null
+      }
+     ]
+    },
+    "lotAuctionTypeId": 1,
+    "isAfterMarket": null
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {
+    "currentBidIncrement": 900,
+    "currentBidIncrementFormatted": "R$ 900,00"
+   },
+   "groupOffer": {
+    "acceptProposal": false,
+    "id": 361367
+   },
+   "product": {
+    "productId": 3755328,
+    "shortDesc": "Ford/KA, 11/11, flex, branco",
+    "galleryJson": [
+     {
+      "originalFileName": "ENC_TcqF_G9yEDJDqQXAlrrawdrihsUq9iI-wEAsgwJwz9xwtCrgoyQNr0aLZMPWtVAb.jpg",
+      "highlight": false,
+      "fileName": "cd123493-7632-4965-b7a7-53d37ceafd89.jpg",
+      "link": "https://ms.sbwebservices.net/photos/cd123493-7632-4965-b7a7-53d37ceafd89.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/cd123493-7632-4965-b7a7-53d37ceafd89.jpg"
+     }
+    ],
+    "productCustomJson": "{\"vehicleRestrictions\": \"\", \"vehicleSearchDate\": \"\", \"vehicleSearchSource\": \"\", \"vehicleSearchType\": \"\", \"vehicleFipeCode\": \"\", \"vehicleDebts\": \"\"}",
+    "photoCount": 1,
+    "videoUrlCount": 0,
+    "thumbnailUrl": "https://ms.sbwebservices.net/photos/cd123493-7632-4965-b7a7-53d37ceafd89.jpg",
+    "detailedDescription": "<p>Um veículo marca/modelo Ford/KA, Placa FINAL 5, ano/modelo 2011/2011, cor branca, flex, chassi final 3735, RENAVAM 00327097647, em regular estado de conservação e uso, com os seguintes detalhes: pneus meia-vida ruins, odômetro marcando 129.982 km, radio marca Pionner com 2 auto-falantes nas portas</p><p></p><p style=\"text-align: justify;\"><strong>Débitos (</strong>Informações obtidos em consulta realizada em 25/08/2026<strong>, </strong>através dos órgãos oficiais)<strong>:&nbsp;</strong></p><p style=\"text-align: justify;\"><strong>IPVA:</strong> R$ 1.012,34 (referente ao exercício de 2026).</p><p style=\"text-align: justify;\"><strong>Licenciamento:</strong> R$ 396,20 (sendo R$ 222,12 do exercício de 2025 e R$ 174,08 do exercício de 2026; último exercício licenciado: 2024).</p><p style=\"text-align: justify;\"><strong>DPVAT:</strong> Nada consta.</p><p style=\"text-align: justify;\"><strong>Multas:</strong> R$ 197,18 (1 multa municipal/RENAINF)</p><p><br></p><p style=\"text-align: justify;\"><strong>Restrições:</strong></p><p style=\"text-align: justify;\"><strong>Restrição Administrativa:</strong> Nada consta.</p><p style=\"text-align: justify;\"><strong>Restrição Tributária:</strong> Nada consta.</p><p><strong>Restrição Financeira:</strong> Nada consta.</p><p><strong>Restrição judiciária (Renajud):</strong> Consta 1 bloqueio judicial ativo.</p><p><strong>Tipo de restrição:</strong> Transferência.</p><p><strong>Vara Judicial:</strong> 2ª Cível de Votuporanga  Tribunal de Justiça de S",
+    "template": {
+     "groups": []
+    },
+    "subCategory": {
+     "id": 10004,
+     "description": "Hatches",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 4,
+     "category": {
+      "id": 10000,
+      "description": "Carros",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 1
+     }
+    },
+    "model": {
+     "id": 278,
+     "description": "Ka"
+    },
+    "brand": {
+     "id": 27,
+     "description": "Ford"
+    },
+    "productYourRef": "00059812120248260664",
+    "location": {
+     "displayOnMap": false,
+     "city": "Orlândia - SP",
+     "state": "São Paulo",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -20.717229,
+      "lon": -47.880313
+     }
+    },
+    "productType": {
+     "id": 10,
+     "description": "Carros & Motos",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {
+     "processNumber": "00059812120248260664",
+     "processYear": "2024",
+     "processType": "Cumprimento de sentença - Acidente de Trânsito",
+     "nature": "Cível",
+     "foro": "Tribunal de Justiça de São Paulo",
+     "district": "Comarca de Votuporanga/SP",
+     "vara": "2ª Vara Cível da Comarca de Votuporanga/SP"
+    }
+   },
+   "seller": {
+    "id": 96587,
+    "name": "Tribunal De Justiça Do Estado De São Paulo",
+    "city": "São Carlos",
+    "courtId": 29,
+    "company": [
+     {
+      "fantasyName": "Tribunal de Justiça do Estado de São Paulo"
+     }
+    ]
+   },
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": 25.0,
+    "maxInstallments": 30,
+    "allowsCreditCard": false,
+    "scheduleType": null,
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": false,
+    "transactionLimit": null
+   },
+   "eventPipeline": {
+    "id": 1725397,
+    "description": "2ª Vara Cível da Comarca de Votuporanga/SP",
+    "currentStage": 1,
+    "stages": [
+     {
+      "eventId": 797004,
+      "eventDesc": "2ª Vara Cível da Comarca de Votuporanga/SP",
+      "beginDate": "2026-10-27 13:00:00",
+      "endDate": "2026-10-29 13:00:00",
+      "statusId": 1,
+      "isActive": true,
+      "isAfterMarket": false,
+      "initialBidValue": 18000,
+      "formattedInitialBidValue": null
+     },
+     {
+      "eventId": 797005,
+      "eventDesc": "2ª Vara Cível da Comarca de Votuporanga/SP",
+      "beginDate": "2026-10-29 13:00:00",
+      "endDate": "2026-11-19 13:00:00",
+      "statusId": 5,
+      "isActive": false,
+      "isAfterMarket": false,
+      "initialBidValue": 10800,
+      "formattedInitialBidValue": null
+     }
+    ]
+   }
+  },
+  {
+   "id": 5053037,
+   "indexationDate": "2026-10-17 17:40:02",
+   "lotNumber": 71,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "totalReceivedProposals": 0,
+   "hasReceivedProposals": false,
+   "visits": 278,
+   "totalBidders": 1,
+   "totalBids": 1,
+   "totalReceivedBidsOrProposals": 1,
+   "hasBids": true,
+   "hasReceivedBidsOrProposals": true,
+   "endDate": "2026-10-20 15:43:30",
+   "endDateTime": 1792521810000,
+   "offerTypeId": 1,
+   "createAt": "2026-10-09 16:59:32",
+   "updateAt": "2026-10-14 19:59:59",
+   "publishedAt": "2026-10-09 17:06:35",
+   "statusId": 1,
+   "price": 5500,
+   "priceFormatted": "R$ 5.500,00",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": true,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": false,
+    "closed": false
+   },
+   "store": {
+    "id": 32,
+    "name": "CPFL",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "position": 7,
+    "logoUri": "https://static.s4bdigital.net/logos_empresas/new_logo_cpfl.png"
+   },
+   "offerDetail": {
+    "id": 5053037,
+    "initialBidValue": 5500,
+    "initialBidValueFormatted": "R$ 5.500,00",
+    "currentMinBid": 5500,
+    "currentMinBidFormatted": "R$ 5.500,00",
+    "currentMaxBid": 5500,
+    "currentMaxBidFormatted": "R$ 5.500,00",
+    "reservedPrice": 7506.84,
+    "reservedPriceFormatted": "R$ 7.506,84"
+   },
+   "currentTimestamp": "2026-10-17 17:55:28",
+   "auction": {
+    "id": 802506,
+    "desc": "CPFL",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 2,
+    "modalityId": 1,
+    "modalityDesc": "Leilão",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2026-10-09 16:54:00",
+    "endDate": "2026-10-20 15:30:00",
+    "maxEnddateOffer": "2026-10-20 15:48:30",
+    "subMarketplaces": [
+     {
+      "subMarketplaceId": 1,
+      "subMarketplaceDesc": "Corporativo"
+     }
+    ],
+    "judicialPraca": null,
+    "judicialPracaDescription": "Praça Única",
+    "judicialControlNumber": null,
+    "auctioneer": "Renato Schlobach Moyses",
+    "registry": "654",
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Sul",
+     "type": 5
+    },
+    "crier": false,
+    "eventPipeline": null,
+    "lotAuctionTypeId": 1,
+    "isAfterMarket": null
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {
+    "currentBidIncrement": 250,
+    "currentBidIncrementFormatted": "R$ 250,00"
+   },
+   "groupOffer": {
+    "acceptProposal": true,
+    "commissionPercent": 5,
+    "id": 363440
+   },
+   "product": {
+    "productId": 3829889,
+    "shortDesc": "HONDA NXR160 BROS ESDD 2020/2020, Placa FINAL 5,  (ID.: 51690)",
+    "galleryJson": [
+     {
+      "originalFileName": "ENC_7ZXjkO0pN-8u9pVpO5XOAQ.jpeg",
+      "highlight": false,
+      "fileName": "d6006492-1b3c-4c28-9594-203fd9542f99.jpg",
+      "link": "https://ms.sbwebservices.net/photos/d6006492-1b3c-4c28-9594-203fd9542f99.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/d6006492-1b3c-4c28-9594-203fd9542f99.jpg"
+     },
+     {
+      "originalFileName": "ENC_aG56Z5vQqjEglwuSk5uBaQ.jpeg",
+      "highlight": false,
+      "fileName": "38c0c940-542b-47ff-96cb-1d1290fcc8f0.jpg",
+      "link": "https://ms.sbwebservices.net/photos/38c0c940-542b-47ff-96cb-1d1290fcc8f0.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/38c0c940-542b-47ff-96cb-1d1290fcc8f0.jpg"
+     },
+     {
+      "originalFileName": "ENC_bBU-QHt5_HqdH_WrImvfjw.jpeg",
+      "highlight": false,
+      "fileName": "da05effa-5197-42ba-b680-63f962e5768c.jpg",
+      "link": "https://ms.sbwebservices.net/photos/da05effa-5197-42ba-b680-63f962e5768c.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/da05effa-5197-42ba-b680-63f962e5768c.jpg"
+     }
+    ],
+    "photoCount": 22,
+    "videoUrlCount": 0,
+    "thumbnailUrl": "https://ms.sbwebservices.net/photos/6e5c85c5-22e9-4c82-9065-39ee2bd81847.jpg",
+    "detailedDescription": "<span><p>Marca: HONDA</p><p>Modelo: NXR160 BROS ESDD</p><p>Ano: 2020</p><p>Placa FINAL 5</p><p>Cor: INDISP.</p><p>Chassi.: </p><p>Direção: Sem teste</p><p><br></p><p>Condições Gerais</p><p>Motor: Sem teste</p><p><br></p><p><br></p><br><br><br>Será de responsabilidade da empresa vendedora o pagamento dos débitos de eventuais multas de trânsito e IPVA relativos<br>ao(s) veículo(s) vendido(s) e anteriores à data do evento (exceto parcelas vincendas do IPVA, quando houver, as quais serão<br>suportadas pelo(s) comprador(es)).</span>",
+    "template": {
+     "groups": [
+      {
+       "title": "Identificação",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "marca",
+         "title": "Marca",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "modelo",
+         "title": "Modelo",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "ano",
+         "title": null,
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "condicao",
+         "title": null,
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "placa",
+         "title": "Placa",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "placauf",
+         "title": "UF",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "numerodemotor",
+         "title": "Numero de Motor",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "numerodesiniestro",
+         "title": "Numero de Siniestro",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "otros",
+         "title": "Otros",
+         "type": "string",
+         "value": ""
+        }
+       ],
+       "id": "identificacao"
+      },
+      {
+       "title": "Especificação",
+       "properties": [],
+       "id": "especificacao"
+      },
+      {
+       "title": "Condições Gerais",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "obsdaquilometragem",
+         "title": "Obs da quilometragem",
+         "type": "string",
+         "value": ""
+        }
+       ],
+       "id": "condicoesgerais"
+      },
+      {
+       "title": "Observações de Vistoria",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "observacoes",
+         "title": "Observações",
+         "type": "string",
+         "value": ""
+        }
+       ],
+       "id": "observacoesdevistoria"
+      },
+      {
+       "title": "Informações",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "valortabelafipe",
+         "title": "Valor Tabela FIPE",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "cepdeorigem",
+         "title": "Cep de Origem",
+         "type": "string",
+         "value": ""
+        }
+       ],
+       "id": "informacoes"
+      }
+     ]
+    },
+    "subCategory": {
+     "id": 11104,
+     "description": "Motos Sinistradas",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 99,
+     "category": {
+      "id": 10012,
+      "description": "Motos",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 2
+     }
+    },
+    "model": {},
+    "brand": {},
+    "productYourRef": "202603049",
+    "location": {
+     "displayOnMap": false,
+     "city": "Alvorada - RS",
+     "state": "Rio Grande do Sul",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -29.999907,
+      "lon": -51.078487
+     }
+    },
+    "productType": {
+     "id": 10,
+     "description": "Carros & Motos",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {},
+    "productCustomJson": "{}"
+   },
+   "seller": {
+    "id": 768802,
+    "name": "Companhia Piratininga de Força e Luz",
+    "city": "Campinas",
+    "company": [
+     {
+      "fantasyName": "CPFL"
+     }
+    ]
+   },
+   "paymentItems": [
+    {
+     "paymentTypeId": 1,
+     "value": 377.16,
+     "mapDescriptionTranslator": {
+      "es_PE": "Estadia",
+      "es_AR": "Estadia",
+      "es_MX": "Estadia",
+      "es_CO": "Estadia",
+      "es_ES": "Estadia",
+      "pt_BR": "Estadia",
+      "es_CL": "Estadia"
+     }
+    },
+    {
+     "paymentTypeId": 2,
+     "value": 578.22,
+     "mapDescriptionTranslator": {
+      "es_PE": "Remoção",
+      "es_AR": "Remoção",
+      "es_MX": "Remoção",
+      "es_CO": "Remoção",
+      "es_ES": "Remoção",
+      "pt_BR": "Remoção",
+      "es_CL": "Remoção"
+     }
+    }
+   ],
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": null,
+    "maxInstallments": null,
+    "allowsCreditCard": true,
+    "scheduleType": "AFTER_WITHDRAWAL",
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": true,
+    "transactionLimit": 120000.0
+   }
+  },
+  {
+   "id": 5042618,
+   "indexationDate": "2026-10-17 17:51:13",
+   "lotNumber": 2,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "totalReceivedProposals": 0,
+   "hasReceivedProposals": false,
+   "visits": 1945,
+   "totalBidders": 9,
+   "totalBids": 9,
+   "totalReceivedBidsOrProposals": 9,
+   "hasBids": true,
+   "hasReceivedBidsOrProposals": true,
+   "endDate": "2026-10-19 15:30:30",
+   "endDateTime": 1792434630000,
+   "offerTypeId": 1,
+   "createAt": "2026-10-02 14:08:17",
+   "updateAt": "2026-10-17 06:11:49",
+   "publishedAt": "2026-10-02 14:09:00",
+   "statusId": 1,
+   "price": 53000,
+   "priceFormatted": "R$ 53.000,00",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": true,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": false,
+    "closed": false
+   },
+   "store": {
+    "id": 1161,
+    "name": "SOLD",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "logoUri": "https://s.superbid.net/image/6a/67/6a670d93-0619-4cf2-9418-777f52aa84f5.png"
+   },
+   "offerDetail": {
+    "id": 5042618,
+    "initialBidValue": 45000,
+    "initialBidValueFormatted": "R$ 45.000,00",
+    "currentMinBid": 53000,
+    "currentMinBidFormatted": "R$ 53.000,00",
+    "currentMaxBid": 53000,
+    "currentMaxBidFormatted": "R$ 53.000,00",
+    "reservedPrice": 999999999999,
+    "reservedPriceFormatted": "R$ 999.999.999.999,00"
+   },
+   "currentTimestamp": "2026-10-17 17:55:28",
+   "auction": {
+    "id": 797372,
+    "desc": "Itograss",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 2,
+    "modalityId": 1,
+    "modalityDesc": "Leilão",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2026-10-01 17:32:00",
+    "endDate": "2026-10-19 15:30:00",
+    "maxEnddateOffer": "2026-10-19 15:33:00",
+    "subMarketplaces": [
+     {
+      "subMarketplaceId": 1,
+      "subMarketplaceDesc": "Corporativo"
+     }
+    ],
+    "judicialPraca": null,
+    "judicialPracaDescription": "Praça Única",
+    "judicialControlNumber": null,
+    "auctioneer": "MARIA BEATRIZ DE BARROS SANTORO VILELA MORAES",
+    "registry": "1126",
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Centro-Oeste",
+     "type": 5
+    },
+    "crier": false,
+    "eventPipeline": null,
+    "lotAuctionTypeId": 1,
+    "isAfterMarket": null
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {
+    "currentBidIncrement": 1000,
+    "currentBidIncrementFormatted": "R$ 1.000,00"
+   },
+   "groupOffer": {
+    "acceptProposal": true,
+    "commissionPercent": 5,
+    "id": 362607
+   },
+   "product": {
+    "productId": 3813223,
+    "shortDesc": "FIAT STRADA FREEDOM 13CD, 2021/2022, Placa FINAL 4 (SP),",
+    "galleryJson": [
+     {
+      "originalFileName": "ENC_Rzg8vzxXwFmz7wDmqM3SRw.jpg",
+      "highlight": false,
+      "fileName": "9204570a-5dfc-410e-99f0-388f81982628.jpg",
+      "link": "https://ms.sbwebservices.net/photos/9204570a-5dfc-410e-99f0-388f81982628.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/9204570a-5dfc-410e-99f0-388f81982628.jpg"
+     },
+     {
+      "originalFileName": "ENC_EpUScXbq5zrgicApTNo_lwzCbXSlr9YvNNz5w1d_9GjuxGi_ADLLI-1lKasfjOl5Pqzath4RA4YCXAydpKm4fQ.jpg",
+      "highlight": false,
+      "fileName": "17728a73-38ce-485a-8212-70b8796533ea.jpg",
+      "link": "https://ms.sbwebservices.net/photos/17728a73-38ce-485a-8212-70b8796533ea.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/17728a73-38ce-485a-8212-70b8796533ea.jpg"
+     },
+     {
+      "originalFileName": "ENC_EpUScXbq5zrgicApTNo_lwzCbXSlr9YvNNz5w1d_9GjuxGi_ADLLI-1lKasfjOl5LNBb28VbC1eIyYVIdMRFDuk8r5Yx8_ElMdWyytqY4u8.jpg",
+      "highlight": false,
+      "fileName": "5a9aa3a7-9ce8-4d2b-9ecc-d67f142f170b.jpg",
+      "link": "https://ms.sbwebservices.net/photos/5a9aa3a7-9ce8-4d2b-9ecc-d67f142f170b.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/5a9aa3a7-9ce8-4d2b-9ecc-d67f142f170b.jpg"
+     }
+    ],
+    "productCustomJson": "{\"vehicleRestrictions\": null, \"vehicleSearchSource\": null, \"vehicleDebts\": \"\", \"vehicleSearchType\": null}",
+    "photoCount": 13,
+    "videoUrlCount": 0,
+    "thumbnailUrl": "https://ms.sbwebservices.net/photos/9204570a-5dfc-410e-99f0-388f81982628.jpg",
+    "detailedDescription": "<span><br>Marca: FIAT<br>Modelo: STRADA FREEDOM 13CD<br>Ano Fab/Modelo: 2021/2022<br>Placa FINAL 4 (SP)<br>Quilometragem acima de: 176072<br>Cor: BRANCA<br>Combustível: ALCOOL/GASOLINA<br>Chassi: <br><br>Acessórios<br><br>Câmbio: Manual<br>Direção: Hidráulica<br>Ar condicionado: Sim <br>Vidros: Elétricos<br>Rodas: Liga leve<br>Bancos: Tecido<br>Aparelho de Som: Sim<br><br>Condições Gerais<br><br>Motor: Funcionando<br>Pintura: Bom <br>Lataria: Bom <br>Tapeçaria: Bom <br>Pneus: Regulares<br><br>Observações: <br><br>Os dados informados são de responsabilidade da vendedora<br><br>Podendo apresentar avarias, riscos, mossas, amassados, pontos de ferrugem e corrosão<br>Podendo apresentar falta de peças, partes e componentes<br>Podendo apresentar falta de ferramentas obrigatórias e estepe<br><br><br><br><br><br>Será de responsabilidade da empresa vendedora o pagamento dos débitos de eventuais multas de trânsito e IPVA relativos<br>ao(s) veículo(s) vendido(s) e anteriores à data do evento (exceto parcelas vincendas do IPVA, quando houver, as quais serão<br> suportadas pelo(s) comprador(es)). <br></span>",
+    "template": {
+     "groups": [
+      {
+       "title": "Identificação",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "marca",
+         "title": "Marca",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "modelo",
+         "title": "Modelo",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "ano",
+         "title": null,
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "condicao",
+         "title": null,
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "placa",
+         "title": "Placa",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "anofabricacao",
+         "title": "Ano Fabricação",
+         "type": "integer",
+         "value": "2021"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "anomodelo",
+         "title": "Ano Modelo",
+         "type": "integer",
+         "value": "2022"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "placauf",
+         "title": "UF",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "numerodemotor",
+         "title": "Numero de Motor",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "numerodesiniestro",
+         "title": "Numero de Siniestro",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "otros",
+         "title": "Otros",
+         "type": "string",
+         "value": ""
+        }
+       ],
+       "id": "identificacao"
+      },
+      {
+       "title": "Informações",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "obsdaquilometragem",
+         "title": "Obs da quilometragem",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "cor",
+         "title": "Cor",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "insufilme",
+         "title": "Insufilm",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "cepdeorigem",
+         "title": "Cep de Origem",
+         "type": "string",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "valortabelafipe",
+         "title": "Valor Tabela FIPE",
+         "type": "string",
+         "value": ""
+        }
+       ],
+       "id": "informacoes"
+      },
+      {
+       "title": "Condições gerais",
+       "properties": [],
+       "id": "condicoesgerais"
+      },
+      {
+       "title": "Acessórios",
+       "properties": [],
+       "id": "acessorios"
+      },
+      {
+       "title": "Financiamento",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "codigofipe",
+         "title": "Código Fipe",
+         "type": "string",
+         "value": ""
+        }
+       ],
+       "id": "financiamento"
+      }
+     ]
+    },
+    "subCategory": {
+     "id": 10005,
+     "description": "Picapes",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 5,
+     "category": {
+      "id": 10000,
+      "description": "Carros",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 1
+     }
+    },
+    "model": {
+     "id": 348,
+     "description": "Strada"
+    },
+    "brand": {
+     "id": 39,
+     "description": "Fiat"
+    },
+    "productYourRef": "202602898",
+    "location": {
+     "displayOnMap": false,
+     "city": "Goiânia - GO",
+     "state": "Goiás",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -16.686849,
+      "lon": -49.27079
+     }
+    },
+    "productType": {
+     "id": 10,
+     "description": "Carros & Motos",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {}
+   },
+   "seller": {
+    "id": 2381010,
+    "name": "ITOGRASS AGRICOLA ALTA MOGIANA LTDA",
+    "city": "Patrocínio Paulista",
+    "company": [
+     {
+      "fantasyName": "ITOGRASS AGRICOLA ALTA MOGIANA LTDA"
+     }
+    ]
+   },
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": null,
+    "maxInstallments": null,
+    "allowsCreditCard": true,
+    "scheduleType": "AFTER_WITHDRAWAL",
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": true,
+    "transactionLimit": 120000.0
+   }
+  },
+  {
+   "id": 5059645,
+   "indexationDate": "2026-10-17 17:48:07",
+   "lotNumber": 13,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "totalReceivedProposals": 0,
+   "hasReceivedProposals": false,
+   "visits": 135,
+   "totalBidders": 0,
+   "totalBids": 0,
+   "totalReceivedBidsOrProposals": 0,
+   "hasBids": false,
+   "hasReceivedBidsOrProposals": false,
+   "endDate": "2026-10-20 14:00:30",
+   "endDateTime": 1792515630000,
+   "offerTypeId": 1,
+   "createAt": "2026-10-14 14:17:44",
+   "updateAt": "2026-10-14 18:23:29",
+   "publishedAt": "2026-10-14 14:41:22",
+   "statusId": 1,
+   "price": 50000,
+   "priceFormatted": "R$ 50.000,00",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": true,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": false,
+    "closed": false
+   },
+   "store": {
+    "id": 16222,
+    "name": "AZ LEILÕES",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "logoUri": "https://static.s4bdigital.net/logos_empresas/AZ_leil%C3%B5es.png"
+   },
+   "offerDetail": {
+    "id": 5059645,
+    "initialBidValue": 50000,
+    "initialBidValueFormatted": "R$ 50.000,00",
+    "currentMinBid": 50000,
+    "currentMinBidFormatted": "R$ 50.000,00",
+    "currentMaxBid": 50000,
+    "currentMaxBidFormatted": "R$ 50.000,00",
+    "releaseValue": 0,
+    "releaseValueFormatted": "R$ 0,00",
+    "reservedPrice": 55000,
+    "reservedPriceFormatted": "R$ 55.000,00"
+   },
+   "currentTimestamp": "2026-10-17 17:55:28",
+   "auction": {
+    "id": 797718,
+    "desc": "36° LEILÃO FORÇA MÁXIMA",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 2,
+    "modalityId": 1,
+    "modalityDesc": "Leilão",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2026-10-13 18:00:00",
+    "endDate": "2026-10-20 14:00:00",
+    "maxEnddateOffer": "2026-10-20 16:08:30",
+    "subMarketplaces": [
+     {
+      "subMarketplaceId": 4,
+      "subMarketplaceDesc": "PME"
+     },
+     {
+      "subMarketplaceId": 1,
+      "subMarketplaceDesc": "Corporativo"
+     }
+    ],
+    "judicialPraca": null,
+    "judicialPracaDescription": "Praça Única",
+    "judicialControlNumber": null,
+    "auctioneer": "Ricardo Macedo",
+    "registry": null,
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Sudeste",
+     "type": 5
+    },
+    "crier": false,
+    "eventPipeline": null,
+    "lotAuctionTypeId": 1,
+    "isAfterMarket": null
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {
+    "currentBidIncrement": 1000,
+    "currentBidIncrementFormatted": "R$ 1.000,00"
+   },
+   "groupOffer": {
+    "acceptProposal": false,
+    "id": 363610
+   },
+   "product": {
+    "productId": 3348771,
+    "shortDesc": "F4000 C/ CARROCERIA - 2004 - MOTOR E CAMBIO DESMONTADO ID: #3348771",
+    "galleryJson": [
+     {
+      "originalFileName": "ENC_EK1va_9qic8aPDxFQeGzxg.jpg",
+      "highlight": false,
+      "fileName": "eb17795b-19da-4bb7-85c6-fb9f175e89b1.jpg",
+      "link": "https://ms.sbwebservices.net/photos/eb17795b-19da-4bb7-85c6-fb9f175e89b1.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/eb17795b-19da-4bb7-85c6-fb9f175e89b1.jpg"
+     },
+     {
+      "originalFileName": "ENC_n86c10pBuAe3-sdn1xorNw.jpg",
+      "highlight": false,
+      "fileName": "d28bed74-7fdb-4300-8453-58682b4e5e16.jpg",
+      "link": "https://ms.sbwebservices.net/photos/d28bed74-7fdb-4300-8453-58682b4e5e16.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/d28bed74-7fdb-4300-8453-58682b4e5e16.jpg"
+     },
+     {
+      "originalFileName": "ENC_vyq_hGiYNDDqok8IIND2wg.jpg",
+      "highlight": true,
+      "fileName": "cd66f73c-d764-447e-8227-6d21cd727aa9.jpg",
+      "link": "https://ms.sbwebservices.net/photos/cd66f73c-d764-447e-8227-6d21cd727aa9.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/cd66f73c-d764-447e-8227-6d21cd727aa9.jpg"
+     }
+    ],
+    "productCustomJson": "{\"vehicleRestrictions\": \"\", \"vehicleSearchDate\": \"\", \"vehicleSearchSource\": \"\", \"vehicleSearchType\": \"\", \"vehicleFipeCode\": \"\", \"vehicleDebts\": \"\"}",
+    "photoCount": 4,
+    "videoUrlCount": 0,
+    "thumbnailUrl": "https://ms.sbwebservices.net/photos/cd66f73c-d764-447e-8227-6d21cd727aa9.jpg",
+    "detailedDescription": "<p><strong>ATENÇÃO ¿ LEIA ANTES DE OFERTAR</strong></p><p>¿ Os lances efetuados são irretratáveis e não poderão ser cancelados por erro, engano ou desistência do licitante.<br>¿ Leia atentamente a descrição do lote e consulte todas as fotos, vídeos e demais informações disponibilizadas antes de ofertar.<br>¿ Recomenda-se a leitura integral do edital/condições de venda e das informações complementares do lote.<br>¿ Ao ofertar, o licitante declara estar ciente e de acordo com as condições do edital.</p><h1>FORD F-4000 C/ CARROCERIA ¿ ANO 2004 ¿ MOTOR E CÂMBIO DESMONTADOS</h1><p>¿ Caminhão <strong>Ford F-4000</strong>.<br>¿ Ano informado: <strong>2004</strong>.<br>¿ Equipado com <strong>carroceria</strong>.<br>¿ <strong>Motor desmontado.</strong><br>¿ <strong>Câmbio desmontado.</strong><br>¿ Veículo encontra-se <strong>sem condições de funcionamento nas condições atuais</strong>, necessitando montagem, revisão e eventuais reparos.<br>¿ Estado e integridade dos componentes internos do motor, câmbio e demais sistemas <strong>não informados/não testados</strong>.<br>¿ Poderá apresentar peças faltantes, avarias, desgastes, oxidação e demais marcas decorrentes do uso e do período em que permaneceu desmontado.<br>¿ Demais condições de lataria, carroceria, pneus, interior, chassis e componentes deverão ser verificadas atentamente pelas fotos e vídeos disponibilizados.<br>¿ Vendido exatamente nas condições em que se encontra.</p><p><strong>IMPORTANTE:</strong> <strong>MOTOR E CÂMBIO ENC",
+    "template": {
+     "groups": [
+      {
+       "title": "Identificação",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "marca",
+         "title": "Marca",
+         "type": "string",
+         "value": "FORD"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "modelo",
+         "title": "Modelo",
+         "type": "string",
+         "value": "F250"
+        }
+       ],
+       "id": "identificacao"
+      }
+     ]
+    },
+    "subCategory": {
+     "id": 10005,
+     "description": "Picapes",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 5,
+     "category": {
+      "id": 10000,
+      "description": "Carros",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 1
+     }
+    },
+    "model": {
+     "id": 354,
+     "description": "F250"
+    },
+    "brand": {
+     "id": 27,
+     "description": "Ford"
+    },
+    "location": {
+     "displayOnMap": false,
+     "city": "São José do Rio Preto - SP",
+     "state": "São Paulo",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -20.812712,
+      "lon": -49.376521
+     }
+    },
+    "productType": {
+     "id": 10,
+     "description": "Carros & Motos",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {}
+   },
+   "seller": {
+    "id": 0,
+    "name": "PESSOA FISICA EXEMPLO",
+    "city": "São José do Rio Preto",
+    "company": [
+     {}
+    ]
+   },
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": null,
+    "maxInstallments": null,
+    "allowsCreditCard": true,
+    "scheduleType": "AFTER_WITHDRAWAL",
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": true,
+    "transactionLimit": 120000.0
+   }
+  },
+  {
+   "id": 5052311,
+   "indexationDate": "2026-10-17 17:06:53",
+   "lotNumber": 1,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "totalReceivedProposals": 0,
+   "hasReceivedProposals": false,
+   "visits": 194,
+   "totalBidders": 0,
+   "totalBids": 0,
+   "totalReceivedBidsOrProposals": 0,
+   "hasBids": false,
+   "hasReceivedBidsOrProposals": false,
+   "endDate": "2026-10-19 14:00:00",
+   "endDateTime": 1792429200000,
+   "offerTypeId": 1,
+   "createAt": "2026-10-08 14:48:43",
+   "updateAt": "2026-10-08 14:49:10",
+   "publishedAt": "2026-10-08 14:49:10",
+   "statusId": 1,
+   "price": 40000,
+   "priceFormatted": "R$ 40.000,00",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": true,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": false,
+    "closed": false
+   },
+   "store": {
+    "id": 807,
+    "name": "MARANGONI LEILÕES",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "logoUri": "https://static.s4bdigital.net/logos_empresas/newlogo_marangoni.png"
+   },
+   "offerDetail": {
+    "id": 5052311,
+    "initialBidValue": 40000,
+    "initialBidValueFormatted": "R$ 40.000,00",
+    "currentMinBid": 40000,
+    "currentMinBidFormatted": "R$ 40.000,00",
+    "currentMaxBid": 40000,
+    "currentMaxBidFormatted": "R$ 40.000,00",
+    "releaseValue": 0,
+    "releaseValueFormatted": "R$ 0,00",
+    "reservedPrice": 40000,
+    "reservedPriceFormatted": "R$ 40.000,00"
+   },
+   "currentTimestamp": "2026-10-17 17:55:23",
+   "auction": {
+    "id": 797614,
+    "desc": "3ª Vara Federal de Maringá",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 2,
+    "modalityId": 4,
+    "modalityDesc": "Leilão",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2026-10-08 14:45:00",
+    "endDate": "2026-10-19 14:00:00",
+    "maxEnddateOffer": "2026-10-19 14:00:00",
+    "subMarketplaces": [
+     {
+      "subMarketplaceId": 3,
+      "subMarketplaceDesc": "Judicial"
+     }
+    ],
+    "judicialPraca": 1,
+    "judicialPracaDescription": "1º Praça",
+    "judicialControlNumber": 797614,
+    "auctioneer": "Luciano Marangoni",
+    "registry": "19/308-L",
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Sul",
+     "type": 5
+    },
+    "crier": false,
+    "eventPipeline": {
+     "id": 1725533,
+     "description": "3ª Vara Federal de Maringá",
+     "currentStage": 1,
+     "stages": [
+      {
+       "eventId": 797614,
+       "eventDesc": "3ª Vara Federal de Maringá",
+       "beginDate": "2026-10-08 14:45:00",
+       "endDate": "2026-10-19 14:00:00",
+       "statusId": 1,
+       "isActive": true,
+       "isAfterMarket": false,
+       "initialBidValue": 40000,
+       "formattedInitialBidValue": null
+      },
+      {
+       "eventId": 797615,
+       "eventDesc": "3ª Vara Federal de Maringá",
+       "beginDate": "2026-10-19 14:00:00",
+       "endDate": "2026-10-29 14:00:00",
+       "statusId": 5,
+       "isActive": false,
+       "isAfterMarket": false,
+       "initialBidValue": 20000,
+       "formattedInitialBidValue": null
+      }
+     ]
+    },
+    "lotAuctionTypeId": 1,
+    "isAfterMarket": null
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {
+    "currentBidIncrement": 500,
+    "currentBidIncrementFormatted": "R$ 500,00"
+   },
+   "groupOffer": {
+    "acceptProposal": false,
+    "id": 363282
+   },
+   "product": {
+    "productId": 3837999,
+    "shortDesc": "Semirreboque Facchini SRF RT, ano 2013/2013",
+    "attachments": [
+     {
+      "originalFileName": "laudo.pdf",
+      "createdAt": "08/10/2026 14:48:22",
+      "fileName": "4a87aee3-f4fc-4b87-892f-f6c3e84fd1e6.pdf",
+      "link": "https://s.superbid.net/attachment/4a/87/4a87aee3-f4fc-4b87-892f-f6c3e84fd1e6.pdf",
+      "contentType": "application/pdf"
+     }
+    ],
+    "galleryJson": [
+     {
+      "originalFileName": "ENC_d51GD4rXJiSA1cJCGfcxAtqsEklEdDhuNqy023B4XX3LcnB5rwkzJ_hJWTN_Djww.jpg",
+      "highlight": false,
+      "fileName": "aa1634c7-2c5a-49da-808e-c0e4f36b061c.jpg",
+      "link": "https://ms.sbwebservices.net/photos/aa1634c7-2c5a-49da-808e-c0e4f36b061c.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/aa1634c7-2c5a-49da-808e-c0e4f36b061c.jpg"
+     },
+     {
+      "originalFileName": "ENC_MgedByOkmuus2DEpiFU8pvs7TU7lRCx4rBeea5-HP2TYa9-_dXgp91JKT4FAS9vL.jpg",
+      "highlight": false,
+      "fileName": "312cb35c-1593-414b-b9dc-cf392f977717.jpg",
+      "link": "https://ms.sbwebservices.net/photos/312cb35c-1593-414b-b9dc-cf392f977717.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/312cb35c-1593-414b-b9dc-cf392f977717.jpg"
+     },
+     {
+      "originalFileName": "ENC_RD0kR52s_Us81VLDu1yzFyNmxaugPj6Z9Rt3kNVOYyNWjMDMApqpsDBhy4t57vF6.jpg",
+      "highlight": false,
+      "fileName": "c54f4b9f-7e0a-407a-937c-1e400c1a3ca2.jpg",
+      "link": "https://ms.sbwebservices.net/photos/c54f4b9f-7e0a-407a-937c-1e400c1a3ca2.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/c54f4b9f-7e0a-407a-937c-1e400c1a3ca2.jpg"
+     }
+    ],
+    "productCustomJson": "{\"vehicleRestrictions\": \"\", \"vehicleSearchDate\": \"\", \"vehicleSearchSource\": \"\", \"vehicleSearchType\": \"\", \"vehicleFipeCode\": \"\", \"vehicleDebts\": \"\"}",
+    "photoCount": 7,
+    "videoUrlCount": 0,
+    "thumbnailUrl": "https://ms.sbwebservices.net/photos/02daa1fd-e996-4d8f-9c00-e1e37b35f1e2.jpg",
+    "detailedDescription": "<p>Trata-se de semirreboque marca Facchini, modelo SRF RT, ano de fabricação e modelo 2013/2013, cor cinza, Placa FINAL 9/SP (Lins/SP), Renavam 0053.746.504-9, chassi , espécie carga, carroceria aberta sobre dois eixos e capacidade de carga de 10,97 toneladas. Por se tratar de semirreboque (reboque), o bem não possui motor, conforme registrado na vistoria.</p><p>O bem foi avaliado em R$ 40.000,00 (quarenta mil reais), conforme laudo de vistoria e procedência veicular, encontrando-se parado no pátio há considerável período e apresentando, no estado aparente, pintura e lataria em más condições e pneus em estado ruim, com chassi não oxidado e não remarcado, de numeração coincidente com os bancos de dados oficiais. </p><p></p>",
+    "template": {
+     "groups": []
+    },
+    "subCategory": {
+     "id": 11423,
+     "description": "Reboque ",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 29,
+     "category": {
+      "id": 10043,
+      "description": "Impl. Rod. e carrocerias",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 4
+     }
+    },
+    "model": {},
+    "brand": {},
+    "location": {
+     "displayOnMap": false,
+     "city": "Maringá - PR",
+     "state": "Paraná",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -23.421,
+      "lon": -51.933056
+     }
+    },
+    "productType": {
+     "id": 11,
+     "description": "Caminhões & Ônibus",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {
+     "processNumber": "5015512-23.2023.4.04.7003"
+    }
+   },
+   "seller": {
+    "id": 1718974,
+    "name": "3ª VARA FEDERAL DE MARINGÁ",
+    "city": "Itapecerica da Serra",
+    "company": [
+     {
+      "fantasyName": "3ª VARA FEDERAL DE MARINGÁ"
+     }
+    ]
+   },
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": null,
+    "maxInstallments": null,
+    "allowsCreditCard": false,
+    "scheduleType": null,
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": false,
+    "transactionLimit": null
+   },
+   "eventPipeline": {
+    "id": 1725533,
+    "description": "3ª Vara Federal de Maringá",
+    "currentStage": 1,
+    "stages": [
+     {
+      "eventId": 797614,
+      "eventDesc": "3ª Vara Federal de Maringá",
+      "beginDate": "2026-10-08 14:45:00",
+      "endDate": "2026-10-19 14:00:00",
+      "statusId": 1,
+      "isActive": true,
+      "isAfterMarket": false,
+      "initialBidValue": 40000,
+      "formattedInitialBidValue": null
+     },
+     {
+      "eventId": 797615,
+      "eventDesc": "3ª Vara Federal de Maringá",
+      "beginDate": "2026-10-19 14:00:00",
+      "endDate": "2026-10-29 14:00:00",
+      "statusId": 5,
+      "isActive": false,
+      "isAfterMarket": false,
+      "initialBidValue": 20000,
+      "formattedInitialBidValue": null
+     }
+    ]
+   }
+  },
+  {
+   "id": 5026511,
+   "indexationDate": "2026-10-17 17:54:17",
+   "lotNumber": 20,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "totalReceivedProposals": 0,
+   "hasReceivedProposals": false,
+   "visits": 1475,
+   "totalBidders": 10,
+   "totalBids": 20,
+   "totalReceivedBidsOrProposals": 20,
+   "hasBids": true,
+   "hasReceivedBidsOrProposals": true,
+   "endDate": "2026-11-18 10:00:00",
+   "endDateTime": 1795006800000,
+   "offerTypeId": 1,
+   "createAt": "2026-09-22 15:29:27",
+   "updateAt": "2026-10-16 23:44:11",
+   "publishedAt": "2026-09-22 17:35:29",
+   "statusId": 1,
+   "price": 53916.67,
+   "priceFormatted": "R$ 53.916,67",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": true,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": false,
+    "closed": false
+   },
+   "store": {
+    "id": 16189,
+    "name": "PEDRO KRONBERG LEILÕES",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "logoUri": "https://static.s4bdigital.net/logos_empresas/logo-pedro-kronberg-195x65.png"
+   },
+   "offerDetail": {
+    "id": 5026511,
+    "initialBidValue": 33916.67,
+    "initialBidValueFormatted": "R$ 33.916,67",
+    "currentMinBid": 53916.67,
+    "currentMinBidFormatted": "R$ 53.916,67",
+    "currentMaxBid": 53916.67,
+    "currentMaxBidFormatted": "R$ 53.916,67",
+    "releaseValue": 0,
+    "releaseValueFormatted": "R$ 0,00",
+    "reservedPrice": 33916.67,
+    "reservedPriceFormatted": "R$ 33.916,67"
+   },
+   "currentTimestamp": "2026-10-17 17:55:23",
+   "auction": {
+    "id": 801772,
+    "desc": "Município de Rio Azul/PR",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 2,
+    "modalityId": 1,
+    "modalityDesc": "Leilão",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2026-09-22 15:30:00",
+    "endDate": "2026-10-19 10:00:00",
+    "maxEnddateOffer": "2026-11-18 10:00:00",
+    "subMarketplaces": [
+     {
+      "subMarketplaceId": 5,
+      "subMarketplaceDesc": "GOV"
+     }
+    ],
+    "judicialPraca": null,
+    "judicialPracaDescription": "Praça Única",
+    "judicialControlNumber": null,
+    "auctioneer": "Pedro Lerner Kronberg",
+    "registry": "20/322-L",
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Sul",
+     "type": 5
+    },
+    "crier": false,
+    "eventPipeline": null,
+    "lotAuctionTypeId": 3,
+    "isAfterMarket": null
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {
+    "currentBidIncrement": 1000,
+    "currentBidIncrementFormatted": "R$ 1.000,00"
+   },
+   "groupOffer": {
+    "acceptProposal": false,
+    "id": 361383
+   },
+   "product": {
+    "productId": 3795695,
+    "shortDesc": "CAMINHÃO BASCULANTE CARGO 2422T  FORD",
+    "galleryJson": [
+     {
+      "originalFileName": "ENC_z1M1Bsb8lSFID4cA5wPcew.jpg",
+      "highlight": false,
+      "fileName": "b2311480-9a3c-479c-89cf-059d40662ed0.jpg",
+      "link": "https://ms.sbwebservices.net/photos/b2311480-9a3c-479c-89cf-059d40662ed0.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/b2311480-9a3c-479c-89cf-059d40662ed0.jpg"
+     },
+     {
+      "originalFileName": "ENC_Jp5tatjRSDAFVxnkfom4SQ.jpg",
+      "highlight": false,
+      "fileName": "0ce25127-acc8-4f5a-a2a0-c4934f6fba2d.jpg",
+      "link": "https://ms.sbwebservices.net/photos/0ce25127-acc8-4f5a-a2a0-c4934f6fba2d.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/0ce25127-acc8-4f5a-a2a0-c4934f6fba2d.jpg"
+     },
+     {
+      "originalFileName": "ENC_N9ojAhU1HAq_RO1eGFlEnw.jpg",
+      "highlight": false,
+      "fileName": "0c4e47d9-f658-4fb8-820b-f3cdf0aa73ea.jpg",
+      "link": "https://ms.sbwebservices.net/photos/0c4e47d9-f658-4fb8-820b-f3cdf0aa73ea.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/0c4e47d9-f658-4fb8-820b-f3cdf0aa73ea.jpg"
+     }
+    ],
+    "productCustomJson": "{\"vehicleRestrictions\": \"\", \"vehicleSearchDate\": \"\", \"vehicleSearchSource\": \"\", \"vehicleSearchType\": \"\", \"vehicleFipeCode\": \"\", \"vehicleDebts\": \"\"}",
+    "photoCount": 6,
+    "videoUrlCount": 0,
+    "thumbnailUrl": "https://ms.sbwebservices.net/photos/b2311480-9a3c-479c-89cf-059d40662ed0.jpg",
+    "detailedDescription": "<p><span>CAMINHÃO BASCULANTE CARGO 2422T  FORD Placa FINAL 3  RENAVAN: 88.181317-6 -ANO: 2005/2005 - Caminhão basculante, usado, em estado de conservação inservível para utilização imediata, apresentando desgaste decorrente do tempo de uso. O veículo encontra-se com a caixa de câmbio desmontada/retirada, componentes do painel e do sistema elétrico parcialmente desmontados, além de necessitar de manutenção mecânica e revisão geral para eventual retorno às condições de funcionamento. Será alienado no estado de conservação em que se encontra, sem garantia de funcionamento, cabendo ao arrematante todas as despesas com reparos, regularização, transporte e demais providências necessárias. Recomenda-se a realização de vistoria prévia pelos interessados.</span></p>",
+    "template": {
+     "groups": [
+      {
+       "title": "\"Observações \"",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "grade",
+         "title": "Grade",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "parabrisa",
+         "title": "Parabrisa",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "capo",
+         "title": "Capô",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "parachoquedianteiro",
+         "title": "Parachoque Dianteiro",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "faroldireito",
+         "title": "Farol Direito",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "lanternadianteiradireita",
+         "title": "Lanterna Dianteira Direita",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "farolesquerdo",
+         "title": "Farol Esquerdo",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "lanternadianteiraesquerda",
+         "title": "Lanterna Dianteira Esquerda",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "paralamadireito",
+         "title": "Paralama Direito",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "retrovisordireito",
+         "title": "Retrovisor Direito",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "portadireita",
+         "title": "Porta Direita",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "lanternatraseiradireita",
+         "title": "Lanterna Traseira Direita",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "lanternatraseiraesquerda",
+         "title": "Lanterna Traseira Esquerda",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "parachoquetraseiro",
+         "title": "Parachoque Traseiro",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "vidrotraseiro",
+         "title": "Vidro Traseiro",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "portaesquerda",
+         "title": "Porta Esquerda",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "retrovisoresquerdo",
+         "title": "Retrovisor Esquerdo",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "paralamaesquerdo",
+         "title": "Paralama Esquerdo",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "paineldeinstrumentos",
+         "title": "Painel de Instrumentos",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "bancosobs",
+         "title": "Bancos",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "teto",
+         "title": "Teto",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "longarina",
+         "title": "Longarina",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "bateria",
+         "title": "Bateria",
+         "type": "multivalue",
+         "value": ""
+        }
+       ],
+       "id": "observacoes"
+      },
+      {
+       "title": "Identificação",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "marca",
+         "title": "Marca",
+         "type": "string",
+         "value": "FORD"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "anofabricacao",
+         "title": "Ano Fabricação",
+         "type": "integer",
+         "value": "2005"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "anomodelo",
+         "title": "Ano Modelo",
+         "type": "integer",
+         "value": "2005"
+        }
+       ],
+       "id": "identificacao"
+      }
+     ]
+    },
+    "subCategory": {
+     "id": 10023,
+     "description": "Caminhões Basculantes",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 1,
+     "category": {
+      "id": 10022,
+      "description": "Caminhões",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 1
+     }
+    },
+    "model": {},
+    "brand": {},
+    "productYourRef": "Município de Rio Azul/PR",
+    "location": {
+     "displayOnMap": false,
+     "city": "Rio Azul - PR",
+     "state": "Paraná",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -25.726712,
+      "lon": -50.789746
+     }
+    },
+    "productType": {
+     "id": 11,
+     "description": "Caminhões & Ônibus",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {}
+   },
+   "seller": {
+    "id": 2409983,
+    "name": "MUNICIPIO DE RIO AZUL",
+    "city": "Rio Azul",
+    "company": [
+     {
+      "fantasyName": "Prefeitura de Rio Azul"
+     }
+    ]
+   },
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": null,
+    "maxInstallments": null,
+    "allowsCreditCard": false,
+    "scheduleType": null,
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": false,
+    "transactionLimit": null
+   }
+  },
+  {
+   "id": 5026516,
+   "indexationDate": "2026-10-17 17:54:10",
+   "lotNumber": 12,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "totalReceivedProposals": 0,
+   "hasReceivedProposals": false,
+   "visits": 1652,
+   "totalBidders": 9,
+   "totalBids": 91,
+   "totalReceivedBidsOrProposals": 91,
+   "hasBids": true,
+   "hasReceivedBidsOrProposals": true,
+   "endDate": "2026-11-18 10:00:00",
+   "endDateTime": 1795006800000,
+   "offerTypeId": 1,
+   "createAt": "2026-09-22 15:29:31",
+   "updateAt": "2026-10-16 12:21:58",
+   "publishedAt": "2026-09-22 17:35:28",
+   "statusId": 1,
+   "price": 60250,
+   "priceFormatted": "R$ 60.250,00",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": true,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": false,
+    "closed": false
+   },
+   "store": {
+    "id": 16189,
+    "name": "PEDRO KRONBERG LEILÕES",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "logoUri": "https://static.s4bdigital.net/logos_empresas/logo-pedro-kronberg-195x65.png"
+   },
+   "offerDetail": {
+    "id": 5026516,
+    "initialBidValue": 15250,
+    "initialBidValueFormatted": "R$ 15.250,00",
+    "currentMinBid": 60250,
+    "currentMinBidFormatted": "R$ 60.250,00",
+    "currentMaxBid": 60250,
+    "currentMaxBidFormatted": "R$ 60.250,00",
+    "releaseValue": 0,
+    "releaseValueFormatted": "R$ 0,00",
+    "reservedPrice": 15250,
+    "reservedPriceFormatted": "R$ 15.250,00"
+   },
+   "currentTimestamp": "2026-10-17 17:55:23",
+   "auction": {
+    "id": 801772,
+    "desc": "Município de Rio Azul/PR",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 2,
+    "modalityId": 1,
+    "modalityDesc": "Leilão",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2026-09-22 15:30:00",
+    "endDate": "2026-10-19 10:00:00",
+    "maxEnddateOffer": "2026-11-18 10:00:00",
+    "subMarketplaces": [
+     {
+      "subMarketplaceId": 5,
+      "subMarketplaceDesc": "GOV"
+     }
+    ],
+    "judicialPraca": null,
+    "judicialPracaDescription": "Praça Única",
+    "judicialControlNumber": null,
+    "auctioneer": "Pedro Lerner Kronberg",
+    "registry": "20/322-L",
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Sul",
+     "type": 5
+    },
+    "crier": false,
+    "eventPipeline": null,
+    "lotAuctionTypeId": 3,
+    "isAfterMarket": null
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {
+    "currentBidIncrement": 500,
+    "currentBidIncrementFormatted": "R$ 500,00"
+   },
+   "groupOffer": {
+    "acceptProposal": false,
+    "id": 361383
+   },
+   "product": {
+    "productId": 3795679,
+    "shortDesc": "ÔNIBUS VOLARE W9 ANO 2011/2012",
+    "galleryJson": [
+     {
+      "originalFileName": "ENC_7Cr5WwA71Ig8dy2skGVEAQ.jpg",
+      "highlight": false,
+      "fileName": "251516c6-d3a3-4ec1-b5d6-37fe65dc384e.jpg",
+      "link": "https://ms.sbwebservices.net/photos/251516c6-d3a3-4ec1-b5d6-37fe65dc384e.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/251516c6-d3a3-4ec1-b5d6-37fe65dc384e.jpg"
+     },
+     {
+      "originalFileName": "ENC_7BBm_Bs9diNK1jX6SQeIzA.jpg",
+      "highlight": false,
+      "fileName": "5cf4af46-b618-4cb1-a1dd-578d09bcff41.jpg",
+      "link": "https://ms.sbwebservices.net/photos/5cf4af46-b618-4cb1-a1dd-578d09bcff41.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/5cf4af46-b618-4cb1-a1dd-578d09bcff41.jpg"
+     },
+     {
+      "originalFileName": "ENC_thHhx6f4YgJ6nZAft65nbg.jpg",
+      "highlight": false,
+      "fileName": "dbbf7455-b2ca-4e1b-ae5f-18c0816fedb4.jpg",
+      "link": "https://ms.sbwebservices.net/photos/dbbf7455-b2ca-4e1b-ae5f-18c0816fedb4.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/dbbf7455-b2ca-4e1b-ae5f-18c0816fedb4.jpg"
+     }
+    ],
+    "productCustomJson": "{\"vehicleRestrictions\": \"\", \"vehicleSearchDate\": \"\", \"vehicleSearchSource\": \"\", \"vehicleSearchType\": \"\", \"vehicleFipeCode\": \"\", \"vehicleDebts\": \"\"}",
+    "photoCount": 6,
+    "videoUrlCount": 0,
+    "thumbnailUrl": "https://ms.sbwebservices.net/photos/251516c6-d3a3-4ec1-b5d6-37fe65dc384e.jpg",
+    "detailedDescription": "<p>VOLARE W9|Tipo:ÔNIBUS|Cor:PRATA|Ano/Modelo:2011/2012|Placa FINAL 6|UF:PR|Chassi:||Motor:|Status:</p>",
+    "template": {
+     "groups": [
+      {
+       "title": "\"Observações \"",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "grade",
+         "title": "Grade",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "parabrisa",
+         "title": "Parabrisa",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "parachoquedianteiro",
+         "title": "Parachoque Dianteiro",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "partefrontal",
+         "title": "Parte Frontal",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "faroldireito",
+         "title": "Farol Direito",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "lanternadianteiradireita",
+         "title": "Lanterna Dianteira Direita",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "farolesquerdo",
+         "title": "Farol Esquerdo",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "lanternadianteiraesquerda",
+         "title": "Lanterna Dianteira Esquerda",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "lateraldireita",
+         "title": "Lateral Direita",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "vidroslateraisdireito",
+         "title": "Vidros Laterais Direito",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "lanternatraseiradireita",
+         "title": "Lanterna Traseira Direita",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "lanternatraseiraesquerda",
+         "title": "Lanterna Traseira Esquerda",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "parachoquetraseiro",
+         "title": "Parachoque Traseiro",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "partetraseira",
+         "title": "Parte Traseira",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "vidrotraseiro",
+         "title": "Vidro Traseiro",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "vidroslateraisesquerdo",
+         "title": "Vidros Laterais Esquerdo",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "lateralesquerda",
+         "title": "Lateral Esquerda",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "retrovisoresquerdo",
+         "title": "Retrovisor Esquerdo",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "paineldeinstrumentos",
+         "title": "Painel de Instrumentos",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "bancosobs",
+         "title": "Bancos",
+         "type": "multivalue",
+         "value": ""
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "assoalho",
+         "title": "Assoalho",
+         "type": "multivalue",
+         "value": ""
+        }
+       ],
+       "id": "observacoes"
+      }
+     ]
+    },
+    "subCategory": {
+     "id": 10036,
+     "description": "Micro ônibus",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 12,
+     "category": {
+      "id": 10033,
+      "description": "Ônibus",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 2
+     }
+    },
+    "model": {},
+    "brand": {},
+    "productYourRef": "Município de Rio Azul/PR",
+    "location": {
+     "displayOnMap": false,
+     "city": "Rio Azul - PR",
+     "state": "Paraná",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -25.726712,
+      "lon": -50.789746
+     }
+    },
+    "productType": {
+     "id": 11,
+     "description": "Caminhões & Ônibus",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {}
+   },
+   "seller": {
+    "id": 2409983,
+    "name": "MUNICIPIO DE RIO AZUL",
+    "city": "Rio Azul",
+    "company": [
+     {
+      "fantasyName": "Prefeitura de Rio Azul"
+     }
+    ]
+   },
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": null,
+    "maxInstallments": null,
+    "allowsCreditCard": false,
+    "scheduleType": null,
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": false,
+    "transactionLimit": null
+   }
+  },
+  {
+   "id": 5029779,
+   "indexationDate": "2026-10-17 16:51:55",
+   "lotNumber": 1,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "totalReceivedProposals": 0,
+   "hasReceivedProposals": false,
+   "visits": 781,
+   "totalBidders": 2,
+   "totalBids": 2,
+   "totalReceivedBidsOrProposals": 2,
+   "hasBids": true,
+   "hasReceivedBidsOrProposals": true,
+   "endDate": "2026-10-19 10:00:00",
+   "endDateTime": 1792414800000,
+   "offerTypeId": 1,
+   "createAt": "2026-09-22 15:18:05",
+   "updateAt": "2026-10-17 11:39:55",
+   "publishedAt": "2026-09-22 15:18:23",
+   "statusId": 1,
+   "price": 20150,
+   "priceFormatted": "R$ 20.150,00",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": true,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": false,
+    "closed": false
+   },
+   "store": {
+    "id": 16059,
+    "name": "ANDRÉ LUIZ LEILÕES",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "logoUri": "https://static.s4bdigital.net/logos_empresas/new_logo_andreluizleiloes.png"
+   },
+   "offerDetail": {
+    "id": 5029779,
+    "initialBidValue": 19900,
+    "initialBidValueFormatted": "R$ 19.900,00",
+    "currentMinBid": 20150,
+    "currentMinBidFormatted": "R$ 20.150,00",
+    "currentMaxBid": 20150,
+    "currentMaxBidFormatted": "R$ 20.150,00",
+    "reservedPrice": 60000,
+    "reservedPriceFormatted": "R$ 60.000,00"
+   },
+   "currentTimestamp": "2026-10-17 17:55:23",
+   "auction": {
+    "id": 797007,
+    "desc": "Corporativo",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 2,
+    "modalityId": 1,
+    "modalityDesc": "Leilão",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2026-09-22 15:20:00",
+    "endDate": "2026-10-19 10:00:00",
+    "maxEnddateOffer": "2026-10-19 10:03:00",
+    "subMarketplaces": [
+     {
+      "subMarketplaceId": 4,
+      "subMarketplaceDesc": "PME"
+     }
+    ],
+    "judicialPraca": null,
+    "judicialPracaDescription": "Praça Única",
+    "judicialControlNumber": null,
+    "auctioneer": "ANDRÉ LUIZ WUITSCHIK",
+    "registry": "20/327_L",
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Sul",
+     "type": 5
+    },
+    "crier": false,
+    "eventPipeline": null,
+    "lotAuctionTypeId": 1,
+    "isAfterMarket": null
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {
+    "currentBidIncrement": 250,
+    "currentBidIncrementFormatted": "R$ 250,00"
+   },
+   "groupOffer": {
+    "acceptProposal": false,
+    "id": 361379
+   },
+   "product": {
+    "productId": 3800313,
+    "shortDesc": "I/Ford Transit Jaedi Tur - 2012/2012 - Placa FINAL: 2D16",
+    "galleryJson": [
+     {
+      "originalFileName": "ENC_9xCgA8kleWfkjyUeAp6d8g.jpeg",
+      "highlight": false,
+      "fileName": "9b8f2811-da3e-4112-8b8d-b67646953f27.jpg",
+      "link": "https://ms.sbwebservices.net/photos/9b8f2811-da3e-4112-8b8d-b67646953f27.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/9b8f2811-da3e-4112-8b8d-b67646953f27.jpg"
+     },
+     {
+      "originalFileName": "ENC_yZPU9_Fjv-X6CQ2zAEXzCw.jpeg",
+      "highlight": false,
+      "fileName": "da25bc0f-84f1-40ac-8f31-9fe740cd77dc.jpg",
+      "link": "https://ms.sbwebservices.net/photos/da25bc0f-84f1-40ac-8f31-9fe740cd77dc.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/da25bc0f-84f1-40ac-8f31-9fe740cd77dc.jpg"
+     },
+     {
+      "originalFileName": "ENC_gSC59IlSoiJN4x4dR0xzSQ.jpeg",
+      "highlight": false,
+      "fileName": "2a2c3af1-ebe2-4719-9a4a-3d064f3270f3.jpg",
+      "link": "https://ms.sbwebservices.net/photos/2a2c3af1-ebe2-4719-9a4a-3d064f3270f3.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/2a2c3af1-ebe2-4719-9a4a-3d064f3270f3.jpg"
+     }
+    ],
+    "productCustomJson": "{}",
+    "photoCount": 18,
+    "videoUrlCount": 0,
+    "thumbnailUrl": "https://ms.sbwebservices.net/photos/9b8f2811-da3e-4112-8b8d-b67646953f27.jpg",
+    "detailedDescription": "<span>MARCA: I<br>MODELO: FORD TRANSIT JAEDI TUR <br>ANO FAB/MODELO: 2012/2012<br>PLACA: FINAL 6<br>KM ACIMA DE: NÃO VISUALIZADO<br>COR: BRANCA<br>COMBUSTÍVEL: DIESEL <br><br>ACESSÓRIOS<br>Nº DE PORTAS: 4<br>CÂMBIO: MANUAL<br>DIREÇÃO: HIDRÁULICA<br>AR CONDICIONADO: SIM<br>VIDROS: ELÉTRICOS<br>RODAS: FERRO<br>BANCOS: TECIDO/COM CAPAS<br>APARELHO DE SOM: SIM<br><br>CONDIÇÕES GERAIS<br>MOTOR: NÃO FUNCIONA<br>PINTURA: REGULAR<br>LATARIA: REGULAR<br>TAPEÇARIA: REGULAR<br>PNEUS: BONS<br><br>OBSERVAÇÕES<br><br>É DE SUMA IMPORTÂNCIA A VISITAÇÃO IN LOCO DOS BENS OFERTADOS, POIS O LEILOEIRO OFICIAL E O COMITENTE VENDEDOR NÃO GARANTEM A REGULARIDADE MECÂNICA, ELÉTRICA, ELETRÔNICA OU HIDRÁULICA DOS BENS E VEÍCULOS OFERTADOS NO EVENTO, BEM COMO DE SUAS PEÇAS, ESTRUTURAS, COMPONENTES E POSSÍVEIS DEFEITOS OU VÍCIOS OCULTOS NOS BENS OFERTADOS.<br><br>CONFORME LOTE EXPOSTO<br>PODENDO FALTAR PARTES, PEÇAS E COMPONENTES.<br>PODENDO FALTAR CHAVE DE IGNIÇÃO.<br>PODENDO FALTAR FERRAMENTAS OBRIGATÓRIAS E ESTEPE.<br>APRESENTA PONTOS DE FERRUGEM E DE CORROSÃO.<br>APRESENTA RISCOS, MOSSAS E AMASSADOS.<br><br>SERÁ DE RESPONSABILIDADE DO ARREMATANTE O PAGAMENTO DOS DÉBITOS DE EVENTUAIS MULTAS DE TRÂNSITO, LICENCIAMENTO, DPVAT<br>(SEGURO OBRIGATÓRIO) E IPVA RELATIVOS AO(S) VEÍCULO(S) APREGOADO(S) AINDA QUE ANTERIORES À DATA DO LEILÃO.<br><br>DÉBITOS EM ABERTO: R$ 0,00 SUJEITO A ALTERAÇÕES DE ACORDO COM OS CADASTROS DOS ÓRGÃOS PÚBLICOS ATÉ A DATA DA TRANSFERÊNCIA DO VEÍCULO.<br><br>No estado em que se enc",
+    "template": {
+     "groups": [
+      {
+       "title": "Identificação",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "placa",
+         "title": "Placa",
+         "type": "string",
+         "value": "6"
+        }
+       ],
+       "id": "identificacao"
+      }
+     ]
+    },
+    "subCategory": {
+     "id": 10040,
+     "description": "Vans de Passageiro",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 14,
+     "category": {
+      "id": 10038,
+      "description": "Vans",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 3
+     }
+    },
+    "model": {},
+    "brand": {},
+    "productYourRef": "1",
+    "location": {
+     "displayOnMap": false,
+     "city": "Ponta Grossa - PR",
+     "state": "Paraná",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -25.099394,
+      "lon": -50.1583
+     }
+    },
+    "productType": {
+     "id": 11,
+     "description": "Caminhões & Ônibus",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {}
+   },
+   "seller": {
+    "id": 2008784,
+    "name": "SILOMAQUE ESTRUTURAS METALICAS LTDA",
+    "city": "Ponta Grossa",
+    "company": [
+     {
+      "fantasyName": "SILOMAQUE"
+     }
+    ]
+   },
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": null,
+    "maxInstallments": null,
+    "allowsCreditCard": false,
+    "scheduleType": null,
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": false,
+    "transactionLimit": null
+   }
+  },
+  {
+   "id": 5033689,
+   "indexationDate": "2026-10-17 17:48:38",
+   "lotNumber": 32,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "totalReceivedProposals": 0,
+   "hasReceivedProposals": false,
+   "visits": 1207,
+   "totalBidders": 0,
+   "totalBids": 0,
+   "totalReceivedBidsOrProposals": 0,
+   "hasBids": false,
+   "hasReceivedBidsOrProposals": false,
+   "endDate": "2026-10-19 11:07:00",
+   "endDateTime": 1792418820000,
+   "offerTypeId": 1,
+   "createAt": "2026-09-28 15:39:59",
+   "updateAt": "2026-09-28 15:41:22",
+   "publishedAt": "2026-09-28 15:41:22",
+   "statusId": 1,
+   "price": 7000,
+   "priceFormatted": "R$ 7.000,00",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": true,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": false,
+    "closed": false
+   },
+   "store": {
+    "id": 1161,
+    "name": "SOLD",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "logoUri": "https://s.superbid.net/image/6a/67/6a670d93-0619-4cf2-9418-777f52aa84f5.png"
+   },
+   "offerDetail": {
+    "id": 5033689,
+    "initialBidValue": 7000,
+    "initialBidValueFormatted": "R$ 7.000,00",
+    "currentMinBid": 7000,
+    "currentMinBidFormatted": "R$ 7.000,00",
+    "currentMaxBid": 7000,
+    "currentMaxBidFormatted": "R$ 7.000,00",
+    "reservedPrice": 999999999999,
+    "reservedPriceFormatted": "R$ 999.999.999.999,00"
+   },
+   "currentTimestamp": "2026-10-17 17:55:23",
+   "auction": {
+    "id": 797193,
+    "desc": "São Luiz Agroindústria",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 2,
+    "modalityId": 1,
+    "modalityDesc": "Leilão",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2026-09-28 15:21:00",
+    "endDate": "2026-10-19 11:00:00",
+    "maxEnddateOffer": "2026-10-19 11:20:30",
+    "subMarketplaces": [
+     {
+      "subMarketplaceId": 1,
+      "subMarketplaceDesc": "Corporativo"
+     }
+    ],
+    "judicialPraca": null,
+    "judicialPracaDescription": "Praça Única",
+    "judicialControlNumber": null,
+    "auctioneer": "MARIA BEATRIZ DE BARROS SANTORO VILELA MORAES",
+    "registry": "1126",
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Sudeste",
+     "type": 5
+    },
+    "crier": false,
+    "eventPipeline": null,
+    "lotAuctionTypeId": 1,
+    "isAfterMarket": null
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {
+    "currentBidIncrement": 250,
+    "currentBidIncrementFormatted": "R$ 250,00"
+   },
+   "groupOffer": {
+    "acceptProposal": true,
+    "commissionPercent": 5,
+    "restrictions": [
+     {
+      "id": 1396817,
+      "restrictionType": "BY_ENTITY_TYPE",
+      "values": [
+       "J"
+      ]
+     },
+     {
+      "id": 1396818,
+      "restrictionType": "BY_FISCAL_DOCUMENT",
+      "values": [
+       "credenciamento_detran"
+      ]
+     }
+    ],
+    "id": 361972
+   },
+   "product": {
+    "productId": 3800351,
+    "shortDesc": "SUCATA DE CAMINHÃO MERCEDES-BENZ  2423 K, 2006/2006, Placa FINAL 3 (SP),  (Ref.: 1239)",
+    "galleryJson": [
+     {
+      "originalFileName": "ENC_MB2ZWP2PlIm35k6-AnhieA.jpg",
+      "highlight": false,
+      "fileName": "2b138e24-1393-4de7-8739-7fab9c58fbb0.jpg",
+      "link": "https://ms.sbwebservices.net/photos/2b138e24-1393-4de7-8739-7fab9c58fbb0.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/2b138e24-1393-4de7-8739-7fab9c58fbb0.jpg"
+     },
+     {
+      "originalFileName": "ENC_Xn7k1NEjvy7uBrLFOtX5pRo9WzuOf3zFyd2NBDylcn8.jpg",
+      "highlight": false,
+      "fileName": "f36ff48a-d9df-4eb0-bab3-ce1c5d7f99f9.jpg",
+      "link": "https://ms.sbwebservices.net/photos/f36ff48a-d9df-4eb0-bab3-ce1c5d7f99f9.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/f36ff48a-d9df-4eb0-bab3-ce1c5d7f99f9.jpg"
+     },
+     {
+      "originalFileName": "ENC_Xn7k1NEjvy7uBrLFOtX5pX-WdQSnt4lU6X8evoxENaw.jpg",
+      "highlight": false,
+      "fileName": "fb3d0667-178b-41c5-ad68-5a03af1e0b5d.jpg",
+      "link": "https://ms.sbwebservices.net/photos/fb3d0667-178b-41c5-ad68-5a03af1e0b5d.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/fb3d0667-178b-41c5-ad68-5a03af1e0b5d.jpg"
+     }
+    ],
+    "productCustomJson": "{\"vehicleRestrictions\": \"ADMINISTRATIVA\", \"vehicleDebts\": 174.08}",
+    "photoCount": 37,
+    "videoUrlCount": 0,
+    "thumbnailUrl": "https://ms.sbwebservices.net/photos/2b138e24-1393-4de7-8739-7fab9c58fbb0.jpg",
+    "detailedDescription": "Referência Local: 1239<br>SUCATA DE CAMINHÃO<br>Marca: MERCEDES-BENZ <br>Modelo: 2423 K<br>Ano Fab/Modelo: 2006/2006<br>Placa FINAL 3 (SP)<br>Quilometragem acima de: 779137<br>Cor: BRANCA<br>Combustível: DIESEL<br>Chassi: <br><br>Eixos: Três<br>Tração: 6x2<br>Carroceria: Chassi<br>Cardan: Falta<br>Diferencial: Desmontado/Avariado, podendo faltar peças<br>Câmbio: Falta<br>Motor: Avariado/Faltando peças e partes<br>Bancos: Tecido<br><br>Condições Gerais<br><br>Pintura: Ruim<br>Lataria: Ruim<br>Tapeçaria/Forração: Ruim<br>Qtd. de Pneus: 6<br>Estado dos Pneus: Ruins<br><br>Observações: <br><br>Veículo desativado e sem direito a documentação<br>Cabine canibalizada<br>Sem emplacamento<br>Climatizador: Sim<br>Faltam duas rodas e dois pneus traseiros lado esquerdo<br>Faltam duas rodas e dois pneus traseiros lado direito<br>Faltam partes, peças e componentes<br>Faltam ferramentas obrigatórias<br>Apresenta riscos, mossas, amassados<br>Possui pontos de ferrugem e corrosão<br>Vendido no estado em que se encontra<br><br><br><br>Será de responsabilidade do comprador o pagamento dos débitos de eventuais multas de trânsito, licenciamento, DPVAT <br> (seguro obrigatório) e IPVA relativos ao(s) veículo(s) vendido(s) ainda que anteriores à data do evento.<br><br>Débitos em aberto:    <b>R$174,08Sujeito a alterações de acordo com os cadastros dos órgãos públicos até a data da transferência do veículo<br>",
+    "template": {
+     "groups": [
+      {
+       "title": "Identificação",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "anofabricacao",
+         "title": "Ano Fabricação",
+         "type": "integer",
+         "value": "2006"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "anomodelo",
+         "title": "Ano Modelo",
+         "type": "integer",
+         "value": "2006"
+        }
+       ],
+       "id": "identificacao"
+      }
+     ]
+    },
+    "subCategory": {
+     "id": 10032,
+     "description": "Sucata de Caminhões",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 44,
+     "category": {
+      "id": 10022,
+      "description": "Caminhões",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 1
+     }
+    },
+    "model": {},
+    "brand": {},
+    "productYourRef": "202602601",
+    "location": {
+     "displayOnMap": false,
+     "city": "Pirassununga - SP",
+     "state": "São Paulo",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -21.993574,
+      "lon": -47.423317
+     }
+    },
+    "productType": {
+     "id": 11,
+     "description": "Caminhões & Ônibus",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {}
+   },
+   "seller": {
+    "id": 1731466,
+    "name": "SAO LUIZ AGROINDUSTRIA SA",
+    "city": "Pirassununga",
+    "company": [
+     {
+      "fantasyName": "SAO LUIZ AGROINDUSTRIA SA"
+     }
+    ]
+   },
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": null,
+    "maxInstallments": null,
+    "allowsCreditCard": true,
+    "scheduleType": "AFTER_PAYMENT",
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": true,
+    "transactionLimit": 120000.0
+   }
+  },
+  {
+   "id": 4380387,
+   "indexationDate": "2026-10-17 16:12:20",
+   "lotNumber": 136062,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "quantityAvailable": 1,
+   "quantityAvailableForProposal": 1,
+   "totalReceivedProposals": 2,
+   "hasReceivedProposals": true,
+   "quantityUnitType": "UNIT_TOTAL",
+   "quantityUnit": 1,
+   "visits": 1439,
+   "totalBidders": 2,
+   "totalBids": 0,
+   "totalReceivedBidsOrProposals": 2,
+   "hasBids": false,
+   "hasReceivedBidsOrProposals": true,
+   "endDate": "2026-10-19 10:00:00",
+   "endDateTime": 1792414800000,
+   "offerTypeId": 9,
+   "createAt": "2025-09-22 10:15:45",
+   "updateAt": "2026-10-17 10:00:35",
+   "publishedAt": "2025-09-22 10:15:45",
+   "statusId": 1,
+   "price": 262500,
+   "priceFormatted": "R$ 262.500,00",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": false,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": true,
+    "closed": false
+   },
+   "store": {
+    "id": 16209,
+    "name": "ARREMAQ",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "logoUri": "https://s.superbid.net/image/6b/2a/6b2a6605-5b53-4d35-9c18-6cd38a0d6e37.png"
+   },
+   "offerDetail": {
+    "id": 4380387,
+    "reservedPrice": 262500,
+    "reservedPriceFormatted": "R$ 262.500,00",
+    "referenceValue": 262500,
+    "referenceValueFormatted": "R$ 262.500,00",
+    "cutValue": 1000,
+    "cutValueFormatted": "R$ 1.000,00"
+   },
+   "currentTimestamp": "2026-10-17 17:55:25",
+   "auction": {
+    "id": 244769,
+    "desc": "Arremaq - TBA",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 2,
+    "modalityId": 5,
+    "modalityDesc": "Tomada de preço",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2024-07-03 16:12:14",
+    "endDate": "2026-12-31 00:00:00",
+    "maxEnddateOffer": "2026-12-31 00:00:00",
+    "subMarketplaces": null,
+    "judicialPraca": null,
+    "judicialPracaDescription": "Praça Única",
+    "judicialControlNumber": null,
+    "auctioneer": "Eduardo Lima Fabrício",
+    "registry": null,
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Sudeste",
+     "type": 5
+    },
+    "crier": true,
+    "eventPipeline": null,
+    "lotAuctionTypeId": 1,
+    "isAfterMarket": false
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {},
+   "groupOffer": {
+    "acceptProposal": false,
+    "id": 267945
+   },
+   "product": {
+    "productId": 3435705,
+    "shortDesc": "Komatsu PC130 2014",
+    "galleryJson": [
+     {
+      "originalFileName": "ENC_DLynDx08ggn4HUlU2HHgiQ.jpg",
+      "highlight": false,
+      "fileName": "65d81c96-8e71-4df8-b841-ab4d71df0913.jpg",
+      "link": "https://ms.sbwebservices.net/photos/65d81c96-8e71-4df8-b841-ab4d71df0913.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/65d81c96-8e71-4df8-b841-ab4d71df0913.jpg"
+     },
+     {
+      "originalFileName": "ENC_DLynDx08ggn4HUlU2HHgiQ.jpg",
+      "highlight": false,
+      "fileName": "4eddeb68-f198-4580-90c6-ff61fa3a2c01.jpg",
+      "link": "https://ms.sbwebservices.net/photos/4eddeb68-f198-4580-90c6-ff61fa3a2c01.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/4eddeb68-f198-4580-90c6-ff61fa3a2c01.jpg"
+     },
+     {
+      "originalFileName": "ENC_DLynDx08ggn4HUlU2HHgiQ.jpg",
+      "highlight": false,
+      "fileName": "752d099a-0588-40af-b4f2-7f5318a51b93.jpg",
+      "link": "https://ms.sbwebservices.net/photos/752d099a-0588-40af-b4f2-7f5318a51b93.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/752d099a-0588-40af-b4f2-7f5318a51b93.jpg"
+     }
+    ],
+    "photoCount": 9,
+    "videoUrlCount": 0,
+    "thumbnailUrl": "https://ms.sbwebservices.net/photos/65d81c96-8e71-4df8-b841-ab4d71df0913.jpg",
+    "template": {
+     "groups": [
+      {
+       "title": "Identificação",
+       "properties": [
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "tipo",
+         "title": "Tipo",
+         "type": "string",
+         "value": "Máquinas Pesadas"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "status",
+         "title": "Status",
+         "type": "string",
+         "value": "operacional"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "anodefabricacao",
+         "title": "Ano de Fabricação",
+         "type": "string",
+         "value": "2014"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "potencia",
+         "title": "Potência",
+         "type": "string",
+         "value": "97"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "horimetro",
+         "title": "Horímetro",
+         "type": "string",
+         "value": "11654"
+        },
+        {
+         "titlesByLocale": null,
+         "valuesByLocale": null,
+         "id": "combustivel",
+         "title": "Combustível",
+         "type": "string",
+         "value": "Diesel"
+        }
+       ],
+       "id": "maquina"
+      },
+      {
+       "title": "Informações",
+       "properties": [],
+       "id": "informacoes"
+      },
+      {
+       "title": "Sistema de Transmissão",
+       "properties": [],
+       "id": "sistemadetransmissao"
+      },
+      {
+       "title": "\"Condições Gerais\"",
+       "properties": [],
+       "id": "condicoesgerais"
+      }
+     ]
+    },
+    "subCategory": {
+     "id": 10323,
+     "description": "Retros & Escavadeiras",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 2,
+     "category": {
+      "id": 10321,
+      "description": "Máquinas pesadas",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 2
+     }
+    },
+    "model": {
+     "id": 11721,
+     "description": "PC130"
+    },
+    "brand": {
+     "id": 153,
+     "description": "Komatsu"
+    },
+    "productYourRef": "68c83ced544e524cc1ace00b",
+    "location": {
+     "displayOnMap": false,
+     "city": "Mathias Lobato - MG",
+     "state": "Minas Gerais",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -18.573446,
+      "lon": -41.915209
+     }
+    },
+    "productType": {
+     "id": 15,
+     "description": "Máquinas Pesadas & Agrícolas",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {},
+    "productCustomJson": "{}",
+    "detailedDescription": ""
+   },
+   "seller": {
+    "id": 1956213,
+    "name": "Arremaq Arremaq",
+    "city": "Ribeirão Preto",
+    "company": [
+     {
+      "fantasyName": "Arremaq"
+     }
+    ]
+   },
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": null,
+    "maxInstallments": null,
+    "allowsCreditCard": false,
+    "scheduleType": null,
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": false,
+    "transactionLimit": null
+   }
+  },
+  {
+   "id": 5026512,
+   "indexationDate": "2026-10-17 16:48:30",
+   "lotNumber": 14,
+   "quantityInLot": 1,
+   "quantitySold": 0,
+   "quantityReserved": 0,
+   "totalReceivedProposals": 0,
+   "hasReceivedProposals": false,
+   "visits": 256,
+   "totalBidders": 0,
+   "totalBids": 0,
+   "totalReceivedBidsOrProposals": 0,
+   "hasBids": false,
+   "hasReceivedBidsOrProposals": false,
+   "endDate": "2026-11-18 10:00:00",
+   "endDateTime": 1795006800000,
+   "offerTypeId": 1,
+   "createAt": "2026-09-22 15:29:28",
+   "updateAt": "2026-10-14 09:25:44",
+   "publishedAt": "2026-09-22 17:35:28",
+   "statusId": 1,
+   "price": 52400,
+   "priceFormatted": "R$ 52.400,00",
+   "offerStatus": {
+    "statusCode": 1,
+    "removed": false,
+    "stabbed": false,
+    "subjudice": false,
+    "giveYourBid": true,
+    "wantToKnowThePrice": false,
+    "makeYourProposal": false,
+    "closedToBids": false,
+    "sold": false,
+    "reserved": false,
+    "available": false,
+    "closed": false
+   },
+   "store": {
+    "id": 16189,
+    "name": "PEDRO KRONBERG LEILÕES",
+    "highlight": true,
+    "storeVisibleOnPortal": true,
+    "logoUri": "https://static.s4bdigital.net/logos_empresas/logo-pedro-kronberg-195x65.png"
+   },
+   "offerDetail": {
+    "id": 5026512,
+    "initialBidValue": 52400,
+    "initialBidValueFormatted": "R$ 52.400,00",
+    "currentMinBid": 52400,
+    "currentMinBidFormatted": "R$ 52.400,00",
+    "currentMaxBid": 52400,
+    "currentMaxBidFormatted": "R$ 52.400,00",
+    "releaseValue": 0,
+    "releaseValueFormatted": "R$ 0,00",
+    "reservedPrice": 52400,
+    "reservedPriceFormatted": "R$ 52.400,00"
+   },
+   "currentTimestamp": "2026-10-17 17:55:25",
+   "auction": {
+    "id": 801772,
+    "desc": "Município de Rio Azul/PR",
+    "slugDesc": null,
+    "localeId": "pt_BR",
+    "currencyIso": "BRL",
+    "statusId": 1,
+    "permissionTypeId": 1,
+    "portalId": 2,
+    "modalityId": 1,
+    "modalityDesc": "Leilão",
+    "businessAreaId": 1,
+    "allOffersOfThisAuctionIsClosed": false,
+    "beginDate": "2026-09-22 15:30:00",
+    "endDate": "2026-10-19 10:00:00",
+    "maxEnddateOffer": "2026-11-18 10:00:00",
+    "subMarketplaces": [
+     {
+      "subMarketplaceId": 5,
+      "subMarketplaceDesc": "GOV"
+     }
+    ],
+    "judicialPraca": null,
+    "judicialPracaDescription": "Praça Única",
+    "judicialControlNumber": null,
+    "auctioneer": "Pedro Lerner Kronberg",
+    "registry": "20/322-L",
+    "address": {
+     "id": 27029,
+     "streetType": "Alameda",
+     "street": "Alameda Lorena",
+     "number": "800",
+     "complement": "2º andar",
+     "district": "Jardins",
+     "city": "São Paulo",
+     "stateCode": "SP",
+     "countryName": "Brasil",
+     "regionName": "Sul",
+     "type": 5
+    },
+    "crier": false,
+    "eventPipeline": null,
+    "lotAuctionTypeId": 3,
+    "isAfterMarket": null
+   },
+   "winnerBid": {},
+   "currentBidIncrement": {
+    "currentBidIncrement": 500,
+    "currentBidIncrementFormatted": "R$ 500,00"
+   },
+   "groupOffer": {
+    "acceptProposal": false,
+    "id": 361383
+   },
+   "product": {
+    "productId": 3795694,
+    "shortDesc": "MOTONIVELADORA PQ 160, SANY 2008",
+    "galleryJson": [
+     {
+      "originalFileName": "ENC_ID8FGDh5RIHVgPg3nn9Hzw.jpg",
+      "highlight": false,
+      "fileName": "3008ada5-fe0c-4398-b4c2-e3fa1938d539.jpg",
+      "link": "https://ms.sbwebservices.net/photos/3008ada5-fe0c-4398-b4c2-e3fa1938d539.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/3008ada5-fe0c-4398-b4c2-e3fa1938d539.jpg"
+     },
+     {
+      "originalFileName": "ENC__bXNdpmw-c3M4IpqgNDp_w.jpg",
+      "highlight": false,
+      "fileName": "0de7f48b-efa2-4844-842c-0f4e85d9f660.jpg",
+      "link": "https://ms.sbwebservices.net/photos/0de7f48b-efa2-4844-842c-0f4e85d9f660.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/0de7f48b-efa2-4844-842c-0f4e85d9f660.jpg"
+     },
+     {
+      "originalFileName": "ENC_ou3zCvaqS69fHq7JjsF8vw.jpg",
+      "highlight": false,
+      "fileName": "bc3ba593-823e-4968-a231-1df560b4a9ca.jpg",
+      "link": "https://ms.sbwebservices.net/photos/bc3ba593-823e-4968-a231-1df560b4a9ca.jpg",
+      "type": "photo",
+      "contentType": "image/jpeg",
+      "thumbnailUrl": "https://ms.sbwebservices.net/photos/bc3ba593-823e-4968-a231-1df560b4a9ca.jpg"
+     }
+    ],
+    "productCustomJson": "{\"vehicleRestrictions\": \"\", \"vehicleSearchDate\": \"\", \"vehicleSearchSource\": \"\", \"vehicleSearchType\": \"\", \"vehicleFipeCode\": \"\", \"vehicleDebts\": \"\"}",
+    "photoCount": 4,
+    "videoUrlCount": 0,
+    "thumbnailUrl": "https://ms.sbwebservices.net/photos/3008ada5-fe0c-4398-b4c2-e3fa1938d539.jpg",
+    "detailedDescription": "<p><span>MOTONIVELADORA PQ 160 - Motoniveladora usada, cor amarela, marca SANY, ano de incorporação 2008. Bem proveniente de processo judicial, sendo alienado no estado de conservação em que se encontra, sem garantia, cabendo ao arrematante verificar suas condições físicas, mecânicas e documentais.</span></p>",
+    "template": {
+     "groups": []
+    },
+    "subCategory": {
+     "id": 10326,
+     "description": "Motoniveladoras",
+     "evidence": "F",
+     "subGrupo": 0,
+     "grupo": 0,
+     "position": 5,
+     "category": {
+      "id": 10321,
+      "description": "Máquinas pesadas",
+      "evidence": "F",
+      "subGrupo": 0,
+      "grupo": 0,
+      "position": 2
+     }
+    },
+    "model": {},
+    "brand": {},
+    "productYourRef": "Município de Rio Azul/PR",
+    "location": {
+     "displayOnMap": false,
+     "city": "Rio Azul - PR",
+     "state": "Paraná",
+     "country": "Brasil",
+     "locationGeo": {
+      "lat": -25.726712,
+      "lon": -50.789746
+     }
+    },
+    "productType": {
+     "id": 15,
+     "description": "Máquinas Pesadas & Agrícolas",
+     "showBrand": true,
+     "showModel": true
+    },
+    "judicial": {}
+   },
+   "seller": {
+    "id": 2409983,
+    "name": "MUNICIPIO DE RIO AZUL",
+    "city": "Rio Azul",
+    "company": [
+     {
+      "fantasyName": "Prefeitura de Rio Azul"
+     }
+    ]
+   },
+   "commercialCondition": {
+    "auctioneerCommissionPercent": null,
+    "minAdvanceRate": null,
+    "maxInstallments": null,
+    "allowsCreditCard": false,
+    "scheduleType": null,
+    "allowCreditCardCommission": false,
+    "allowCreditCardTotalValue": false,
+    "transactionLimit": null
+   }
+  }
+ ]
+}

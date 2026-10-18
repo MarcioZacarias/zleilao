@@ -403,3 +403,28 @@ Chromium 1248; ~820 MB em `%LOCALAPPDATA%\ms-playwright`):
 
 Enquanto nenhuma fonte exige o navegador, a camada Playwright não entra no
 `BaseScraper`: código sem uso é código que quebra sem ninguém ver.
+
+## Copart fora, OLX fora, FIPE fica (18/10/2026)
+
+**Copart**: tecnicamente viável como coletor híbrido (navegador abre a sessão
+no Imperva, a API aceita os cookies por pelo menos 12 minutos), mas os termos
+limitam a uso pessoal e não comercial e vedam download e cópia sem
+consentimento escrito. Márcio escolheu deixar de fora; o Playwright instalado
+no venv (1.64.0, ~820 MB em `%LOCALAPPDATA%\ms-playwright`) pode ser removido
+com `pip uninstall playwright pyee` e apagando as pastas `*-1248`.
+
+**OLX**: a EF previa OLX na F4 "com Playwright e avaliação de proxy". A
+investigação mostrou que nem isso é conforme. O `robots.txt` (um bloco
+`User-agent: *`, 636 linhas) proíbe `/*?*q=*` (busca por termo), `/*?*o=*`
+(paginação) e todos os parâmetros de filtro — exatamente o que a coleta
+dirigida da RN-011 usa. Os termos (27/02/2025, cláusula 9.2) vedam "realizar
+web crawling no Site" e usar anúncios "para sua posterior inclusão em
+quaisquer veículos alheios ao Site" sem autorização prévia e expressa, e vedam
+"manipular dispositivos técnicos de proteção" — o que descarta também
+impersonação de TLS e navegador disfarçado. Na prática o site já recusa o
+cliente HTTP do projeto pela impressão digital TLS. Pela RN-009 a OLX não
+entra, nem como fonte inativa: não há o que configurar.
+
+O comparador de preço de referência continua na tabela FIPE (decisão da onda
+3). O caminho limpo para anúncios de usados é autorização por escrito de um
+marketplace, não técnica.
